@@ -13,6 +13,8 @@
 |피그마|[피그마 링크](https://www.figma.com/design/5t2wyrsTCNVLYlXcoPsmFw/2%EC%B0%A8-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8?node-id=0-1&node-type=CANVAS&t=jBr2Avh2G31RMTFp-0)|
 |API 문서||
 |ERD|[ERDCloud 링크](https://www.erdcloud.com/d/ipmxoh7CYc75MjNY4)|
+![image](https://github.com/user-attachments/assets/95ac1870-0889-4326-8535-a4f96bce10b2)
+
 |기능 명세서|[기능 명세서 링크](https://www.notion.so/883154a1867f458e86db2922452fd29c)|
 |클래스 다이어그램||
 
