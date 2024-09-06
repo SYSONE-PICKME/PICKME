@@ -7,9 +7,9 @@ import project.pickme.user.constant.Type;
 @Getter
 @AllArgsConstructor
 public class User {
-	private Long id;
-	private String loginId;
+	private String id;
 	private String password;
+	private String role;
 	private String name;
 	private String email;
 	private Type type;

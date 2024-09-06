@@ -6,9 +6,9 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class Customs {
-	private Long id;
-	private String loginId;
+	private String id;
 	private String password;
+	private String role;
 	private String name;
 	private String deptName;
 	private String tel;
