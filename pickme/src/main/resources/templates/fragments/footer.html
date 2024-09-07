@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Footer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
+
+</head>
+<body>
+    <footer th:fragment="footer">
+        <div class="footer-container">
+            <div class="footer-logo">
+                <h2>PICK-ME</h2>
+                <button class="inquiry-btn">문의하기</button>
+                <p class="operation-time">10:00 - 18:00(점심시간 13:00 - 14:00)</p>
+                <p class="closed-days">주일, 공휴일 휴무</p>
+            </div>
+            <div class="footer-links">
+                <div class="link-column">
+                    <h3>PICK-ME</h3>
+                    <ul>
+                        <li>경매 홈으로</li>
+                        <li>개발팀 소개</li>
+                    </ul>
+                </div>
+                <div class="link-column">
+                    <h3>고객센터</h3>
+                    <ul>
+                        <li>공지사항</li>
+                        <li>자주 묻는 질문</li>
+                        <li>약관 및 정책</li>
+                        <li>개인정보처리방침</li>
+                    </ul>
+                </div>
+                <div class="link-column">
+                    <h3>관련 사이트</h3>
+                    <ul>
+                        <li>관세청</li>
+                        <li>UNI-PASS</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>PICK-ME | 서울특별시 창경궁로 254, 7층 706호 | 기술지원센터 010-2222-3333</p>
+            <a href="https://github.com/SYSONE-PICKME/PICKME" target="_blank" class="github-link">
+                <img th:src="@{/images/github_pixel_logo.png}" alt="GitHub" width="24" height="24">
+            </a>
+        </div>
+    </footer>
+</body>
+</html>

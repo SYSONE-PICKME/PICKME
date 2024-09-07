@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Common Header</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" th:href="@{/css/header.css}">
+</head>
+<body>
+    <header th:fragment="header">
+        <div class="header-top">
+            <span class="header_text">합법적인 경매가 이루어지는 곳</span>
+        </div>
+        <nav class="main-nav">
+            <a href="/" class="logo">PICKME</a>
+            <ul class="nav-links">
+                <li><a href="/notice_link">공지사항</a></li>
+                <li><a href="/item_list">공매물품조회</a></li>
+                <li><a href="/auction_list">입찰 목록</a></li>
+                <li><a href="/point">포인트등록</a></li>
+                <li><a href="/mypage">마이페이지</a></li>
+                <li><a href="/statistics">통계</a></li>
+            </ul>
+            <button class="login-button">로그아웃</button>
+        </nav>
+    </header>
+</body>
+</html>

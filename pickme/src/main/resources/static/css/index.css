@@ -1,0 +1,26 @@
+* {
+    border: none;
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+   }
+
+   html, body {
+     height: 100%;
+     width: 100%;
+     border: none;
+   }
+
+   body {
+     font-family: "IBM Plex Sans KR", sans-serif;
+   }
+
+   .page-container {
+     min-height: 100vh;
+     display: flex;
+     flex-direction: column;
+   }
+
+   main {
+     flex: 1;
+   }
