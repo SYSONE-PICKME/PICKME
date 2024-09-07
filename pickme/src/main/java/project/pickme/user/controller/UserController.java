@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.RequiredArgsConstructor;
-import project.pickme.user.dto.UserSignUpDto;
+import project.pickme.user.dto.SignUpDto;
 import project.pickme.user.service.UserService;
 
 @Controller
@@ -22,8 +22,8 @@ public class UserController {
 	}
 
 	@PostMapping("/signUp")
-	public String userSignUP(@ModelAttribute UserSignUpDto userSignUpDto){
-		userService.userSignUp(userSignUpDto);
+	public String signUp(@ModelAttribute SignUpDto signUpDto){
+		userService.userSignUp(signUpDto);
 
 		return "redirect:/user/signUpForm";	//TODO: 로그인 화면으로 변경하기
 	}

@@ -3,7 +3,7 @@ package project.pickme.user.dto;
 import lombok.Data;
 
 @Data
-public class UserSignUpDto {
+public class SignUpDto {
 	private String email;
 	private String emailDomain;
 	private String password;
@@ -11,4 +11,5 @@ public class UserSignUpDto {
 	private String phoneNum;
 	private String name;
 	private String id;
+	private String businessNum;
 }

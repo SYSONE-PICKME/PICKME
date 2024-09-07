@@ -6,7 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 import project.pickme.user.domain.User;
-import project.pickme.user.dto.UserSignUpDto;
+import project.pickme.user.dto.SignUpDto;
 import project.pickme.user.repository.UserMapper;
 
 @Service
@@ -19,8 +19,8 @@ public class UserService {
 	//TODO: 회원가입 전 아이디 중복확인 기능, 이메일 인증 기능
 
 	@Transactional
-	public void userSignUp(UserSignUpDto userSignUpDto){
-		User user = User.createUser(userSignUpDto, passwordEncoder.encode(userSignUpDto.getPassword()));
+	public void userSignUp(SignUpDto signUpDto){
+		User user = User.createUser(signUpDto, passwordEncoder.encode(signUpDto.getPassword()));
 		userMapper.save(user);
 	}
 }

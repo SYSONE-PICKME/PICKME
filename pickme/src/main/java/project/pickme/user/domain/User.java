@@ -5,7 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import project.pickme.user.constant.Role;
 import project.pickme.user.constant.Type;
-import project.pickme.user.dto.UserSignUpDto;
+import project.pickme.user.dto.SignUpDto;
 
 @Getter
 @AllArgsConstructor
@@ -22,16 +22,17 @@ public class User{
 	private String businessNum;
 	private long point;
 
-	public static User createUser(UserSignUpDto userSignUpDto, String password){
+	public static User createUser(SignUpDto signUpDto, String password){
 		return User.builder()
-			.id(userSignUpDto.getId())
+			.id(signUpDto.getId())
 			.password(password)
 			.role(Role.USER)
-			.name(userSignUpDto.getName())
-			.email(userSignUpDto.getEmail() + "@" + userSignUpDto.getEmailDomain())
-			.type(Type.USER)
-			.addr(userSignUpDto.getAddr())
-			.phoneNum(userSignUpDto.getPhoneNum())
+			.name(signUpDto.getName())
+			.email(signUpDto.getEmail() + "@" + signUpDto.getEmailDomain())
+			.type(signUpDto.getBusinessNum() == null ? Type.USER : Type.BUSINESS)
+			.addr(signUpDto.getAddr())
+			.phoneNum(signUpDto.getPhoneNum())
+			.businessNum(signUpDto.getBusinessNum())
 			.build();
 	}
 }
