@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="project.pickme.user.repository.UserMapper">
+    <insert id="save" parameterType="project.pickme.user.domain.User">
+        insert into user(id, password, role, name, email, type, addr, phone_num, business_num, point)
+        values(#{id}, #{password}, #{role}, #{name}, #{email}, #{type}, #{addr}, #{phoneNum}, #{businessNum}, #{point})
+    </insert>
+</mapper>
