@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>회원가입</title>
+    <link rel="stylesheet" href="/user/css/signUp.css"> <!-- CSS 파일 경로 -->
+</head>
+<body>
+<div class="form-container">
+    <h1>회원가입</h1>
+    <div class="tabs">
+        <button class="tab-btn personal active" onclick="showForm('personal')">개인</button>
+        <button class="tab-btn business" onclick="showForm('business')">사업자</button>
+    </div>
+    <div class="line"></div>
+    <form method="post" action="/user/signUp">
+    <div class="form-group">
+        <label for="email">이메일</label>
+        <div class="email-container">
+            <input type="text" id="email" name="email" placeholder="이메일">
+            <span>@</span>
+            <select id="email-domain" name="emailDomain">
+                <option value="">선택해주세요</option>
+                <option value="gmail.com">gmail.com</option>
+                <option value="naver.com">naver.com</option>
+                <option value="daum.net">daum.net</option>
+            </select>
+        </div>
+        <button class="email-btn" id="email-btn" disabled>이메일 인증하기</button>
+    </div>
+    <div class="form-group">
+        <label for="password">비밀번호</label>
+        <input type="password" id="password" name= "password" placeholder="비밀번호">
+    </div>
+    <div class="form-group">
+        <label for="password-confirm">비밀번호 확인</label>
+        <input type="password" id="password-confirm" placeholder="비밀번호 확인">
+    </div>
+    <div class="form-group">
+        <label for="addr">주소</label>
+        <input type="text" id="addr" name= "addr" placeholder="주소">
+    </div>
+    <div class="form-group">
+        <label for="phoneNum">전화번호</label>
+        <input type="text" id="phoneNum" name="phoneNum" placeholder="000-0000-0000">
+    </div>
+    <div class="form-group" id="business-number-group" style="display: none;">
+        <label for="business-number">사업자 등록번호</label>
+        <input type="text" id="business-number" name = "businessNum" placeholder="사업자 등록번호">
+    </div>
+    <div class="form-group">
+        <label for="name">이름</label>
+        <input type="text" id="name" name="name" placeholder="이름">
+    </div>
+    <div class="form-group">
+        <label for="id">아이디</label>
+        <div class="id-container">
+            <input type="text" id="id" name="id" placeholder="아이디">
+            <button class="check-btn" id="check-btn" disabled>중복확인</button>
+        </div>
+    </div>
+    <button class="submit-btn" id="submit-btn">회원가입하기</button>
+    </form>
+</div>>
+<script src="/user/js/signUp.js"></script>
+</body>
+</html>
