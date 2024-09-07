@@ -16,10 +16,10 @@ public class UserService {
 	private final UserMapper userMapper;
 	private final BCryptPasswordEncoder passwordEncoder;
 
-	//TODO: 회원가입 전 아이디 중복확인 기능, 이메일 인증 기능
+	//TODO: 회원가입 전 아이디 중복확인 기능, 이메일 인증 기능, 비밀번호 일치 기능
 
 	@Transactional
-	public void userSignUp(SignUpDto signUpDto){
+	public void signUp(SignUpDto signUpDto){
 		User user = User.createUser(signUpDto, passwordEncoder.encode(signUpDto.getPassword()));
 		userMapper.save(user);
 	}

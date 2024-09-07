@@ -21,7 +21,7 @@ public class WebSecurityConfig {
 			.csrf(AbstractHttpConfigurer::disable)
 			.formLogin(AbstractHttpConfigurer::disable)    //기본 로그인 화면 비활성화
 			.authorizeHttpRequests(authorizeRequest ->
-				authorizeRequest.requestMatchers("/user/**").permitAll()
+				authorizeRequest.requestMatchers("/user/signUpForm").permitAll()
 			)
 			.build();
 	}

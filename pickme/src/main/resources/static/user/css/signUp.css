@@ -179,6 +179,13 @@ input[type="password"]:focus {
     background-color: #26A743;
 }
 
+.field-error-message {
+    color: red;
+    font-size: 0.5em;
+    margin-top: 5px;
+}
+
+
 /* 미디어 쿼리: 화면 너비가 768px 이하일 때 적용 */
 @media (max-width: 768px) {
     .email-container {

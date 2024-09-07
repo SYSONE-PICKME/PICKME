@@ -29,7 +29,7 @@ public class User{
 			.role(Role.USER)
 			.name(signUpDto.getName())
 			.email(signUpDto.getEmail() + "@" + signUpDto.getEmailDomain())
-			.type(signUpDto.getBusinessNum() == null ? Type.USER : Type.BUSINESS)
+			.type( Type.valueOf(signUpDto.getType().toUpperCase()))
 			.addr(signUpDto.getAddr())
 			.phoneNum(signUpDto.getPhoneNum())
 			.businessNum(signUpDto.getBusinessNum())
