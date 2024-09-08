@@ -1,26 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="project.pickme.user.repository.UserMapper">
-
-    <resultMap id="UserResultMap" type="project.pickme.user.domain.User">
-        <id property="id" column="id" />
-        <result property="password" column="password"/>
-        <result property="role" column="role"/>
-        <result property="name" column="name" />
-        <result property="email" column="email" />
-        <result property="type" column="type"/>
-        <result property="addr" column="addr" />
-        <result property="phoneNum" column="phone_num" />
-        <result property="businessNum" column="business_num" />
-        <result property="point" column="point" />
-    </resultMap>
-
     <insert id="save" parameterType="project.pickme.user.domain.User">
         insert into user(id, password, role, name, email, type, addr, phone_num, business_num, point)
         values(#{id}, #{password}, #{role}, #{name}, #{email}, #{type}, #{addr}, #{phoneNum}, #{businessNum}, #{point})
     </insert>
 
-    <select id="findById" parameterType="String" resultMap="UserResultMap">
+    <select id="findById" parameterType="String" resultType="project.pickme.user.domain.User">
         select * from user where id = #{id};
     </select>
 
