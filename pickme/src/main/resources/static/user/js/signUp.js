@@ -35,16 +35,11 @@ document.addEventListener('DOMContentLoaded', function () {
     const idInput = document.getElementById('id');
     const checkButton = document.getElementById('check-btn');
 
-    function toggleCheckButton() {
-        if (idInput.value) {
-            checkButton.disabled = false;
-        } else {
-            checkButton.disabled = true;
-        }
+    const toggleCheckButton = () => {
+        checkButton.disabled = !idInput.value;
     }
 
     idInput.addEventListener('input', toggleCheckButton);
-
     toggleCheckButton();
 })
 
@@ -73,3 +68,19 @@ function showForm(type) {
 
     document.querySelector('input[name="type"]').value = type;
 }
+
+//비밀번호 일치 확인 기능
+document.addEventListener('DOMContentLoaded', () => {
+    const password = document.getElementById('password');
+    const passwordConfirm = document.getElementById('password-confirm');
+    const passwordMatchMessage = document.getElementById('password-match-message');
+    const submitButton = document.getElementById('submit-btn');
+
+    const checkPasswordMatch = () => {
+        const passwordsMatch = password.value === passwordConfirm.value;
+        passwordMatchMessage.style.display = passwordsMatch || !passwordConfirm.value ? 'none' : 'block';
+        submitButton.disabled = !passwordsMatch;
+    };
+
+    [password, passwordConfirm].forEach(input => input.addEventListener('input', checkPasswordMatch));
+});

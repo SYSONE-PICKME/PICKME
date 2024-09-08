@@ -63,7 +63,7 @@ body {
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
     padding: 15px 50px;
-    margin: 0 5px; /* 두 컬럼 사이에 간격을 주기 위해 마진 추가 */
+    margin: 0 5px; /* 두 컬럼 사이에 간격*/
     flex: 0.5; /* 활성화된 탭이 비활성화된 탭의 50% 크기로 설정 */
 }
 
@@ -117,8 +117,8 @@ input[type="password"]:focus {
 }
 
 .email-container span {
-    margin: 0 5px; /* 양쪽에 간격 추가 */
-    font-size: 18px; /* 텍스트 크기 조정 */
+    margin: 0 5px;
+    font-size: 18px;
     line-height: 40px; /* @ 기호를 수직 중앙에 위치시키기 위해 높이와 동일하게 설정 */
     display: inline-block;
 }
@@ -134,8 +134,8 @@ input[type="password"]:focus {
     border: 1px solid #ddd;
     border-radius: 5px;
     box-sizing: border-box;
-    margin-right: 5px; /* 버튼과의 간격 */
-    height: 40px; /* 다른 입력 필드와 동일한 높이 */
+    margin-right: 5px;
+    height: 40px;
     max-width: calc(100% - 110px); /* 버튼 크기를 고려하여 최대 너비 설정 */
 }
 
@@ -143,11 +143,11 @@ input[type="password"]:focus {
     padding: 10px;
     border: 1px solid #D9D9D9;
     background-color: #F1F1F1;
-    color: #9DA0AE;    /*글자색*/
+    color: #9DA0AE;
     border-radius: 5px;
     cursor: pointer;
-    height: 40px; /* 입력 필드와 동일한 높이 */
-    width: 100px; /* 버튼의 고정된 너비 설정 */
+    height: 40px;
+    width: 100px;
     box-sizing: border-box;
     flex-shrink: 0; /* 버튼 크기 고정 */
 }
@@ -156,7 +156,7 @@ input[type="password"]:focus {
     padding: 10px;
     border: 1px solid #D9D9D9;
     background-color: #F1F1F1;
-    color: #9DA0AE;    /*글자색*/
+    color: #9DA0AE;
     border-radius: 5px;
     cursor: not-allowed;
     width: 100%; /* 반응형을 위해 전체 너비 사용 */
@@ -167,11 +167,10 @@ input[type="password"]:focus {
 .email-btn:enabled,
 .check-btn:enabled
 {
-    background-color: #ffffff; /* 활성화 상태의 배경색 */
-    color: #2EC44F; /* 활성화 상태의 텍스트 색상 */
-    border: 1px solid #4caf50; /* 활성화 상태의 테두리 색상 */
-    cursor: pointer; /* 활성화 상태의 커서 스타일 */
-    transition: background-color 0.3s ease, color 0.3s ease, border 0.3s ease; /* 부드러운 전환 효과 */
+    background-color: #ffffff;
+    color: #2EC44F;
+    border: 1px solid #4caf50;
+    cursor: pointer;
 }
 
 .email-btn:enabled:hover,
@@ -205,54 +204,37 @@ input[type="password"]:focus {
     margin-top: 5px;
 }
 
-
-/* 미디어 쿼리: 화면 너비가 768px 이하일 때 적용 */
 @media (max-width: 768px) {
-    .email-container {
-        flex-direction: column; /* 중간 화면에서는 세로 정렬 */
+    .tab-btn {
+        font-size: 14px;
     }
 
-    .id-container {
-        flex-direction: column; /* 중간 화면에서 아이디 필드도 세로 정렬 */
-    }
-
-    .email-container input,
-    .email-container select,
-    .id-container input {
-        margin-right: 0;
-        margin-bottom: 10px; /* 필드 간격 유지 */
-        width: 100%;
-        max-width: 100%; /* 필드가 100% 너비를 차지하도록 설정 */
-    }
-
-    .check-btn {
-        width: 100%;
-        margin-bottom: 10px; /* 버튼 아래 여백 추가 */
-    }
-}
-
-/* 미디어 쿼리: 화면 너비가 480px 이하일 때 적용 */
-@media (max-width: 480px) {
-    body {
-        padding: 10px; /* 작은 화면에서는 패딩 축소 */
-    }
-
-    h1 {
-        font-size: 18px; /* 작은 화면에서 제목 크기 축소 */
+    .tab-btn.active {
+        padding: 10px 20px;
+        flex: 1;
     }
 
     .tab-btn {
-        font-size: 14px; /* 작은 화면에서는 탭 버튼 글자 크기 축소 */
+        flex: 1;
+    }
+}
+
+
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
     }
 
-    input[type="text"],
-    input[type="password"],
-    select {
-        padding: 8px; /* 작은 화면에서는 입력 필드 패딩 축소 */
+    h1 {
+        font-size: 18px;
     }
 
-    .submit-btn {
-        font-size: 14px; /* 작은 화면에서는 제출 버튼 글자 크기 축소 */
-        padding: 8px;
+    .tab-btn {
+        font-size: 12px;
+    }
+
+    .tab-btn.active {
+        padding: 8px 10px;
+        flex: 1;
     }
 }

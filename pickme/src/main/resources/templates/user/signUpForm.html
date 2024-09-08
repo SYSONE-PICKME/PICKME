@@ -43,12 +43,12 @@
         <div class="form-group">
             <label th:for="password">비밀번호</label>
             <input type="password" th:field="*{password}" placeholder="비밀번호" th:classappend="${#fields.hasErrors('password')}? ' fieldError' : ''">
-            <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="field-error-message">Incorrect data</p>
         </div>
 
         <div class="form-group">
             <label for="password-confirm">비밀번호 확인</label>
             <input type="password" id="password-confirm" placeholder="비밀번호 확인">
+            <p id="password-match-message" class="field-error-message" style="display: none;">비밀번호가 일치하지 않습니다.</p>
         </div>
 
         <div class="form-group">
