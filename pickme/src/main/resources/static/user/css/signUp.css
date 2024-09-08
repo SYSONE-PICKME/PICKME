@@ -28,8 +28,8 @@ body {
 }
 
 .form-container {
-    max-width: 400px;
-    margin-top: 20px;
+    max-width: 450px;
+    width: 100%; /* 부모 요소의 너비를 기준으로 100% 너비 */
 }
 
 .form-container h1{

@@ -7,4 +7,8 @@ import project.pickme.user.domain.User;
 @Mapper
 public interface UserMapper {
 	void save(User user);
+
+	User findById(String id);
+
+	void deleteAll();
 }
