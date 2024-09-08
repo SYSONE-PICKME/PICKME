@@ -1,5 +1,5 @@
 package project.pickme.user.constant;
 
 public enum Role {
-	USER, ADMIN
+	ROLE_USER, ROLE_ADMIN
 }

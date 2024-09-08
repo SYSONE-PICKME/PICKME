@@ -1,5 +1,7 @@
 package project.pickme.user.repository;
 
+import java.util.Optional;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import project.pickme.user.domain.User;
@@ -8,7 +10,7 @@ import project.pickme.user.domain.User;
 public interface UserMapper {
 	void save(User user);
 
-	User findById(String id);
+	Optional<User> findById(String id);
 
 	void deleteAll();
 }

@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import jakarta.validation.Valid;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import project.pickme.user.dto.LoginDto;
 import project.pickme.user.dto.SignUpDto;
 import project.pickme.user.service.UserService;
 
@@ -17,6 +19,11 @@ import project.pickme.user.service.UserService;
 @RequestMapping("/user")
 public class UserController {
 	private final UserService userService;
+
+	@GetMapping
+	public String home(){
+		return "home";
+	}
 
 	@GetMapping("/signUpForm")
 	public String userSignUpForm(@ModelAttribute("signUpDto") SignUpDto signUpDto){
@@ -35,12 +42,7 @@ public class UserController {
 	}
 
 	@GetMapping("/loginForm")
-	public String loginForm(){
+	public String loginForm(@ModelAttribute("loginDto") LoginDto loginDto){
 		return "user/loginForm";
-	}
-
-	@PostMapping("/login")
-	public String login(){
-		return "redirect:/";
 	}
 }

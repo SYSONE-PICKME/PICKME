@@ -11,12 +11,12 @@
     <div class="logo-container">
         <a href="/" class="logo">PICKME</a>
     </div>
-    <form>ㅠ
+    <form method="post" action="/user/login" th:object="${loginDto}">
         <div class="input-group">
-            <input type="text" placeholder="아이디" required>
+            <input type="text" th:field="*{id}" placeholder="아이디" required>
         </div>
         <div class="input-group">
-            <input type="password" placeholder="비밀번호" required>
+            <input type="password" th:field="*{password}" placeholder="비밀번호" required>
         </div>
         <button type="submit" class="login-button">로그인</button>
     </form>
