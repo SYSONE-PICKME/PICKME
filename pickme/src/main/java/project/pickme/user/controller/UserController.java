@@ -31,6 +31,16 @@ public class UserController {
 		}
 
 		userService.signUp(signUpDto);
-		return "redirect:/user/login";
+		return "redirect:/user/loginForm";
+	}
+
+	@GetMapping("/loginForm")
+	public String loginForm(){
+		return "user/loginForm";
+	}
+
+	@PostMapping("/login")
+	public String login(){
+		return "redirect:/";
 	}
 }
