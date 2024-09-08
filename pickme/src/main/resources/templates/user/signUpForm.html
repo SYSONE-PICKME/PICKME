@@ -10,6 +10,11 @@
     <link rel="stylesheet" href="/user/css/signUp.css">
 </head>
 <body>
+<header class="header">
+    <div class="logo-container">
+        <a href="/" class="logo">PICKME</a>
+    </div>
+</header>
 <div class="form-container">
     <h1>회원가입</h1>
     <div class="tabs">
@@ -19,7 +24,6 @@
     <div class="line"></div>
     <form method="post" action="/user/signUp" th:object="${signUpDto}">
         <input type="hidden" name="type" th:value="${signUpDto.type ?: 'user'}">
-
         <div class="form-group">
             <label th:for="email">이메일</label>
             <div class="email-container">

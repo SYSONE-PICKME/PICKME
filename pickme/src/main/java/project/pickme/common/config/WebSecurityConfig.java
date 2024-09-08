@@ -20,14 +20,14 @@ public class WebSecurityConfig {
 			.cors(AbstractHttpConfigurer::disable)
 			.csrf(AbstractHttpConfigurer::disable)
 			.formLogin(AbstractHttpConfigurer::disable)    //기본 로그인 화면 비활성화
-			.authorizeHttpRequests(authorizeRequest ->
-				authorizeRequest.requestMatchers("/user/signUpForm").permitAll()
+			.authorizeHttpRequests(authorizeRequests ->
+				authorizeRequests.anyRequest().permitAll()  //TODO: 개발 후 제대로 경로 설정하기
 			)
 			.build();
 	}
 
 	@Bean
-	public WebSecurityCustomizer webSecurityCustomizer(){	//정적 리소시 시큐리티 대상 제외
+	public WebSecurityCustomizer webSecurityCustomizer(){	//정적 리소스 시큐리티 대상 제외
 		return (web) -> {
 			web.ignoring()
 				.requestMatchers(

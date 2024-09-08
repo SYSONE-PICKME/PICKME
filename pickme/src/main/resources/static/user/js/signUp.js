@@ -71,8 +71,5 @@ function showForm(type) {
     document.querySelector('.tab-btn.user').classList.toggle('active', type === 'user');
     document.querySelector('.tab-btn.business').classList.toggle('active', type === 'business');
 
-    // 선택된 폼 타입을 숨겨진 필드에 저장
     document.querySelector('input[name="type"]').value = type;
-
-    const form = document.querySelector('form');
 }
