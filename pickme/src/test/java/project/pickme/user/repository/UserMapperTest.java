@@ -60,7 +60,7 @@ class UserMapperTest {
 		return User.builder()
 			.id(id)
 			.password("1234")
-			.role(Role.USER)
+			.role(Role.ROLE_USER)
 			.name("김테스트")
 			.email("test@naver.com")
 			.type(USER)

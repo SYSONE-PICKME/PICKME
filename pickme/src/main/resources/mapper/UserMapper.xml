@@ -7,10 +7,10 @@
     </insert>
 
     <select id="findById" parameterType="String" resultType="project.pickme.user.domain.User">
-        select * from user where id = #{id};
+        select * from user where id = #{id}
     </select>
 
     <delete id="deleteAll">
-        delete from user;
+        delete from user
     </delete>
 </mapper>
