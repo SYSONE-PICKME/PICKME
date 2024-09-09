@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="project.pickme.customs.repository.CustomsRepository">
+
+    <select id="findById">
+        select *
+        from Customs
+        where id = #{id}
+    </select>
+
+    <insert id="save">
+        insert into Customs (id, password, role, name, tel)
+        values (#{id}, #{password}, #{role}, #{name}, #{tel})
+    </insert>
+
+    <delete id="deleteAll">
+        delete from customs;
+    </delete>
+</mapper>
