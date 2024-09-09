@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PICKME 로그인</title>
-    <link rel="stylesheet" href="/user/css/login.css">
+    <link rel="stylesheet" href="/customs/css/login.css">
 </head>
 <body>
 <div class="login-container">
     <div class="logo-container">
         <a href="/" class="logo">PICKME</a>
     </div>
-    <form method="post" action="/user/login" th:object="${loginDto}">
+    <form method="post" action="/customs/login" th:object="${loginDto}">
         <div class="input-group">
             <input type="text" th:field="*{id}" placeholder="아이디" required>
         </div>
@@ -20,9 +20,6 @@
         </div>
         <button type="submit" class="login-button">로그인</button>
     </form>
-    <div class="links">
-        <a href="/user/signUpForm" class="signup-link">회원가입</a>
-    </div>
 </div>
 </body>
 </html>
