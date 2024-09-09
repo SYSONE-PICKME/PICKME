@@ -26,7 +26,7 @@ import project.pickme.common.auth.UserDetailServiceImpl;
 public class WebSecurityConfig {
 
 	private final UserDetailServiceImpl userDetailService;
-	private final CustomsDetailServiceImpl customosDetailService;
+	private final CustomsDetailServiceImpl customsDetailService;
 
 	@Bean
 	public BCryptPasswordEncoder bCryptPasswordEncoder() {
@@ -42,7 +42,7 @@ public class WebSecurityConfig {
 	}
 
 	@Bean
-	public SecurityFilterChain userfilterChain(HttpSecurity http) throws Exception {
+	public SecurityFilterChain userFilterChain(HttpSecurity http) throws Exception {
 		AuthenticationManagerBuilder managerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
 		configureAuthenticationManager(managerBuilder, userDetailService);
 
@@ -50,9 +50,9 @@ public class WebSecurityConfig {
 	}
 
 	@Bean
-	public SecurityFilterChain adminfilterChain(HttpSecurity http) throws Exception {
+	public SecurityFilterChain adminFilterChain(HttpSecurity http) throws Exception {
 		AuthenticationManagerBuilder managerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
-		configureAuthenticationManager(managerBuilder, customosDetailService);
+		configureAuthenticationManager(managerBuilder, customsDetailService);
 
 		return commonSecurityFilter(http, "/customs/**", "/customs/loginForm", "/customs/login", "/customs/loginForm?error=true");
 	}
