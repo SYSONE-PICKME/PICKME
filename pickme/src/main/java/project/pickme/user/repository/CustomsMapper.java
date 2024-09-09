@@ -9,7 +9,6 @@ import project.pickme.user.domain.Customs;
 
 @Mapper
 public interface CustomsMapper {
-	void save(Customs customs);
 	List<Customs> findAll();
 	Optional<Customs> findById(String id);
 	void saveAll(List<Customs> customs);

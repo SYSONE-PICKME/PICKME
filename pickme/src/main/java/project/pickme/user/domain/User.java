@@ -3,11 +3,13 @@ package project.pickme.user.domain;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import project.pickme.user.constant.Role;
 import project.pickme.user.constant.Type;
 
 @Getter
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 public class User {
 	private String id;

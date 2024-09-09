@@ -3,10 +3,12 @@ package project.pickme.user.domain;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import project.pickme.user.constant.Role;
 
 @Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor
 public class Customs {
 	private String id;
 	private String password;
