@@ -23,4 +23,20 @@ public class User{
 	private String phoneNum;
 	private String businessNum;
 	private long point;
+
+	@Override
+	public String toString() {
+		return "User{" +
+			"id='" + id + '\'' +
+			", password='" + password + '\'' +
+			", role=" + role +
+			", name='" + name + '\'' +
+			", email='" + email + '\'' +
+			", type=" + type +
+			", addr='" + addr + '\'' +
+			", phoneNum='" + phoneNum + '\'' +
+			", businessNum='" + businessNum + '\'' +
+			", point=" + point +
+			'}';
+	}
 }

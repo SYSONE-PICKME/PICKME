@@ -9,12 +9,16 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import project.pickme.user.domain.User;
+import project.pickme.user.domain.Customs;
 
 @RequiredArgsConstructor
 @Getter
-public class UserDetailsImpl implements UserDetails {
-	private final User user;
+public class CustomsDetailsImpl implements UserDetails {
+	private final Customs customs;
+
+	public Customs getCustoms() {
+		return customs;
+	}
 
 	@Override
 	public boolean isAccountNonExpired() {
@@ -38,16 +42,16 @@ public class UserDetailsImpl implements UserDetails {
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return Collections.singletonList(new SimpleGrantedAuthority(user.getRole().name()));
+		return Collections.singletonList(new SimpleGrantedAuthority(customs.getRole().name()));
 	}
 
 	@Override
 	public String getPassword() {
-		return user.getPassword();
+		return customs.getPassword();
 	}
 
 	@Override
 	public String getUsername() {
-		return user.getId();
+		return customs.getId();
 	}
 }

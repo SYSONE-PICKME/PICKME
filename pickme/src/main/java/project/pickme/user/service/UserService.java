@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import project.pickme.user.constant.Role;
 import project.pickme.user.domain.User;
-import project.pickme.user.dto.LoginDto;
 import project.pickme.user.dto.SignUpDto;
 import project.pickme.user.repository.UserMapper;
 

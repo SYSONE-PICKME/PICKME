@@ -14,7 +14,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 	private final Map<String, String> redirectUrlMap = Map.of(
-		ROLE_ADMIN.name(), "/admin/home",
+		ROLE_ADMIN.name(), "/customs/home",
 		ROLE_USER.name(), "/user/home"
 	);
 

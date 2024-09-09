@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.annotation.web.configurers.SessionManagementConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -16,62 +17,81 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 
 import lombok.RequiredArgsConstructor;
 import project.pickme.common.auth.CustomAuthenticationSuccessHandler;
+import project.pickme.common.auth.CustomsDetailServiceImpl;
 import project.pickme.common.auth.UserDetailServiceImpl;
 
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class WebSecurityConfig {
+
 	private final UserDetailServiceImpl userDetailService;
+	private final CustomsDetailServiceImpl customosDetailService;
 
 	@Bean
-	public BCryptPasswordEncoder bCryptPasswordEncoder(){
+	public BCryptPasswordEncoder bCryptPasswordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
 
 	@Bean
-	public WebSecurityCustomizer webSecurityCustomizer(){	//정적 리소스 시큐리티 대상 제외
-		return (web) -> {
-			web.ignoring()
-				.requestMatchers(
-					PathRequest.toStaticResources().atCommonLocations()
-				);
-		};
+	public WebSecurityCustomizer webSecurityCustomizer() {
+		return (web) -> web.ignoring()
+			.requestMatchers(
+				PathRequest.toStaticResources().atCommonLocations()
+			);
 	}
 
 	@Bean
-	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+	public SecurityFilterChain userfilterChain(HttpSecurity http) throws Exception {
 		AuthenticationManagerBuilder managerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
-		managerBuilder.userDetailsService(userDetailService)
-			.passwordEncoder(bCryptPasswordEncoder());
+		configureAuthenticationManager(managerBuilder, userDetailService);
 
+		return commonSecurityFilter(http, "/user/**", "/user/loginForm", "/user/login", "/user/loginForm?error=true");
+	}
+
+	@Bean
+	public SecurityFilterChain adminfilterChain(HttpSecurity http) throws Exception {
+		AuthenticationManagerBuilder managerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
+		configureAuthenticationManager(managerBuilder, customosDetailService);
+
+		return commonSecurityFilter(http, "/customs/**", "/customs/loginForm", "/customs/login", "/customs/loginForm?error=true");
+	}
+
+	private void configureAuthenticationManager(AuthenticationManagerBuilder managerBuilder, UserDetailsService userDetailsService) throws Exception {
+		managerBuilder.userDetailsService(userDetailsService)
+			.passwordEncoder(bCryptPasswordEncoder());
+	}
+
+	private SecurityFilterChain commonSecurityFilter(HttpSecurity http, String securityMatcher, String loginPage, String loginProcessingUrl, String failureRedirectUrl) throws Exception {
 		http
+			.securityMatcher(securityMatcher)
 			.formLogin(AbstractHttpConfigurer::disable)
 			.cors(AbstractHttpConfigurer::disable)
 			.csrf(AbstractHttpConfigurer::disable)
 			.authorizeHttpRequests((authorize) -> authorize
-				.requestMatchers("/user/**", "/").permitAll()
+				.requestMatchers(securityMatcher).permitAll()
 				.anyRequest().authenticated())
 			.formLogin(form -> form
-				.loginPage("/user/loginForm")
+				.loginPage(loginPage)
 				.usernameParameter("id")
-				.loginProcessingUrl("/user/login")
+				.loginProcessingUrl(loginProcessingUrl)
 				.successHandler(authenticationSuccessHandler())
 				.failureHandler((request, response, exception) -> {
-					response.sendRedirect("/user/loginForm?error=true");
+					response.sendRedirect(failureRedirectUrl);
 				}).permitAll()
 			)
-
 			.sessionManagement(sessionManagementConfigurer ->
 				sessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
-					.sessionFixation(SessionManagementConfigurer.SessionFixationConfigurer::newSession)
-					.maximumSessions(1));
+					.sessionFixation(SessionManagementConfigurer.SessionFixationConfigurer::changeSessionId)
+					.maximumSessions(1)
+					.maxSessionsPreventsLogin(true)
+					.expiredUrl(loginPage));
 
 		return http.build();
 	}
 
 	@Bean
-	public AuthenticationSuccessHandler authenticationSuccessHandler(){
+	public AuthenticationSuccessHandler authenticationSuccessHandler() {
 		return new CustomAuthenticationSuccessHandler();
 	}
 }
