@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="project.pickme.item.repository.ItemRepository">
+
+    <insert id="insertItem">
+        insert into item ( customs_id, category, name, target, price, start_time, end_time,create_time,status)
+        values (#{customsId}, #{category}, #{name}, #{target}, #{price}, #{startTime},#{endTime},#{createTime},#{status})
+    </insert>
+
+
+    <delete id="delete" parameterType="Long">
+        delete from item where item_id=#{id}
+    </delete>
+
+
+
+</mapper>
