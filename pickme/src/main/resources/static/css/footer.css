@@ -1,0 +1,77 @@
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 5%;
+    padding-top: 3%;
+    padding-left: 5%;
+    background-color: #F9F9F9;
+}
+
+.footer-logo {
+    flex: 1;
+}
+
+.footer-logo h2 {
+    font-size: 36px;
+    margin-bottom: 10px;
+    font-weight: 800;
+}
+
+.inquiry-btn {
+    background-color: #f0f0f0;
+    border: 1px solid #ffffff;
+    /* padding: 5px 10px; */
+    padding: 0.5em 2em;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 400;
+    font-size: 1rem;
+}
+
+.operation-time, .closed-days {
+    font-size: 14px;
+    color: #9DA0AE;
+    margin: 5px 0;
+}
+
+.footer-links {
+    display: flex;
+    flex: 1;
+    justify-content: space-around;
+    padding-right : 25%;
+}
+
+.link-column h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.link-column ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.link-column li {
+    font-size: 14px;
+    color : #9DA0AE;
+    margin-bottom: 5px;
+    line-height: 30px;
+}
+
+.footer-bottom {
+    background-color: #ffffff;
+    /* padding: 10px 20px; */
+    padding-top : 10px;
+    padding-left : 10%;
+    padding-right : 20%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    color: #9DA0AE;
+    font-weight: 800;
+}
+
+.github-link {
+    display: inline-block;
+}
