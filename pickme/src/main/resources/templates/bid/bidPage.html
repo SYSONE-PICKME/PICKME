@@ -11,7 +11,6 @@
 <header class="header">
     합리적인 경매가 이루어지는 곳
 </header>
-
 <div class="container" th:object="${oneBidItemDto}">
     <h2>입찰중</h2>
     <div class="item-details">
@@ -42,14 +41,14 @@
         <div class="bid-info">
             <div class="bid-info-row">
                 <span class="bold-text">현재 최고가</span>
-                <span class="max-price" th:text="*{startPrice}">400,000원</span>
+                <span class="max-price" th:text="*{startPrice}"></span>
             </div>
             <div class="bid-info-row">
                 <span class="bold-text" th:text="*{myPoint}">보유 포인트 <button class="recharge-btn">충전</button></span>
                 <span>1,000,000원 </span>
             </div>
             <div class="bid-info-row">
-                <span class="bold-text">남은 시간</span>
+                <span class="bold-text" >남은 시간</span>
                 <span class="time" id="time-remaining"></span>
             </div>
             <div class="line"></div>
@@ -77,10 +76,19 @@
 
         socket.onmessage = (event) => {
             const data = JSON.parse(event.data); // 서버로부터 받은 데이터를 JSON 객체로 파싱
-            console.log("서버로부터 받음!!!!!!!!!", data)
-            if (data.maxPrice != undefined) { // maxPrice 필드가 존재할 경우
+            console.log("서버로부터 받음: ", data);
+
+            if (data.maxPrice != undefined) {
+                const maxPriceElement = document.querySelector('.max-price');
                 console.log("최고가 업데이트: ", data.maxPrice);
-                document.querySelector('.max-price').textContent = `${data.maxPrice}원`;
+                maxPriceElement.textContent = `${data.maxPrice} 원`;
+
+                maxPriceElement.classList.add('updated');
+
+                // 애니메이션이 끝난 후 클래스를 제거하여 다시 적용 가능하도록 구현
+                setTimeout(() => {
+                    maxPriceElement.classList.remove('updated');
+                }, 500);
             }
         };
 

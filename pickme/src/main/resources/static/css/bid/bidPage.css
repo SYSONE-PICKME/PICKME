@@ -76,9 +76,22 @@ h2 {
     font-size: 24px;
     color: blue;
 }
-.max-price{
-    font-weight: bold;
+
+.max-price {
+    display: inline-block; /* 애니메이션 적용을 위해 inline-block으로 설정 */
+    transition: transform 0.3s ease-in-out;
     color: red;
+    font-weight: bold;
+}
+
+.max-price.updated {
+    animation: growShrink 0.5s ease-in-out;
+}
+
+@keyframes growShrink {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.5); }
+    100% { transform: scale(1); }
 }
 
 .bid-details {
