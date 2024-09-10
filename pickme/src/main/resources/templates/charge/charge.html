@@ -16,10 +16,11 @@
   <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 
   <script>
-    const IMP = window.IMP;
+    var IMP = window.IMP;
     IMP.init("imp12712062");
 
     function requestPay(amount) {
+    console.log('??')
         IMP.request_pay(
             {
                 pg: "kakaopay.TC0ONETIME",
