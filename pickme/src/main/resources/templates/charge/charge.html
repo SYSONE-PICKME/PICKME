@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PICKME</title>
+
+  <link rel="stylesheet" th:href="@{/css/index.css}">
+  <link rel="stylesheet" th:href="@{/css/header.css}">
+  <link rel="stylesheet" th:href="@{/css/footer.css}">
+  <link rel="stylesheet" type="text/css" th:href="@{/charge/style.css}">
+
+  <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+  <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+
+  <script>
+    const IMP = window.IMP;
+    IMP.init("imp12712062");
+
+    function requestPay(amount) {
+        IMP.request_pay(
+            {
+                pg: "kakaopay.TC0ONETIME",
+                pay_method: "card",
+                merchant_uid: 'merchant_' + new Date().getTime(),
+                name: "Pick Me",
+                amount,
+                buyer_email: 'test@naver.com',
+                buyer_name: 'test',
+                buyer_tel: '010-1234-5678',
+                buyer_addr: '서울특별시',
+                buyer_postcode: '123-456',
+            },
+            function(response) {
+                if (response.success) {
+                    $.ajax({
+                        url: "/charge/complete", // 서버의 결제 완료 처리 URL
+                        method: "POST",
+                        data: {
+                            imp_uid: response.imp_uid, // 아임포트 거래 고유번호
+                            charge_amount: amount
+                        },
+                        success: function(data) {
+                            alert("결제가 성공적으로 완료되었습니다.");
+                        },
+                        error: function(error) {
+                            alert("결제 처리 중 오류가 발생했습니다.");
+                        }
+                    });
+                } else {
+                    alert("결제에 실패했습니다: " + response.error_msg);
+                }
+            });
+    }
+  </script>
+
+</head>
+<body>
+<!-- 헤더 -->
+<div th:replace="~{fragments/header :: header}">header content</div>
+
+<!-- 메인 -->
+<main>
+  <div class="container">
+    <div class="sidebar">
+      <div class="welcome-message">
+        <h2>어서오세요! <span th:text="${user.name}"></span>님</h2>
+        <p>보유 포인트</p>
+        <h3><span th:text="${user.point}"></span> P</h3>
+        <button>충전</button>
+      </div>
+      <ul class="menu">
+        <li><a href="#">개인정보 수정</a></li>
+        <li><a href="#">관심 상품</a></li>
+        <li><a href="#">내 문의 내역</a></li>
+        <li><a href="#">내 결제 목록</a></li>
+        <li><a href="#">포인트 내역</a></li>
+      </ul>
+    </div>
+    <div class="content">
+      <h3>포인트 충전</h3>
+      <div class="charge-options">
+        <div class="option">
+          <p>10,000 P</p>
+          <button onclick="requestPay(10000)">충전하기</button>
+        </div>
+        <div class="option">
+          <p>50,000 P</p>
+          <button onclick="requestPay(50000)">충전하기</button>
+        </div>
+        <div class="option">
+          <p>100,000 P</p>
+          <button onclick="requestPay(100000)">충전하기</button>
+        </div>
+        <div class="option">
+          <p>200,000 P</p>
+          <button onclick="requestPay(200000)">충전하기</button>
+        </div>
+        <div class="option">
+          <p>500,000 P</p>
+          <button onclick="requestPay(500000)">충전하기</button>
+        </div>
+        <div class="option">
+          <p>1,000,000 P</p>
+          <button onclick="requestPay(1000000)">충전하기</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+
+<!-- 푸터 -->
+<div th:replace="~{fragments/footer :: footer}">footer content</div>
+</body>
+</html>
