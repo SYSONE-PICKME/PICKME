@@ -1,4 +1,4 @@
-package project.pickme.common.config;
+package project.pickme.bid.webSocket;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.WebSocketHandler;
@@ -7,7 +7,6 @@ import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
 
 import lombok.RequiredArgsConstructor;
-import project.pickme.bid.webSocket.WebSocketHandShakeInterceptor;
 
 @Configuration
 @EnableWebSocket

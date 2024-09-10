@@ -3,37 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>입찰 페이지</title>
+    <title>입찰중</title>
     <link rel="stylesheet" href="/css/bid/bidPage.css">
 </head>
 <body>
-<div class="bid-container">
-    <div class="current-price">
-        <span>현재 최고가</span>
-        <span class="max-price">400,000원</span>
+<header class="header">
+    합리적인 경매가 이루어지는 곳
+</header>
+
+<div class="container">
+    <h2>입찰중</h2>
+    <div class="item-details">
+        <img src="/images/test.jpg" alt="Laptop Image" class="item-image">
+        <div class="item-info">
+            <h2>Jumper Laptop16 InchDDR4 16GSSD 512Value</h2>
+            <table class="item-timeline">
+                <tr>
+                    <td>공매 번호</td>
+                    <td>0000-0000-00000</td>
+                </tr>
+                <tr>
+                    <td>공매시작일시</td>
+                    <td>2024-09-06 10:00:00</td>
+                </tr>
+                <tr>
+                    <td>공매마감일시</td>
+                    <td>2024-09-06 13:00:00</td>
+                </tr>
+            </table>
+            <div class="starting-price">
+                공매시작 가격 <span class="price">308,151원</span>
+            </div>
+        </div>
     </div>
-    <div class="points">
-        <span>보유 포인트</span>
-        <span class="points-amount">
-                1,000,000원
-                <button class="recharge-btn">충전</button>
-            </span>
+
+    <div class="bid-details">
+        <div class="bid-info">
+            <div class="bid-info-row">
+                <span class="bold-text">현재 최고가</span>
+                <span class="max-price">400,000원</span>
+            </div>
+            <div class="bid-info-row">
+                <span class="bold-text">보유 포인트 <button class="recharge-btn">충전</button></span>
+                <span>1,000,000원 </span>
+            </div>
+            <div class="bid-info-row">
+                <span class="bold-text">남은 시간</span>
+                <span class="time">10:23:59</span>
+            </div>
+            <div class="line"></div>
+            <div class="bid-amount">
+                <label for="price" class="bold-text">입찰 금액</label>
+                <input type="text" id="price" class="amount-input" placeholder="금액 입력">
+                <span class="won">원</span>
+            </div>
+            <button class="bid-btn">입찰하기</button>
+        </div>
     </div>
-    <div class="time-remaining">
-        <span>남은 시간</span>
-        <span class="time">10:23:59</span>
-    </div>
-    <div class="bid-amount">
-        <label for="price">입찰 금액</label>
-        <input type="text" id="price" class="amount-input" placeholder="금액 입력">
-        <span class="won">원</span>
-    </div>
-    <button class="bid-btn">입찰하기</button>
 </div>
+
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        const itemId = [[${itemId}]];  // 숫자일 경우
-        const userId = '[[${userId}]]';  // 문자열일 경우
+        const itemId = [[${oneBidItemDto.itemId}]];  // 숫자일 경우
+        const userId = '[[${oneBidItemDto.userId}]]';  // 문자열일 경우
 
         //소켓 생성(웹소켓 메서드와 이벤트를 통해 서버와 통신 가능)
         const socket = new WebSocket(`ws://localhost:8099/connect/${itemId}/${userId}`);

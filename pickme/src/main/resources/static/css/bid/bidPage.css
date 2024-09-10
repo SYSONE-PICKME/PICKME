@@ -1,112 +1,168 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 body {
+    margin: 0;
     font-family: "IBM Plex Sans KR", sans-serif;
-    background-color: #f5f5f5;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    background-color: #ffffff;
 }
 
-.bid-container {
-    background-color: #fff;
+.header {
+    background-color: #2EC44F;
+    color: black;
+    text-align: left;
+    margin-bottom: 70px;
+    padding: 5px 50px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.container {
+    width: 70%;
+    margin: 20px auto;
+}
+
+h2 {
+    font-size: 30px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.item-details {
+    display: flex;
+    border: 1px solid #D9D9D9;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    width: 300px;
+    background-color: #ffffff;
+    margin-bottom: 30px;
 }
 
-.bid-container div {
-    margin-bottom: 15px;
+.item-image {
+    max-width: 500px;
+    margin-right: 20px;
 }
 
-.current-price,
-.points,
-.time-remaining,
-.bid-amount {
+.item-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.item-info h2 {
+    margin: 0 0 20px 0;
+    font-size: 24px;
+}
+
+.item-timeline {
+    width: 100%;
+    border-radius: 10px;
+    background-color: #F1F1F1;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.item-timeline td {
+    padding: 15px 10px;
+}
+
+.starting-price {
+    display: flex;
+    margin-top: 20px;
+    justify-content: space-between; /*양쪽 끝에 배치*/
+    align-items: center;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.price {
+    font-size: 24px;
+    color: blue;
+}
+.max-price{
+    font-weight: bold;
+    color: red;
+}
+
+.bid-details {
     display: flex;
     justify-content: space-between;
-    align-items: center;
 }
 
-.price,
-.points-amount .recharge-btn,
-.time,
-.amount {
+.bold-text {
     font-weight: bold;
-    font-size: 1.2em;
 }
 
-.price,
-.points-amount,
-.time {
-    color: #555;
+.chart-container {
+    width: 60%;
+}
+
+.chart-image {
+    width: 100%;
+    height: auto;
+}
+
+.bid-info {
+    width: 40%;
+    padding: 30px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.bid-info-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.line {
+    border-bottom: 1px solid #dcdcdc;
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 25px;
 }
 
 .recharge-btn {
-    background-color: #4CAF50;
+    background-color: #34C759;
     color: white;
     border: none;
+    padding: 5px 10px;
     border-radius: 5px;
-    padding: 3px 8px;
-    font-size: 0.9em;
     cursor: pointer;
-    margin-left: 10px;
-}
-
-.recharge-btn:hover {
-    background-color: #45a049;
 }
 
 .time {
-    color: #00b300;
+    color: #34C759;
+    font-weight: bold;
 }
 
-/* 입찰 금액 입력 필드 스타일 */
 .bid-amount {
     display: flex;
-    justify-content: flex-start; /* 왼쪽 정렬로 변경 */
-    align-items: center;
-}
-
-.bid-amount label {
-    font-size: 1.2em;
-    font-weight: bold;
-    color: #555;
-    margin-right: 10px;
+    justify-content: space-between;
+    margin-top: 20px;
 }
 
 .amount-input {
-    font-size: 1.2em;
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    width: 100px;
-    text-align: right;
-    margin-right: 5px;
+    width: calc(100% - 200px);
+    padding: 10px;
+    margin-left: auto;
+    background-color: #F1F1F1;
+    border-radius: 10px;
+    border: none;
+    font-weight: bold;
 }
 
-.bid-amount .won {
-    font-size: 1.2em;
-    color: #555;
+.won {
+    margin-left: 10px;
+    font-size: 18px;
 }
 
 .bid-btn {
     width: 100%;
-    background-color: #000;
-    color: #fff;
+    background-color: black;
+    color: #2EC44F;
     padding: 10px;
     border: none;
-    border-radius: 5px;
-    font-size: 1.2em;
+    margin-top: 25px;
+    border-radius: 10px;
     cursor: pointer;
-}
-
-.bid-btn:hover {
-    background-color: #333;
+    font-size: 18px;
 }

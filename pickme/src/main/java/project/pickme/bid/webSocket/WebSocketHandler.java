@@ -12,8 +12,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import project.pickme.bid.dto.request.AddBidDto;
-import project.pickme.bid.dto.request.MaxPriceDto;
+import project.pickme.bid.dto.AddBidDto;
+import project.pickme.bid.dto.MaxPriceDto;
 
 @Component
 @RequiredArgsConstructor
@@ -22,17 +22,14 @@ public class WebSocketHandler extends TextWebSocketHandler {
 	private final WebSocketService webSocketService;
 	private final ObjectMapper objectMapper;
 
-	@Override	//클라이언트 메세지 송수신
+	@Override    //클라이언트 메세지 송수신
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) {
-		try{
+		try {
 			String payload = message.getPayload();
-
-			if(payload.contains("price")){
-				AddBidDto addBidDto = objectMapper.readValue(payload, AddBidDto.class);
-				MaxPriceDto data = new MaxPriceDto(addBidDto.getPrice() + 10000);
-				webSocketService.sendBid2AllClient(addBidDto.getItemId(), data);
-			}
-		}catch (Exception e){
+			AddBidDto addBidDto = objectMapper.readValue(payload, AddBidDto.class);
+			MaxPriceDto data = new MaxPriceDto(addBidDto.getPrice());
+			webSocketService.sendBid2AllClient(addBidDto.getItemId(), data);
+		} catch (Exception e) {
 			log.error(e.getMessage());
 		}
 	}

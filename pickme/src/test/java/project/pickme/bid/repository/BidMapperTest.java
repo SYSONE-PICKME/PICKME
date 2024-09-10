@@ -14,7 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
 import project.pickme.bid.domain.Bid;
-import project.pickme.bid.dto.request.BidCreateDto;
+import project.pickme.bid.dto.BidCreateDto;
 import project.pickme.user.constant.Role;
 import project.pickme.user.domain.User;
 import project.pickme.user.repository.UserMapper;

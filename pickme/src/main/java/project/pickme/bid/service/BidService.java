@@ -6,12 +6,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
-import project.pickme.bid.dto.request.BidCreateDto;
-import project.pickme.bid.dto.request.MaxPriceDto;
+import project.pickme.bid.dto.BidCreateDto;
+import project.pickme.bid.dto.MaxPriceDto;
 import project.pickme.bid.repository.BidMapper;
 import project.pickme.bid.webSocket.WebSocketService;
 import project.pickme.common.exception.BusinessException;
 import project.pickme.item.domain.Item;
+import project.pickme.bid.dto.OneBidItemDto;
 import project.pickme.item.repository.ItemMapper;
 import project.pickme.user.domain.User;
 
@@ -32,5 +33,12 @@ public class BidService {
 		//TODO: 현재 최고가를 실시간 전송 해야함
 		MaxPriceDto data = new MaxPriceDto(price + 10000);
 		webSocketService.sendBid2Client(user.getId(), data);
+	}
+
+	public OneBidItemDto showOneBidItem(User user, long itemId) {
+		Item item = itemMapper.findItemById(itemId).orElseThrow(() -> new BusinessException(NOT_FOUND_ITEM));
+		//TODO: 이미지 조회 로직
+
+		return OneBidItemDto.of(item, user, "test.png");
 	}
 }

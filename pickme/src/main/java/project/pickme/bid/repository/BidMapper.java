@@ -5,7 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import project.pickme.bid.domain.Bid;
-import project.pickme.bid.dto.request.BidCreateDto;
+import project.pickme.bid.dto.BidCreateDto;
 
 @Mapper
 public interface BidMapper {
