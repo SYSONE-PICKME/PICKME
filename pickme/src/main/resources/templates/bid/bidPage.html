@@ -50,7 +50,7 @@
             </div>
             <div class="bid-info-row">
                 <span class="bold-text">남은 시간</span>
-                <span class="time">10:23:59</span>
+                <span class="time" id="time-remaining"></span>
             </div>
             <div class="line"></div>
             <div class="bid-amount">
@@ -110,6 +110,9 @@
             }
         })
     })
+
+    var endTime = new Date('[[${oneBidItemDto.endTime}]]').getTime();
 </script>
+<script src="/js/bid/timer.js"></script>
 </body>
 </html>
