@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
@@ -11,28 +12,28 @@
     합리적인 경매가 이루어지는 곳
 </header>
 
-<div class="container">
+<div class="container" th:object="${oneBidItemDto}">
     <h2>입찰중</h2>
     <div class="item-details">
         <img src="/images/test.jpg" alt="Laptop Image" class="item-image">
         <div class="item-info">
-            <h2>Jumper Laptop16 InchDDR4 16GSSD 512Value</h2>
+            <h2 th:text="*{name}"></h2>
             <table class="item-timeline">
                 <tr>
                     <td>공매 번호</td>
-                    <td>0000-0000-00000</td>
+                    <td th:text="*{itemId}"></td>
                 </tr>
                 <tr>
                     <td>공매시작일시</td>
-                    <td>2024-09-06 10:00:00</td>
+                    <td th:text="*{startTime}"></td>
                 </tr>
                 <tr>
                     <td>공매마감일시</td>
-                    <td>2024-09-06 13:00:00</td>
+                    <td th:text="*{endTime}"></td>
                 </tr>
             </table>
             <div class="starting-price">
-                공매시작 가격 <span class="price">308,151원</span>
+                공매시작 가격 <span class="price" th:text="*{startPrice}">308,151원</span>
             </div>
         </div>
     </div>
@@ -41,10 +42,10 @@
         <div class="bid-info">
             <div class="bid-info-row">
                 <span class="bold-text">현재 최고가</span>
-                <span class="max-price">400,000원</span>
+                <span class="max-price" th:text="*{startPrice}">400,000원</span>
             </div>
             <div class="bid-info-row">
-                <span class="bold-text">보유 포인트 <button class="recharge-btn">충전</button></span>
+                <span class="bold-text" th:text="*{myPoint}">보유 포인트 <button class="recharge-btn">충전</button></span>
                 <span>1,000,000원 </span>
             </div>
             <div class="bid-info-row">
