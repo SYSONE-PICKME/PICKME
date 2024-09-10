@@ -31,14 +31,10 @@ public class ChargeService {
 		}
 
 		// todo: 사용자 point update
-		save(ChargeDto.Create.of(amount, "test"));
+		chargeMapper.save(ChargeDto.Create.of(amount, "test"));
 	}
 
 	private boolean isNotEqualsAmount(BigDecimal paymentAmount, int amount) {
 		return !paymentAmount.equals(new BigDecimal(amount));
-	}
-
-	public void save(ChargeDto.Create charge) {
-		chargeMapper.save(charge);
 	}
 }
