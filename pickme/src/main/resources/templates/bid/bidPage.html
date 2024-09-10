@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>입찰 페이지</title>
+    <link rel="stylesheet" href="/css/bid/bidPage.css">
+</head>
+<body>
+<div class="bid-container">
+    <div class="current-price">
+        <span>현재 최고가</span>
+        <span class="max-price">400,000원</span>
+    </div>
+    <div class="points">
+        <span>보유 포인트</span>
+        <span class="points-amount">
+                1,000,000원
+                <button class="recharge-btn">충전</button>
+            </span>
+    </div>
+    <div class="time-remaining">
+        <span>남은 시간</span>
+        <span class="time">10:23:59</span>
+    </div>
+    <div class="bid-amount">
+        <label for="price">입찰 금액</label>
+        <input type="text" id="price" class="amount-input" placeholder="금액 입력">
+        <span class="won">원</span>
+    </div>
+    <button class="bid-btn">입찰하기</button>
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const itemId = [[${itemId}]];  // 숫자일 경우
+        const userId = '[[${userId}]]';  // 문자열일 경우
+
+        //소켓 생성(웹소켓 메서드와 이벤트를 통해 서버와 통신 가능)
+        const socket = new WebSocket(`ws://localhost:8099/connect/${itemId}/${userId}`);
+
+        socket.onopen = () => {
+            console.log("웹 소켓 open");
+        };
+
+        socket.onmessage = (event) => {
+            const data = JSON.parse(event.data); // 서버로부터 받은 데이터를 JSON 객체로 파싱
+            console.log("서버로부터 받음!!!!!!!!!", data)
+            if (data.maxPrice != undefined) { // maxPrice 필드가 존재할 경우
+                console.log("최고가 업데이트: ", data.maxPrice);
+                document.querySelector('.max-price').textContent = `${data.maxPrice}원`;
+            }
+        };
+
+        socket.onerror = (error) => {
+            console.log("에러 발생:", error);
+        };
+
+        socket.onclose = () => {
+            console.log("웹 소켓 닫힘");
+        };
+
+        //입찰하기 버튼 클릭 시 실시간 금액 전송
+        document.querySelector('.bid-btn').addEventListener('click', function () {
+            const price = document.getElementById('price').value;
+
+            if(price){
+                const message = {
+                    itemId:itemId,
+                    userId:userId,
+                    price: price
+                };
+
+                socket.send(JSON.stringify(message))
+                console.log('입찰 금액 전송: ', message);
+            } else{
+                alert('금액을 입력해주세요.');
+            }
+        })
+    })
+</script>
+</body>
+</html>

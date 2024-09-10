@@ -1,0 +1,112 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "IBM Plex Sans KR", sans-serif;
+    background-color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.bid-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+}
+
+.bid-container div {
+    margin-bottom: 15px;
+}
+
+.current-price,
+.points,
+.time-remaining,
+.bid-amount {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.price,
+.points-amount .recharge-btn,
+.time,
+.amount {
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.price,
+.points-amount,
+.time {
+    color: #555;
+}
+
+.recharge-btn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 3px 8px;
+    font-size: 0.9em;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.recharge-btn:hover {
+    background-color: #45a049;
+}
+
+.time {
+    color: #00b300;
+}
+
+/* 입찰 금액 입력 필드 스타일 */
+.bid-amount {
+    display: flex;
+    justify-content: flex-start; /* 왼쪽 정렬로 변경 */
+    align-items: center;
+}
+
+.bid-amount label {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #555;
+    margin-right: 10px;
+}
+
+.amount-input {
+    font-size: 1.2em;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100px;
+    text-align: right;
+    margin-right: 5px;
+}
+
+.bid-amount .won {
+    font-size: 1.2em;
+    color: #555;
+}
+
+.bid-btn {
+    width: 100%;
+    background-color: #000;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2em;
+    cursor: pointer;
+}
+
+.bid-btn:hover {
+    background-color: #333;
+}

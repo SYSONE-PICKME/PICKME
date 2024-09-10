@@ -24,7 +24,6 @@ import project.pickme.common.auth.UserDetailServiceImpl;
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class WebSecurityConfig {
-
 	private final UserDetailServiceImpl userDetailService;
 	private final CustomsDetailServiceImpl customsDetailService;
 
@@ -69,7 +68,7 @@ public class WebSecurityConfig {
 			.cors(AbstractHttpConfigurer::disable)
 			.csrf(AbstractHttpConfigurer::disable)
 			.authorizeHttpRequests((authorize) -> authorize
-				.requestMatchers(securityMatcher).permitAll()
+				.requestMatchers(loginPage, "/user/home", "/user/signUp", "/user/signUpForm").permitAll()
 				.anyRequest().authenticated())
 			.formLogin(form -> form
 				.loginPage(loginPage)

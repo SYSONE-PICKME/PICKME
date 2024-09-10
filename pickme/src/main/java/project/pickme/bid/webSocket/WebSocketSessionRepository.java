@@ -1,7 +1,11 @@
 package project.pickme.bid.webSocket;
 
+import static java.util.Collections.*;
+
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -28,6 +32,13 @@ public class WebSocketSessionRepository {
 		addUserSession(userId, session);
 		log.info("{}번 공매품에 유저{} 입장", itemId, userId);
 		log.info("{}번 공매품에 입장한 유저 수: {}명", itemId, users.size());
+	}
+
+	public List<WebSocketSession> findAllUserSession(Long itemId) {
+		return itemRoom.getOrDefault(itemId, emptySet()).stream()
+			.map(sessions::get)
+			.filter(Objects::nonNull)
+			.toList();
 	}
 
 	private void addUserSession(String userId, org.springframework.web.socket.WebSocketSession session) {

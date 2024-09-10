@@ -7,7 +7,7 @@
         <result property="bidTime" column="bid_time" />
         <result property="isSuccess" column="is_success" />
         <association property="user" column="user_id" javaType="project.pickme.user.domain.User" select="project.pickme.user.repository.UserMapper.findUserById"/>
-        <association property="item" column="item_id" javaType="project.pickme.item.domain.Item" select="project.pickme.item.repository.ItemMapper.findItemById" />
+        <association property="item" column="item_id" javaType="project.pickme.item.domain.Item" />
     </resultMap>
 
     <select id="findAll" resultMap="BidResultMap">
@@ -23,7 +23,7 @@
                  LEFT JOIN Item i ON b.item_id = i.item_id
     </select>
 
-    <insert id="save" parameterType="project.pickme.bid.dto.BidCreateDto">
+    <insert id="save" parameterType="project.pickme.bid.dto.request.BidCreateDto">
         insert into Bid(item_id, user_id, price, bid_time, is_success)
         values(#{itemId}, #{userId}, #{price}, #{bidTime}, #{isSuccess})
     </insert>

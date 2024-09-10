@@ -4,12 +4,14 @@ import java.time.LocalDateTime;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import project.pickme.user.domain.Customs;
 import project.pickme.item.constant.Status;
 import project.pickme.user.constant.Type;
 
 @Getter
 @AllArgsConstructor
+@NoArgsConstructor
 public class Item {
 	private Long id;
 	private String name;

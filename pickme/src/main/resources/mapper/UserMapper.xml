@@ -2,15 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="project.pickme.user.repository.UserMapper">
     <insert id="save" parameterType="project.pickme.user.domain.User">
-        insert into user(id, password, role, name, email, type, addr, phone_num, business_num, point)
+        insert into User(id, password, role, name, email, type, addr, phone_num, business_num, point)
         values(#{id}, #{password}, #{role}, #{name}, #{email}, #{type}, #{addr}, #{phoneNum}, #{businessNum}, #{point})
     </insert>
 
-    <select id="findById" parameterType="String" resultType="project.pickme.user.domain.User">
-        select * from user where id = #{id}
+    <select id="findUserById" parameterType="String" resultType="project.pickme.user.domain.User">
+        select * from User where id = #{id}
     </select>
 
     <delete id="deleteAll">
-        delete from user
+        delete from User
     </delete>
 </mapper>

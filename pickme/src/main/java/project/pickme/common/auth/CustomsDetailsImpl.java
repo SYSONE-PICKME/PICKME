@@ -16,10 +16,6 @@ import project.pickme.user.domain.Customs;
 public class CustomsDetailsImpl implements UserDetails {
 	private final Customs customs;
 
-	public Customs getCustoms() {
-		return customs;
-	}
-
 	@Override
 	public boolean isAccountNonExpired() {
 		return true;

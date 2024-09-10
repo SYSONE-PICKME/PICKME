@@ -32,9 +32,9 @@ class UserMapperTest {
 
 	@Test
 	@DisplayName("회원 아이디로 회원을 찾을 수 있다.")
-	void findById() {
+	void findUserById() {
 	    // given // when
-		User findUser = userMapper.findById("initUser").get();
+		User findUser = userMapper.findUserById("initUser").get();
 
 		// then
 		assertThat(findUser).extracting("id", "name", "email", "addr")
@@ -51,7 +51,7 @@ class UserMapperTest {
 		userMapper.save(user);
 
 	    // then
-		User findUser = userMapper.findById("test").get();
+		User findUser = userMapper.findUserById("test").get();
 		assertThat(findUser).extracting("id", "name", "email", "addr")
 			.containsExactly("test", "김테스트", "test@naver.com","서울특별시 종로구 창경궁로");
 	}
