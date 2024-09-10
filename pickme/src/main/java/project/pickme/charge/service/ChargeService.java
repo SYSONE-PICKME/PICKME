@@ -3,8 +3,6 @@ package project.pickme.charge.service;
 import java.io.IOException;
 import java.math.BigDecimal;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,21 +11,15 @@ import com.siot.IamportRestClient.exception.IamportResponseException;
 import com.siot.IamportRestClient.response.IamportResponse;
 import com.siot.IamportRestClient.response.Payment;
 
+import lombok.RequiredArgsConstructor;
 import project.pickme.charge.dto.ChargeDto;
 import project.pickme.charge.mapper.ChargeMapper;
 
 @Service
+@RequiredArgsConstructor
 public class ChargeService {
 	private final IamportClient iamportClient;
-
-	@Autowired
-	ChargeMapper chargeMapper;
-
-	public ChargeService(
-		@Value("${secret.iamport.api-key}") String API_KEY,
-		@Value("${secret.iamport.api-secret-key}") String API_SECRET_KEY) {
-		this.iamportClient = new IamportClient(API_KEY, API_SECRET_KEY);
-	}
+	private final ChargeMapper chargeMapper;
 
 	@Transactional
 	public void charge(String impUid, int amount) throws IamportResponseException, IOException {
