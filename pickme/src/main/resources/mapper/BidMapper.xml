@@ -31,4 +31,10 @@
     <delete id="deleteAll">
         delete from Bid
     </delete>
+
+    <select id="findMaxBidByItemId" resultType="long">
+        select max(b.price) as price
+        from Bid b
+        group by b.item_id
+    </select>
 </mapper>

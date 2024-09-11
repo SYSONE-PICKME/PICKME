@@ -14,4 +14,6 @@ public interface BidMapper {
 	List<Bid> findAll();
 
 	void deleteAll();
+
+	long findMaxBidByItemId(Long itemId);
 }
