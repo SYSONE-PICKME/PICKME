@@ -64,34 +64,3 @@ public class NoticeService {
 		return notice != null ? CampaignDTO.fromEntity(notice) : null;
 	}
 }
-
-
-// @Service
-// @Transactional
-// public class NoticeService {
-//
-// 	@Autowired
-// 	private NoticeMapper noticeMapper;
-//
-// 	public List<Notice> getAllNotice(){
-// 		return noticeMapper.selectAll();
-// 	}
-//
-// 	public Notice getNoticeById(long id){
-// 		return noticeMapper.selectById(id);
-// 	}
-//
-// 	public Notice createNotice(Notice notice) {
-// 		notice.setCreateTime(LocalDateTime.now());
-// 		noticeMapper.insert(notice);
-// 		return noticeMapper.selectById(notice.getId());
-// 	}
-//
-// 	public void updateNotice(Notice notice){
-// 		noticeMapper.update(notice);
-// 	}
-//
-// 	public void deleteNotice(long id){
-// 		noticeMapper.delete(id);
-// 	}
-// }

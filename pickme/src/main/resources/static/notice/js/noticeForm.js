@@ -14,7 +14,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // 이미지 업로드 및 미리보기 기능
     const imageUpload = document.getElementById('campaignImage');
     const previewImage = document.getElementById('previewImage');
     const imageUploadContainer = document.querySelector('.image-upload-container');
@@ -55,33 +54,3 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
-
-
-//document.addEventListener('DOMContentLoaded', function() {
-//    const form = document.querySelector('form');
-//    const titleInput = document.getElementById('title');
-//    const contentTextarea = document.getElementById('content');
-//
-//    form.addEventListener('submit', function(event) {
-//        if (!titleInput.value.trim()) {
-//            event.preventDefault();
-//            alert('제목을 입력해주세요.');
-//            titleInput.focus();
-//        } else if (!contentTextarea.value.trim()) {
-//            event.preventDefault();
-//            alert('내용을 입력해주세요.');
-//            contentTextarea.focus();
-//        }
-//    });
-//});
-
-//document.addEventListener('DOMContentLoaded', function() {
-//    const tabs = document.querySelectorAll('.tab');
-//    tabs.forEach(tab => {
-//        tab.addEventListener('click', function() {
-//            tabs.forEach(t => t.classList.remove('active'));
-//            this.classList.add('active');
-//            // 여기에 탭 전환 로직을 추가할 수 있습니다.
-//        });
-//    });
-//});

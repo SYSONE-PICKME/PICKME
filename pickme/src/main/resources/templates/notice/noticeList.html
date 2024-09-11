@@ -10,46 +10,43 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
-
-<div class="container">
-  <h1>공지사항</h1>
-  <div class="main-card">
-    <div class="notice-list">
-      <div th:each="notice : ${notices}" class="notice-item">
-        <div class="notice-content">
-          <div class="notice-icon">
-            <img th:src="@{${notice.title.startsWith('공지') ? '/images/notice.png' : '/images/campaign.png'}}" alt="공지 아이콘">
+    <div class="container">
+      <h1>공지사항</h1>
+      <div class="main-card">
+        <div class="notice-list">
+          <div th:each="notice : ${notices}" class="notice-item">
+            <div class="notice-content">
+              <div class="notice-icon">
+                <img th:src="@{${notice.title.startsWith('공지') ? '/images/notice.png' : '/images/campaign.png'}}" alt="공지 아이콘">
+              </div>
+              <div class="notice-text">
+                <h3 class="notice-title" th:text="${notice.title}">공지사항 제목</h3>
+                <p>
+                  <span th:text="'@' + ${notice.customsName}"></span>
+                  <span th:text="${#temporals.format(notice.createTime, 'yyyy-MM-dd')}">날짜</span>
+                </p>
+              </div>
+            </div>
+            <div class="notice-actions">
+                <a th:href="@{/customs/notice/editNotice/{id}(id=${notice.id})}" class="btn btn-primary">수정</a>
+                <a th:href="@{/customs/notice/delete/{id}(id=${notice.id})}" class="btn btn-secondary">삭제</a>
+            </div>
           </div>
-          <div class="notice-text">
-            <h3 class="notice-title" th:text="${notice.title}">공지사항 제목</h3>
-            <p>
-<!--              <span th:text="${'@' + notice.customs.name}">@작성자</span>-->
-              <span th:text="'@' + ${notice.customsName}"></span>
-              <span th:text="${#temporals.format(notice.createTime, 'yyyy-MM-dd')}">날짜</span>
-            </p>
-          </div>
-        </div>
-        <div class="notice-actions">
-          <button class="btn btn-primary">수정</button>
-          <button class="btn btn-secondary">삭제</button>
         </div>
       </div>
-    </div>
-  </div>
-  <div class="bottom-container">
-    <div class="pagination-wrapper">
-      <div class="pagination">
-        <button class="prev-btn" id="prevBtn">&lt;</button>
-        <div class="page-indicators" id="pageIndicators">
+      <div class="bottom-container">
+        <div class="pagination-wrapper">
+          <div class="pagination">
+            <button class="prev-btn" id="prevBtn">&lt;</button>
+            <div class="page-indicators" id="pageIndicators">
+            </div>
+            <button class="next-btn" id="nextBtn">&gt;</button>
+          </div>
         </div>
-        <button class="next-btn" id="nextBtn">&gt;</button>
+        <a th:href="@{/customs/notice/newNotice}" class="btn btn-write">등록하기</a>
       </div>
-    </div>
-<!--    <a href="/user/notice/newNotice" class="btn btn-write">등록하기</a>-->
-    <a th:href="@{/customs/notice/newNotice}" class="btn btn-write">등록하기</a>
-  </div>
 
-</div>
+    </div>
 
   <script th:src="@{/notice/js/noticeList.js}"></script>
 </body>

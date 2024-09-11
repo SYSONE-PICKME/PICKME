@@ -55,6 +55,5 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // 초기 페이지 설정
     goToPage(1);
 });

@@ -154,25 +154,6 @@ textarea {
     background-color: #e0e0e0;
 }
 
-/*
-.submit-btn {
-    display: block;
-    width: 40%;
-    padding: 10px;
-    background-color: #000;
-    color: #fff;
-    border: none;
-    border-radius: 20px;
-    font-size: 18px;
-    font-weight: 600;
-    cursor: pointer;
-    margin: 20px auto 0;
-}
-
-.submit-btn:hover {
-    background-color: #333;
-}
-*/
 #campaignTitle, #campaignCustomsNotice {
     font-family: "IBM Plex Sans KR", sans-serif;
     font-size: 12px;

@@ -89,6 +89,8 @@ h1 {
     cursor: pointer;
     font-size: 14px;
     font-weight: 500;
+    text-decoration: none;
+    display: inline-block;
 }
 
 .btn-primary {
@@ -97,7 +99,7 @@ h1 {
 }
 
 .btn-secondary {
-    background-color: #333;
+    background-color: #6c757d;
     color: white;
 }
 
@@ -170,84 +172,3 @@ h1 {
 .btn-write:hover {
     background-color: #45a049;
 }
-
-
-/*
-.pagination {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
-}
-
-.prev-btn, .next-btn {
-    background: none;
-    border: none;
-    font-size: 24px;
-    color: #333;
-    cursor: pointer;
-    padding: 0 10px;
-}
-
-.prev-btn:disabled, .next-btn:disabled {
-    color: #ccc;
-    cursor: not-allowed;
-}
-
-.page-indicators {
-    display: flex;
-    gap: 5px;
-    margin: 0 10px;
-}
-
-.page-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background-color: #ddd;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.page-dot.active {
-    background-color: #333;
-}
-*/
-
-
-
-
-/*
-.pagination {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
-}
-
-.prev-btn, .next-btn {
-    background: none;
-    border: none;
-    font-size: 24px;
-    color: #333;
-    cursor: pointer;
-}
-
-.page-indicators {
-    display: flex;
-    gap: 5px;
-    margin: 0 10px;
-}
-
-.page-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background-color: #ddd;
-    cursor: pointer;
-}
-
-.page-dot.active {
-    background-color: #333;
-}
-*/

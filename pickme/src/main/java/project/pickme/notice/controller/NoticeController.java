@@ -69,9 +69,20 @@ public class NoticeController {
 	}
 
 	@GetMapping("/editNotice/{id}")
-	public String updateNotice(@PathVariable("id") long id, Model model) {
+	public String updateNotice(@PathVariable("id") long id, Model model, Authentication authentication) {
 		NoticeDTO notice = noticeService.getNoticeById(id);
 		model.addAttribute("notice", notice);
+
+		if (authentication != null && authentication.getPrincipal() instanceof CustomsDetailsImpl) {
+			CustomsDetailsImpl customsDetails = (CustomsDetailsImpl) authentication.getPrincipal();
+			Customs customs = customsDetails.getCustoms();
+			model.addAttribute("customsName", customs.getName());
+			model.addAttribute("customsId", customs.getId());
+		} else {
+			model.addAttribute("customsName", "Unknown");
+			model.addAttribute("customsId", "");
+		}
+
 		return "notice/noticeForm";
 	}
 
@@ -79,13 +90,13 @@ public class NoticeController {
 	public String updateNotice(@PathVariable("id") long id, @ModelAttribute NoticeDTO noticeDTO) {
 		noticeDTO.setId(id);
 		noticeService.updateNotice(noticeDTO);
-		return "redirect:/noticeContent";
+		return "redirect:/customs/notice/noticeContent/" + id;
 	}
 
 	@GetMapping("/delete/{id}")
 	public String deleteNotice(@PathVariable("id") long id) {
 		noticeService.deleteNotice(id);
-		return "redirect:/noticeList";
+		return "redirect:/customs/notice";
 	}
 
 	@GetMapping("/newCampaign")
@@ -108,14 +119,13 @@ public class NoticeController {
 		Authentication authentication) throws IOException {
 		CampaignDTO campaignDTO = new CampaignDTO();
 		campaignDTO.setTitle(title);
-		campaignDTO.setContent(""); // 빈 문자열로 설정
+		campaignDTO.setContent("");
 
 		if (!imageFile.isEmpty()) {
 			String imageUrl = fileUploadService.uploadFile(imageFile);
 			campaignDTO.setImageUrl(imageUrl);
 		}
 
-		// CustomsId 설정 (인증 정보에서 가져오기)
 		if (authentication != null && authentication.getPrincipal() instanceof CustomsDetailsImpl) {
 			CustomsDetailsImpl customsDetails = (CustomsDetailsImpl) authentication.getPrincipal();
 			campaignDTO.setCustomsId(customsDetails.getCustoms().getId());

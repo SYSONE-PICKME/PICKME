@@ -47,5 +47,14 @@
         insert into Notice(customs_id, title, content)
         values(#{customs.id}, #{title}, #{content})
     </insert>
+
+    <update id="update" parameterType="project.pickme.notice.domain.Notice">
+        update Notice set title = #{title}, content = #{content}
+        where notice_id = #{id}
+    </update>
     
+    <delete id="delete" parameterType="long">
+        delete from Notice where notice_id = #{id}
+    </delete>
+
 </mapper>
