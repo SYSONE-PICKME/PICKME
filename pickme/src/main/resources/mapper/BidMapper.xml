@@ -23,7 +23,7 @@
                  LEFT JOIN Item i ON b.item_id = i.item_id
     </select>
 
-    <insert id="save" parameterType="project.pickme.bid.dto.BidCreateDto" useGeneratedKeys="true" keyProperty="id">
+    <insert id="save" parameterType="project.pickme.bid.dto.BidCreateDto" useGeneratedKeys="true" keyProperty="bidId">
         insert into Bid(item_id, user_id, price, bid_time, is_success)
         values(#{itemId}, #{userId}, #{price}, #{bidTime}, #{isSuccess})
     </insert>
@@ -37,5 +37,19 @@
         from Bid b
         group by b.item_id
         having b.item_id = #{itemId}
+    </select>
+
+    <select id="findBidById" parameterType="long" resultMap="BidResultMap">
+        SELECT
+            b.bid_id as id,
+            b.price,
+            b.bid_time,
+            b.is_success,
+            u.id as user_id,
+            i.item_id as item_id
+        FROM Bid b
+                 LEFT JOIN User u ON b.user_id = u.id
+                 LEFT JOIN Item i ON b.item_id = i.item_id
+        where b.bid_id = #{bidId}
     </select>
 </mapper>

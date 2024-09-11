@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class BidCreateDto {
-	private Long id;    //save 후 반환 받을 저장된 BidId
+	private Long bidId;    //save 후 반환 받을 저장된 BidId
 	private long price;
 	private LocalDateTime bidTime;
 	private boolean isSuccess;
