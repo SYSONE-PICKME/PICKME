@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import project.pickme.item.domain.ItemDTO;
+import project.pickme.item.domain.ItemFormDTO;
 import project.pickme.item.repository.ItemRepository;
 
 @Service
