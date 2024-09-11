@@ -5,28 +5,23 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import project.pickme.user.constant.Role;
-import project.pickme.user.constant.Type;
+import lombok.RequiredArgsConstructor;
+import project.pickme.charge.service.ChargeService;
+import project.pickme.common.annotation.CurrentUser;
 import project.pickme.user.domain.User;
+import project.pickme.user.dto.UserDto;
 
 @Controller
-@RequestMapping("/charge")
+@RequestMapping("/user/charge")
+@RequiredArgsConstructor
 public class ChargeController {
+	private final ChargeService chargeService;
 
 	@GetMapping
-	public String charge(Model model) {
-		User user = User.builder()
-			.id("test")
-			.password("1234")
-			.role(Role.ROLE_USER)
-			.name("테스트")
-			.type(Type.USER)
-			.addr("서울특별시 종로구")
-			.email("test@naver.com")
-			.point(50000)
-			.build();
+	public String charge(@CurrentUser User user, Model model) {
+		UserDto.Info userInfo = chargeService.getUserInfo(user.getId());
+		model.addAttribute("user", userInfo);
 
-		model.addAttribute("user", user);
 		return "charge/charge.html";
 	}
 }

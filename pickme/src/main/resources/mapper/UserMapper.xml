@@ -13,4 +13,10 @@
     <delete id="deleteAll">
         delete from User
     </delete>
+
+    <update id="updatePointById" parameterType="project.pickme.user.dto.UserDto$UpdatePoint">
+        update User
+        set point = #{point}
+        where id = #{id}
+    </update>
 </mapper>
