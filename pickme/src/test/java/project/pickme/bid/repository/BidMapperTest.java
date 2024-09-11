@@ -3,13 +3,15 @@ package project.pickme.bid.repository;
 import static org.assertj.core.api.Assertions.*;
 import static project.pickme.user.constant.Type.*;
 
+import java.util.Collection;
 import java.util.List;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
@@ -29,15 +31,15 @@ class BidMapperTest {
 
 	@BeforeEach
 	void setUp(){
-		// //TODO: 공매 품 저장 해야함 지금은 db에 데이터 넣었음
-		// User user = createUser("testUser");
-		// userMapper.save(user);
+		//TODO: 공매 품 저장 해야함 지금은 db에 데이터 넣었음
+		User user = createUser("testUser");
+		userMapper.save(user);
 	}
 
 	@AfterEach
 	void tearDown() {
-		// bidMapper.deleteAll();
-		// userMapper.deleteAll();
+		bidMapper.deleteAll();
+		userMapper.deleteAll();
 	}
 
 	@Test
@@ -103,12 +105,38 @@ class BidMapperTest {
 		bidMapper.save(bid2);
 
 	    // when
-		Bid findBid = bidMapper.findBidById(bid1.getBidId());
+		Bid findBid = bidMapper.findBidById(bid1.getBidId()).get();
 
 		// then
 		assertThat(findBid).isNotNull()
 			.extracting("id", "price", "user.id")
 			.contains(bid1.getBidId(), 1000l, "testUser");
+	}
+
+	@TestFactory
+	@DisplayName("입찰 상태 수정 시나리오")
+	Collection<DynamicTest> updateBidSuccess(){
+		//given
+		User user = userMapper.findUserById("testUser").get();
+		Long itemId = 1l;
+		BidCreateDto bid = BidCreateDto.create(1000, user.getId(), itemId);
+		bidMapper.save(bid);
+
+		return List.of(
+			DynamicTest.dynamicTest("입찰한 경우 처음 isSuccess 상태는 false이다.", () -> {
+				//when //then
+				Bid beforeUpdateBid = bidMapper.findBidById(bid.getBidId()).get();
+				assertThat(beforeUpdateBid.isSuccess()).isFalse();
+			}),
+			DynamicTest.dynamicTest("updateBidSuccess를 하면 isSuccess 상태는 true이다.", () ->{
+				//when
+				bidMapper.updateBidSuccess(bid.getBidId());
+
+				//then
+				Bid afterUpdateBid = bidMapper.findBidById(bid.getBidId()).get();
+				assertThat(afterUpdateBid.isSuccess()).isTrue();
+			})
+		);
 	}
 
 	private static User createUser(String id) {

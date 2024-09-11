@@ -1,6 +1,9 @@
 package project.pickme.bid.repository;
 
 import java.util.List;
+import java.util.Optional;
+
+import javax.swing.text.html.Option;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -17,5 +20,7 @@ public interface BidMapper {
 
 	Long findMaxBidByItemId(Long itemId);
 
-	Bid findBidById(Long bidId);
+	Optional<Bid> findBidById(Long bidId);
+
+	void updateBidSuccess(Long bidId);
 }

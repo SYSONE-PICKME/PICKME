@@ -52,4 +52,10 @@
                  LEFT JOIN Item i ON b.item_id = i.item_id
         where b.bid_id = #{bidId}
     </select>
+
+    <update id="updateBidSuccess" parameterType="long">
+        update Bid
+        set is_success = true
+        where bid_id = #{bidId}
+    </update>
 </mapper>
