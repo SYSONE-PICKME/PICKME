@@ -11,7 +11,10 @@ public enum ErrorCode {
 	NOT_FOUND_USER("존재하지 않는 회원"),
 
 	//공매품
-	NOT_FOUND_ITEM("존재하지 않는 공매품");
+	NOT_FOUND_ITEM("존재하지 않는 공매품"),
+
+	//입찰
+	NOT_FOUND_BID("존재하지 않는 입찰");
 
 	private final String errorCode;
 }

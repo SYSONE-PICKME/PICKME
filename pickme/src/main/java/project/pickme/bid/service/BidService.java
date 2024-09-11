@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
+import project.pickme.bid.domain.Bid;
 import project.pickme.bid.dto.AddBidDto;
 import project.pickme.bid.dto.BidCreateDto;
 import project.pickme.bid.dto.MaxPriceDto;
@@ -26,7 +27,7 @@ public class BidService {
 	private final BidMapper bidMapper;
 
 	public OneBidItemDto showOneBidItem(User user, Long itemId) {
-		Item item = itemMapper.findItemById(itemId).orElseThrow(() -> new BusinessException(NOT_FOUND_ITEM));
+		Item item = getItem(itemId);
 		Long maxPrice = bidMapper.findMaxBidByItemId(item.getId());
 
 		//TODO: 이미지 조회 로직
@@ -35,10 +36,22 @@ public class BidService {
 
 	@Transactional
 	public MaxPriceDto addBid(AddBidDto addBidDto){
-		User user = userMapper.findUserById(addBidDto.getUserId()).orElseThrow(() -> new BusinessException(NOT_FOUND_ITEM));
-		Item item = itemMapper.findItemById(addBidDto.getItemId()).orElseThrow(() -> new BusinessException(NOT_FOUND_ITEM));
+		User user = userMapper.findUserById(addBidDto.getUserId()).orElseThrow(() -> new BusinessException(NOT_FOUND_USER));
+		Item item = getItem(addBidDto.getItemId());
 
-		Long savedBidId = bidMapper.save(BidCreateDto.create(addBidDto.getPrice(), user.getId(), item.getId()));
-		return MaxPriceDto.create(savedBidId, addBidDto.getPrice());
+		BidCreateDto bidCreateDto = BidCreateDto.create(addBidDto.getPrice(), user.getId(), item.getId());
+		bidMapper.save(bidCreateDto);
+		return MaxPriceDto.create(bidCreateDto.getBidId(), addBidDto.getPrice());
+	}
+
+	public void closeBid(Long bidId){
+		Bid bid = bidMapper.findBidById(bidId).orElseThrow(() -> new BusinessException(NOT_FOUND_BID));
+
+		bidMapper.updateBidSuccess(bidId);
+		userMapper.minusPoint(bid.getUser().getId(), bid.getPrice());	//포인트 차감
+	}
+
+	private Item getItem(Long itemId) {
+		return itemMapper.findItemById(itemId).orElseThrow(() -> new BusinessException(NOT_FOUND_ITEM));
 	}
 }

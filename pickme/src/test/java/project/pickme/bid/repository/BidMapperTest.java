@@ -93,7 +93,6 @@ class BidMapperTest {
 
 	@Test
 	@DisplayName("입찰 아이디로 입찰을 찾을 수 있다.")
-	@Transactional
 	void findBidById() {
 	    // given
 		User user = userMapper.findUserById("testUser").get();

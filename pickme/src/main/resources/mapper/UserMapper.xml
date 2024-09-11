@@ -13,4 +13,10 @@
     <delete id="deleteAll">
         delete from User
     </delete>
+
+    <update id="minusPoint">
+        update user
+        set point = point - #{price}
+        where id = #{userId}
+    </update>
 </mapper>
