@@ -13,7 +13,6 @@ import lombok.Setter;
 import project.pickme.user.constant.Type;
 
 @Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class ItemFormDTO {
@@ -29,3 +28,4 @@ public class ItemFormDTO {
 	private int law;
 
 }
+
