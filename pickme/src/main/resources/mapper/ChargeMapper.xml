@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="project.pickme.charge.mapper.ChargeMapper">
+    <insert id="save" parameterType="project.pickme.charge.dto.ChargeDto">
+        insert into Charge(user_id, price, charge_time)
+        values(#{userId}, #{price}, #{chargeTime})
+    </insert>
+</mapper>
