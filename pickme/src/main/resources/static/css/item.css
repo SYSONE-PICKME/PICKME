@@ -1,0 +1,123 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+}
+
+header {
+    background-color: #000;
+    color: #fff;
+    padding: 1rem;
+}
+
+header h1 {
+    margin-bottom: 1rem;
+}
+
+
+nav ul {
+    list-style-type: none;
+    display: flex;
+}
+
+nav ul li {
+    margin-right: 1rem;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+nav ul li a.active {
+    color: #4CAF50;
+}
+
+main {
+    display: flex;
+    padding: 2rem;
+}
+
+aside {
+    width: 200px;
+    margin-right: 2rem;
+}
+
+aside button {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+aside ul {
+    list-style-type: none;
+    margin-bottom: 1rem;
+}
+
+aside ul li {
+    margin-bottom: 0.5rem;
+}
+
+section {
+    flex: 1;
+}
+
+.image-upload {
+    display: flex;
+
+    gap: 10px; /* 아이템 사이 간격 설정 */
+}
+
+.image {
+    display: flex;
+    flex-direction: row;
+    width: 100px;
+    height: 100px;
+    border: 1px solid #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+
+form div {
+    margin-bottom: 1rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="time"] {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+}
+
+button {
+    padding: 0.5rem 1rem;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.calendar {
+    border: 1px solid #ccc;
+    padding: 1rem;
+    margin-top: 1rem;
+}
