@@ -12,7 +12,4 @@ public interface CustomsRepository {
 	Customs findById(String id);
 
 	void deleteAll();
-
-
-
 }
