@@ -14,7 +14,7 @@
       <h1>공지사항</h1>
       <div class="main-card">
         <div class="notice-list">
-          <div th:each="notice : ${notices}" class="notice-item">
+          <div th:each="notice : ${notices}" class="notice-item" th:data-notice-id="${notice.id}">
             <div class="notice-content">
               <div class="notice-icon">
                 <img th:src="@{${notice.title.startsWith('공지') ? '/images/notice.png' : '/images/campaign.png'}}" alt="공지 아이콘">
@@ -45,7 +45,6 @@
         </div>
         <a th:href="@{/customs/notice/newNotice}" class="btn btn-write">등록하기</a>
       </div>
-
     </div>
 
   <script th:src="@{/notice/js/noticeList.js}"></script>

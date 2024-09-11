@@ -172,3 +172,17 @@ h1 {
 .btn-write:hover {
     background-color: #45a049;
 }
+
+.notice-item {
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.notice-item:hover {
+    background-color: #f0f0f0;
+}
+
+.notice-actions .btn {
+    z-index: 1;
+    position: relative;
+}
