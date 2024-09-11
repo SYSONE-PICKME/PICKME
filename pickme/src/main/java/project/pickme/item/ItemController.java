@@ -28,11 +28,9 @@ import project.pickme.user.constant.Type;
 @RequiredArgsConstructor
 public class ItemController {
 
-	@Autowired
-	private LawService lawService;
+	private final LawService lawService;
 
-	@Autowired
-	private ItemService itemService;
+	private final ItemService itemService;
 
 	private final S3Service s3Service;
 
@@ -55,20 +53,6 @@ public class ItemController {
 			Status.NOT_OPEN, "gunsan");
 
 		itemService.save(itemDTO);
-
-		// if (files == null || files.length == 0) {
-		// 	System.out.println("파일이 전달되지 않았습니다.");
-		// 	return "redirect:/item/create";
-		// }
-		//
-		//
-		// for (MultipartFile file : files) {
-		//
-		// 	String fileName =file.getOriginalFilename();
-		// 	System.out.println(file);
-		// 	System.out.println("파일 이름: " + fileName);
-		// 	System.out.println(files.length);
-		// }
 		return "redirect:/customs/item/create";
 	}
 
