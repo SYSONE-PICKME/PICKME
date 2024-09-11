@@ -48,6 +48,9 @@ dependencies {
 
 	// iamport
 	implementation 'com.github.iamport:iamport-rest-client-java:0.2.21'
+
+	// jasypt
+	implementation 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.4'
 }
 
 tasks.named('test') {
