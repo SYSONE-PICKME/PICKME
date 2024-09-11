@@ -7,7 +7,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class MaxPriceDto {
-	private Long maxPriceBidId;
+	private Long bidId;
 	private long maxPrice;
 
 	public static MaxPriceDto create(Long maxPriceBidId, long maxPrice) {

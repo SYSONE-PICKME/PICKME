@@ -51,6 +51,7 @@ function updateMaxPrice(maxPrice){
 
 function sendBidToServer(socket, price, itemId, userId){
     const message = {
+        type: 'BID',
         itemId : itemId,
         userId : userId,
         price: price
@@ -83,6 +84,10 @@ document.addEventListener("DOMContentLoaded", function () {
     //소켓 생성(웹소켓 메서드와 이벤트를 통해 서버와 통신 가능)
     const socket = new WebSocket(`ws://localhost:8099/connect/${itemId}/${userId}`);
 
+    //변수 선언
+    let selectedPrice = null;
+    let selectedBid = null;
+
     socket.onopen = () => console.log("웹 소켓 open");
     socket.onmessage = (event) => {
         const data = JSON.parse(event.data); // 서버로부터 받은 데이터를 JSON 객체로 파싱
@@ -90,11 +95,25 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (data.maxPrice != undefined) {
             updateMaxPrice(data.maxPrice);
+            selectedPrice = data.maxPrice;
+            selectedBid = data.bidId;
         }
     };
 
     socket.onerror = (error) => console.log("에러 발생:", error);
     socket.onclose = () => console.log("웹 소켓 닫힘");
+
+    // bidEnded 이벤트를 감지
+    window.addEventListener('bidEnded', (event) => {
+        const message = {
+            type: 'BID_END',
+            itemId: itemId,
+            bidId: selectedBid,
+            price: selectedPrice
+        };
+        socket.send(JSON.stringify(message));
+        console.log("경매 종료 메세지 전송", message);
+    });
 
     //입찰하기 버튼 클릭 시 실시간 금액 전송
     document.querySelector('.bid-btn').addEventListener('click', function () {

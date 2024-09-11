@@ -15,7 +15,7 @@
     </delete>
 
     <update id="minusPoint">
-        update user
+        update User
         set point = point - #{price}
         where id = #{userId}
     </update>

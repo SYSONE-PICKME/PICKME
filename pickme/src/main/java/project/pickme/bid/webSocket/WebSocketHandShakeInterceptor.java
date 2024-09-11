@@ -1,6 +1,5 @@
 package project.pickme.bid.webSocket;
 
-import java.net.URL;
 import java.util.Map;
 
 import org.springframework.http.HttpStatus;

@@ -44,6 +44,7 @@ public class BidService {
 		return MaxPriceDto.create(bidCreateDto.getBidId(), addBidDto.getPrice());
 	}
 
+	@Transactional
 	public void closeBid(Long bidId){
 		Bid bid = bidMapper.findBidById(bidId).orElseThrow(() -> new BusinessException(NOT_FOUND_BID));
 

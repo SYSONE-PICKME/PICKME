@@ -3,9 +3,9 @@ package project.pickme.bid.dto;
 import lombok.Getter;
 
 @Getter
-public class AddBidDto {
+public class SelectedBidDto {
 	private String type;
 	private Long itemId;
-	private String userId;
-	private long price;
+	private Long bidId;
+	private long selectedPrice;
 }
