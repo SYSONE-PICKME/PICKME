@@ -24,7 +24,6 @@ public class ItemFormDTO {
 	private LocalTime startTime;
 	private LocalDate endDate;
 	private LocalTime endTime;
-
 	private int law;
 
 }
