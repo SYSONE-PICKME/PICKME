@@ -15,8 +15,8 @@ import project.pickme.user.constant.Type;
 public class Item {
 	private Long id;
 	private String name;
-	private String category;
-	private String target;
+	private Category category;
+	private Type target;
 	private long price;
 	private LocalDateTime startTime;
 	private LocalDateTime endTime;
