@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.transaction.annotation.Transactional;
 
 import project.pickme.bid.domain.Bid;
 import project.pickme.bid.dto.BidCreateDto;
@@ -28,15 +29,15 @@ class BidMapperTest {
 
 	@BeforeEach
 	void setUp(){
-		//TODO: 공매 품 저장 해야함 지금은 db에 데이터 넣었음
-		User user = createUser("testUser");
-		userMapper.save(user);
+		// //TODO: 공매 품 저장 해야함 지금은 db에 데이터 넣었음
+		// User user = createUser("testUser");
+		// userMapper.save(user);
 	}
 
 	@AfterEach
 	void tearDown() {
-		bidMapper.deleteAll();
-		userMapper.deleteAll();
+		// bidMapper.deleteAll();
+		// userMapper.deleteAll();
 	}
 
 	@Test
@@ -59,13 +60,13 @@ class BidMapperTest {
 	@DisplayName("저장된 입찰 아이디를 반환받을 수 있다.")
 	void saveReturnId() {
 		// given
-		BidCreateDto bid = BidCreateDto.create(1000, "testUser", 1l);
+		BidCreateDto bid = BidCreateDto.create(1000, "testUser", 2l);
 
 		// when
-		Long savedId = bidMapper.save(bid);
+		bidMapper.save(bid);
 
 		// then
-		assertThat(savedId).isNotNull();
+		assertThat(bid.getBidId()).isNotNull();
 	}
 
 
@@ -85,7 +86,29 @@ class BidMapperTest {
 		long maxPrice = bidMapper.findMaxBidByItemId(itemId);
 
 		// then
-		Assertions.assertThat(maxPrice).isEqualTo(10000);
+		assertThat(maxPrice).isEqualTo(10000);
+	}
+
+	@Test
+	@DisplayName("입찰 아이디로 입찰을 찾을 수 있다.")
+	@Transactional
+	void findBidById() {
+	    // given
+		User user = userMapper.findUserById("testUser").get();
+		Long itemId = 1l;
+		BidCreateDto bid1 = BidCreateDto.create(1000, user.getId(), itemId);
+		BidCreateDto bid2 = BidCreateDto.create(10000, user.getId(), itemId);
+
+		bidMapper.save(bid1);
+		bidMapper.save(bid2);
+
+	    // when
+		Bid findBid = bidMapper.findBidById(bid1.getBidId());
+
+		// then
+		assertThat(findBid).isNotNull()
+			.extracting("id", "price", "user.id")
+			.contains(bid1.getBidId(), 1000l, "testUser");
 	}
 
 	private static User createUser(String id) {
