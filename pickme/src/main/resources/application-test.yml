@@ -1,0 +1,15 @@
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: project.pickme
+
+spring:
+  config:
+    activate:
+      on-profile: test
+  application:
+    name: pickme
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ENC(3OH7RPlsKMEZzEfDkyj1unZ3JKZy1C5N5if5IduWHv8OFeG7q1FN17q42M8SyrXUHnBTGqlm9B+zutB4pAd0v9J4h/LyZtQMl2fQlY3Aj0Y23dIxCRBh5m431gJkHodk)
+    username: ENC(PVfomFx2vcnNApL2xVcLOw==)
+    password: ENC(dUaGVc29LQyFGF6oRGhZqA==)
