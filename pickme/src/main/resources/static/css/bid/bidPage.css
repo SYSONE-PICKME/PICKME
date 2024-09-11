@@ -79,6 +79,12 @@ h2 {
     color: blue;
 }
 
+.price::after,
+.max-price::after,
+.my-point::after {
+    content: " 원";
+}
+
 .max-price {
     display: inline-block;
     transition: transform 0.3s ease-in-out;

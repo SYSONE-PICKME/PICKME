@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Modal Example</title>
+    <link rel="stylesheet" href="/css/modal.css"> <!-- 모달 스타일을 위해 추가 -->
+</head>
+<body>
+<div id="modal" class="modal" th:fragment="modal">
+    <div class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="icon-container">
+                    <span class="icon">❗</span>
+                </div>
+            </div>
+            <div class="modal-body">
+                <p id="modal-message"></p>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-confirm" class="btn-confirm">확인</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/js/modal.js"></script> <!-- 모달 동작을 위한 스크립트 추가 -->
+</body>
+</html>
