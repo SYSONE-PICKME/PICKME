@@ -15,8 +15,10 @@
   <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
   <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 
-  <script>
-    const IMP = window.IMP;
+  <script th:inline="javascript">
+    const userId = [[${user.id}]];
+
+    var IMP = window.IMP;
     IMP.init("imp12712062");
 
     function requestPay(amount) {
@@ -35,15 +37,21 @@
             },
             function(response) {
                 if (response.success) {
+                  const request = {
+                      impUid: response.imp_uid,
+                      point: amount,
+                      userId: userId
+                  };
                     $.ajax({
                         url: "/charge/complete", // 서버의 결제 완료 처리 URL
                         method: "POST",
-                        data: {
-                            imp_uid: response.imp_uid, // 아임포트 거래 고유번호
-                            charge_amount: amount
-                        },
+                        data: JSON.stringify(request),
+                        contentType: "application/json",
+
                         success: function(data) {
-                            alert("결제가 성공적으로 완료되었습니다.");
+                            // alert("결제가 성공적으로 완료되었습니다.");
+                            confirm('결제가 성공적으로 완료되었습니다.')
+                            location.href='http://localhost:8099/user/charge';
                         },
                         error: function(error) {
                             alert("결제 처리 중 오류가 발생했습니다.");
@@ -54,6 +62,7 @@
                 }
             });
     }
+
   </script>
 
 </head>
