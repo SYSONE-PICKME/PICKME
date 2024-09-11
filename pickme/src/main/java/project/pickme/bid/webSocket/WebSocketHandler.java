@@ -30,7 +30,7 @@ public class WebSocketHandler extends TextWebSocketHandler {
 			String payload = message.getPayload();
 			AddBidDto addBidDto = objectMapper.readValue(payload, AddBidDto.class);
 			MaxPriceDto maxPriceDto = bidService.addBid(addBidDto);
-			webSocketService.sendBid2AllClient(addBidDto.getItemId(), maxPriceDto);
+			webSocketService.sendBidToAllClient(addBidDto.getItemId(), maxPriceDto);
 		} catch (Exception e) {
 			log.error(e.getMessage());
 		}

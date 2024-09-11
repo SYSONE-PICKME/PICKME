@@ -23,7 +23,7 @@ public class WebSocketService {
 		webSocketSessionRepository.saveUserInItem(itemId, userId, session);
 	}
 
-	public void sendBid2Client(String userId, Object data){
+	public void sendBidToClient(String userId, Object data){
 		try {
 			WebSocketSession session = webSocketSessionRepository.findSessionByUserId(userId);
 			if(session != null && session.isOpen()){
@@ -37,7 +37,7 @@ public class WebSocketService {
 		}
 	}
 
-	public void sendBid2AllClient(Long itemId, Object data){
+	public void sendBidToAllClient(Long itemId, Object data){
 		try{
 			List<WebSocketSession> allUserSession = webSocketSessionRepository.findAllUserSession(itemId);
 			String jsonString = objectMapper.writeValueAsString(data);
