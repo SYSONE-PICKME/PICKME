@@ -22,12 +22,12 @@ public class WebSocketHandler extends TextWebSocketHandler {
 	private final WebSocketService webSocketService;
 	private final ObjectMapper objectMapper;
 
-	@Override    //클라이언트 메세지 송수신
+	@Override    //클라이언트와 메세지 송수신
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) {
 		try {
 			String payload = message.getPayload();
 			AddBidDto addBidDto = objectMapper.readValue(payload, AddBidDto.class);
-			MaxPriceDto data = new MaxPriceDto(addBidDto.getPrice());
+			MaxPriceDto data = new MaxPriceDto(addBidDto.getPrice());	//TODO: 실제 최고가로 전송하도록 수정
 			webSocketService.sendBid2AllClient(addBidDto.getItemId(), data);
 		} catch (Exception e) {
 			log.error(e.getMessage());

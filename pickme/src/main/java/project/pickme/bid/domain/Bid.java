@@ -10,8 +10,8 @@ import project.pickme.item.domain.Item;
 import project.pickme.user.domain.User;
 
 @Getter
-@AllArgsConstructor
 @Builder
+@AllArgsConstructor
 @NoArgsConstructor
 public class Bid {
 	private Long id;

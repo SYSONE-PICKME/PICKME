@@ -19,6 +19,7 @@ public class WebSocketHandShakeInterceptor implements HandshakeInterceptor {
 		Map<String, Object> attributes) throws Exception {
 
 		String[] parts = request.getURI().getPath().split("/");
+
 		if (parts.length != 4) {
 			log.error("잘못된 웹소켓 연결 요청" + request.getURI().getPath());
 			response.setStatusCode(HttpStatus.FORBIDDEN);
