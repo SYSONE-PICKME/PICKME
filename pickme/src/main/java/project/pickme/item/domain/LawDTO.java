@@ -6,6 +6,6 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class LawDTO {
-	private int id;
+	private Long id;
 	private String title;
 }
