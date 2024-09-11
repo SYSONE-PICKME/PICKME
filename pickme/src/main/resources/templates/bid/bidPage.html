@@ -32,7 +32,7 @@
                 </tr>
             </table>
             <div class="starting-price">
-                공매시작 가격 <span class="price" th:text="*{startPrice}">308,151원</span>
+                공매시작 가격 <span class="price" th:text="*{startPrice}"></span>
             </div>
         </div>
     </div>
@@ -62,8 +62,8 @@
     </div>
 </div>
 <script>
-    const itemId = [[${oneBidItemDto.itemId}]];  // 숫자일 경우
-    const userId = '[[${oneBidItemDto.userId}]]';  // 문자열일 경우
+    const itemId = [[${oneBidItemDto.itemId}]];
+    const userId = '[[${oneBidItemDto.userId}]]';
     var endTime = new Date('[[${oneBidItemDto.endTime}]]').getTime();
 </script>
 <script src="/js/bid/timer.js"></script>

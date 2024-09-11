@@ -27,6 +27,7 @@ h2 {
 
 .item-details {
     display: flex;
+    flex-direction: row;
     border: 1px solid #D9D9D9;
     padding: 20px;
     border-radius: 10px;
@@ -35,6 +36,7 @@ h2 {
 }
 
 .item-image {
+    width: 100%;
     max-width: 500px;
     margin-right: 20px;
 }
@@ -66,7 +68,7 @@ h2 {
 .starting-price {
     display: flex;
     margin-top: 20px;
-    justify-content: space-between; /*양쪽 끝에 배치*/
+    justify-content: space-between;
     align-items: center;
     font-size: 18px;
     font-weight: bold;
@@ -78,7 +80,7 @@ h2 {
 }
 
 .max-price {
-    display: inline-block; /* 애니메이션 적용을 위해 inline-block으로 설정 */
+    display: inline-block;
     transition: transform 0.3s ease-in-out;
     color: red;
     font-weight: bold;
@@ -178,4 +180,20 @@ h2 {
     border-radius: 10px;
     cursor: pointer;
     font-size: 18px;
+}
+
+@media (max-width: 1220px) {
+    .item-image {
+        width: 100%;
+        max-width: 800px;
+        margin-right: 20px;
+    }
+
+    .item-details{
+        flex-direction: column;
+    }
+
+    .bid-info{
+        width: 100%;
+    }
 }
