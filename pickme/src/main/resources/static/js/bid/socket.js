@@ -38,8 +38,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if(price){
             const message = {
-                itemId:itemId,
-                userId:userId,
+                itemId: itemId,
+                userId: userId,
                 price: price
             };
 

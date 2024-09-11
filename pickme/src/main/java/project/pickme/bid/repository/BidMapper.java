@@ -9,11 +9,11 @@ import project.pickme.bid.dto.BidCreateDto;
 
 @Mapper
 public interface BidMapper {
-	void save(BidCreateDto bid);
+	Long save(BidCreateDto bid);
 
 	List<Bid> findAll();
 
 	void deleteAll();
 
-	long findMaxBidByItemId(Long itemId);
+	Long findMaxBidByItemId(Long itemId);
 }

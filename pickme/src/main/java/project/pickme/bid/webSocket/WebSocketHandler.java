@@ -14,12 +14,14 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import project.pickme.bid.dto.AddBidDto;
 import project.pickme.bid.dto.MaxPriceDto;
+import project.pickme.bid.service.BidService;
 
 @Component
 @RequiredArgsConstructor
 @Slf4j
 public class WebSocketHandler extends TextWebSocketHandler {
 	private final WebSocketService webSocketService;
+	private final BidService bidService;
 	private final ObjectMapper objectMapper;
 
 	@Override    //클라이언트와 메세지 송수신
@@ -27,8 +29,8 @@ public class WebSocketHandler extends TextWebSocketHandler {
 		try {
 			String payload = message.getPayload();
 			AddBidDto addBidDto = objectMapper.readValue(payload, AddBidDto.class);
-			MaxPriceDto data = new MaxPriceDto(addBidDto.getPrice());	//TODO: 실제 최고가로 전송하도록 수정
-			webSocketService.sendBid2AllClient(addBidDto.getItemId(), data);
+			MaxPriceDto maxPriceDto = bidService.addBid(addBidDto);
+			webSocketService.sendBid2AllClient(addBidDto.getItemId(), maxPriceDto);
 		} catch (Exception e) {
 			log.error(e.getMessage());
 		}

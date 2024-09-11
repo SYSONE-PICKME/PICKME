@@ -22,5 +22,6 @@
             i.status,
             c.id as customs_id
         from Item i left join Customs c on i.customs_id = c.id
+        where i.item_id = ${itemId}
     </select>
 </mapper>

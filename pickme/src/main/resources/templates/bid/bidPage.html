@@ -41,11 +41,11 @@
         <div class="bid-info">
             <div class="bid-info-row">
                 <span class="bold-text">현재 최고가</span>
-                <span class="max-price" th:text="*{startPrice}"></span>
+                <span class="max-price" th:text="*{maxPrice}"></span>
             </div>
             <div class="bid-info-row">
-                <span class="bold-text" th:text="*{myPoint}">보유 포인트 <button class="recharge-btn">충전</button></span>
-                <span>1,000,000원 </span>
+                <span class="bold-text">보유 포인트 <button class="recharge-btn">충전</button></span>
+                <span th:text="*{myPoint}"></span>
             </div>
             <div class="bid-info-row">
                 <span class="bold-text" >남은 시간</span>

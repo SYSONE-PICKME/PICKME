@@ -56,6 +56,20 @@ class BidMapperTest {
 	}
 
 	@Test
+	@DisplayName("저장된 입찰 아이디를 반환받을 수 있다.")
+	void saveReturnId() {
+		// given
+		BidCreateDto bid = BidCreateDto.create(1000, "testUser", 1l);
+
+		// when
+		Long savedId = bidMapper.save(bid);
+
+		// then
+		assertThat(savedId).isNotNull();
+	}
+
+
+	@Test
 	@DisplayName("공매품에 입찰한 금액 가장 큰 금액을 찾을 수 있다.")
 	void findMaxBidByItemId() {
 	    // given

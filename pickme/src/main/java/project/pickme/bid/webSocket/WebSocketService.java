@@ -19,7 +19,7 @@ public class WebSocketService {
 	private final WebSocketSessionRepository webSocketSessionRepository;
 	private final ObjectMapper objectMapper;
 
-	public void saveInItem(long itemId, String userId, org.springframework.web.socket.WebSocketSession session){
+	public void saveInItem(long itemId, String userId, WebSocketSession session){
 		webSocketSessionRepository.saveUserInItem(itemId, userId, session);
 	}
 
