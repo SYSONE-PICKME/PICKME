@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>공지사항</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/notice/css/noticeContent.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+<div class="container">
+    <h1 th:text="${notice instanceof T(project.pickme.notice.dto.CampaignDTO) ? '캠페인' : '공지사항'}"></h1>
+
+    <div class="notice-content" th:object="${notice}">
+        <h2 th:text="*{title}"></h2>
+        <p class="date" th:text="${#temporals.format(notice.createTime, 'yyyy.MM.dd')}"></p>
+
+        <div th:if="${notice instanceof T(project.pickme.notice.dto.CampaignDTO)}" class="campaign-content">
+            <img th:if="${notice.imageUrl != null and !notice.imageUrl.isEmpty()}"
+                 th:src="@{${notice.imageUrl}}"
+                 alt="캠페인 이미지"
+                 style="max-width: 100%;">
+<!--            <p th:if="${notice.imageUrl == null or notice.imageUrl.isEmpty()}">이미지가 없습니다.</p>-->
+<!--            <p th:text="${notice.content}"></p>-->
+        </div>
+        <div th:unless="${notice instanceof T(project.pickme.notice.dto.CampaignDTO)}" class="notice-body" th:text="*{content}">
+        </div>
+    </div>
+
+    <div class="button-group">
+        <a href="/customs/notice" class="btn btn-list">목록 보기</a>
+        <a th:href="@{/customs/notice/{id}/editNotice(id=${notice.id})}" class="btn btn-edit">수정</a>
+        <a th:href="@{/customs/notice/{id}/delete(id=${notice.id})}" class="btn btn-delete">삭제</a>
+    </div>
+</div>
+<script src="/js/notice.js"></script>
+</body>
+</html>

@@ -1,0 +1,170 @@
+body {
+    font-family: 'Noto Sans KR', Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+h1 {
+    color: #333;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+.notice-content h2 {
+    font-size: 1.5em;
+    color: #444;
+    margin-bottom: 10px;
+}
+
+.notice-content .date {
+    color: #666;
+    font-size: 0.9em;
+    margin-bottom: 20px;
+}
+
+.notice-body, .campaign-content {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-top: 20px;
+}
+
+.notice-body {
+    white-space: pre-wrap;
+}
+
+.campaign-content img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+.button-group {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 0 5px;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.btn-list {
+    background-color: #6c757d;
+}
+
+.btn-edit {
+    background-color: #28a745;
+}
+
+.btn-delete {
+    background-color: #dc3545;
+}
+
+.btn:hover {
+    opacity: 0.8;
+}
+
+/*
+body {
+    font-family: 'Noto Sans KR', Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+h1 {
+    color: #333;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+.notice-content h2 {
+    font-size: 1.5em;
+    color: #444;
+    margin-bottom: 10px;
+}
+
+.notice-content .date {
+    color: #666;
+    font-size: 0.9em;
+    margin-bottom: 20px;
+}
+
+.notice-body, .campaign-content {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-top: 20px;
+}
+
+.notice-body {
+    white-space: pre-wrap;
+}
+
+.campaign-content img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+.button-group {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 0 5px;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.btn-list {
+    background-color: #6c757d;
+}
+
+.btn-edit {
+    background-color: #28a745;
+}
+
+.btn-delete {
+    background-color: #dc3545;
+}
+
+.btn:hover {
+    opacity: 0.8;
+}
+
+*/

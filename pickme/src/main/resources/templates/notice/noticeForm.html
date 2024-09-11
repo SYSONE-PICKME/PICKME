@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>공지사항</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/notice/css/noticeForm.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+<div class="container">
+    <h1>새 공지글 등록</h1>
+    <div class="tab-container">
+        <button class="tab active" data-tab="notice">
+            <img src="/images/notice.png" alt="공지사항 아이콘">
+            공지사항 등록
+        </button>
+        <button class="tab" data-tab="campaign">
+            <img src="/images/campaign.png" alt="캠페인 아이콘">
+            캠페인 등록
+        </button>
+    </div>
+    <div class="card">
+        <div id="noticeForm" class="form-content active">
+            <form th:action="@{/customs/notice}" th:object="${notice}" method="post">
+                <div class="form-group">
+                    <label for="title">제목</label>
+                    <input type="text" id="title" th:field="*{title}" placeholder="제목을 입력하세요" required>
+                </div>
+                <div class="form-group">
+                    <label for="customs_notice">공지 기관</label>
+                    <input type="text" id="customs_notice" th:value="${customsName}" readonly>
+                    <input type="hidden" th:field="*{customsId}" th:value="${customsId}">
+                </div>
+                <div class="form-group">
+                    <label for="content">내용</label>
+                    <textarea id="content" th:field="*{content}" placeholder="내용을 작성해주세요" required></textarea>
+                </div>
+                <div class="button-group">
+                    <a href="/customs/notice" class="cancel-btn">작성 취소</a>
+                    <button type="submit" class="submit-btn">등록하기</button>
+                </div>
+            </form>
+        </div>
+
+        <div id="campaignForm" class="form-content">
+            <form th:action="@{/customs/notice/campaign}" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="campaignTitle">제목</label>
+                    <input type="text" id="campaignTitle" name="title" placeholder="제목을 입력하세요" required>
+                </div>
+                <div class="form-group">
+                    <label for="campaignCustomsNotice">공지 기관</label>
+                    <input type="text" id="campaignCustomsNotice" th:value="${customsName}" readonly>
+                    <input type="hidden" name="customsId" th:value="${customsId}">
+                </div>
+                <div class="form-group image-upload-area">
+                    <input type="file" id="campaignImage" name="imageFile" accept="image/*" required>
+                    <div class="image-preview">
+                        <img id="previewImage" src="/images/camera.png" alt="미리보기 이미지">
+                        <p>클릭하여 이미지 업로드</p>
+                    </div>
+                </div>
+                <div class="button-group">
+                    <a href="/customs/notice" class="cancel-btn">작성 취소</a>
+                    <button type="submit" class="submit-btn">등록하기</button>
+                </div>
+            </form>
+        </div>
+<!--        <div id="campaignForm" class="form-content">-->
+<!--            <form th:action="@{/customs/campagin}" method="post" enctype="multipart/form-data">-->
+<!--                <div class="form-group">-->
+<!--                    <label for="title">제목</label>-->
+<!--                    <input type="text" id="campaignTitle" name="title" placeholder="제목을 입력하세요" required>-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <label for="campaignCustomsNotice">공지 기관</label>-->
+<!--                    <input type="text" id="campaignCustomsNotice" th:value="${customsName}" readonly>-->
+<!--                    <input type="hidden" name="campaignCustomsId" th:value="${customsId}">-->
+<!--                </div>-->
+<!--                <div class="form-group image-upload-area">-->
+<!--                    <input type="file" id="campaignImage" name="campaignImage" accept="image/*" required>-->
+<!--                    <div class="image-preview">-->
+<!--                        <img id="previewImage" src="/images/camera.png" alt="미리보기 이미지">-->
+<!--                        <p>클릭하여 이미지 업로드</p>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="button-group">-->
+<!--                    <a href="/customs/notice" class="cancel-btn">작성 취소</a>-->
+<!--                    <button type="submit" class="submit-btn">등록하기</button>-->
+<!--                </div>-->
+<!--            </form>-->
+<!--        </div>-->
+    </div>
+</div>
+<script th:src="@{/notice/js/noticeForm.js}"></script>
+</body>
+</html>
