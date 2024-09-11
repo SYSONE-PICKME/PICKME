@@ -11,10 +11,7 @@ import project.pickme.customs.repository.CustomsRepository;
 @RequiredArgsConstructor
 public class CustomsSevice implements CustomsRepository {
 
-	@Autowired
 	private final CustomsRepository customsRepository;
-
-
 
 	@Override
 	public void save(Customs customs) {
