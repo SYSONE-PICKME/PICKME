@@ -5,6 +5,7 @@ import static project.pickme.user.constant.Type.*;
 
 import java.util.List;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -52,6 +53,25 @@ class BidMapperTest {
 		assertThat(findBids).hasSize(1)
 			.extracting("price", "user.id", "isSuccess")
 			.containsExactlyInAnyOrder(tuple(1000l, "testUser", false));
+	}
+
+	@Test
+	@DisplayName("공매품에 입찰한 금액 가장 큰 금액을 찾을 수 있다.")
+	void findMaxBidByItemId() {
+	    // given
+		User user = userMapper.findUserById("testUser").get();
+		Long itemId = 1l;
+		BidCreateDto bid1 = BidCreateDto.create(1000, user.getId(), itemId);
+		BidCreateDto bid2 = BidCreateDto.create(10000, user.getId(), itemId);
+
+		bidMapper.save(bid1);
+		bidMapper.save(bid2);
+
+	    // when
+		long maxPrice = bidMapper.findMaxBidByItemId(itemId);
+
+		// then
+		Assertions.assertThat(maxPrice).isEqualTo(10000);
 	}
 
 	private static User createUser(String id) {
