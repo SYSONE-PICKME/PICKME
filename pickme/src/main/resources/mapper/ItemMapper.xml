@@ -3,15 +3,16 @@
 <mapper namespace="project.pickme.item.repository.ItemRepository">
 
     <insert id="insertItem">
-        insert into item ( customs_id, category, name, target, price, start_time, end_time,create_time,status)
-        values (#{customsId}, #{category}, #{name}, #{target}, #{price}, #{startTime},#{endTime},#{createTime},#{status})
+        insert into Item (customs_id, code, name, target, price, start_time, end_time, status)
+        values (#{customsId}, #{code}, #{name}, #{target}, #{price}, #{startTime}, #{endTime}, #{status})
     </insert>
 
 
     <delete id="delete" parameterType="Long">
-        delete from item where item_id=#{id}
+        delete
+        from item
+        where item_id = #{id}
     </delete>
-
 
 
 </mapper>
