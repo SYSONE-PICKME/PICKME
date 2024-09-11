@@ -21,7 +21,7 @@ public class ChargeRestController {
 	private final ChargeService chargeService;
 
 	@PostMapping("/complete")
-	public ResponseEntity<?> complete(@RequestBody() ChargeRequest request) throws IamportResponseException, IOException {
+	public ResponseEntity<?> complete(@RequestBody ChargeRequest request) throws IamportResponseException, IOException {
 		chargeService.charge(request);
 
 		return ResponseEntity.ok("결제가 성공적으로 완료되었습니다.");
