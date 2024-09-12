@@ -1,0 +1,114 @@
+body {
+    font-family: "IBM Plex Sans KR", sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    text-align: center;
+}
+
+.main-image img {
+    margin: 20px 0;
+}
+
+.thumbnail-images {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.thumbnail {
+    width: 153px;
+    height: 140px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border 0.3s;
+}
+
+.thumbnail:hover {
+    border: 2px solid #000;
+}
+
+.auction-details {
+    margin-top: 20px;
+    margin-left: 50px;
+    border: solid;
+    border-color: #B2B2B2;
+    border-radius: 20px;
+}
+
+.auction-details h2 {
+    margin-top: 25px;
+    margin-bottom: 20px;
+    padding-left: 35px;
+    font-size: 30px;
+    font-weight: 500;
+    text-align: left;
+}
+
+.auction-details p {
+    font-family: "IBM Plex Sans KR", sans-serif;
+    font-size: 18px;
+    margin: 5px 0;
+}
+
+.action-sub-details {
+    font-family: "IBM Plex Sans KR", sans-serif;
+    font-weight: 400;
+    text-align: left;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 20px;
+    background-color: #F1F1F1
+}
+
+.price {
+    color: red;
+    font-size: 20px;
+}
+
+.bid-button {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    color: #2EC44F;
+    border-radius: 20px;
+    background-color: black;
+    cursor: not-allowed;
+}
+
+#bid-button.active {
+    cursor: pointer;
+}
+
+#bid-button.disabled {
+    background-color: #F1F1F1;
+    color: #666666;
+    cursor: not-allowed;
+}
+
+.action-buttons {
+    margin-top: 30px;
+    margin-bottom: 40px;
+}
+
+.action-buttons button {
+    width: 330px;
+    height: 200px;
+
+    margin-right: 30px;
+    font-size: 16px;
+    border-radius: 40px;
+    cursor: pointer;
+}
+
+.contact-info {
+    margin-left: 25px;
+    font-size: 18px;
+    border: solid;
+    border-color: #B2B2B2;
+    border-radius: 20px;
+}
