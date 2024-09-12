@@ -5,5 +5,4 @@
         select *
         from Law;
     </select>
-
 </mapper>
