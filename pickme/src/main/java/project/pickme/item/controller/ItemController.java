@@ -20,7 +20,7 @@ public class ItemController {
 	private final ItemService itemService;
 	@GetMapping("/create")
 	public String getItem(Model model) {
-		model.addAttribute("item", new ItemFormDto());
+		@ModelAttribute ItemFormDto itemFormDto;
 		model.addAttribute("laws", itemService.findAllLaws());
 		model.addAttribute("type", Type.values());
 		model.addAttribute("categories", Category.values());
