@@ -63,3 +63,9 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+allprojects {
+	repositories {
+		maven { url 'https://jitpack.io' }
+	}
+}
