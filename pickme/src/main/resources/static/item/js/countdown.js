@@ -1,8 +1,6 @@
 const startDate = new Date(startTime.toString()).getTime();
 const endDate = new Date(endTime.toString()).getTime();
 
-console.log(startDate);
-
 function disableButton() {
     const bidButton = document.getElementById('bid-button');
     bidButton.disabled = true;
