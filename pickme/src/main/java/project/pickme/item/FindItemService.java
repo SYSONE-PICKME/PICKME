@@ -5,18 +5,18 @@ import java.util.NoSuchElementException;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
-import project.pickme.item.dto.ItemDto;
+import project.pickme.item.dto.FindItemDto;
 import project.pickme.item.mapper.FindItemMapper;
 
 @Service
 @RequiredArgsConstructor
-public class ItemService {
+public class FindItemService {
 	private final FindItemMapper itemMapper;
 
-	public ItemDto.Info findById(Long id) {
-		ItemDto.GetOne item = itemMapper.findById(id)
+	public FindItemDto.Info findById(Long id) {
+		FindItemDto.GetOne item = itemMapper.findById(id)
 			.orElseThrow(() -> new NoSuchElementException("해당 공매품이 존재하지 않습니다."));
 
-		return new ItemDto.Info(item);
+		return new FindItemDto.Info(item);
 	}
 }

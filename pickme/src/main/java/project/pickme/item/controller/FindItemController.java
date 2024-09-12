@@ -7,18 +7,18 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.RequiredArgsConstructor;
-import project.pickme.item.ItemService;
-import project.pickme.item.dto.ItemDto;
+import project.pickme.item.FindItemService;
+import project.pickme.item.dto.FindItemDto;
 
 @Controller
 @RequestMapping("/user/item")
 @RequiredArgsConstructor
-public class ItemController {
-	private final ItemService itemService;
+public class FindItemController {
+	private final FindItemService itemService;
 
 	@GetMapping("/{id}")
 	public String getItemInfo(@PathVariable("id") Long id, Model model) {
-		ItemDto.Info item = itemService.findById(id);
+		FindItemDto.Info item = itemService.findById(id);
 		model.addAttribute("item", item);
 
 		return "item/item.html";

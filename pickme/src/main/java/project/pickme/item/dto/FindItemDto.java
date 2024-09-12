@@ -8,7 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import project.pickme.user.constant.Type;
 
-public class ItemDto {
+public class FindItemDto {
 	@Getter
 	@NoArgsConstructor
 	public static class GetOne {
