@@ -13,6 +13,4 @@ public class Customs {
 	private String role;
 	private String name;
 	private String tel;
-
-
 }
