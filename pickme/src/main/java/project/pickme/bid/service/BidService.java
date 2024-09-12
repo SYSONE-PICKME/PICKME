@@ -55,7 +55,7 @@ public class BidService {
 		Bid bid = bidMapper.findBidById(bidId).orElseThrow(() -> new BusinessException(NOT_FOUND_BID));
 
 		bidMapper.updateBidSuccess(bidId);
-		userMapper.minusPoint(bid.getUser().getId(), bid.getPrice());	//포인트 차감
+		userMapper.minusPoint(bid.getUserId(), bid.getPrice());	//포인트 차감
 	}
 
 	private Item getItem(Long itemId) {
