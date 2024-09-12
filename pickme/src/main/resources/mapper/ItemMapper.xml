@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="project.pickme.item.repository.ItemRepository">
+<mapper namespace="project.pickme.item.repository.ItemMapper">
 
     <insert id="insertItem">
         insert into Item (customs_id, code, name, target, price, start_time, end_time, status)
@@ -16,3 +16,4 @@
 
 
 </mapper>
+
