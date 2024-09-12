@@ -1,7 +1,6 @@
-package project.pickme.item.repository;
+package project.pickme.item.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
-
 import project.pickme.item.dto.ItemDto;
 
 @Mapper

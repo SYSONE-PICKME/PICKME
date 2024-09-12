@@ -1,4 +1,4 @@
-package project.pickme.item.repository;
+package project.pickme.item.mapper;
 
 import java.util.List;
 
