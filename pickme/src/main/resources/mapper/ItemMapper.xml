@@ -7,12 +7,4 @@
         values (#{customsId}, #{code}, #{name}, #{target}, #{price}, #{startTime}, #{endTime}, #{status})
     </insert>
 
-
-    <delete id="delete" parameterType="Long">
-        delete
-        from item
-        where item_id = #{id}
-    </delete>
-
-
 </mapper>
