@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import lombok.RequiredArgsConstructor;
 import project.pickme.item.constant.Status;
 import project.pickme.item.domain.Category;
-import project.pickme.item.domain.ItemDTO;
-import project.pickme.item.domain.ItemFormDTO;
-import project.pickme.item.domain.LawDTO;
+import project.pickme.item.dto.ItemDto;
+import project.pickme.item.dto.ItemFormDto;
+import project.pickme.item.dto.LawDto;
 import project.pickme.item.service.ItemService;
 import project.pickme.item.service.LawService;
 import project.pickme.item.service.S3Service;
@@ -36,8 +35,8 @@ public class ItemController {
 
 	@GetMapping("/create")
 	public String getItem(Model model) {
-		List<LawDTO> laws = lawService.getLaws();
-		model.addAttribute("item", new ItemFormDTO());
+		List<LawDto> laws = lawService.getLaws();
+		model.addAttribute("item", new ItemFormDto());
 		model.addAttribute("laws", laws);
 		model.addAttribute("type", Type.values());
 		model.addAttribute("categories", Category.values());
@@ -45,10 +44,10 @@ public class ItemController {
 	}
 
 	@PostMapping("/create")
-	public String insertItem(@ModelAttribute ItemFormDTO itemFormDTO) {
+	public String insertItem(@ModelAttribute ItemFormDto itemFormDTO) {
 		LocalDateTime start = LocalDateTime.of(itemFormDTO.getStartDate(), itemFormDTO.getStartTime());
 		LocalDateTime end = LocalDateTime.of(itemFormDTO.getEndDate(), itemFormDTO.getEndTime());
-		ItemDTO itemDTO = new ItemDTO(itemFormDTO.getName(), itemFormDTO.getCode(), itemFormDTO.getTarget(),
+		ItemDto itemDTO = new ItemDto(itemFormDTO.getName(), itemFormDTO.getCode(), itemFormDTO.getTarget(),
 			itemFormDTO.getPrice(), start, end,
 			Status.NOT_OPEN, "gunsan");
 
