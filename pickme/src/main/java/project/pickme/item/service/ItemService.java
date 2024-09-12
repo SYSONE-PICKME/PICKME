@@ -1,34 +1,31 @@
 package project.pickme.item.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import lombok.RequiredArgsConstructor;
-import project.pickme.item.domain.ItemDTO;
-import project.pickme.item.domain.ItemFormDTO;
-import project.pickme.item.repository.ItemRepository;
+import project.pickme.item.dto.ItemDto;
+import project.pickme.item.repository.ItemMapper;
 
 @Service
 @RequiredArgsConstructor
 public class ItemService {
 
-	@Autowired
-	private ItemRepository itemRepository;
+
+	private final ItemMapper itemMapper;
 
 	public void delete(Long id) {
-		itemRepository.delete(id);
+		itemMapper.delete(id);
 	}
 
-	public void save(ItemDTO item) {
-		itemRepository.insertItem(item);
+	public void save(ItemDto item) {
+		itemMapper.insertItem(item);
 	}
 
-	public void update(ItemDTO item) {
-		itemRepository.updateItem(item);
+	public void update(ItemDto item) {
+		itemMapper.updateItem(item);
 	}
 
-	public ItemDTO findById(Long id) {
-		return itemRepository.findById(id);
+	public ItemDto findById(Long id) {
+		return itemMapper.findById(id);
 	}
 
 

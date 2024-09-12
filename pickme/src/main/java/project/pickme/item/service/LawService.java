@@ -1,21 +1,22 @@
 package project.pickme.item.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import project.pickme.item.domain.LawDTO;
-import project.pickme.item.repository.LawRepository;
+import lombok.RequiredArgsConstructor;
+import project.pickme.item.dto.LawDto;
+import project.pickme.item.repository.LawMapper;
 
 @Service
+@RequiredArgsConstructor
 public class LawService {
-	@Autowired
-	private LawRepository lawRepository;
 
-	public List<LawDTO> getLaws() {
-		List<LawDTO> laws = lawRepository.findAllLaws();
+	private final LawMapper lawMapper;
+
+	public List<LawDto> getLaws() {
+		List<LawDto> laws = lawMapper.findAllLaws();
 		return laws;
 	}
 }
