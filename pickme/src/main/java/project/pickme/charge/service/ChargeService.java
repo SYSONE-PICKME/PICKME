@@ -56,7 +56,7 @@ public class ChargeService {
 	}
 
 	private User getUser(String id) {
-		return userMapper.findById(id)
+		return userMapper.findUserById(id)
 			.orElseThrow(() -> new NoSuchElementException("존재하지 않는 유저입니다."));
 	}
 }
