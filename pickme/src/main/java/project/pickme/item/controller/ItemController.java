@@ -17,11 +17,7 @@ import project.pickme.user.constant.Type;
 @RequestMapping(value = "/customs/item")
 @RequiredArgsConstructor
 public class ItemController {
-
-
 	private final ItemService itemService;
-
-
 	@GetMapping("/create")
 	public String getItem(Model model) {
 		model.addAttribute("item", new ItemFormDto());
@@ -36,5 +32,4 @@ public class ItemController {
 		itemService.save(itemFormDto);
 		return "redirect:/customs/item/create";
 	}
-
 }
