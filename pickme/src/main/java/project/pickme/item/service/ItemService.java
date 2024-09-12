@@ -2,7 +2,6 @@ package project.pickme.item.service;
 
 import java.time.LocalDateTime;
 import java.util.List;
-
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 import project.pickme.item.constant.Status;
@@ -18,10 +17,6 @@ public class ItemService {
 	private final LawMapper lawMapper;
 	private final ItemMapper itemMapper;
 
-	public void delete(Long id) {
-		itemMapper.delete(id);
-	}
-
 	public void save(ItemFormDto itemFormDto) {
 		LocalDateTime start = LocalDateTime.of(itemFormDto.getStartDate(), itemFormDto.getStartTime());
 		LocalDateTime end = LocalDateTime.of(itemFormDto.getEndDate(), itemFormDto.getEndTime());
@@ -34,13 +29,4 @@ public class ItemService {
 	public List<LawDto> findAllLaws() {
 		return lawMapper.findAllLaws();
 	}
-
-	public void update(ItemDto item) {
-		itemMapper.updateItem(item);
-	}
-
-	public ItemDto findById(Long id) {
-		return itemMapper.findById(id);
-	}
-
 }
