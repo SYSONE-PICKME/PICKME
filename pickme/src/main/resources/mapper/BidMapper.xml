@@ -11,16 +11,16 @@
     </resultMap>
 
     <select id="findAll" resultMap="BidResultMap">
-        SELECT
+        select
             b.bid_id as id,
             b.price,
             b.bid_time,
             b.is_success,
             u.id as user_id,
             i.item_id as item_id
-        FROM Bid b
-                 LEFT JOIN User u ON b.user_id = u.id
-                 LEFT JOIN Item i ON b.item_id = i.item_id
+        from Bid b
+                 left join User u on b.user_id = u.id
+                 left join Item i on b.item_id = i.item_id
     </select>
 
     <insert id="save" parameterType="project.pickme.bid.dto.BidCreateDto" useGeneratedKeys="true" keyProperty="bidId">
@@ -40,16 +40,16 @@
     </select>
 
     <select id="findBidById" parameterType="long" resultMap="BidResultMap">
-        SELECT
+        select
             b.bid_id as id,
             b.price,
             b.bid_time,
             b.is_success,
             u.id as user_id,
             i.item_id as item_id
-        FROM Bid b
-                 LEFT JOIN User u ON b.user_id = u.id
-                 LEFT JOIN Item i ON b.item_id = i.item_id
+        from Bid b
+                 left join User u on b.user_id = u.id
+                 left join Item i on b.item_id = i.item_id
         where b.bid_id = #{bidId}
     </select>
 
