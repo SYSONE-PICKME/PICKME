@@ -17,6 +17,5 @@ class LawServiceTest {
 	void getLaws() {
 		List<LawDto> laws = lawService.getLaws();
 		System.out.println(laws.size());
-
 	}
 }
