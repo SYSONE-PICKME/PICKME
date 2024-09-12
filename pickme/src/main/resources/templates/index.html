@@ -1,10 +1,140 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PICKME</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
+    <link rel="stylesheet" th:href="@{/css/userMain.css}">
 </head>
 <body>
+<div class="only-margin">
+    <div class="container">
+        <div class="top-container">
+            <div class="campaign-container">
+                <section class="campaign">
+                    <img th:src="@{/images/imsi.png}" alt="캠페인" src="">
+                </section>
 
+            </div>
+            <div class="top-buttons">
+                <button class="custom-admin">
+                    <img th:src="@{/images/administrative-fine.png}" alt="관세 행정" src="">
+                    <span>관세 행정 사전안내</span>
+                </button>
+                <button class="auction-guide">
+                    <img th:src="@{/images/law.png}" alt="경매 안내" src="">
+                    <span>경매 안내</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="navigation">
+            <button><img th:src="@{/images/annoucement.png}" alt="배송" src="">배송현황</button>
+            <button><img th:src="@{/images/search-engine.png}" alt="공매물품조회" src="">공매물품조회</button>
+            <button><img th:src="@{/images/auction.png}" alt="입찰목록" src="">입찰목록</button>
+            <button><img th:src="@{/images/point.png}" alt="포인트등록" src="">포인트등록</button>
+            <button><img th:src="@{/images/myPage.png}" alt="마이페이지" src="">마이페이지</button>
+            <button><img th:src="@{/images/data-analysis.png}" alt="통계" src="">통계</button>
+        </div>
+
+        <section class="products-grid">
+            <div class="product-card">
+                <span class="status">진행중</span>
+                <img th:src="@{/images/planning.jpg}" alt="제품 1" src="">
+                <div class="product-info">
+                    <h3>Jumper Laptop16 InchDDR4 16G5SD 512Value LaptopSlimFHD</h3>
+                    <p>공매예상가격 <span class="price">36000원</span></p>
+                    <p>
+                        <span class="auction-label">공매시작시간</span>
+                        <span class="auction-date">2024-09-05 10:00</span><br>
+                        <span class="auction-label">공매마감시간</span>
+                        <span class="auction-end_date">2024-09-06 10:00</span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <span class="status">진행중</span>
+                <img th:src="@{/images/planning.jpg}" alt="제품 1" src="">
+                <div class="product-info">
+                    <h3>Jumper Laptop16 InchDDR4 16G5SD 512Value LaptopSlimFHD</h3>
+                    <p>공매예상가격 <span class="price">36000원</span></p>
+                    <p>
+                        <span class="auction-label">공매시작시간</span>
+                        <span class="auction-date">2024-09-05 10:00</span><br>
+                        <span class="auction-label">공매마감시간</span>
+                        <span class="auction-end_date">2024-09-06 10:00</span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <span class="status">진행중</span>
+                <img th:src="@{/images/planning.jpg}" alt="제품 1" src="">
+                <div class="product-info">
+                    <h3>Jumper Laptop16 InchDDR4 16G5SD 512Value LaptopSlimFHD</h3>
+                    <p>공매예상가격 <span class="price">36000원</span></p>
+                    <p>
+                        <span class="auction-label">공매시작시간</span>
+                        <span class="auction-date">2024-09-05 10:00</span><br>
+                        <span class="auction-label">공매마감시간</span>
+                        <span class="auction-end_date">2024-09-06 10:00</span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <span class="status">진행중</span>
+                <img th:src="@{/images/planning.jpg}" alt="제품 1" src="">
+                <div class="product-info">
+                    <h3>Jumper Laptop16 InchDDR4 16G5SD 512Value LaptopSlimFHD</h3>
+                    <p>공매예상가격 <span class="price">36000원</span></p>
+                    <p>
+                        <span class="auction-label">공매시작시간</span>
+                        <span class="auction-date">2024-09-05 10:00</span><br>
+                        <span class="auction-label">공매마감시간</span>
+                        <span class="auction-end_date">2024-09-06 10:00</span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <span class="status">진행중</span>
+                <img th:src="@{/images/planning.jpg}" alt="제품 1" src="">
+                <div class="product-info">
+                    <h3>Jumper Laptop16 InchDDR4 16G5SD 512Value LaptopSlimFHD</h3>
+                    <p>공매예상가격 <span class="price">36000원</span></p>
+                    <p>
+                        <span class="auction-label">공매시작시간</span>
+                        <span class="auction-date">2024-09-05 10:00</span><br>
+                        <span class="auction-label">공매마감시간</span>
+                        <span class="auction-end_date">2024-09-06 10:00</span>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="pagination">
+            <button class="prev">&lt;</button>
+            <div class="page-dots">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+            <button class="next">&gt;</button>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/js/userMain.js}"></script>
+<div th:replace="~{fragments/footer :: footer}">footer content</div>
 </body>
 </html>

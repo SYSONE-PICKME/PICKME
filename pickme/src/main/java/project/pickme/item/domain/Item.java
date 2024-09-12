@@ -4,8 +4,6 @@ import java.time.LocalDateTime;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import project.pickme.customs.domain.Customs;
 import project.pickme.item.constant.Status;
 import project.pickme.user.constant.Type;
@@ -20,8 +18,6 @@ public class Item {
 	private long price;
 	private LocalDateTime startTime;
 	private LocalDateTime endTime;
-	private LocalDateTime createTime;
 	private Status status;
 	private Customs customs;
-
 }

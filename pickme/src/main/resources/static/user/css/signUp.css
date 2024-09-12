@@ -1,0 +1,240 @@
+body {
+    font-family: "IBM Plex Sans KR", sans-serif;
+    background-color: #ffff;
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.header {
+    width: 100%;
+    background-color: #ffffff;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: flex-start; /*왼쪽 정렬*/
+    align-items: center;
+}
+
+.logo {
+    font-weight: 700;
+    font-size: 32px;
+    color: #000000;
+    text-decoration: none;
+}
+
+.form-container {
+    max-width: 450px;
+    width: 100%; /* 부모 요소의 너비를 기준으로 100% 너비 */
+}
+
+.form-container h1{
+    text-align: center;
+}
+
+.tabs {
+    display: flex;
+    border-radius: 10px;
+    background-color: #F6FFF8;
+    border: 1px solid #2EC44F;
+    overflow: hidden;
+    align-items: center;
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 20px 0;
+    border: none;
+    background-color: transparent;
+    color: #CCCCCC;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+    font-weight: bold;
+}
+
+.tab-btn.active {
+    background-color: white;
+    color: black;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    padding: 15px 50px;
+    margin: 0 5px; /* 두 컬럼 사이에 간격*/
+    flex: 0.5; /* 활성화된 탭이 비활성화된 탭의 50% 크기로 설정 */
+}
+
+.line {
+    border-bottom: 1px solid #dcdcdc;
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 25px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="password"],
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-sizing: border-box;
+    height: 40px; /* 입력 필드와 드롭다운의 높이를 동일하게 설정 */
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+    border-color: #2EC44F;
+    outline: none;
+}
+
+.email-container {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap; /* 작은 화면에서 행이 넘어갈 수 있도록 설정 */
+}
+
+.email-container input {
+    flex: 2;
+    margin-right: 5px;
+}
+
+.email-container select {
+    flex: 1;
+}
+
+.email-container span {
+    margin: 0 5px;
+    font-size: 18px;
+    line-height: 40px; /* @ 기호를 수직 중앙에 위치시키기 위해 높이와 동일하게 설정 */
+    display: inline-block;
+}
+
+.id-container {
+    display: flex;
+    align-items: center; /* 입력 필드와 버튼을 수직 중앙 정렬 */
+}
+
+.id-container input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin-right: 5px;
+    height: 40px;
+    max-width: calc(100% - 110px); /* 버튼 크기를 고려하여 최대 너비 설정 */
+}
+
+.check-btn {
+    padding: 10px;
+    border: 1px solid #D9D9D9;
+    background-color: #F1F1F1;
+    color: #9DA0AE;
+    border-radius: 5px;
+    cursor: pointer;
+    height: 40px;
+    width: 100px;
+    box-sizing: border-box;
+    flex-shrink: 0; /* 버튼 크기 고정 */
+}
+
+.email-btn {
+    padding: 10px;
+    border: 1px solid #D9D9D9;
+    background-color: #F1F1F1;
+    color: #9DA0AE;
+    border-radius: 5px;
+    cursor: not-allowed;
+    width: 100%; /* 반응형을 위해 전체 너비 사용 */
+    box-sizing: border-box;
+    margin-top: 10px;
+}
+
+.email-btn:enabled,
+.check-btn:enabled
+{
+    background-color: #ffffff;
+    color: #2EC44F;
+    border: 1px solid #4caf50;
+    cursor: pointer;
+}
+
+.email-btn:enabled:hover,
+.check-btn:enabled:hover{
+    background-color: #F6FFF8;
+    color: #2EC44F;
+    border: 1px solid #2EC44F;
+    cursor: pointer;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background-color: #2EC44F;
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-bottom: 70px;
+}
+
+.submit-btn:hover{
+    background-color: #26A743;
+}
+
+.field-error-message {
+    color: red;
+    font-size: 0.5em;
+    margin-top: 5px;
+}
+
+@media (max-width: 768px) {
+    .tab-btn {
+        font-size: 14px;
+    }
+
+    .tab-btn.active {
+        padding: 10px 20px;
+        flex: 1;
+    }
+
+    .tab-btn {
+        flex: 1;
+    }
+}
+
+
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 18px;
+    }
+
+    .tab-btn {
+        font-size: 12px;
+    }
+
+    .tab-btn.active {
+        padding: 8px 10px;
+        flex: 1;
+    }
+}

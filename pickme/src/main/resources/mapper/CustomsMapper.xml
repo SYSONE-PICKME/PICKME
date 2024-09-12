@@ -1,16 +1,24 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="project.pickme.customs.repository.CustomsRepository">
-
-    <select id="findById">
-        select *
-        from Customs
-        where id = #{id}
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="project.pickme.user.repository.CustomsMapper">
+    <select id = "findById" parameterType="String" resultType="project.pickme.user.domain.Customs">
+        select * from customs where id = #{id}
     </select>
 
-    <insert id="save">
-        insert into Customs (id, password, role, name, tel)
-        values (#{id}, #{password}, #{role}, #{name}, #{tel})
+    <insert id="save" parameterType="project.pickme.user.domain.Customs">
+        insert into customs(id, password, role, name, tel)
+    </insert>
+
+    <select id="findAll" resultType="project.pickme.user.domain.Customs">
+        select * from customs
+    </select>
+
+    <insert id="saveAll" parameterType="java.util.List">
+        insert into customs (id, password, name, tel, role)
+        values
+        <foreach collection="list" item="item" open="(" close=")" separator="), (">
+            #{item.id}, #{item.password}, #{item.name}, #{item.tel}, #{item.role}
+        </foreach>
     </insert>
 
     <delete id="deleteAll">

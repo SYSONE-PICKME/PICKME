@@ -1,0 +1,57 @@
+
+
+.header-top {
+    background-color: #2EC44F;
+    color: black;
+    text-align: left;
+    padding: 5px 0;
+    font-weight: 600;
+    height: 2em;
+    border: none;
+}
+
+.header_text {
+    margin-left: 10%;
+}
+
+.main-nav {
+    display: flex;
+    /* justify-content: space-between; */
+    justify-content: flex-start;
+    align-items: center;
+    padding: 1% 10%;
+    background-color: white;
+}
+
+.logo {
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration: none;
+    color: black;
+    margin-right: 50px;
+}
+
+.nav-links {
+    display: flex;
+    list-style-type: none;
+    font-weight: 400;
+}
+
+.nav-links li {
+    margin: 0 15px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: black;
+}
+
+.login-button {
+    background-color: #2EC44F;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: auto; /* 버튼을 오른쪽 끝으로 밀기 */
+}

@@ -24,12 +24,16 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-websocket'
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3'
+
+	//Spring Security
+	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
+	testImplementation 'org.springframework.security:spring-security-test'
+
 	implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE' //AWS S3
 
 	compileOnly 'org.projectlombok:lombok'
@@ -38,11 +42,22 @@ dependencies {
 	runtimeOnly 'com.mysql:mysql-connector-j'
 
 	annotationProcessor 'org.projectlombok:lombok'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	//MyBatis
 	testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.3'
-	testImplementation 'org.springframework.security:spring-security-test'
-	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	runtimeOnly 'com.mysql:mysql-connector-j'
+
+	//validation
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+	// iamport
+	implementation 'com.github.iamport:iamport-rest-client-java:0.2.21'
+
+	// jasypt
+	implementation 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.4'
 }
 
 tasks.named('test') {
