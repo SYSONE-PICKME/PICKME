@@ -19,8 +19,7 @@ import project.pickme.user.constant.Type;
 public class ItemController {
 	private final ItemService itemService;
 	@GetMapping("/create")
-	public String getItem(Model model) {
-		@ModelAttribute ItemFormDto itemFormDto;
+	public String getItem(Model model,@ModelAttribute ItemFormDto itemFormDto;) {
 		model.addAttribute("laws", itemService.findAllLaws());
 		model.addAttribute("type", Type.values());
 		model.addAttribute("categories", Category.values());
