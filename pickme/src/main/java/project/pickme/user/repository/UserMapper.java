@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import project.pickme.user.domain.User;
+import project.pickme.user.dto.UserDto;
 
 @Mapper
 public interface UserMapper {
@@ -16,4 +17,6 @@ public interface UserMapper {
 	void deleteAll();
 
 	void minusPoint(@Param("userId") String userId, @Param("price") long price);
+
+	void updatePointById(UserDto.UpdatePoint userDto);
 }

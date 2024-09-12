@@ -19,4 +19,10 @@
         set point = point - #{price}
         where id = #{userId}
     </update>
+
+    <update id="updatePointById" parameterType="project.pickme.user.dto.UserDto$UpdatePoint">
+        update User
+        set point = #{point}
+        where id = #{id}
+    </update>
 </mapper>
