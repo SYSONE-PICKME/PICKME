@@ -6,7 +6,7 @@
         values(#{id}, #{password}, #{role}, #{name}, #{email}, #{type}, #{addr}, #{phoneNum}, #{businessNum}, #{point})
     </insert>
 
-    <select id="findById" parameterType="String" resultType="project.pickme.user.domain.User">
+    <select id="findUserById" parameterType="String" resultType="project.pickme.user.domain.User">
         select * from User where id = #{id}
     </select>
 

@@ -1,7 +1,9 @@
-package project.pickme.user.repository;
+package project.pickme.bid.repository;
 
 import static org.assertj.core.api.Assertions.*;
 import static project.pickme.user.constant.Type.*;
+
+import java.util.List;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,49 +13,45 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
+import project.pickme.bid.domain.Bid;
+import project.pickme.bid.dto.BidCreateDto;
 import project.pickme.user.constant.Role;
 import project.pickme.user.domain.User;
+import project.pickme.user.repository.UserMapper;
 
 @SpringBootTest
 @ActiveProfiles("test")
-class UserMapperTest {
+class BidMapperTest {
+	@Autowired private BidMapper bidMapper;
 	@Autowired private UserMapper userMapper;
 
 	@BeforeEach
-	void initUserData(){
-		User user = createUser("initUser");
+	void setUp(){
+		//TODO: 공매 품 저장 해야함 지금은 db에 데이터 넣었음
+		User user = createUser("testUser");
 		userMapper.save(user);
 	}
 
 	@AfterEach
 	void tearDown() {
+		bidMapper.deleteAll();
 		userMapper.deleteAll();
 	}
 
 	@Test
-	@DisplayName("회원 아이디로 회원을 찾을 수 있다.")
-	void findUserById() {
-	    // given // when
-		User findUser = userMapper.findUserById("initUser").get();
-
-		// then
-		assertThat(findUser).extracting("id", "name", "email", "addr")
-			.containsExactly("initUser", "김테스트", "test@naver.com","서울특별시 종로구 창경궁로");
-	}
-
-	@Test
-	@DisplayName("회원을 저장할 수 있다.")
+	@DisplayName("입찰을 저장할 수 있다.")
 	void save() {
 	    // given
-		User user = createUser("test");
+		BidCreateDto bid = BidCreateDto.create(1000, "testUser", 1l);
 
 		// when
-		userMapper.save(user);
+		bidMapper.save(bid);
 
 	    // then
-		User findUser = userMapper.findUserById("test").get();
-		assertThat(findUser).extracting("id", "name", "email", "addr")
-			.containsExactly("test", "김테스트", "test@naver.com","서울특별시 종로구 창경궁로");
+		List<Bid> findBids = bidMapper.findAll();
+		assertThat(findBids).hasSize(1)
+			.extracting("price", "user.id", "isSuccess")
+			.containsExactlyInAnyOrder(tuple(1000l, "testUser", false));
 	}
 
 	private static User createUser(String id) {

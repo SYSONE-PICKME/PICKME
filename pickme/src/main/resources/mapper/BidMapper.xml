@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="project.pickme.bid.repository.BidMapper">
+    <resultMap id="BidResultMap" type="project.pickme.bid.domain.Bid">
+        <id property="id" column="id" />
+        <result property="price" column="price" />
+        <result property="bidTime" column="bid_time" />
+        <result property="isSuccess" column="is_success" />
+        <association property="user" column="user_id" javaType="project.pickme.user.domain.User" select="project.pickme.user.repository.UserMapper.findUserById"/>
+        <association property="item" column="item_id" javaType="project.pickme.item.domain.Item" />
+    </resultMap>
+
+    <select id="findAll" resultMap="BidResultMap">
+        SELECT
+            b.bid_id as id,
+            b.price,
+            b.bid_time,
+            b.is_success,
+            u.id as user_id,
+            i.item_id as item_id
+        FROM Bid b
+                 LEFT JOIN User u ON b.user_id = u.id
+                 LEFT JOIN Item i ON b.item_id = i.item_id
+    </select>
+
+    <insert id="save" parameterType="project.pickme.bid.dto.BidCreateDto">
+        insert into Bid(item_id, user_id, price, bid_time, is_success)
+        values(#{itemId}, #{userId}, #{price}, #{bidTime}, #{isSuccess})
+    </insert>
+
+    <delete id="deleteAll">
+        delete from Bid
+    </delete>
+</mapper>

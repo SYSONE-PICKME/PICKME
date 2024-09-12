@@ -11,7 +11,7 @@ import project.pickme.user.dto.UserDto;
 public interface UserMapper {
 	void save(User user);
 
-	Optional<User> findById(String id);
+	Optional<User> findUserById(String id);
 
 	void deleteAll();
 
