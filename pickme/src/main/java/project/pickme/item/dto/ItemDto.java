@@ -1,19 +1,17 @@
-package project.pickme.item.domain;
+package project.pickme.item.dto;
 
-import java.lang.annotation.Target;
 import java.time.LocalDateTime;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import project.pickme.item.constant.Status;
 import project.pickme.user.constant.Type;
 
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ItemDTO {
+public class ItemDto {
 	private String name;
 	private String code;
 	private Type target;
