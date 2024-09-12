@@ -34,12 +34,12 @@ public class WebSocketHandler extends TextWebSocketHandler {
 			String type = receiveMessage.get("type").asText();
 			String payload = message.getPayload();
 
-			if("BID".equals(type)){
+			if(type.equals("BID")){
 				AddBidDto addBidDto = objectMapper.readValue(payload, AddBidDto.class);
 				MaxPriceDto maxPriceDto = bidService.addBid(addBidDto);
 				webSocketService.sendBidToAllClient(addBidDto.getItemId(), maxPriceDto);
 			}
-			if("BID_END".equals(type)){
+			if(type.equals("BID_END")){
 				SelectedBidDto selectedBidDto = objectMapper.readValue(payload, SelectedBidDto.class);
 				bidService.closeBid(selectedBidDto.getBidId());
 			}
