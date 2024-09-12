@@ -28,7 +28,6 @@ class CustomsSeviceTest {
 		customsService.save(customs);
 		Customs result= customsService.findById(customs.getId());
 		Assertions.assertEquals(customs.getId(),result.getId());
-
 	}
 
 	@Test
