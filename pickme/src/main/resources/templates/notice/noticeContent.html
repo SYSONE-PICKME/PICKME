@@ -11,25 +11,25 @@
 </head>
 <body>
 <div class="container">
-    <h1 th:text="${notice instanceof T(project.pickme.notice.dto.CampaignDTO) ? '캠페인' : '공지사항'}"></h1>
+    <h1 th:text="${notice instanceof T(project.pickme.notice.dto.CampaignDto) ? '캠페인' : '공지사항'}"></h1>
 
     <div class="notice-content" th:object="${notice}">
         <h2 th:text="*{title}"></h2>
         <p class="date" th:text="${#temporals.format(notice.createTime, 'yyyy.MM.dd')}"></p>
 
-        <div th:if="${notice instanceof T(project.pickme.notice.dto.CampaignDTO)}" class="campaign-content">
+        <div th:if="${notice instanceof T(project.pickme.notice.dto.CampaignDto)}" class="campaign-content">
             <img th:if="${notice.imageUrl != null and !notice.imageUrl.isEmpty()}"
                  th:src="@{${notice.imageUrl}}"
                  alt="캠페인 이미지"
                  style="max-width: 100%;">
         </div>
-        <div th:unless="${notice instanceof T(project.pickme.notice.dto.CampaignDTO)}" class="notice-body" th:text="*{content}">
+        <div th:unless="${notice instanceof T(project.pickme.notice.dto.CampaignDto)}" class="notice-body" th:text="*{content}">
         </div>
     </div>
 
     <div class="button-group">
         <a href="/customs/notice" class="btn btn-list">목록 보기</a>
-        <a th:href="@{/customs/notice/editNotice/{id}(id=${notice.id})}" class="btn btn-primary">수정</a>
+        <a th:href="@{/customs/notice/edit/{id}(id=${notice.id})}" class="btn btn-primary">수정</a>
         <a th:href="@{/customs/notice/delete/{id}(id=${notice.id})}" class="btn btn-secondary">삭제</a>
     </div>
 </div>

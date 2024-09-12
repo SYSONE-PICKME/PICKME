@@ -8,59 +8,59 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import lombok.RequiredArgsConstructor;
 import project.pickme.notice.domain.Notice;
-import project.pickme.notice.dto.CampaignDTO;
-import project.pickme.notice.dto.NoticeDTO;
+import project.pickme.notice.dto.CampaignDto;
+import project.pickme.notice.dto.NoticeDto;
 import project.pickme.notice.mapper.NoticeMapper;
 
 @Service
-@Transactional
+@RequiredArgsConstructor
 public class NoticeService {
 
-	@Autowired
-	private NoticeMapper noticeMapper;
+	private final NoticeMapper noticeMapper;
 
-	public List<NoticeDTO> getAllNotice() {
+	@Transactional(readOnly = true)
+	public List<NoticeDto> getAllNotice() {
 		return noticeMapper.selectAll().stream()
-			.map(NoticeDTO::fromEntity)
+			.map(NoticeDto::fromEntity)
 			.collect(Collectors.toList());
 	}
 
-	public NoticeDTO getNoticeById(long id) {
+	@Transactional(readOnly = true)
+	public NoticeDto getNoticeById(long id) {
 		Notice notice = noticeMapper.selectById(id);
-		return notice != null ? NoticeDTO.fromEntity(notice) : null;
+		return notice != null ? NoticeDto.fromEntity(notice) : null;
 	}
 
-	public NoticeDTO createNotice(NoticeDTO noticeDTO) {
-		Notice notice = noticeDTO.toEntity();
-		notice.setCreateTime(LocalDateTime.now());
+	@Transactional
+	public NoticeDto createNotice(NoticeDto noticeDto) {
+		Notice notice = noticeDto.toEntity();
 		noticeMapper.insert(notice);
-		return NoticeDTO.fromEntity(noticeMapper.selectById(notice.getId()));
+		return NoticeDto.fromEntity(noticeMapper.selectById(notice.getId()));
 	}
 
-	public void updateNotice(NoticeDTO noticeDTO) {
-		Notice notice = noticeDTO.toEntity();
+	@Transactional
+	public void updateNotice(NoticeDto noticeDto) {
+		Notice notice = noticeDto.toEntity();
 		noticeMapper.update(notice);
 	}
 
+	@Transactional
 	public void deleteNotice(long id) {
 		noticeMapper.delete(id);
 	}
 
-	// 캠페인을 위한 추가 메서드
-	public CampaignDTO createCampaign(CampaignDTO campaignDTO) {
-		System.out.println("Service - Before save: " + campaignDTO);
-
-		Notice notice = campaignDTO.toEntity();
-		notice.setCreateTime(LocalDateTime.now());
+	@Transactional
+	public CampaignDto createCampaign(CampaignDto campaignDto) {
+		Notice notice = campaignDto.toEntity();
 		noticeMapper.insert(notice);
-
-		System.out.println("Service - After save: " + noticeMapper.selectById(notice.getId()));
-		return CampaignDTO.fromEntity(noticeMapper.selectById(notice.getId()));
+		return CampaignDto.fromEntity(noticeMapper.selectById(notice.getId()));
 	}
 
-	public CampaignDTO getCampaignById(long id) {
+	@Transactional
+	public CampaignDto getCampaignById(long id) {
 		Notice notice = noticeMapper.selectById(id);
-		return notice != null ? CampaignDTO.fromEntity(notice) : null;
+		return notice != null ? CampaignDto.fromEntity(notice) : null;
 	}
 }

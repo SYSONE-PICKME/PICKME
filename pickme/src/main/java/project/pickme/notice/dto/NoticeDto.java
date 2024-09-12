@@ -14,7 +14,7 @@ import project.pickme.user.domain.Customs;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class NoticeDTO {
+public class NoticeDto {
 	private Long id;
 	private String title;
 	private String content;
@@ -28,21 +28,26 @@ public class NoticeDTO {
 			.id(this.id)
 			.title(this.title)
 			.content(this.content)
-			.createTime(this.createTime)
-			.customs(Customs.createCustoms(this.customsId, "", this.customsName, ""))  // 이름 정보 추가
+			.customs(Customs.createCustoms(this.customsId, "", this.customsName, ""))
 			.build();
 	}
 
-	public static NoticeDTO fromEntity(Notice notice) {
+	public static NoticeDto fromEntity(Notice notice) {
 		Customs customs = notice.getCustoms();
-		return NoticeDTO.builder()
+		return NoticeDto.builder()
 			.id(notice.getId())
 			.title(notice.getTitle())
 			.content(notice.getContent())
 			.createTime(notice.getCreateTime())
-			.customsId(notice.getCustoms().getId())
+			.customsId(customs.getId())
 			.customsName(customs.getName())
 			.customsRole(customs.getRole())
 			.build();
 	}
+
+	public void updateEntity(Notice notice) {
+		notice.updateTitle(this.title);
+		notice.updateContent(this.content);
+	}
+
 }

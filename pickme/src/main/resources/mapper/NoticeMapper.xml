@@ -42,13 +42,13 @@
         where notice_id = #{id}
     </select>
 
-    <insert id="insert" parameterType="project.pickme.notice.domain.Notice"
+    <insert id="insert" parameterType="project.pickme.notice.dto.NoticeDto"
             useGeneratedKeys="true" keyProperty="id" keyColumn="notice_id">
         insert into Notice(customs_id, title, content)
         values(#{customs.id}, #{title}, #{content})
     </insert>
 
-    <update id="update" parameterType="project.pickme.notice.domain.Notice">
+    <update id="update" parameterType="project.pickme.notice.dto.NoticeDto">
         update Notice set title = #{title}, content = #{content}
         where notice_id = #{id}
     </update>
