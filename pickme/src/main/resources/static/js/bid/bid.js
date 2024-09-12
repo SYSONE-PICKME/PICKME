@@ -1,4 +1,5 @@
 import Modal from './modal.js';
+import {addData} from "./chart.js";
 
 const bidUnits = [
     { min: 0, max: 100000, unit: 10000},
@@ -95,6 +96,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (data.maxPrice != undefined) {
             updateMaxPrice(data.maxPrice);
+            addData(data.maxPrice);
             selectedPrice = data.maxPrice;
             selectedBid = data.bidId;
         }

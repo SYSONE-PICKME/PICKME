@@ -36,6 +36,7 @@ public class WebSocketHandler extends TextWebSocketHandler {
 
 			if("BID".equals(type)){
 				AddBidDto addBidDto = objectMapper.readValue(payload, AddBidDto.class);
+				System.out.println(addBidDto.toString());
 				MaxPriceDto maxPriceDto = bidService.addBid(addBidDto);
 				webSocketService.sendBidToAllClient(addBidDto.getItemId(), maxPriceDto);
 			}
