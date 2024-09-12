@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PICKME</title>
+
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+    <link rel="stylesheet" th:href="@{/css/header.css}">
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
+
+    <link rel="stylesheet" th:href="@{/item/css/style.css}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        const startTime = /*[[${item.startTime}]]*/ {};
+        const endTime = /*[[${item.endTime}]]*/ {};
+        /*]]>*/
+    </script>
+    <script th:src="@{/item/js/image.js}"></script>
+</head>
+<body>
+<!-- 헤더 -->
+<div th:replace="~{fragments/header :: header}">header content</div>
+
+<!-- 메인 -->
+<main>
+    <div class="container">
+        <div style="display: flex;">
+        <div class="image-container">
+            <div class="main-image">
+                <img id="largeImage" th:src="${item.imageUrls[0]}" alt="메인 이미지" style="width:650px; height:400px">
+            </div>
+
+            <div class="thumbnail-images">
+                <img th:src="${item.imageUrls[1]}" class="thumbnail" alt="섬네일1" onclick="changeImage(this)">
+                <img th:src="${item.imageUrls[2]}" class="thumbnail" alt="섬네일2" onclick="changeImage(this)">
+                <img th:src="${item.imageUrls[3]}" class="thumbnail" alt="섬네일3" onclick="changeImage(this)">
+                <img th:src="${item.imageUrls[4]}" class="thumbnail" alt="섬네일4" onclick="changeImage(this)">
+            </div>
+        </div>
+
+        <div class="auction-details" style="width:800px; height:560px">
+            <h2><span th:text="${item.name}"></span></h2>
+            <div class="action-sub-details" style="width:670px; height:320px">
+                <p>공매 번호: <span th:text="${item.id}"></span></p>
+                <p>세관명: <span th:text="${item.customsName}"></span></p>
+                <p>입찰 대상: <span th:text="${item.target}"></span></p>
+                <p>공매시작일시: <span th:text="${item.startTime}"></span></p>
+                <p>공매마감일시: <span th:text="${item.endTime}"></span></p>
+            </div>
+            <p class="price">공매예정가격: <span th:text="${item.price}"></span>원</p>
+        </div>
+        </div>
+
+        <div>
+            <button class="bid-button" id="bid-button" style="width:1430px; height:65px;"></button>
+        </div>
+
+        <div class="action-buttons" style="display: flex;">
+            <button>경매 호가표</button>
+            <button>관련 법규</button>
+            <div class="contact-info" style="width:800px; height: 200px;">
+                <p>담당 부서: <span th:text="${item.customsName}"></span></p>
+                <p>문의 전화: <span th:text="${item.customsTel}"></span></p>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- 푸터 -->
+<!--<div th:replace="fragments/footer :: footer"></div>-->
+<div th:replace="~{fragments/footer :: footer}">footer content</div>
+<script th:src="@{/item/js/countdown.js}"></script>
+</body>
+</html>
