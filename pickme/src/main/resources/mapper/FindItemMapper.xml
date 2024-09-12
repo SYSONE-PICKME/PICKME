@@ -30,4 +30,22 @@
 
         where i.item_id = #{id}
     </select>
+
+    <select id = "findAll" resultType="project.pickme.item.dto.FindItemDto$GetAll">
+        select
+        i.item_id as id,
+        i.name,
+        i.price,
+        i.start_time as startTime,
+        i.end_time as endTime,
+        i.status,
+        img.url as imgUrl
+
+        from
+        Item i
+
+        join Image img
+        on i.item_id = img.item_id
+        and img.seq = 1
+    </select>
 </mapper>

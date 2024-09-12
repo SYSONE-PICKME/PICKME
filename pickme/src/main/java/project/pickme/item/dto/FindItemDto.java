@@ -57,4 +57,16 @@ public class FindItemDto {
 			this.imageUrls = Arrays.asList(dto.getImages().split(","));
 		}
 	}
+
+	@Getter
+	@NoArgsConstructor
+	public static class GetAll {
+		private Long id;
+		private String name;
+		private long price;
+		private LocalDateTime startTime;
+		private LocalDateTime endTime;
+		private String status;
+		private String imgUrl;
+	}
 }
