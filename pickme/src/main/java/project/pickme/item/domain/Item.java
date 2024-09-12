@@ -1,7 +1,6 @@
 package project.pickme.item.domain;
 
 import java.time.LocalDateTime;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import project.pickme.customs.domain.Customs;
