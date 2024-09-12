@@ -1,4 +1,4 @@
-package project.pickme.bid.dto;
+package project.pickme.bid.dto.reqeust;
 
 import lombok.Getter;
 

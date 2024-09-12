@@ -10,7 +10,7 @@
     <link rel="stylesheet" th:href="@{/css/header.css}">
     <link rel="stylesheet" th:href="@{/css/footer.css}">
 
-    <link rel="stylesheet" th:href="@{/item/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/item/style.css}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,7 +22,7 @@
         const endTime = /*[[${item.endTime}]]*/ {};
         /*]]>*/
     </script>
-    <script th:src="@{/item/js/image.js}"></script>
+    <script th:src="@{/js/item/image.js}"></script>
 </head>
 <body>
 <!-- 헤더 -->
@@ -76,6 +76,6 @@
 <!-- 푸터 -->
 <!--<div th:replace="fragments/footer :: footer"></div>-->
 <div th:replace="~{fragments/footer :: footer}">footer content</div>
-<script th:src="@{/item/js/countdown.js}"></script>
+<script th:src="@{/js/item/countdown.js}"></script>
 </body>
 </html>

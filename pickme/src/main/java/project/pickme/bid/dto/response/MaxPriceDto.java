@@ -1,4 +1,4 @@
-package project.pickme.bid.dto;
+package project.pickme.bid.dto.response;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

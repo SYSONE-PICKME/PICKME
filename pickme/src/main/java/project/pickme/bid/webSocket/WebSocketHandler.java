@@ -13,9 +13,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import project.pickme.bid.dto.AddBidDto;
-import project.pickme.bid.dto.MaxPriceDto;
-import project.pickme.bid.dto.SelectedBidDto;
+import project.pickme.bid.dto.reqeust.AddBidDto;
+import project.pickme.bid.dto.response.MaxPriceDto;
+import project.pickme.bid.dto.response.SelectedBidDto;
 import project.pickme.bid.service.BidService;
 
 @Component
@@ -41,7 +41,7 @@ public class WebSocketHandler extends TextWebSocketHandler {
 			}
 			if(type.equals("BID_END")){
 				SelectedBidDto selectedBidDto = objectMapper.readValue(payload, SelectedBidDto.class);
-				bidService.closeBid(selectedBidDto.getBidId());
+				bidService.selectBid(selectedBidDto.getBidId(), selectedBidDto);	//낙찰처리
 			}
 		} catch (Exception e) {
 			log.error(e.getMessage());

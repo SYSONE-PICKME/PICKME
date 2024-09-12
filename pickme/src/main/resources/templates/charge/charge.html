@@ -9,7 +9,7 @@
   <link rel="stylesheet" th:href="@{/css/index.css}">
   <link rel="stylesheet" th:href="@{/css/header.css}">
   <link rel="stylesheet" th:href="@{/css/footer.css}">
-  <link rel="stylesheet" type="text/css" th:href="@{/charge/style.css}">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/charge/style.css}">
 
   <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
   <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
@@ -50,7 +50,7 @@
 
                         success: function(data) {
                             alert("결제가 성공적으로 완료되었습니다.");
-                            location.href='http://localhost:8099/user/charge';
+                            location.href='../../static/css/charge';
                         },
                         error: function(error) {
                             alert("결제 처리 중 오류가 발생했습니다.");

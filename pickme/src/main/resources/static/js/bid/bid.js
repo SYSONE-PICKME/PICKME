@@ -114,7 +114,9 @@ document.addEventListener("DOMContentLoaded", function () {
             type: 'BID_END',
             itemId: itemId,
             bidId: selectedBid,
-            price: selectedPrice
+            price: selectedPrice,
+            itemName: itemName,
+            itemImage: itemImage
         };
         socket.send(JSON.stringify(message));
         console.log("경매 종료 메세지 전송", message);

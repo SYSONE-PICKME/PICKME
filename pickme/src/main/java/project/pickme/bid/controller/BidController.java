@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import lombok.RequiredArgsConstructor;
 import project.pickme.bid.service.BidService;
 import project.pickme.common.annotation.CurrentUser;
-import project.pickme.bid.dto.OneBidItemDto;
+import project.pickme.bid.dto.response.OneBidItemDto;
 import project.pickme.user.domain.User;
 
 @Controller
