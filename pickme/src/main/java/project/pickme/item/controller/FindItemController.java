@@ -23,7 +23,7 @@ public class FindItemController {
 		FindItemDto.Info item = itemService.findById(id);
 		model.addAttribute("item", item);
 
-		return "item/item.html";
+		return "item/item";
 	}
 
 	@GetMapping("/list")
