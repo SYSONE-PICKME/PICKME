@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import project.pickme.item.dto.FindItemDto;
-import project.pickme.item.mapper.FindItemMapper;
+import project.pickme.item.repository.FindItemMapper;
 
 @Service
 @RequiredArgsConstructor
