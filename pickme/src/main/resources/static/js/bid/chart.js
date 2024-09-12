@@ -1,11 +1,17 @@
 // 차트를 그릴 캔버스 가져오기
 const ctx = document.querySelector('#myChart').getContext('2d');
 
-// 초기 라벨과 데이터
-let labels = [0], data = [startPrice];
+let labels, data;
+if (allPrice.length > 0) {
+    labels = allPrice.map((_, index) => index + 1); // x축 라벨은 1부터 시작하여 allPrice 크기만큼 설정
+    data = allPrice.slice(); // y축 데이터는 allPrice로 설정
+} else {
+    labels = [1]; // x축 라벨을 1로 설정
+    data = [startPrice]; // y축 데이터는 startPrice로 설정
+}
 
 // x축 값 증가를 위한 변수
-let xValueCounter = 1;
+let xValueCounter = labels.length + 1; // 다음 x축 라벨은 현재 라벨 크기 + 1
 
 // Chart.js를 이용해 차트 생성
 export const chart = new Chart(ctx, {
@@ -25,7 +31,7 @@ export const chart = new Chart(ctx, {
         maintainAspectRatio: false, // 차트의 가로 세로 비율을 유지하지 않음
 
         animation: {
-            duration: 1000, // 애니메이션 지속 시간
+            duration: 100, // 애니메이션 지속 시간
             easing: 'ease-in-out' // 애니메이션의 변화 속도
         },
         plugins: {
