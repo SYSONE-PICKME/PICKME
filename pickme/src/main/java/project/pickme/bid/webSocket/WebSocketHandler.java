@@ -32,16 +32,14 @@ public class WebSocketHandler extends TextWebSocketHandler {
 			// 메시지를 JSON으로 파싱
 			JsonNode receiveMessage = objectMapper.readTree(message.getPayload());
 			String type = receiveMessage.get("type").asText();
+			String payload = message.getPayload();
 
 			if("BID".equals(type)){
-				String payload = message.getPayload();
 				AddBidDto addBidDto = objectMapper.readValue(payload, AddBidDto.class);
 				MaxPriceDto maxPriceDto = bidService.addBid(addBidDto);
 				webSocketService.sendBidToAllClient(addBidDto.getItemId(), maxPriceDto);
 			}
 			if("BID_END".equals(type)){
-				System.out.println("들어옴");
-				String payload = message.getPayload();
 				SelectedBidDto selectedBidDto = objectMapper.readValue(payload, SelectedBidDto.class);
 				bidService.closeBid(selectedBidDto.getBidId());
 			}

@@ -1,6 +1,7 @@
 package project.pickme.bid.service;
 
 import static project.pickme.common.exception.ErrorCode.*;
+import static project.pickme.item.constant.Status.*;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,13 +36,18 @@ public class BidService {
 	}
 
 	@Transactional
-	public MaxPriceDto addBid(AddBidDto addBidDto){
+	public MaxPriceDto addBid(AddBidDto addBidDto){	//입찰하는 메서드
 		User user = userMapper.findUserById(addBidDto.getUserId()).orElseThrow(() -> new BusinessException(NOT_FOUND_USER));
 		Item item = getItem(addBidDto.getItemId());
 
-		BidCreateDto bidCreateDto = BidCreateDto.create(addBidDto.getPrice(), user.getId(), item.getId());
-		bidMapper.save(bidCreateDto);
-		return MaxPriceDto.create(bidCreateDto.getBidId(), addBidDto.getPrice());
+		if(item.getStatus().equals(OPEN)){
+			BidCreateDto bidCreateDto = BidCreateDto.create(addBidDto.getPrice(), user.getId(), item.getId());
+			bidMapper.save(bidCreateDto);
+
+			return MaxPriceDto.create(bidCreateDto.getBidId(), addBidDto.getPrice());
+		}
+
+		throw new BusinessException(BID_NOT_PROGRESS);
 	}
 
 	@Transactional

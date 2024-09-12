@@ -10,7 +10,7 @@ public class MaxPriceDto {
 	private Long bidId;
 	private long maxPrice;
 
-	public static MaxPriceDto create(Long maxPriceBidId, long maxPrice) {
-		return new MaxPriceDto(maxPriceBidId, maxPrice);
+	public static MaxPriceDto create(Long bidId, long maxPrice) {
+		return new MaxPriceDto(bidId, maxPrice);
 	}
 }

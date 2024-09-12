@@ -11,6 +11,7 @@
         <result property="status" column="status" />
         <association property="customs" column="customs_id" javaType="project.pickme.user.domain.Customs" />
     </resultMap>
+
     <select id="findItemById" parameterType="long" resultMap="oneItemResultMap">
         select
             i.item_id,
