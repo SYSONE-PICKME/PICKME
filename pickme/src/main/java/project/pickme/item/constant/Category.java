@@ -1,8 +1,10 @@
-package project.pickme.item.domain;
+package project.pickme.item.constant;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
+@AllArgsConstructor
 public enum Category {
 	CLOTHES(1, "의류"),
 	DAILY(2, "생활용품"),
@@ -12,9 +14,4 @@ public enum Category {
 
 	private final int code;
 	private final String name;
-
-	Category(int code, String name) {
-		this.code = code;
-		this.name = name;
-	}
 }
