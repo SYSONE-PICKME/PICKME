@@ -5,11 +5,11 @@ import java.time.LocalDateTime;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import project.pickme.user.domain.Customs;
 
-@Data
+@Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
@@ -22,9 +22,5 @@ public class Notice {
 
 	public void updateContent(String content) {
 		this.content = content;
-	}
-
-	public void updateTitle(String title) {
-		this.title = title;
 	}
 }

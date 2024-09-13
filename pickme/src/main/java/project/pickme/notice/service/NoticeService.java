@@ -25,9 +25,9 @@ public class NoticeService {
 			.collect(Collectors.toList());
 	}
 
-	public NoticeDto getNoticeById(long id) {
+	public NoticeDto getNoticeOrCampaignById(Long id) {
 		Notice notice = noticeMapper.selectById(id);
-		return notice != null ? NoticeDto.fromEntity(notice) : null;
+		return convertToAppropriateDto(notice);
 	}
 
 	@Transactional
@@ -55,9 +55,13 @@ public class NoticeService {
 		return CampaignDto.fromEntity(noticeMapper.selectById(notice.getId()));
 	}
 
-	@Transactional
-	public CampaignDto getCampaignById(long id) {
-		Notice notice = noticeMapper.selectById(id);
-		return notice != null ? CampaignDto.fromEntity(notice) : null;
+	private NoticeDto convertToAppropriateDto(Notice notice) {
+		if (notice == null) {
+			return null;
+		}
+		if (notice.getContent().contains("[Image URL: ")) {
+			return CampaignDto.fromEntity(notice);
+		}
+		return NoticeDto.fromEntity(notice);
 	}
 }

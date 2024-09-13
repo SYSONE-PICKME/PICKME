@@ -1,23 +1,18 @@
 package project.pickme.notice.dto;
 
 import java.time.LocalDateTime;
-
 import org.springframework.web.multipart.MultipartFile;
 
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import project.pickme.notice.domain.Notice;
 import project.pickme.user.constant.Role;
 
-@Data
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper = true)
 public class CampaignDto extends NoticeDto {
 	private String imageUrl;
 	private MultipartFile imageFile;
@@ -35,7 +30,7 @@ public class CampaignDto extends NoticeDto {
 	public Notice toEntity() {
 		Notice notice = super.toEntity();
 		if (this.imageUrl != null) {
-			notice.setContent(notice.getContent() + "\n[Image URL: " + this.imageUrl + "]");
+			notice.updateContent(notice.getContent() + "\n[Image URL: " + this.imageUrl + "]");
 		}
 		return notice;
 	}
@@ -62,5 +57,11 @@ public class CampaignDto extends NoticeDto {
 			.imageUrl(imageUrl)
 			.build();
 	}
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
 
+	public void setImageFile(MultipartFile imageFile) {
+		this.imageFile = imageFile;
+	}
 }

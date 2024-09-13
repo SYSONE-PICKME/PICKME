@@ -20,5 +20,7 @@ public class Customs {
 		return new Customs(id, password, Role.ROLE_ADMIN, name, tel);
 	}
 
-
+	public static Customs createCustoms(String id, String name) {
+		return new Customs(id, "", Role.ROLE_ADMIN, name, "");
+	}
 }

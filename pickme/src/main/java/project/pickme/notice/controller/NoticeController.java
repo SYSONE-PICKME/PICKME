@@ -37,23 +37,26 @@ public class NoticeController {
 	}
 
 	@GetMapping("/newNotice")
-	public String showNoticeForm(Model model, @CurrentUser Customs currentUser) {
+	public String showNoticeForm(Model model, @CurrentUser Customs currentUser, @ModelAttribute("notice") NoticeDto noticeDto) {
 		model.addAttribute("customsName", currentUser.getName());
 		model.addAttribute("customsId", currentUser.getId());
-		model.addAttribute("notice", new NoticeDto());
 		return "notice/noticeForm";
 	}
 
 	@PostMapping
 	public String createNotice(@ModelAttribute NoticeDto noticeDto, @CurrentUser Customs customs){
-		noticeDto.setCustomsId(customs.getId());
-		NoticeDto savedNotice = noticeService.createNotice(noticeDto);
+		NoticeDto newNoticeDto = NoticeDto.builder()
+			.title(noticeDto.getTitle())
+			.content(noticeDto.getContent())
+			.customsId(customs.getId())
+			.build();
+		NoticeDto savedNotice = noticeService.createNotice(newNoticeDto);
 		return "redirect:/customs/notice/noticeContent/" + savedNotice.getId();
 	}
 
 	@GetMapping("/edit/{id}")
-	public String updateNotice(@PathVariable("id") long id, Model model, @CurrentUser Customs customs) {
-		NoticeDto notice = noticeService.getNoticeById(id);
+	public String showEditForm(@PathVariable("id") long id, Model model, @CurrentUser Customs customs) {
+		NoticeDto notice = noticeService.getNoticeOrCampaignById(id);
 		model.addAttribute("notice", notice);
 		model.addAttribute("customsName", customs.getName());
 		model.addAttribute("customsId", customs.getId());
@@ -62,8 +65,13 @@ public class NoticeController {
 
 	@PostMapping("/edit/{id}")
 	public String updateNotice(@PathVariable("id") long id, @ModelAttribute NoticeDto noticeDto) {
-		noticeDto.setId(id);
-		noticeService.updateNotice(noticeDto);
+		NoticeDto updatedNoticeDto = NoticeDto.builder()
+			.id(id)
+			.title(noticeDto.getTitle())
+			.content(noticeDto.getContent())
+			.customsId(noticeDto.getCustomsId())
+			.build();
+		noticeService.updateNotice(updatedNoticeDto);
 		return "redirect:/customs/notice/noticeContent/" + id;
 	}
 
@@ -85,14 +93,17 @@ public class NoticeController {
 	public String createCampaign(@RequestParam("title") String title,
 		@RequestParam("imageFile") MultipartFile imageFile,
 		@CurrentUser Customs customs) throws IOException {
-		CampaignDto campaignDto = new CampaignDto();
-		campaignDto.setTitle(title);
-		campaignDto.setContent("");
-		campaignDto.setCustomsId(customs.getId());
+		String imageUrl = null;
 		if (!imageFile.isEmpty()) {
-			String imageUrl = fileUploadService.uploadFile(imageFile);
-			campaignDto.setImageUrl(imageUrl);
+			imageUrl = fileUploadService.uploadFile(imageFile);
 		}
+
+		CampaignDto campaignDto = CampaignDto.campaignBuilder()
+			.title(title)
+			.content("")
+			.customsId(customs.getId())
+			.imageUrl(imageUrl)
+			.build();
 
 		CampaignDto savedCampaign = noticeService.createCampaign(campaignDto);
 		return "redirect:/customs/notice/noticeContent/" + savedCampaign.getId();
@@ -100,12 +111,9 @@ public class NoticeController {
 
 	@GetMapping("/noticeContent/{id}")
 	public String showNoticeOrCampaign(@PathVariable Long id, Model model) {
-		NoticeDto notice = noticeService.getNoticeById(id);
+		NoticeDto notice = noticeService.getNoticeOrCampaignById(id);
 		if (notice == null) {
 			return "redirect:/customs/notice";
-		}
-		if (notice.getContent().contains("[Image URL: ")) {
-			notice = noticeService.getCampaignById(id);
 		}
 		model.addAttribute("notice", notice);
 		return "notice/noticeContent";

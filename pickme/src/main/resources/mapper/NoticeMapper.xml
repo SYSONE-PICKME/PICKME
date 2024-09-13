@@ -25,6 +25,7 @@
         c.name
         from Notice n
         left join Customs c on n.customs_id = c.id
+        order by notice_id desc;
     </select>
 
     <select id="selectById" parameterType="long" resultMap="noticeResultMap">

@@ -4,13 +4,15 @@ import java.time.LocalDateTime;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import project.pickme.notice.domain.Notice;
 import project.pickme.user.constant.Role;
 import project.pickme.user.domain.Customs;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -27,9 +29,9 @@ public class NoticeDto {
 		return Notice.builder()
 			.id(id)
 			.title(title)
-			.content(tcontent)
+			.content(content)
 			.createTime(createTime)
-			.customs(Customs.createCustoms(customsId, "", customsName, ""))
+			.customs(Customs.createCustoms(customsId, customsName))
 			.build();
 	}
 
@@ -44,10 +46,5 @@ public class NoticeDto {
 			.customsName(customs.getName())
 			.customsRole(customs.getRole())
 			.build();
-	}
-
-	public void updateEntity(Notice notice) {
-		notice.updateTitle(this.title);
-		notice.updateContent(this.content);
 	}
 }
