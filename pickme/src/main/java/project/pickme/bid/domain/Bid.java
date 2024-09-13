@@ -20,4 +20,8 @@ public class Bid {
 	private boolean isSuccess;
 	private User user;
 	private Item item;
+
+	public String getUserId() {
+		return user.getId();
+	}
 }

@@ -14,6 +14,12 @@
         delete from User
     </delete>
 
+    <update id="minusPoint">
+        update User
+        set point = point - #{price}
+        where id = #{userId}
+    </update>
+
     <update id="updatePointById" parameterType="project.pickme.user.dto.UserDto$UpdatePoint">
         update User
         set point = #{point}

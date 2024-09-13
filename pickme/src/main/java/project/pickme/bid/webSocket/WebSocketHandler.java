@@ -8,27 +8,41 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import project.pickme.bid.dto.AddBidDto;
 import project.pickme.bid.dto.MaxPriceDto;
+import project.pickme.bid.dto.SelectedBidDto;
+import project.pickme.bid.service.BidService;
 
 @Component
 @RequiredArgsConstructor
 @Slf4j
 public class WebSocketHandler extends TextWebSocketHandler {
 	private final WebSocketService webSocketService;
+	private final BidService bidService;
 	private final ObjectMapper objectMapper;
 
 	@Override    //클라이언트와 메세지 송수신
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) {
 		try {
+			// 메시지를 JSON으로 파싱
+			JsonNode receiveMessage = objectMapper.readTree(message.getPayload());
+			String type = receiveMessage.get("type").asText();
 			String payload = message.getPayload();
-			AddBidDto addBidDto = objectMapper.readValue(payload, AddBidDto.class);
-			MaxPriceDto data = new MaxPriceDto(addBidDto.getPrice());	//TODO: 실제 최고가로 전송하도록 수정
-			webSocketService.sendBid2AllClient(addBidDto.getItemId(), data);
+
+			if(type.equals("BID")){
+				AddBidDto addBidDto = objectMapper.readValue(payload, AddBidDto.class);
+				MaxPriceDto maxPriceDto = bidService.addBid(addBidDto);
+				webSocketService.sendBidToAllClient(addBidDto.getItemId(), maxPriceDto);
+			}
+			if(type.equals("BID_END")){
+				SelectedBidDto selectedBidDto = objectMapper.readValue(payload, SelectedBidDto.class);
+				bidService.closeBid(selectedBidDto.getBidId());
+			}
 		} catch (Exception e) {
 			log.error(e.getMessage());
 		}

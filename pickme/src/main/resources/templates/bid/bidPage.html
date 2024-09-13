@@ -6,11 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>입찰중</title>
     <link rel="stylesheet" href="/css/bid/bidPage.css">
+    <link rel="stylesheet" href="/css/bid/modal.css">
 </head>
 <body>
 <header class="header">
     합리적인 경매가 이루어지는 곳
 </header>
+
+<div th:replace="~{bid/modal :: modal}"></div>
+
 <div class="container" th:object="${oneBidItemDto}">
     <h2>입찰중</h2>
     <div class="item-details">
@@ -41,11 +45,11 @@
         <div class="bid-info">
             <div class="bid-info-row">
                 <span class="bold-text">현재 최고가</span>
-                <span class="max-price" th:text="*{startPrice}"></span>
+                <span class="max-price" th:text="*{maxPrice}"></span>
             </div>
             <div class="bid-info-row">
-                <span class="bold-text" th:text="*{myPoint}">보유 포인트 <button class="recharge-btn">충전</button></span>
-                <span>1,000,000원 </span>
+                <span class="bold-text">보유 포인트 <button class="recharge-btn">충전</button></span>
+                <span class="my-point" th:text="*{myPoint}"></span>
             </div>
             <div class="bid-info-row">
                 <span class="bold-text" >남은 시간</span>
@@ -64,9 +68,11 @@
 <script>
     const itemId = [[${oneBidItemDto.itemId}]];
     const userId = '[[${oneBidItemDto.userId}]]';
+    const myPoint = [[${oneBidItemDto.myPoint}]];
     var endTime = new Date('[[${oneBidItemDto.endTime}]]').getTime();
 </script>
+<script type="module" src="/js/bid/modal.js"></script>
 <script src="/js/bid/timer.js"></script>
-<script src="/js/bid/socket.js"></script>
+<script type="module" src="/js/bid/bid.js"></script>
 </body>
 </html>

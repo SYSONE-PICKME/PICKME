@@ -14,13 +14,15 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 @Slf4j
 public class WebSocketHandShakeInterceptor implements HandshakeInterceptor {
+	private static final int URL_LENGTH = 4;
+
 	@Override
 	public boolean beforeHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler,
 		Map<String, Object> attributes) throws Exception {
 
 		String[] parts = request.getURI().getPath().split("/");
 
-		if (parts.length != 4) {
+		if (parts.length != URL_LENGTH) {
 			log.error("잘못된 웹소켓 연결 요청" + request.getURI().getPath());
 			response.setStatusCode(HttpStatus.FORBIDDEN);
 			response.getBody().write("웹소켓 연결 실패".getBytes());

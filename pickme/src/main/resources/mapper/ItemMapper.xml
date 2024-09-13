@@ -11,6 +11,7 @@
         <result property="status" column="status" />
         <association property="customs" column="customs_id" javaType="project.pickme.user.domain.Customs" />
     </resultMap>
+
     <select id="findItemById" parameterType="long" resultMap="oneItemResultMap">
         select
             i.item_id,
@@ -22,5 +23,6 @@
             i.status,
             c.id as customs_id
         from Item i left join Customs c on i.customs_id = c.id
+        where i.item_id = ${itemId}
     </select>
 </mapper>
