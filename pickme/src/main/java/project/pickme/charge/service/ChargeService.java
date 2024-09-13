@@ -15,7 +15,7 @@ import com.siot.IamportRestClient.response.Payment;
 import lombok.RequiredArgsConstructor;
 import project.pickme.charge.dto.ChargeDto;
 import project.pickme.charge.dto.ChargeRequest;
-import project.pickme.charge.mapper.ChargeMapper;
+import project.pickme.charge.repository.ChargeMapper;
 import project.pickme.user.domain.User;
 import project.pickme.user.dto.UserDto;
 import project.pickme.user.repository.UserMapper;

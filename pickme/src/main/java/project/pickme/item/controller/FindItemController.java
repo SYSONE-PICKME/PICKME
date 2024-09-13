@@ -1,5 +1,7 @@
 package project.pickme.item.controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +23,14 @@ public class FindItemController {
 		FindItemDto.Info item = itemService.findById(id);
 		model.addAttribute("item", item);
 
-		return "item/item.html";
+		return "item/item";
+	}
+
+	@GetMapping("/list")
+	public String getAllItems(Model model) {
+		List<FindItemDto.GetAll> items = itemService.findAll();
+		model.addAttribute("items", items);
+
+		return "item/list";
 	}
 }
