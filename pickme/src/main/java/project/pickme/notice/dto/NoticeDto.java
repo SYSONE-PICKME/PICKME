@@ -25,10 +25,11 @@ public class NoticeDto {
 
 	public Notice toEntity() {
 		return Notice.builder()
-			.id(this.id)
-			.title(this.title)
-			.content(this.content)
-			.customs(Customs.createCustoms(this.customsId, "", this.customsName, ""))
+			.id(id)
+			.title(title)
+			.content(tcontent)
+			.createTime(createTime)
+			.customs(Customs.createCustoms(customsId, "", customsName, ""))
 			.build();
 	}
 
@@ -49,5 +50,4 @@ public class NoticeDto {
 		notice.updateTitle(this.title);
 		notice.updateContent(this.content);
 	}
-
 }

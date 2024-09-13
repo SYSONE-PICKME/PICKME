@@ -13,7 +13,7 @@
             <result property="role" column="role"/>
         </association>
     </resultMap>
-    
+
     <select id="selectAll" resultMap="noticeResultMap">
         select n.notice_id,
         n.customs_id,
@@ -48,13 +48,13 @@
         values(#{customs.id}, #{title}, #{content})
     </insert>
 
-    <update id="update" parameterType="project.pickme.notice.dto.NoticeDto">
-        update Notice set title = #{title}, content = #{content}
-        where notice_id = #{id}
-    </update>
-    
-    <delete id="delete" parameterType="long">
-        delete from Notice where notice_id = #{id}
-    </delete>
+        <update id="update" parameterType="project.pickme.notice.dto.NoticeDto">
+            update Notice set title = #{title}, content = #{content}
+            where notice_id = #{id}
+        </update>
+
+        <delete id="delete" parameterType="long">
+            delete from Notice where notice_id = #{id}
+        </delete>
 
 </mapper>

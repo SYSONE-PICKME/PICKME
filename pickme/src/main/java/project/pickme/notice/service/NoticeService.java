@@ -1,10 +1,8 @@
 package project.pickme.notice.service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,18 +14,17 @@ import project.pickme.notice.mapper.NoticeMapper;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class NoticeService {
 
 	private final NoticeMapper noticeMapper;
 
-	@Transactional(readOnly = true)
 	public List<NoticeDto> getAllNotice() {
 		return noticeMapper.selectAll().stream()
 			.map(NoticeDto::fromEntity)
 			.collect(Collectors.toList());
 	}
 
-	@Transactional(readOnly = true)
 	public NoticeDto getNoticeById(long id) {
 		Notice notice = noticeMapper.selectById(id);
 		return notice != null ? NoticeDto.fromEntity(notice) : null;

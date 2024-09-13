@@ -38,10 +38,8 @@ public class NoticeController {
 
 	@GetMapping("/newNotice")
 	public String showNoticeForm(Model model, @CurrentUser Customs currentUser) {
-
 		model.addAttribute("customsName", currentUser.getName());
 		model.addAttribute("customsId", currentUser.getId());
-
 		model.addAttribute("notice", new NoticeDto());
 		return "notice/noticeForm";
 	}
@@ -57,10 +55,8 @@ public class NoticeController {
 	public String updateNotice(@PathVariable("id") long id, Model model, @CurrentUser Customs customs) {
 		NoticeDto notice = noticeService.getNoticeById(id);
 		model.addAttribute("notice", notice);
-
 		model.addAttribute("customsName", customs.getName());
 		model.addAttribute("customsId", customs.getId());
-
 		return "notice/noticeForm";
 	}
 
@@ -79,12 +75,9 @@ public class NoticeController {
 
 	@GetMapping("/newCampaign")
 	public String showCampaignForm(Model model, @CurrentUser Customs customs) {
-
 		model.addAttribute("customsName", customs.getName());
 		model.addAttribute("customsId", customs.getId());
-
 		model.addAttribute("campaign", new CampaignDto());
-
 		return "notice/campaignForm";
 	}
 
@@ -96,7 +89,6 @@ public class NoticeController {
 		campaignDto.setTitle(title);
 		campaignDto.setContent("");
 		campaignDto.setCustomsId(customs.getId());
-
 		if (!imageFile.isEmpty()) {
 			String imageUrl = fileUploadService.uploadFile(imageFile);
 			campaignDto.setImageUrl(imageUrl);

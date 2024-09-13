@@ -20,15 +20,5 @@ public class Customs {
 		return new Customs(id, password, Role.ROLE_ADMIN, name, tel);
 	}
 
-	@Override
-	public String toString() {
-		return "Customs{" +
-			"id='" + id + '\'' +
-			", password='" + password + '\'' +
-			", role=" + role +
-			", name='" + name + '\'' +
-			", tel='" + tel + '\'' +
-			'}';
-	}
 
 }
