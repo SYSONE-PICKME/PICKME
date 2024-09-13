@@ -20,7 +20,7 @@ import project.pickme.common.exception.BusinessException;
 import project.pickme.item.domain.Item;
 import project.pickme.bid.dto.response.OneBidItemDto;
 import project.pickme.item.repository.ItemMapper;
-import project.pickme.user.controller.MailService;
+import project.pickme.user.service.MailService;
 import project.pickme.user.domain.User;
 import project.pickme.user.repository.UserMapper;
 

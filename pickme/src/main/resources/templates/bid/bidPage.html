@@ -21,11 +21,11 @@
     <div class="item-details">
         <img src="/images/test.jpg" alt="Laptop Image" class="item-image">
         <div class="item-info">
-            <h2 th:text="*{name}"></h2>
+            <h2 th:text="*{name}" class="item-name"></h2>
             <table class="item-timeline">
                 <tr>
                     <td>공매 번호</td>
-                    <td th:text="*{itemId}"></td>
+                    <td th:text="*{itemId}" class="item-id"></td>
                 </tr>
                 <tr>
                     <td>공매시작일시</td>
@@ -33,7 +33,7 @@
                 </tr>
                 <tr>
                     <td>공매마감일시</td>
-                    <td th:text="*{endTime}"></td>
+                    <td th:text="*{endTime}" class="end-time"></td>
                 </tr>
             </table>
             <div class="starting-price">
@@ -55,7 +55,7 @@
                 <span class="my-point" th:text="*{myPoint}"></span>
             </div>
             <div class="bid-info-row">
-                <span class="bold-text" >남은 시간</span>
+                <span class="bold-text">남은 시간</span>
                 <span class="time" id="time-remaining"></span>
             </div>
             <div class="line"></div>
@@ -72,12 +72,7 @@
 <script>
     const itemId = [[${oneBidItemDto.itemId}]];
     const userId = '[[${oneBidItemDto.userId}]]';
-    const myPoint = [[${oneBidItemDto.myPoint}]];
-    const startPrice = [[${oneBidItemDto.startPrice}]];
     const allPrice = [[${oneBidItemDto.allPrice}]];
-    const itemName = '[[${oneBidItemDto.name}]]';
-    const itemImage = '[[${oneBidItemDto.imageUrl}]]';
-    var endTime = new Date('[[${oneBidItemDto.endTime}]]').getTime();
 </script>
 <script type="module" src="/js/bid/modal.js"></script>
 <script src="/js/bid/timer.js"></script>

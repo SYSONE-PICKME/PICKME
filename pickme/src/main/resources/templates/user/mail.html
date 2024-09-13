@@ -110,11 +110,10 @@
         <p>아래의 상품이 성공적으로 낙찰되었습니다.</p>
     </div>
     <div class="my-item">
-        <img src="https://pickmepickme.s3.ap-northeast-2.amazonaws.com/computer.jpg" alt="상품 이미지">
+        <img src="https://pickmepickme.s3.ap-northeast-2.amazonaws.com/computer.jpg" alt="상품 이미지"> <!-- TODO: th:src"{$itemImage}로 변경 해야함" -->
         <div class="email-body">
             <div class="content-box">
-<!--                <strong>상품명: <span th:text="${itemName}">[상품명]</span></strong>-->
-                <strong>상품명: FLAKFJALKDFJASLKDFJ DKSFLSKF 182918391</span></strong>
+                <strong>상품명: <span th:text="${itemName}">[상품명]</span></strong>
                 <p>낙찰 금액: <span th:text="${price}" >[낙찰 금액]</span> 원</p>
             </div>
         </div>

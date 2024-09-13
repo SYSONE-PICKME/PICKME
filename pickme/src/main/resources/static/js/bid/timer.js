@@ -1,4 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
+    const endTime = new Date(document.querySelector('.end-time').textContent).getTime();
+
     function step() {
         var now = Date.now();
         var remaining = Math.max(0, endTime - now);

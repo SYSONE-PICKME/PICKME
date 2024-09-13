@@ -12,6 +12,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import project.pickme.user.dto.LoginDto;
 import project.pickme.user.dto.SignUpDto;
+import project.pickme.user.service.MailService;
 import project.pickme.user.service.UserService;
 
 @Controller

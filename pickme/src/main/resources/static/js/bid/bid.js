@@ -1,6 +1,8 @@
 import Modal from './modal.js';
 import {addData} from "./chart.js";
 
+let myPoint;
+
 const bidUnits = [
     {min: 0, max: 100000, unit: 1000},
     {min: 100000, max: 1000000, unit: 10000},
@@ -78,13 +80,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // 보유 포인트
     const myPointElement = document.querySelector('.my-point');
-    const myPoint = parseInt(myPointElement.textContent);
+    myPoint = parseInt(myPointElement.textContent);
     myPointElement.textContent = formatCurrency(myPoint);
 });
 
 //웹소켓 부분
 document.addEventListener("DOMContentLoaded", function () {
     const modal = new Modal("modal", "modal-message", "modal-confirm");
+    const itemName = document.querySelector('.item-name').textContent;
+    const itemImage = document.querySelector('.item-image').textContent;
+
     //소켓 생성(웹소켓 메서드와 이벤트를 통해 서버와 통신 가능)
     const socket = new WebSocket(`ws://localhost:8099/connect/${itemId}/${userId}`);
 
@@ -125,6 +130,8 @@ document.addEventListener("DOMContentLoaded", function () {
     //입찰하기 버튼 클릭 시 실시간 금액 전송
     document.querySelector('.bid-btn').addEventListener('click', function () {
         const price = document.getElementById('price').value;
+        console.log("myPoint", myPoint);
+
         const maxPriceElement = document.querySelector('.max-price');
         const currentMaxPrice = parseInt(maxPriceElement.textContent.replace(/,/g, ''));
 
