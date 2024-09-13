@@ -58,7 +58,12 @@ public class WebSocketSessionRepository {
 		if(userIds == null){
 			return;
 		}
-
 		userIds.forEach(sessions::remove);
+	}
+
+	public void closeUserSession(Long itemId, String userId){
+		Set<String> userIds = itemRoom.get(itemId);
+		userIds.remove(userId);
+		sessions.remove(userId);
 	}
 }

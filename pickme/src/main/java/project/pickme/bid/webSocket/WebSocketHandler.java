@@ -37,10 +37,11 @@ public class WebSocketHandler extends TextWebSocketHandler {
 			if(type.equals("BID")){
 				AddBidDto addBidDto = objectMapper.readValue(payload, AddBidDto.class);
 				MaxPriceDto maxPriceDto = bidService.addBid(addBidDto);
-				webSocketService.sendBidToAllClient(addBidDto.getItemId(), maxPriceDto);
+				webSocketService.sendToAllClient(addBidDto.getItemId(), maxPriceDto);
 			}
 			if(type.equals("BID_END")){
 				SelectedBidDto selectedBidDto = objectMapper.readValue(payload, SelectedBidDto.class);
+				webSocketService.sendResultAllClient(selectedBidDto.getItemId(), selectedBidDto.getBidId());
 				bidService.selectBid(selectedBidDto.getBidId(), selectedBidDto);	//낙찰처리
 			}
 		} catch (Exception e) {

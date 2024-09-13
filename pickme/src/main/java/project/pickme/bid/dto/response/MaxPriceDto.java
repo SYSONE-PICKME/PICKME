@@ -7,6 +7,8 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class MaxPriceDto {
+	private final String type = "priceUpdate";
+
 	private Long bidId;
 	private long maxPrice;
 

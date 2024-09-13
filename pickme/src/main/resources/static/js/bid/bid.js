@@ -97,16 +97,31 @@ document.addEventListener("DOMContentLoaded", function () {
     let selectedPrice = null;
     let selectedBid = null;
 
+    const handlers = {
+        priceUpdate: function(data){
+            if(data.maxPrice != undefined){
+                updateMaxPrice(data.maxPrice);
+                addData(data.maxPrice);
+                selectedPrice = data.maxPrice;
+                selectedBid = data.bidId;
+            }
+        },
+        bidResult: function(data){
+            alert(data.result);
+        }
+    }
+
     socket.onopen = () => console.log("웹 소켓 open");
+
     socket.onmessage = (event) => {
         const data = JSON.parse(event.data); // 서버로부터 받은 데이터를 JSON 객체로 파싱
         console.log("서버로부터 받음: ", data);
 
-        if (data.maxPrice != undefined) {
-            updateMaxPrice(data.maxPrice);
-            addData(data.maxPrice);
-            selectedPrice = data.maxPrice;
-            selectedBid = data.bidId;
+        const handler = handlers[data.type];
+        if(handler) {
+            handler(data);
+        } else {
+            console.warn("알 수 없는 메세지 타입", data.type);
         }
     };
 

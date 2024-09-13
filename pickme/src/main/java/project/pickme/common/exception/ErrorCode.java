@@ -20,7 +20,10 @@ public enum ErrorCode {
 
 	//입찰
 	NOT_FOUND_BID(NOT_FOUND, "존재하지 않는 입찰"),
-	BID_NOT_PROGRESS(BAD_REQUEST,"진행중이지 않은 경매");
+	BID_NOT_PROGRESS(BAD_REQUEST,"진행중이지 않은 경매"),
+
+	//webSocket
+	INVALID_JSON_DATA(INTERNAL_SERVER_ERROR, "데이터 JSON 변환 에러");
 
 	private final HttpStatus status;
 	private final String errorMessage;
