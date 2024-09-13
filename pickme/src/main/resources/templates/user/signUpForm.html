@@ -28,23 +28,20 @@
         <div class="form-group">
             <label th:for="email">이메일</label>
             <div class="email-container">
-                <input type="text" th:field="*{email}" placeholder="이메일" th:classappend="${#fields.hasErrors('email')}? ' fieldError' : ''">
+                <input type="text" id="email" th:field="*{email}" placeholder="이메일" required>
                 <span>@</span>
-                <select th:field="*{emailDomain}" th:classappend="${#fields.hasErrors('emailDomain')}? ' fieldError' : ''">
+                <select th:field="*{emailDomain}" id="email-domain" required>
                     <option value="">선택해주세요</option>
                     <option value="gmail.com">gmail.com</option>
                     <option value="naver.com">naver.com</option>
                     <option value="daum.net">daum.net</option>
                 </select>
             </div>
-            <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="field-error-message">Incorrect data</p>
-            <p th:if="${#fields.hasErrors('emailDomain')}" th:errors="*{emailDomain}" class="field-error-message">Incorrect data</p>
-            <button class="email-btn" id="email-btn" disabled>이메일 인증하기</button>
         </div>
 
         <div class="form-group">
             <label th:for="password">비밀번호</label>
-            <input type="password" th:field="*{password}" placeholder="비밀번호" th:classappend="${#fields.hasErrors('password')}? ' fieldError' : ''">
+            <input type="password" th:field="*{password}" placeholder="비밀번호" required>
         </div>
 
         <div class="form-group">
@@ -55,36 +52,31 @@
 
         <div class="form-group">
             <label th:for="addr">주소</label>
-            <input type="text" th:field="*{addr}" placeholder="주소" th:classappend="${#fields.hasErrors('addr')}? ' fieldError' : ''">
-            <p th:if="${#fields.hasErrors('addr')}" th:errors="*{addr}" class="field-error-message">Incorrect data</p>
+            <input type="text" th:field="*{addr}" placeholder="주소" required>
         </div>
 
         <div class="form-group">
             <label th:for="phoneNum">전화번호</label>
-            <input type="text" th:field="*{phoneNum}" placeholder="000-0000-0000" th:classappend="${#fields.hasErrors('phoneNum')}? ' fieldError' : ''">
-            <p th:if="${#fields.hasErrors('phoneNum')}" th:errors="*{phoneNum}" class="field-error-message">Incorrect data</p>
+            <input type="text" th:field="*{phoneNum}" placeholder="000-0000-0000" required>
         </div>
 
         <div class="form-group" id="business-number-group" th:style="'display:' + (${type == 'business'} ? 'block' : 'none')">
             <label th:for="businessNum">사업자 등록번호</label>
-            <input type="text" th:field="*{businessNum}" placeholder="사업자 등록번호" th:classappend="${#fields.hasErrors('businessNum')}? ' fieldError' : ''">
-            <p th:if="${#fields.hasErrors('businessNum')}" th:errors="*{businessNum}" class="field-error-message">Incorrect data</p>
+            <input type="text" th:field="*{businessNum}" placeholder="사업자 등록번호">
         </div>
 
         <div class="form-group">
             <label th:for="name">이름</label>
-            <input type="text" th:field="*{name}" placeholder="이름" th:classappend="${#fields.hasErrors('name')}? ' fieldError' : ''">
-            <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="field-error-message">Incorrect data</p>
+            <input type="text" th:field="*{name}" placeholder="이름" required>
         </div>
 
         <div class="form-group">
             <label th:for="id">아이디</label>
             <div class="id-container">
-                <input type="text" th:field="*{id}" placeholder="아이디" th:classappend="${#fields.hasErrors('id')}? ' fieldError' : ''">
+                <input type="text" th:field="*{id}" placeholder="아이디" required>
                 <button class="check-btn" id="check-btn" disabled>중복확인</button>
             </div>
             <p id="id-check-result" class="field-error-message"></p>
-            <p th:if="${#fields.hasErrors('id')}" th:errors="*{id}" class="field-error-message">Incorrect data</p>
         </div>
         <button class="submit-btn" id="submit-btn">회원가입하기</button>
     </form>

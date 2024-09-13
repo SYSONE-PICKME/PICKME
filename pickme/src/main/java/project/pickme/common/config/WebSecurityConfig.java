@@ -68,7 +68,7 @@ public class WebSecurityConfig {
 			.cors(AbstractHttpConfigurer::disable)
 			.csrf(AbstractHttpConfigurer::disable)
 			.authorizeHttpRequests((authorize) -> authorize
-				.requestMatchers(loginPage, "/user/home", "/user/signUp", "/user/signUpForm", "/user/check/**", "/customs/check/**").permitAll()
+				.requestMatchers(loginPage, "/user/home", "/user/signUp", "/user/signUpForm", "/user/check-id").permitAll()
 				.anyRequest().authenticated())
 			.formLogin(form -> form
 				.loginPage(loginPage)

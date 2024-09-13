@@ -13,5 +13,16 @@ spring:
   config:
     import: "classpath:application-secret.yml"
 
+  mail:
+    host: smtp.naver.com
+    port: 465
+    username: ENC(wWdiYL3v9NmkuW/UAyH9gT/8zcw4Us64nW6G8rJxTRk=)
+    password: ENC(skQhPQvxBxXDvkF3QloiSw9JOqrjvFJJ)
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.ssl.enable: true
+      mail.smtp.ssl.trust: smtp.naver.com
+      mail.smtp.starttls.enable: true
+
 server:
   port: 8099

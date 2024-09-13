@@ -31,17 +31,17 @@ public class MailService {
 		message.addRecipients(MimeMessage.RecipientType.TO, toMail);
 		message.setSubject("공매 낙찰 안내");
 		message.setFrom(fromMail);
-		message.setText(buildEmailContent(selectedBidDto),"utf-8", "html");
+		message.setText(buildBidEmailContent(selectedBidDto),"utf-8", "html");
 
 		return message;
 	}
 
-	private String buildEmailContent(SelectedBidDto selectedBidDto){
+	private String buildBidEmailContent(SelectedBidDto selectedBidDto){
 		Context context = new Context();
 		context.setVariable("itemName", selectedBidDto.getItemName());
 		context.setVariable("imageUrl", "https://pickmepickme.s3.ap-northeast-2.amazonaws.com/computer.jpg"); //TODO: selectedBidDto.getImageUrl로 수정하기
 		context.setVariable("price", selectedBidDto.getPrice());
 
-		return templateEngine.process("/user/mail", context);
+		return templateEngine.process("/user/bidMail", context);
 	}
 }

@@ -10,20 +10,18 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-//이메일 필드 다 입력한 경우 활성화 시키기
+// //아이디 필드 입력한 경우 버튼 활성화
 document.addEventListener('DOMContentLoaded', () => {
-    const emailInput = document.getElementById('email');
-    const emailDomainSelect = document.getElementById('emailDomain');
-    const emailButton = document.getElementById('email-btn');
+    const idInput = document.getElementById('id');
+    const checkButton = document.getElementById('check-btn');
 
-    const toggleEmailButton = () => {
-        emailButton.disabled = !(emailInput.value && emailDomainSelect.value)
+    const toggleCheckButton = () => {
+        checkButton.disabled = !idInput.value;
     }
 
-    emailInput.addEventListener('input', toggleEmailButton);
-    emailDomainSelect.addEventListener('change', toggleEmailButton);
-    toggleEmailButton();
-});
+    idInput.addEventListener('input', toggleCheckButton);
+    toggleCheckButton();
+})
 
 //사업자인 경우 사업자 등록번호 입력란 보여주기
 function showForm(type) {

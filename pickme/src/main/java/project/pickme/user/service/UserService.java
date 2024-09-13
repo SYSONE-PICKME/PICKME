@@ -1,6 +1,7 @@
 package project.pickme.user.service;
 
 import static project.pickme.common.exception.ErrorCode.*;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,8 +20,6 @@ import project.pickme.user.repository.UserMapper;
 public class UserService {
 	private final UserMapper userMapper;
 	private final BCryptPasswordEncoder passwordEncoder;
-
-	//TODO: 이메일 인증 기능
 
 	@Transactional
 	public void signUp(SignUpDto signUpDto){
