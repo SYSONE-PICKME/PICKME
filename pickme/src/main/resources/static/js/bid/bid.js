@@ -55,18 +55,6 @@ function updateMaxPrice(maxPrice){
     }, 500);
 }
 
-function sendBidToServer(socket, price, itemId, userId){
-    const message = {
-        type: 'BID',
-        itemId : itemId,
-        userId : userId,
-        price: price
-    };
-
-    socket.send(JSON.stringify(message));
-    console.log("입찰 금액 전송: ", message);
-}
-
 document.addEventListener("DOMContentLoaded", function () {
     // 시작 가격
     const startPriceElement = document.querySelector('.price');
@@ -85,6 +73,18 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 //웹소켓 부분
+function sendBidToServer(socket, price, itemId, userId){
+    const message = {
+        type: 'BID',
+        itemId : itemId,
+        userId : userId,
+        price: price
+    };
+
+    socket.send(JSON.stringify(message));
+    console.log("입찰 금액 전송: ", message);
+}
+
 document.addEventListener("DOMContentLoaded", function () {
     const modal = new Modal("modal", "modal-message", "modal-confirm");
     const itemName = document.querySelector('.item-name').textContent;
@@ -107,7 +107,13 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         },
         bidResult: function(data){
-            alert(data.result);
+            if (data.result === 'success') { // 성공 시에만 confetti 효과를 뿌리도록 설정
+                displayConfetti();
+                modal.open("입찰에 성공하셨습니다~");
+            }
+            if (data.result === 'fail'){
+                modal.open("입찰에 실패했습니다.");
+            }
         }
     }
 
