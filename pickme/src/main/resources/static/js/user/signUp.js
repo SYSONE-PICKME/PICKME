@@ -25,19 +25,6 @@ document.addEventListener('DOMContentLoaded', () => {
     toggleEmailButton();
 });
 
-//아이디 필드 입력한 경우 버튼 활성화
-document.addEventListener('DOMContentLoaded', () => {
-    const idInput = document.getElementById('id');
-    const checkButton = document.getElementById('check-btn');
-
-    const toggleCheckButton = () => {
-        checkButton.disabled = !idInput.value;
-    }
-
-    idInput.addEventListener('input', toggleCheckButton);
-    toggleCheckButton();
-})
-
 //사업자인 경우 사업자 등록번호 입력란 보여주기
 function showForm(type) {
     const businessNumberGroup = document.getElementById('business-number-group');

@@ -1,12 +1,9 @@
 package project.pickme.user.service;
-import java.util.List;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
-import project.pickme.user.domain.Customs;
 import project.pickme.user.repository.CustomsMapper;
 
 @Service

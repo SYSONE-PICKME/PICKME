@@ -6,6 +6,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
     <title>PICKME 회원가입</title>
     <link rel="stylesheet" href="/css/user/signUp.css">
 </head>
@@ -29,7 +30,7 @@
             <div class="email-container">
                 <input type="text" th:field="*{email}" placeholder="이메일" th:classappend="${#fields.hasErrors('email')}? ' fieldError' : ''">
                 <span>@</span>
-                <select th:field="*{emailDomain}">
+                <select th:field="*{emailDomain}" th:classappend="${#fields.hasErrors('emailDomain')}? ' fieldError' : ''">
                     <option value="">선택해주세요</option>
                     <option value="gmail.com">gmail.com</option>
                     <option value="naver.com">naver.com</option>
@@ -37,6 +38,7 @@
                 </select>
             </div>
             <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="field-error-message">Incorrect data</p>
+            <p th:if="${#fields.hasErrors('emailDomain')}" th:errors="*{emailDomain}" class="field-error-message">Incorrect data</p>
             <button class="email-btn" id="email-btn" disabled>이메일 인증하기</button>
         </div>
 
@@ -81,12 +83,13 @@
                 <input type="text" th:field="*{id}" placeholder="아이디" th:classappend="${#fields.hasErrors('id')}? ' fieldError' : ''">
                 <button class="check-btn" id="check-btn" disabled>중복확인</button>
             </div>
+            <p id="id-check-result" class="field-error-message"></p>
             <p th:if="${#fields.hasErrors('id')}" th:errors="*{id}" class="field-error-message">Incorrect data</p>
         </div>
-
         <button class="submit-btn" id="submit-btn">회원가입하기</button>
     </form>
 </div>
 <script src="/js/user/signUp.js"></script>
+<script src="/js/user/validateUser.js"></script>
 </body>
 </html>

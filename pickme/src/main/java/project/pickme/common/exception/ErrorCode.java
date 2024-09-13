@@ -1,5 +1,9 @@
 package project.pickme.common.exception;
 
+import static org.springframework.http.HttpStatus.*;
+
+import org.springframework.http.HttpStatus;
+
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -7,15 +11,17 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum ErrorCode {
 	//사용자
-	NOT_FOUND_CUSTOMS("존재하지 않는 세관"),
-	NOT_FOUND_USER("존재하지 않는 회원"),
+	NOT_FOUND_CUSTOMS(NOT_FOUND,"존재하지 않는 세관"),
+	NOT_FOUND_USER(NOT_FOUND, "존재하지 않는 회원"),
+	DUPLICATE_ID(BAD_REQUEST,"이미 존재하는 아이디"),
 
 	//공매품
-	NOT_FOUND_ITEM("존재하지 않는 공매품"),
+	NOT_FOUND_ITEM(NOT_FOUND,"존재하지 않는 공매품"),
 
 	//입찰
-	NOT_FOUND_BID("존재하지 않는 입찰"),
-	BID_NOT_PROGRESS("진행중이지 않은 경매");
+	NOT_FOUND_BID(NOT_FOUND, "존재하지 않는 입찰"),
+	BID_NOT_PROGRESS(BAD_REQUEST,"진행중이지 않은 경매");
 
-	private final String errorCode;
+	private final HttpStatus status;
+	private final String errorMessage;
 }

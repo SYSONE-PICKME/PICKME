@@ -12,7 +12,6 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import project.pickme.user.dto.LoginDto;
 import project.pickme.user.dto.SignUpDto;
-import project.pickme.user.service.MailService;
 import project.pickme.user.service.UserService;
 
 @Controller
@@ -20,7 +19,6 @@ import project.pickme.user.service.UserService;
 @RequestMapping("/user")
 public class UserController {
 	private final UserService userService;
-	private final MailService mailService;
 
 	@GetMapping("/signUpForm")
 	public String userSignUpForm(@ModelAttribute("signUpDto") SignUpDto signUpDto){
