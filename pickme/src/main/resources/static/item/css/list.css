@@ -4,6 +4,46 @@ body {
     margin: 0;
 }
 
+.category {
+    padding: 10px;
+    margin-top: 60px;
+    margin-left: 480px;
+    margin-right: 480px;
+    margin-bottom: 30px;
+}
+
+.category ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-around; /* 항목을 수평으로 나열 */
+}
+
+.category ul li {
+    text-align: center; /* 이미지를 가운데로 배치 */
+}
+
+.category ul li a {
+    text-decoration: none;
+    color: black;
+    display: flex;
+    font-weight: 600;
+    flex-direction: column; /* 이미지 위, 글씨 아래로 배치 */
+    align-items: center; /* 가로로 가운데 정렬 */
+    justify-content: center;
+}
+
+.category ul li a img {
+    width: 40px; /* 이미지 크기 설정 */
+    height: 40px;
+    margin-bottom: 8px; /* 이미지와 텍스트 사이 간격 */
+}
+
+.category ul li a:hover {
+    color: #ffcc00; /* 호버 시 색상 변경 */
+}
+
 .auction-list {
     padding-top: 40px;
     max-width: 1200px;
