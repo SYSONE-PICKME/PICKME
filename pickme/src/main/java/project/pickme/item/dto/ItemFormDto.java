@@ -17,10 +17,10 @@ public class ItemFormDto {
 	private String name;
 	private int code;
 	private Type type;
-	private Long price;
+	private long price;
 	private LocalDate startDate;
 	private LocalTime startTime;
 	private LocalDate endDate;
 	private LocalTime endTime;
-	private int law;
+	private long[] lawId;
 }
