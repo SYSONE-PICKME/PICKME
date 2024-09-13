@@ -26,9 +26,9 @@
                  left join Customs c on i.customs_id = c.id
     </select>
 
-    <insert id="insertItem">
-        insert into Item (customs_id, code, name, target, price, start_time, end_time, status)
-        values (#{customsId}, #{code}, #{name}, #{type}, #{price}, #{startTime}, #{endTime}, #{status})
+    <insert id="insertItem" parameterType="ItemDto" useGeneratedKeys="true" keyProperty="itemId">
+        INSERT INTO Item (name, code, target, price, start_time, end_time, status, customs_id)
+        VALUES (#{name}, #{code}, #{type}, #{price}, #{startTime}, #{endTime}, #{status}, #{customsId})
     </insert>
 
 </mapper>
