@@ -1,8 +1,8 @@
 package project.pickme.item.repository;
 
-import static org.assertj.core.api.Assertions.*;
 import static project.pickme.user.constant.Type.*;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -38,7 +38,7 @@ class ItemMapperTest {
 		Item findItem = itemMapper.findItemById(itemId).get();
 
 		// then
-		assertThat(findItem)
+		Assertions.assertThat(findItem)
 			.extracting("name", "target", "price")
 			.contains("공매품1", BUSINESS, 1000l);
 	}

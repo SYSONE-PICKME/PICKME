@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", function() {
         if (remaining > 0) {
             requestAnimationFrame(step);
         } else {
+            window.dispatchEvent(new CustomEvent('bidEnded', { detail: { itemId: itemId } }));
             document.getElementById("time-remaining").innerHTML = "공매 마감";
         }
     }

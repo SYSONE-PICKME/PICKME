@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="project.pickme.item.repository.FindItemMapper">
+    <select id = "findById" parameterType="Long" resultType="project.pickme.item.dto.FindItemDto$GetOne">
+        select
+        i.item_id as itemId,
+        i.name as itemName,
+        i.target,
+        i.price,
+        i.start_time as startTime,
+        i.end_time as endTime,
+        i.status as itemStatus,
+
+        -- Customs table
+        c.id as customsId,
+        c.name as customsName,
+        c.tel as customsTel,
+
+        -- Image table
+        group_concat(img.url order by img.seq asc) as images
+
+        from
+        Item i
+
+        -- Join Image table
+        join Image img on i.item_id = img.item_id
+
+        -- Join Customs table
+        join Customs c on i.customs_id = c.id
+
+        where i.item_id = #{id}
+    </select>
+
+    <select id = "findAll" resultType="project.pickme.item.dto.FindItemDto$GetAll">
+        select
+        i.item_id as id,
+        i.name,
+        i.price,
+        i.start_time as startTime,
+        i.end_time as endTime,
+        i.status,
+        img.url as imgUrl
+
+        from
+        Item i
+
+        join Image img
+        on i.item_id = img.item_id
+        and img.seq = 1
+    </select>
+</mapper>

@@ -21,7 +21,7 @@ class UserMapperTest {
 
 	@BeforeEach
 	void initUserData(){
-		User user = createUser("initUser");
+		User user = createUser("initUser", 0);
 		userMapper.save(user);
 	}
 
@@ -45,7 +45,7 @@ class UserMapperTest {
 	@DisplayName("회원을 저장할 수 있다.")
 	void save() {
 	    // given
-		User user = createUser("test");
+		User user = createUser("test", 0);
 
 		// when
 		userMapper.save(user);
@@ -56,7 +56,24 @@ class UserMapperTest {
 			.containsExactly("test", "김테스트", "test@naver.com","서울특별시 종로구 창경궁로");
 	}
 
-	private static User createUser(String id) {
+	@Test
+	@DisplayName("포인트를 차감할 수 있다.")
+	void minusPoint() {
+	    // given
+		User user = createUser("pointUser", 100000);
+		userMapper.save(user);
+		User findUser = userMapper.findUserById("pointUser").get();
+		long minus = 50000;
+
+		// when
+		userMapper.minusPoint(findUser.getId(), minus);
+
+	    // then
+		User afterMinusPointUser = userMapper.findUserById("pointUser").get();
+		assertThat(afterMinusPointUser.getPoint()).isEqualTo(50000);
+	}
+
+	private static User createUser(String id, long point) {
 		return User.builder()
 			.id(id)
 			.password("1234")
@@ -66,6 +83,7 @@ class UserMapperTest {
 			.type(USER)
 			.addr("서울특별시 종로구 창경궁로")
 			.phoneNum("010-1111-1111")
+			.point(point)
 			.businessNum(null)
 			.build();
 	}

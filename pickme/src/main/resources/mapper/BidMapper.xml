@@ -11,19 +11,19 @@
     </resultMap>
 
     <select id="findAll" resultMap="BidResultMap">
-        SELECT
+        select
             b.bid_id as id,
             b.price,
             b.bid_time,
             b.is_success,
             u.id as user_id,
             i.item_id as item_id
-        FROM Bid b
-                 LEFT JOIN User u ON b.user_id = u.id
-                 LEFT JOIN Item i ON b.item_id = i.item_id
+        from Bid b
+                 left join User u on b.user_id = u.id
+                 left join Item i on b.item_id = i.item_id
     </select>
 
-    <insert id="save" parameterType="project.pickme.bid.dto.BidCreateDto">
+    <insert id="save" parameterType="project.pickme.bid.dto.BidCreateDto" useGeneratedKeys="true" keyProperty="bidId">
         insert into Bid(item_id, user_id, price, bid_time, is_success)
         values(#{itemId}, #{userId}, #{price}, #{bidTime}, #{isSuccess})
     </insert>
@@ -31,4 +31,38 @@
     <delete id="deleteAll">
         delete from Bid
     </delete>
+
+    <select id="findMaxBidByItemId" parameterType="long" resultType="long">
+        select max(b.price) as price
+        from Bid b
+        group by b.item_id
+        having b.item_id = #{itemId}
+    </select>
+
+    <select id="findBidById" parameterType="long" resultMap="BidResultMap">
+        select
+            b.bid_id as id,
+            b.price,
+            b.bid_time,
+            b.is_success,
+            u.id as user_id,
+            i.item_id as item_id
+        from Bid b
+                 left join User u on b.user_id = u.id
+                 left join Item i on b.item_id = i.item_id
+        where b.bid_id = #{bidId}
+    </select>
+
+    <update id="updateBidSuccess" parameterType="long">
+        update Bid
+        set is_success = true
+        where bid_id = #{bidId}
+    </update>
+
+    <select id="findAllPriceByItemId" parameterType="long" resultType="long">
+        select price
+        from Bid
+        where item_id = #{itemId}
+        order by price
+    </select>
 </mapper>

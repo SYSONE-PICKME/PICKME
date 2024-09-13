@@ -1,4 +1,5 @@
 package project.pickme.bid.controller;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,11 +19,10 @@ public class BidController {
 	private final BidService bidService;
 
 	@GetMapping("/bid/{itemId}")
-	public String show(@CurrentUser User user, @PathVariable("itemId") long itemId, Model model){
+	public String show(@CurrentUser User user, @PathVariable("itemId") Long itemId, Model model) {
 		OneBidItemDto oneBidItemDto = bidService.showOneBidItem(user, itemId);
-
 		model.addAttribute("oneBidItemDto", oneBidItemDto);
 
-		return "bid/bidPage";	//이 페이지에 들어가는 순간 웹소켓 세션 연결
+		return "bid/bidPage";
 	}
 }

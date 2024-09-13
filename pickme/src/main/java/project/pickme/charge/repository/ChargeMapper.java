@@ -1,4 +1,4 @@
-package project.pickme.charge.mapper;
+package project.pickme.charge.repository;
 
 import org.apache.ibatis.annotations.Mapper;
 
