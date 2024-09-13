@@ -58,4 +58,11 @@
         set is_success = true
         where bid_id = #{bidId}
     </update>
+
+    <select id="findAllPriceByItemId" parameterType="long" resultType="long">
+        select price
+        from Bid
+        where item_id = #{itemId}
+        order by price
+    </select>
 </mapper>

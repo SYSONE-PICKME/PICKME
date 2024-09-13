@@ -137,6 +137,28 @@ class BidMapperTest {
 		);
 	}
 
+	@Test
+	@DisplayName("해당 공매품에 입찰한 모든 가격 정보를 가져올 수 있다.(오름차순)")
+	void findAllPriceByItemId() {
+	    // given
+		User user = userMapper.findUserById("testUser").get();
+		Long itemId = 1l;
+		BidCreateDto bid1 = BidCreateDto.create(1000, user.getId(), itemId);
+		BidCreateDto bid2 = BidCreateDto.create(10000, user.getId(), itemId);
+		BidCreateDto bid3 = BidCreateDto.create(100000, user.getId(), itemId);
+
+		bidMapper.save(bid1);
+		bidMapper.save(bid2);
+		bidMapper.save(bid3);
+
+	    // when
+		List<Long> allPriceByItemId = bidMapper.findAllPriceByItemId(1l);
+
+		// then
+		assertThat(allPriceByItemId).hasSize(3)
+			.containsExactlyInAnyOrder(1000l, 10000l, 100000l);
+	}
+
 	private static User createUser(String id) {
 		return User.builder()
 			.id(id)

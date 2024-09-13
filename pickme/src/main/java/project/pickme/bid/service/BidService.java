@@ -3,6 +3,8 @@ package project.pickme.bid.service;
 import static project.pickme.common.exception.ErrorCode.*;
 import static project.pickme.item.constant.Status.*;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,10 +31,10 @@ public class BidService {
 
 	public OneBidItemDto showOneBidItem(User user, Long itemId) {
 		Item item = getItem(itemId);
-		Long maxPrice = bidMapper.findMaxBidByItemId(item.getId());
+		List<Long> allPrice = bidMapper.findAllPriceByItemId(item.getId());
 
 		//TODO: 이미지 조회 로직
-		return OneBidItemDto.of(item, user, maxPrice, "test.png");
+		return OneBidItemDto.of(item, user, allPrice, "test.png");
 	}
 
 	@Transactional

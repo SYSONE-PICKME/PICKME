@@ -3,10 +3,7 @@ package project.pickme.bid.repository;
 import java.util.List;
 import java.util.Optional;
 
-import javax.swing.text.html.Option;
-
 import org.apache.ibatis.annotations.Mapper;
-
 import project.pickme.bid.domain.Bid;
 import project.pickme.bid.dto.BidCreateDto;
 
@@ -19,6 +16,8 @@ public interface BidMapper {
 	void deleteAll();
 
 	Long findMaxBidByItemId(Long itemId);
+
+	List<Long> findAllPriceByItemId(Long itemId);
 
 	Optional<Bid> findBidById(Long bidId);
 
