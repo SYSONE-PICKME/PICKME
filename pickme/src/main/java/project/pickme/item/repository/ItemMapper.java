@@ -11,5 +11,5 @@ import project.pickme.item.dto.ItemDto;
 public interface ItemMapper {
 	Optional<Item> findItemById(Long itemId);
 
-	void insertItem(ItemDto item);
+	void insertItem(ItemDto itemDto);
 }
