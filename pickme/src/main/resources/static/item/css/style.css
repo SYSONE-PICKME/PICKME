@@ -33,6 +33,7 @@ body {
 }
 
 .auction-details {
+    position: relative;
     margin-top: 20px;
     margin-left: 50px;
     border: solid;
@@ -112,3 +113,24 @@ body {
     border-color: #B2B2B2;
     border-radius: 20px;
 }
+
+.heart {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  position: absolute;
+  top: 30px;
+  right: 30px;
+}
+
+.heart .fa-heart {
+  color: #ccc; /* 빈 하트 색상 */
+  transition: color 0.3s;
+}
+
+.heart.active .fa-heart {
+  color: red; /* 꽉 찬 하트 색상 */
+}
+
+

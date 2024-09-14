@@ -16,6 +16,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script th:inline="javascript">
         /*<![CDATA[*/
         const startTime = /*[[${item.startTime}]]*/ {};
@@ -23,6 +26,7 @@
         /*]]>*/
     </script>
     <script th:src="@{/item/js/image.js}"></script>
+    <script th:src="@{/item/js/likeButton.js}"></script>
 </head>
 <body>
 <!-- 헤더 -->
@@ -45,11 +49,13 @@
             </div>
         </div>
 
-        <form th:action="@{'/user/item/' + ${item.id} + '/like'}" method="post">
-            <button type="submit" th:text="${item.isLiked ? 'Unlike' : 'Like'}"></button>
-        </form>
+
+
         <div class="auction-details" style="width:800px; height:560px">
             <h2><span th:text="${item.name}"></span></h2>
+            <button id="likeButton" class="heart" type="button" th:data-liked="${item.isLiked}" th:data-item-id="${item.id}" th:data-action-url="@{/user/item/{id}/like(id=${item.id})}">
+                <i class="far fa-heart"></i>
+            </button>
             <div class="action-sub-details" style="width:670px; height:320px">
                 <p>공매 번호: <span th:text="${item.id}"></span></p>
                 <p>세관명: <span th:text="${item.customsName}"></span></p>
