@@ -28,8 +28,8 @@
     </select>
 
     <insert id="insertItem" parameterType="ItemDto" useGeneratedKeys="true" keyProperty="itemId">
-        INSERT INTO Item (name, code, target, price, start_time, end_time, status, customs_id)
-        VALUES (#{name}, #{code}, #{type}, #{price}, #{startTime}, #{endTime}, #{status}, #{customsId})
+        insert into Item (name, code, target, price, start_time, end_time, status, customs_id)
+        values (#{name}, #{code}, #{type}, #{price}, #{startTime}, #{endTime}, #{status}, #{customsId})
     </insert>
 
 </mapper>
