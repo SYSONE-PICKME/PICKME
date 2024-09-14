@@ -69,3 +69,45 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     goToPage(1);
 });
+//axios에 대해 알아본 결과 RESTful하게 구현하려면 controller에 @Delete로 매핑한 뒤 .get이 아닌 .delete로 구현하는게 더 좋다고 기재되어 있음.
+const modal = document.getElementById("deleteModal");
+const confirmBtn = document.getElementById("confirm-btn");
+const cancelBtn = document.getElementById("cancel-btn");
+
+let noticeIdToDelete = null;
+
+function confirmDelete(noticeId) {
+    noticeIdToDelete = noticeId;
+    modal.style.display = "flex";
+}
+
+confirmBtn.addEventListener('click', function() {
+    if (noticeIdToDelete) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', `/customs/notice/delete/${noticeIdToDelete}`, true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                alert("삭제 완료");
+                modal.style.display = "none";
+                location.reload();
+            } else {
+                alert("삭제에 실패했습니다.");
+            }
+        };
+        xhr.onerror = function() {
+            alert("삭제 요청 중 오류 발생");
+        };
+        xhr.send();
+    }
+});
+
+cancelBtn.addEventListener('click', function() {
+    modal.style.display = "none";
+});
+
+window.addEventListener('click', function(event) {
+    if (event.target === modal) {
+        modal.style.display = "none";
+    }
+});
