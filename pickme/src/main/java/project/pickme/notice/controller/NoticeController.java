@@ -50,8 +50,8 @@ public class NoticeController {
 			.content(noticeDto.getContent())
 			.customsId(customs.getId())
 			.build();
-		NoticeDto savedNotice = noticeService.createNotice(newNoticeDto);
-		return "redirect:/customs/notice/noticeContent/" + savedNotice.getId();
+		Long noticeId = noticeService.createNotice(newNoticeDto);
+		return "redirect:/customs/notice/noticeContent/" + noticeId;
 	}
 
 	@GetMapping("/edit/{id}")

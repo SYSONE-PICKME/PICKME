@@ -30,17 +30,20 @@ public class NoticeService {
 	}
 
 	public NoticeDto getNoticeOrCampaignById(Long id) {
+		if (id == null) {
+			return new NoticeDto();
+		}
 		Notice notice = noticeMapper.selectById(id);
 		return convertToAppropriateDto(notice);
 	}
 
 	@Transactional
-	public NoticeDto createNotice(NoticeDto noticeDto) {
+	public Long createNotice(NoticeDto noticeDto) {
 		Optional<Customs> customsOptional = customsMapper.findById(noticeDto.getCustomsId());
 		Customs customs = customsOptional.get();
 		Notice notice = noticeDto.toEntity(customs);
 		noticeMapper.insert(notice);
-		return NoticeDto.fromEntity(noticeMapper.selectById(notice.getId()));
+		return notice.getId();
 	}
 
 	@Transactional
