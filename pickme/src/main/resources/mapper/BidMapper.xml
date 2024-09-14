@@ -65,4 +65,18 @@
         where item_id = #{itemId}
         order by price
     </select>
+
+    <select id="findMySuccessfulBid">
+        select i.item_id as itemNum,i.name as itemName,c.name as customsName,b.price as price,img.url as imgUrl
+        from Item i
+            join Bid b
+                 on i.item_id = b.item_id
+            join Customs c
+                 on c.id = i.customs_id
+            join Image img
+                 on img.item_id=i.item_id
+        where b.is_success = 1
+          and b.user_id = #{id}
+          and img.seq=0;
+    </select>
 </mapper>
