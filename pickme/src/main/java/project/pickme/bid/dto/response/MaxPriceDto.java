@@ -8,11 +8,10 @@ import lombok.Getter;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class MaxPriceDto {
 	private final String type = "priceUpdate";
-
 	private Long bidId;
 	private long maxPrice;
 
-	public static MaxPriceDto create(Long bidId, long maxPrice) {
+	public static MaxPriceDto createOf(Long bidId, long maxPrice) {
 		return new MaxPriceDto(bidId, maxPrice);
 	}
 }

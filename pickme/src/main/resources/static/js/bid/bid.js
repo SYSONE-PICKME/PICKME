@@ -92,6 +92,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     //소켓 생성(웹소켓 메서드와 이벤트를 통해 서버와 통신 가능)
     const socket = new WebSocket(`ws://localhost:8099/connect/${itemId}/${userId}`);
+    socket.onopen = () => console.log("웹 소켓 open");
 
     //변수 선언
     let selectedPrice = null;
@@ -116,8 +117,6 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }
     }
-
-    socket.onopen = () => console.log("웹 소켓 open");
 
     socket.onmessage = (event) => {
         const data = JSON.parse(event.data); // 서버로부터 받은 데이터를 JSON 객체로 파싱

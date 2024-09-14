@@ -1,7 +1,6 @@
 package project.pickme.bid.service;
 
 import static project.pickme.common.exception.ErrorCode.*;
-import static project.pickme.item.constant.Status.*;
 
 import java.util.List;
 
@@ -38,7 +37,7 @@ public class BidService {
 		List<Long> allPrice = bidMapper.findAllPriceByItemId(item.getId());
 
 		//TODO: 이미지 조회 로직
-		return OneBidItemDto.of(item, user, allPrice, "test.png");
+		return OneBidItemDto.createOf(item, user, allPrice, "test.png");
 	}
 
 	@Transactional
@@ -46,11 +45,11 @@ public class BidService {
 		User user = userMapper.findUserById(addBidDto.getUserId()).orElseThrow(() -> new BusinessException(NOT_FOUND_USER));
 		Item item = getItem(addBidDto.getItemId());
 
-		if(item.getStatus().equals(OPEN)){
+		if(item.isOpen()){
 			BidCreateDto bidCreateDto = BidCreateDto.create(addBidDto.getPrice(), user.getId(), item.getId());
 			bidMapper.save(bidCreateDto);
 
-			return MaxPriceDto.create(bidCreateDto.getBidId(), addBidDto.getPrice());
+			return MaxPriceDto.createOf(bidCreateDto.getBidId(), addBidDto.getPrice());
 		}
 
 		throw new BusinessException(BID_NOT_PROGRESS);
@@ -62,6 +61,7 @@ public class BidService {
 
 		bidMapper.updateBidSuccess(bidId);
 		userMapper.minusPoint(bid.getUserId(), bid.getPrice());	//포인트 차감
+		//TODO: 포인트 사용 내역 저장
 
 		//낙찰자에게 메일 전송
 		mailService.sendSuccessfulBidMail(selectedBidDto, bid.getUserEmail());

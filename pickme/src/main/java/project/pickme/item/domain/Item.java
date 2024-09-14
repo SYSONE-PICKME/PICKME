@@ -1,5 +1,7 @@
 package project.pickme.item.domain;
 
+import static project.pickme.item.constant.Status.*;
+
 import java.time.LocalDateTime;
 
 import lombok.AllArgsConstructor;
@@ -21,4 +23,8 @@ public class Item {
 	private LocalDateTime endTime;
 	private Status status;
 	private Customs customs;
+
+	public boolean isOpen() {
+		return status.equals(OPEN);
+	}
 }
