@@ -25,13 +25,13 @@ public class NoticeDto {
 	private String customsName;
 	private Role customsRole;
 
-	public Notice toEntity() {
+	public Notice toEntity(Customs customs) {
 		return Notice.builder()
 			.id(id)
 			.title(title)
 			.content(content)
 			.createTime(createTime)
-			.customs(Customs.createCustoms(customsId, customsName))
+			.customs(customs)
 			.build();
 	}
 
@@ -45,6 +45,15 @@ public class NoticeDto {
 			.customsId(customs.getId())
 			.customsName(customs.getName())
 			.customsRole(customs.getRole())
+			.build();
+	}
+
+	public static NoticeDto updateNoticeDto(Long id, NoticeDto noticeDto) {
+		return NoticeDto.builder()
+			.id(id)
+			.title(noticeDto.getTitle())
+			.content(noticeDto.getContent())
+			.customsId(noticeDto.getCustomsId())
 			.build();
 	}
 }

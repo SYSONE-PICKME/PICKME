@@ -7,10 +7,13 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import project.pickme.notice.domain.Notice;
 import project.pickme.user.constant.Role;
+import project.pickme.user.domain.Customs;
 
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class CampaignDto extends NoticeDto {
@@ -27,8 +30,8 @@ public class CampaignDto extends NoticeDto {
 	}
 
 	@Override
-	public Notice toEntity() {
-		Notice notice = super.toEntity();
+	public Notice toEntity(Customs customs) {
+		Notice notice = super.toEntity(customs);
 		if (this.imageUrl != null) {
 			notice.updateContent(notice.getContent() + "\n[Image URL: " + this.imageUrl + "]");
 		}
@@ -56,12 +59,5 @@ public class CampaignDto extends NoticeDto {
 			.customsRole(baseDto.getCustomsRole())
 			.imageUrl(imageUrl)
 			.build();
-	}
-	public void setImageUrl(String imageUrl) {
-		this.imageUrl = imageUrl;
-	}
-
-	public void setImageFile(MultipartFile imageFile) {
-		this.imageFile = imageFile;
 	}
 }

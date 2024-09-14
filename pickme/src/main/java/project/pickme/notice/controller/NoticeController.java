@@ -31,15 +31,15 @@ public class NoticeController {
 
 	@GetMapping
 	private String showNotice(Model model) {
-		List<NoticeDto> listNotice = noticeService.getAllNotice();
-		model.addAttribute("notices", listNotice);
+		List<NoticeDto> notices = noticeService.getAllNotice();
+		model.addAttribute("notices", notices);
 		return "notice/noticeList";
 	}
 
-	@GetMapping("/newNotice")
-	public String showNoticeForm(Model model, @CurrentUser Customs currentUser, @ModelAttribute("notice") NoticeDto noticeDto) {
-		model.addAttribute("customsName", currentUser.getName());
-		model.addAttribute("customsId", currentUser.getId());
+	@GetMapping("/new")
+	public String showNoticeForm(Model model, @CurrentUser Customs customs, @ModelAttribute("notice") NoticeDto noticeDto) {
+		model.addAttribute("customsName", customs.getName());
+		model.addAttribute("customsId", noticeDto.getId());
 		return "notice/noticeForm";
 	}
 
@@ -55,7 +55,7 @@ public class NoticeController {
 	}
 
 	@GetMapping("/edit/{id}")
-	public String showEditForm(@PathVariable("id") long id, Model model, @CurrentUser Customs customs) {
+	public String showEditForm(@PathVariable("id") Long id, Model model, @CurrentUser Customs customs) {
 		NoticeDto notice = noticeService.getNoticeOrCampaignById(id);
 		model.addAttribute("notice", notice);
 		model.addAttribute("customsName", customs.getName());
@@ -64,19 +64,14 @@ public class NoticeController {
 	}
 
 	@PostMapping("/edit/{id}")
-	public String updateNotice(@PathVariable("id") long id, @ModelAttribute NoticeDto noticeDto) {
-		NoticeDto updatedNoticeDto = NoticeDto.builder()
-			.id(id)
-			.title(noticeDto.getTitle())
-			.content(noticeDto.getContent())
-			.customsId(noticeDto.getCustomsId())
-			.build();
+	public String updateNotice(@PathVariable("id") Long id, @ModelAttribute NoticeDto noticeDto) {
+		NoticeDto updatedNoticeDto = NoticeDto.updateNoticeDto(id, noticeDto);
 		noticeService.updateNotice(updatedNoticeDto);
 		return "redirect:/customs/notice/noticeContent/" + id;
 	}
 
 	@GetMapping("/delete/{id}")
-	public String deleteNotice(@PathVariable("id") long id) {
+	public String deleteNotice(@PathVariable("id") Long id) {
 		noticeService.deleteNotice(id);
 		return "redirect:/customs/notice";
 	}
