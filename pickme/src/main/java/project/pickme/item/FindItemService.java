@@ -14,8 +14,8 @@ import project.pickme.item.repository.FindItemMapper;
 public class FindItemService {
 	private final FindItemMapper itemMapper;
 
-	public FindItemDto.Info findById(Long id) {
-		FindItemDto.GetOne item = itemMapper.findById(id)
+	public FindItemDto.Info findById(Long id, String userId) {
+		FindItemDto.GetOne item = itemMapper.findById(id, userId)
 			.orElseThrow(() -> new NoSuchElementException("해당 공매품이 존재하지 않습니다."));
 
 		return new FindItemDto.Info(item);
