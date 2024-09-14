@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PICKME</title>
+
+    <link rel="stylesheet" th:href="@{/css/common/index.css}">
+    <link rel="stylesheet" th:href="@{/css/common/header.css}">
+    <link rel="stylesheet" th:href="@{/css/common/footer.css}">
+    <link rel="stylesheet" th:href="@{/item/css/list.css}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/bid/success.css">
+    <title>Title</title>
+</head>
+<body>
+<!-- 헤더 -->
+<div th:replace="~{fragments/header :: header}">header content</div>
+
+<!-- 메인 -->
+<main>
+    <div class="auction-list">
+        <div class="header-section">
+            <h2>낙찰목록</h2>
+            <hr>
+        </div>
+        <div class="product-grid">
+            <div class="product-card" th:each="item : ${successfulBidList}">
+                <img th:src="@{${item.imgUrl}}" alt="product image" class="product-image">
+                <div class="product-info">
+                    <h3 th:text="${item.itemName}"></h3>
+                    <p>공매번호: <span th:text="${item.itemNum}"></span></p>
+                    <p><span th:text="${item.customsName}"></span></p>
+                    <p>결제금액: <span th:text="${item.price}"></span>원</p>
+                    <input type="button" id="deliveryInfo" value="배송 현황">
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<!-- 푸터 -->
+<!--<div th:replace="fragments/footer :: footer"></div>-->
+<div th:replace="~{fragments/footer :: footer}">footer content</div>
+
+</body>
+</html>
