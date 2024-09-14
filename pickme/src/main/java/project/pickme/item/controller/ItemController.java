@@ -44,4 +44,11 @@ public class ItemController {
 
 		return "redirect:/customs/item/create";
 	}
+
+	@GetMapping("/item-list")
+	public String getItemList(@CurrentUser Customs customs, Model model) {
+		model.addAttribute("item", itemService.findItemsByCustomsId(customs.getId()));
+
+		return "item/item-list";
+	}
 }
