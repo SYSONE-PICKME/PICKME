@@ -10,11 +10,11 @@ public class BidResult {
 	private final String type = "bidResult";
 	private String result;
 
-	public static BidResult success(){
+	public static BidResult success() {
 		return new BidResult("success");
 	}
 
-	public static BidResult fail(){
+	public static BidResult fail() {
 		return new BidResult("fail");
 	}
 }

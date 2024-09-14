@@ -91,8 +91,23 @@ document.addEventListener("DOMContentLoaded", function () {
     const itemImage = document.querySelector('.item-image').textContent;
 
     //소켓 생성(웹소켓 메서드와 이벤트를 통해 서버와 통신 가능)
-    const socket = new WebSocket(`ws://localhost:8099/connect/${itemId}/${userId}`);
+    let socket = new WebSocket(`ws://localhost:8099/connect/${itemId}/${userId}`);
     socket.onopen = () => console.log("웹 소켓 open");
+
+    document.addEventListener('visibilitychange', function () {
+        if (document.visibilityState === 'visible') {
+            socket = new WebSocket(`ws://localhost:8099/connect/${itemId}/${userId}`);
+            socket.onopen = () => console.log("웹 소켓 open");
+        } else if (document.visibilityState === 'hidden') {
+            const message = {
+                type: 'EXIT',
+                itemId: itemId,
+                userId: userId
+            }
+            socket.send(JSON.stringify(message));
+            console.log("화면 나감 메서제 전송", message);
+        }
+    })
 
     //변수 선언
     let selectedPrice = null;

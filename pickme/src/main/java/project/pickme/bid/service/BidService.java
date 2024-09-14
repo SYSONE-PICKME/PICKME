@@ -41,11 +41,11 @@ public class BidService {
 	}
 
 	@Transactional
-	public MaxPriceDto addBid(AddBidDto addBidDto){	//입찰하는 메서드
+	public MaxPriceDto addBid(AddBidDto addBidDto) {    //입찰하는 메서드
 		User user = userMapper.findUserById(addBidDto.getUserId()).orElseThrow(() -> new BusinessException(NOT_FOUND_USER));
 		Item item = getItem(addBidDto.getItemId());
 
-		if(item.isOpen()){
+		if (item.isOpen()) {
 			BidCreateDto bidCreateDto = BidCreateDto.create(addBidDto.getPrice(), user.getId(), item.getId());
 			bidMapper.save(bidCreateDto);
 
@@ -60,7 +60,7 @@ public class BidService {
 		Bid bid = bidMapper.findBidById(bidId).orElseThrow(() -> new BusinessException(NOT_FOUND_BID));
 
 		bidMapper.updateBidSuccess(bidId);
-		userMapper.minusPoint(bid.getUserId(), bid.getPrice());	//포인트 차감
+		userMapper.minusPoint(bid.getUserId(), bid.getPrice());    //포인트 차감
 		//TODO: 포인트 사용 내역 저장
 
 		//낙찰자에게 메일 전송

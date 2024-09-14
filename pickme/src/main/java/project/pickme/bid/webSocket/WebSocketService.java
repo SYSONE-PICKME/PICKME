@@ -63,6 +63,10 @@ public class WebSocketService {
 		closeAllConnection(itemId);
 	}
 
+	public void closeSessionByUserId(Long itemId, String userId){
+		webSocketSessionRepository.closeUserSession(itemId, userId);
+	}
+
 	private void sendSuccessUser(Long itemId, Long bidId) {
 		String selectedUserId = bidMapper.findBidById(bidId)
 			.orElseThrow(() -> new BusinessException(NOT_FOUND_BID))
@@ -74,9 +78,5 @@ public class WebSocketService {
 
 	private void closeAllConnection(Long itemId) {
 		webSocketSessionRepository.closeAllSessionByItemId(itemId);
-	}
-
-	private void closeSessionByUserId(Long itemId, String userId){
-		webSocketSessionRepository.closeUserSession(itemId, userId);
 	}
 }

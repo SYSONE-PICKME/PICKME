@@ -45,9 +45,9 @@ public class WebSocketSessionRepository {
 	private void addUserSession(String userId, org.springframework.web.socket.WebSocketSession session) {
 		if(sessions.get(userId) == null || !sessions.get(userId).isOpen()){
 			sessions.put(userId, session);
-			log.info("유저{} 웹소켓 세션 저장 성공", userId);
+			log.info("유저: {} 웹소켓 세션 저장 성공", userId);
 		} else{
-			log.info("유저{}는 이미 웹소켓 세션이 존재합니다.", userId);
+			log.info("유저: {}는 이미 웹소켓 세션이 존재합니다.", userId);
 		}
 	}
 
@@ -59,11 +59,13 @@ public class WebSocketSessionRepository {
 			return;
 		}
 		userIds.forEach(sessions::remove);
+		log.info("공매품: {} 웹소켓 세션 삭제", itemId);
 	}
 
 	public void closeUserSession(Long itemId, String userId){
 		Set<String> userIds = itemRoom.get(itemId);
 		userIds.remove(userId);
 		sessions.remove(userId);
+		log.info("공매품: {}, 유저: {} 웹소켓 세션 삭제", itemId, userId);
 	}
 }

@@ -26,7 +26,7 @@ public class Bid {
 		return user.getId();
 	}
 
-	public String getUserEmail(){
+	public String getUserEmail() {
 		return user.getEmail();
 	}
 }
