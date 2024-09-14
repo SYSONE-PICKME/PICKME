@@ -7,8 +7,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" th:href="@{/customs/css/customsMain.css}">
+  <link rel="stylesheet" th:href="@{/customs/css/customsHeader.css}">
 </head>
 <body>
+<div th:replace="~{customs/customsHeader :: header}">header content</div>
 
 <div class="container">
   <h1 class="section-title">공지 및 공고</h1>
@@ -59,27 +61,6 @@
       </div>
     </a>
   </div>
-
 </div>
-
-<!--  <div class="footer-buttons">-->
-<!--    <div>-->
-<!--      <img th:src="@{/images/icon-notice.png}" alt="공지 관리">-->
-<!--      <p>공지 관리</p>-->
-<!--    </div>-->
-<!--    <div>-->
-<!--      <img th:src="@{/images/icon-auction.png}" alt="경매 관리">-->
-<!--      <p>경매 관리</p>-->
-<!--    </div>-->
-<!--    <div>-->
-<!--      <img th:src="@{/images/icon-user.png}" alt="사용자 관리">-->
-<!--      <p>사용자 관리</p>-->
-<!--    </div>-->
-<!--    <div>-->
-<!--      <img th:src="@{/images/icon-inquiry.png}" alt="문의 관리">-->
-<!--      <p>문의 관리</p>-->
-<!--    </div>-->
-<!--  </div>-->
-
 </body>
 </html>

@@ -1,0 +1,71 @@
+body {
+    font-family: "IBM Plex Sans KR", sans-serif;
+    margin: 0;
+    padding: 0;
+}
+header {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+}
+.top-black-bar {
+    font-family: "IBM Plex Sans KR", sans-serif;
+    background-color: #000;
+    min-height: 20px;
+    color: #2EC44F;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 15px 40px;
+}
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;  /* 상하 패딩 증가 */
+}
+.logo-nav {
+    display: flex;
+    align-items: center;
+}
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    margin-right: 60px;  /* 로고와 리스트 사이 간격 증가 */
+    margin-left: 20px;   /* 로고 왼쪽 여백 추가 */
+}
+nav ul {
+    font-family: "IBM Plex Sans KR", sans-serif;
+    font-weight: 600;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+nav ul li {
+    margin-right: 40px;  /* 리스트 항목 간 간격 증가 */
+}
+nav ul li:last-child {
+    margin-right: 0;  /* 마지막 리스트 항목의 오른쪽 마진 제거 */
+}
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+    padding: 5px 10px;  /* 클릭 영역 증가 */
+}
+nav ul li a.active {
+    color: #4CAF50;
+    font-weight: bold;
+}
+.logout-btn {
+    padding: 8px 15px;  /* 버튼 크기 증가 */
+    background-color: #000;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-right: 50px;  /* 오른쪽 여백 추가 */
+}
+.logout-btn:hover {
+    background-color: #e0e0e0;
+}
