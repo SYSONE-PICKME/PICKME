@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/notice/css/noticeContent.css}">
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
@@ -20,19 +21,29 @@
         <div th:if="${notice instanceof T(project.pickme.notice.dto.CampaignDto)}" class="campaign-content">
             <img th:if="${notice.imageUrl != null and !notice.imageUrl.isEmpty()}"
                  th:src="@{${notice.imageUrl}}"
-                 alt="캠페인 이미지"
-                 style="max-width: 100%;">
+                 alt="캠페인 이미지">
         </div>
-        <div th:unless="${notice instanceof T(project.pickme.notice.dto.CampaignDto)}" class="notice-body" th:text="*{content}">
+        <div th:unless="${notice instanceof T(project.pickme.notice.dto.CampaignDto)}" class="notice-body"
+             th:utext="${#strings.replace(#strings.escapeXml(notice.content), '&#10;', '&lt;br&gt;')}">
+        </div>
+
+    </div>
+    <div class="nav-content">
+        <div class="navigation-buttons">
+            <div class="nav-arrows">
+                <a th:href="@{/customs/notice/{id}(id=${previousNoticeId})}" class="nav-content-btn" title="이전글"><i class="fas fa-chevron-left"></i></a>
+                <a th:href="@{/customs/notice/{id}(id=${nextNoticeId})}" class="nav-content-btn" title="다음글"><i class="fas fa-chevron-right"></i></a>
+            </div>
+            <div class="action-buttons">
+                <a th:href="@{/customs/notice/edit/{id}(id=${notice.id})}" class="content-btn">수 정</a>
+                <a th:href="@{/customs/notice/delete/{id}(id=${notice.id})}" class="content-btn">삭 제</a>
+                <a href="/customs/notice" class="content-btn">목록보기</a>
+            </div>
         </div>
     </div>
 
-    <div class="button-group">
-        <a href="/customs/notice" class="btn btn-list">목록 보기</a>
-        <a th:href="@{/customs/notice/edit/{id}(id=${notice.id})}" class="btn btn-primary">수정</a>
-        <a th:href="@{/customs/notice/delete/{id}(id=${notice.id})}" class="btn btn-secondary">삭제</a>
-    </div>
 </div>
+<div th:replace="~{fragments/footer :: footer}">footer content</div>
 <script src="/js/notice.js"></script>
 </body>
 </html>
