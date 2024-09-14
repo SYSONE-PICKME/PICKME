@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.RequiredArgsConstructor;
 import project.pickme.common.annotation.CurrentUser;
-import project.pickme.item.FindItemService;
+import project.pickme.item.service.FindItemService;
 import project.pickme.item.dto.FindItemDto;
 import project.pickme.user.domain.User;
 

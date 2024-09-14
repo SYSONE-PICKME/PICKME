@@ -1,4 +1,4 @@
-package project.pickme.item;
+package project.pickme.item.service;
 
 import java.util.NoSuchElementException;
 
