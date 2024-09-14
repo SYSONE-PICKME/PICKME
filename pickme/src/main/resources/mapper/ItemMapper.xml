@@ -33,9 +33,19 @@
     </insert>
 
     <select id="findItemsByCustomsId">
-        select *
-        from Item
-        where customs_id = #{customsId};
+        select i.item_id    as itemId,
+               i.price      as price,
+               i.customs_id as customsId,
+               i.name       as name,
+               i.start_time as startTime,
+               i.end_time   as endTime,
+               i.status     as status,
+               img.url      as url
+        from Item i
+                 left join Image img
+                           on i.item_id = img.item_id
+        where customs_id = #{customsId}
+          and img.seq = 0;
     </select>
 
 </mapper>
