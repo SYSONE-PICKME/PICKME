@@ -25,4 +25,10 @@ public class BidController {
 
 		return "bid/bidPage";
 	}
+
+	@GetMapping("/successfulBidList")
+	public String successfulBidList(@CurrentUser User user,Model model) {
+		model.addAttribute("successfulBidList",bidService.findMySuccessfulBid(user));
+		return "bid/successfulBidList";
+	}
 }
