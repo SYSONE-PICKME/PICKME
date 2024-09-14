@@ -45,6 +45,9 @@
             </div>
         </div>
 
+        <form th:action="@{'/user/item/' + ${item.id} + '/like'}" method="post">
+            <button type="submit" th:text="${item.isLiked ? 'Unlike' : 'Like'}"></button>
+        </form>
         <div class="auction-details" style="width:800px; height:560px">
             <h2><span th:text="${item.name}"></span></h2>
             <div class="action-sub-details" style="width:670px; height:320px">
