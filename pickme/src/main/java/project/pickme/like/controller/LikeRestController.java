@@ -1,25 +1,26 @@
 package project.pickme.like.controller;
 
-import org.springframework.stereotype.Controller;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
 import project.pickme.common.annotation.CurrentUser;
 import project.pickme.like.service.LikeService;
 import project.pickme.user.domain.User;
 
-@Controller
+@RestController
 @RequestMapping("/user/item")
 @RequiredArgsConstructor
-public class LikeController {
+public class LikeRestController {
 	private final LikeService likeService;
 
 	@PostMapping("/{id}/like")
-	public String switchLike(@CurrentUser User user, @PathVariable("id") Long id) {
+	public ResponseEntity<?> switchLike(@CurrentUser User user, @PathVariable("id") Long id) {
 		likeService.switchOrAddIfNotExist(id, user.getId());
 
-		return "redirect:/user/item/" + id;
+		return ResponseEntity.ok("좋아요 요청 성공");
 	}
 }
