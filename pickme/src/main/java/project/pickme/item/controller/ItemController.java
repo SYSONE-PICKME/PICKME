@@ -47,7 +47,7 @@ public class ItemController {
 
 	@GetMapping("/item-list")
 	public String getItemList(@CurrentUser Customs customs, Model model) {
-		model.addAttribute("item", itemService.findItemsByCustomsId(customs.getId()));
+		model.addAttribute("itemList", itemService.findItemsByCustomsId(customs.getId()));
 
 		return "item/item-list";
 	}
