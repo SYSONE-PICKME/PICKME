@@ -16,14 +16,12 @@ import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import project.pickme.common.exception.BusinessException;
 import project.pickme.item.dto.ImageDto;
 import project.pickme.item.dto.ItemDto;
 import project.pickme.item.repository.ImageMapper;
 
 @Service
-@Slf4j
 @RequiredArgsConstructor
 public class S3Service {
 	private final AmazonS3 amazonS3;
@@ -57,7 +55,6 @@ public class S3Service {
 
 	public void uploadImages(ItemDto itemDto, MultipartFile[] files) {
 		int sequence = 0;
-
 		for (MultipartFile file : files) {
 			long itemId = itemDto.getItemId();
 			String name = file.getOriginalFilename();

@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import project.pickme.item.constant.Status;
 import project.pickme.item.dto.ItemDto;
 import project.pickme.item.dto.ItemFormDto;
@@ -20,7 +19,6 @@ import project.pickme.item.repository.ItemLawMapper;
 import project.pickme.s3.service.S3Service;
 import project.pickme.user.domain.Customs;
 
-@Slf4j
 @Service
 @RequiredArgsConstructor
 public class ItemService {
