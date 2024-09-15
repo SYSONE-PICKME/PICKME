@@ -15,7 +15,10 @@ public enum ErrorCode {
 
 	//입찰
 	NOT_FOUND_BID("존재하지 않는 입찰"),
-	BID_NOT_PROGRESS("진행중이지 않은 경매");
+	BID_NOT_PROGRESS("진행중이지 않은 경매"),
+
+	//이미지
+	IMAGE_UPLOAD_FAILED("이미지 업로드 실패");
 
 	private final String errorCode;
 }
