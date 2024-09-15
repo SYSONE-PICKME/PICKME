@@ -8,6 +8,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class ControllerAdvice {
 	@ExceptionHandler(BusinessException.class)
 	public ResponseEntity<?> handlerBizException(BusinessException e){
-		return ResponseEntity.status(e.getErrorCode().getStatus()).body(e.getErrorCode().getErrorMessage());
+		return ResponseEntity.status(e.getErrorCode().getHttpStatus()).body(e.getErrorCode().getMessage());
 	}
 }

@@ -1,6 +1,8 @@
 package project.pickme.bid.service;
 
-import static project.pickme.common.exception.ErrorCode.*;
+import static project.pickme.bid.exception.BidErrorCode.*;
+import static project.pickme.item.exception.ItemErrorCode.*;
+import static project.pickme.user.exception.UserErrorCode.*;
 
 import java.util.List;
 
