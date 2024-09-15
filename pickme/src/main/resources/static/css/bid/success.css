@@ -38,6 +38,7 @@
 }
 
 input[type="button"] {
+    margin: 5px;
     background-color: #f0fff0;
     color: #28a745;
     border: 1px solid #28a745;
