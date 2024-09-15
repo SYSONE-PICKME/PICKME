@@ -103,4 +103,8 @@ public class ItemService {
 			sequence++;
 		}
 	}
+
+	public List<ItemDto> findItemsByCustomsId(String customsId) {
+		return itemMapper.findItemsByCustomsId(customsId);
+	}
 }
