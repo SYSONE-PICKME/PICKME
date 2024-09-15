@@ -13,6 +13,7 @@ import project.pickme.bid.domain.Bid;
 import project.pickme.bid.dto.AddBidDto;
 import project.pickme.bid.dto.BidCreateDto;
 import project.pickme.bid.dto.MaxPriceDto;
+import project.pickme.bid.dto.SuccessfulBidDto;
 import project.pickme.bid.repository.BidMapper;
 import project.pickme.common.exception.BusinessException;
 import project.pickme.item.domain.Item;
@@ -38,11 +39,12 @@ public class BidService {
 	}
 
 	@Transactional
-	public MaxPriceDto addBid(AddBidDto addBidDto){	//입찰하는 메서드
-		User user = userMapper.findUserById(addBidDto.getUserId()).orElseThrow(() -> new BusinessException(NOT_FOUND_USER));
+	public MaxPriceDto addBid(AddBidDto addBidDto) {    //입찰하는 메서드
+		User user = userMapper.findUserById(addBidDto.getUserId())
+			.orElseThrow(() -> new BusinessException(NOT_FOUND_USER));
 		Item item = getItem(addBidDto.getItemId());
 
-		if(item.getStatus().equals(OPEN)){
+		if (item.getStatus().equals(OPEN)) {
 			BidCreateDto bidCreateDto = BidCreateDto.create(addBidDto.getPrice(), user.getId(), item.getId());
 			bidMapper.save(bidCreateDto);
 
@@ -53,14 +55,18 @@ public class BidService {
 	}
 
 	@Transactional
-	public void closeBid(Long bidId){
+	public void closeBid(Long bidId) {
 		Bid bid = bidMapper.findBidById(bidId).orElseThrow(() -> new BusinessException(NOT_FOUND_BID));
 
 		bidMapper.updateBidSuccess(bidId);
-		userMapper.minusPoint(bid.getUserId(), bid.getPrice());	//포인트 차감
+		userMapper.minusPoint(bid.getUserId(), bid.getPrice());    //포인트 차감
 	}
 
 	private Item getItem(Long itemId) {
 		return itemMapper.findItemById(itemId).orElseThrow(() -> new BusinessException(NOT_FOUND_ITEM));
+	}
+
+	public List<SuccessfulBidDto> findMySuccessfulBid(User user) {
+		return bidMapper.findMySuccessfulBid(user.getId());
 	}
 }

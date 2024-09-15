@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="project.pickme.like.repository.LikeMapper">
+    <select id = "findByItemIdAndUserId" parameterType="map" resultType="project.pickme.like.dto.LikeDto">
+        select
+        m.like_id as id,
+        m.item_id as itemId,
+        m.user_id as userId,
+        m.status
+
+        from Mine m
+
+        where item_id = #{itemId}
+        and user_id = #{userId}
+    </select>
+
+    <insert id="save" parameterType="map">
+        insert into Mine(user_id, item_id)
+        values(#{userId}, #{itemId})
+    </insert>
+
+    <update id="updateStatus" parameterType="map">
+        update Mine
+
+        set status = 1 - status
+
+        where item_id = #{itemId}
+        and user_id = #{userId}
+    </update>
+</mapper>

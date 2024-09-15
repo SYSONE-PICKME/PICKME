@@ -50,4 +50,41 @@ public class ItemService {
 	public List<LawDto> findAllLaws() {
 		return lawMapper.findAllLaws();
 	}
-}
+
+	public String uploadImage(MultipartFile file) {
+		String fileName = createFileName(file.getOriginalFilename());
+
+		ObjectMetadata objectMetadata = new ObjectMetadata();        // ObjectMetadata 를 통해 파일에 대한 정보를 추가
+		objectMetadata.setContentLength(file.getSize());        // multipartFil 의 크기 설정 (byte)
+		objectMetadata.setContentType(file.getContentType());    // multipartFil 의 컨텐츠 유형 설정
+
+		try (InputStream inputStream = file.getInputStream()) {
+			amazonS3.putObject(new PutObjectRequest(bucket, fileName, inputStream, objectMetadata)        // 객체를 S3에 업로드
+				.withCannedAcl(CannedAccessControlList.PublicRead));        // 업로드된 객체에 대한 공개 읽기 권한을 설정
+		} catch (IOException e) {
+			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "이미지 업로드에 실패했습니다.");
+		}
+
+		return amazonS3.getUrl(bucket, fileName).toString();
+	}
+
+	// 파일 이름 생성
+	private String createFileName(String fileName) {
+		return UUID.randomUUID().toString().concat(fileName);
+	}
+
+	public void uploadImages(ItemDto itemDto, MultipartFile[] files) {
+		int sequence = 0;
+
+		for (MultipartFile file : files) {
+			long itemId = itemDto.getItemId();
+			String name = file.getOriginalFilename();
+			String url = uploadImage(file);
+			imageMapper.insertImage(new ImageDto(itemId, name, url, sequence));
+			sequence++;
+		}
+	}
+
+	public List<ItemDto> findItemsByCustomsId(String customsId) {
+		return itemMapper.findItemsByCustomsId(customsId);
+	}
