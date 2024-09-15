@@ -17,7 +17,6 @@ import lombok.extern.slf4j.Slf4j;
 @Repository
 @Slf4j
 public class WebSocketSessionRepository {
-	//TODO: 화면 나가면 웹소켓 연결 해제 해야함
 	private final Map<Long, Set<String>> itemRoom = new ConcurrentHashMap<>();
 	private final Map<String, WebSocketSession> sessions = new ConcurrentHashMap<>();
 
@@ -25,7 +24,7 @@ public class WebSocketSessionRepository {
 		return sessions.get(userId);
 	}
 
-	public void saveUserInItem(Long itemId, String userId, WebSocketSession session){
+	public void saveUserInItem(Long itemId, String userId, WebSocketSession session) {
 		Set<String> users = itemRoom.computeIfAbsent(itemId, k -> new HashSet<>());
 		users.add(userId);
 		itemRoom.put(itemId, users);
@@ -42,30 +41,36 @@ public class WebSocketSessionRepository {
 			.toList();
 	}
 
-	private void addUserSession(String userId, org.springframework.web.socket.WebSocketSession session) {
-		if(sessions.get(userId) == null || !sessions.get(userId).isOpen()){
+	private void addUserSession(String userId, WebSocketSession session) {
+		if (sessions.get(userId) == null || !sessions.get(userId).isOpen()) {
 			sessions.put(userId, session);
 			log.info("유저: {} 웹소켓 세션 저장 성공", userId);
-		} else{
+		} else {
 			log.info("유저: {}는 이미 웹소켓 세션이 존재합니다.", userId);
 		}
 	}
 
-	public void closeAllSessionByItemId(Long itemId) {	//마감된 공매품 세션 전부 삭제
+	public void closeAllSessionByItemId(Long itemId) {    //마감된 공매품 세션 전부 삭제
 		Set<String> userIds = itemRoom.get(itemId);
 		itemRoom.remove(itemId);
 
-		if(userIds == null){
+		if (userIds == null) {
 			return;
 		}
+
 		userIds.forEach(sessions::remove);
 		log.info("공매품: {} 웹소켓 세션 삭제", itemId);
 	}
 
-	public void closeUserSession(Long itemId, String userId){
+	public void closeUserSession(Long itemId, String userId) {
 		Set<String> userIds = itemRoom.get(itemId);
-		userIds.remove(userId);
+
+		if (userIds != null) {
+			userIds.remove(userId);
+		}
+
 		sessions.remove(userId);
+
 		log.info("공매품: {}, 유저: {} 웹소켓 세션 삭제", itemId, userId);
 	}
 }

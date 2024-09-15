@@ -49,9 +49,9 @@ public class WebSocketHandler extends TextWebSocketHandler {
 			String payload = message.getPayload();
 
 			Consumer<String> command = commandMap.get(type);
-			if(command != null){
+			if (command != null) {
 				command.accept(payload);
-			} else{
+			} else {
 				log.warn("알 수 없는 타입: {}", type);
 			}
 		} catch (Exception e) {
@@ -72,8 +72,8 @@ public class WebSocketHandler extends TextWebSocketHandler {
 	private void selectBid(String payload) {
 		try {
 			SelectedBidDto selectedBidDto = objectMapper.readValue(payload, SelectedBidDto.class);
-			webSocketService.sendResultAllClient(selectedBidDto.getItemId(), selectedBidDto.getBidId());
-			bidService.selectBid(selectedBidDto.getBidId(), selectedBidDto);	//낙찰처리
+			webSocketService.sendResultAllClient(selectedBidDto);
+			bidService.selectBid(selectedBidDto.getBidId(), selectedBidDto);    //낙찰처리
 		} catch (MessagingException | JsonProcessingException e) {
 			log.error("Error selectBid", e);
 		}
@@ -83,7 +83,7 @@ public class WebSocketHandler extends TextWebSocketHandler {
 		try {
 			ExitMemberDto exitMemberDto = objectMapper.readValue(payload, ExitMemberDto.class);
 			webSocketService.closeSessionByUserId(exitMemberDto.getItemId(), exitMemberDto.getUserId());
-		}catch (JsonProcessingException e){
+		} catch (JsonProcessingException e) {
 			log.error("Error closeConnection", e);
 		}
 	}

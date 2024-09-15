@@ -23,7 +23,6 @@ public class WebSocketHandShakeInterceptor implements HandshakeInterceptor {
 		String[] parts = request.getURI().getPath().split("/");
 
 		if (parts.length != URL_LENGTH) {
-			log.error("잘못된 웹소켓 연결 요청" + request.getURI().getPath());
 			response.setStatusCode(HttpStatus.FORBIDDEN);
 			response.getBody().write("웹소켓 연결 실패".getBytes());
 			return false;

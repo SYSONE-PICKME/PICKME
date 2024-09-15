@@ -1,7 +1,5 @@
 package project.pickme.bid.webSocket;
 
-import static project.pickme.common.exception.ErrorCode.*;
-
 import java.io.IOException;
 import java.util.List;
 
@@ -14,8 +12,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import project.pickme.bid.dto.response.BidResult;
+import project.pickme.bid.dto.response.SelectedBidDto;
 import project.pickme.bid.repository.BidMapper;
-import project.pickme.common.exception.BusinessException;
 
 @Service
 @RequiredArgsConstructor
@@ -57,23 +55,22 @@ public class WebSocketService {
 		}
 	}
 
-	public void sendResultAllClient(Long itemId, Long bidId) {
-		sendSuccessUser(itemId, bidId);
+	public void sendResultAllClient(SelectedBidDto selectedBidDto) {
+		//TODO: 아무도 입찰 안한경우 처리 해야함
+		//성공한 유저
+		String userId = selectedBidDto.getUserId();
+		Long itemId = selectedBidDto.getItemId();
+		
+		sendToClient(userId, BidResult.success());
+		closeSessionByUserId(itemId, userId);
+
+		//실패한 유저
 		sendToAllClient(itemId, BidResult.fail());
 		closeAllConnection(itemId);
 	}
 
 	public void closeSessionByUserId(Long itemId, String userId){
 		webSocketSessionRepository.closeUserSession(itemId, userId);
-	}
-
-	private void sendSuccessUser(Long itemId, Long bidId) {
-		String selectedUserId = bidMapper.findBidById(bidId)
-			.orElseThrow(() -> new BusinessException(NOT_FOUND_BID))
-			.getUserId();
-
-		sendToClient(selectedUserId, BidResult.success());
-		closeSessionByUserId(itemId, selectedUserId);
 	}
 
 	private void closeAllConnection(Long itemId) {
