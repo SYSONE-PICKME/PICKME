@@ -11,16 +11,16 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum ErrorCode {
 	//사용자
-	NOT_FOUND_CUSTOMS(NOT_FOUND,"존재하지 않는 세관"),
+	NOT_FOUND_CUSTOMS(NOT_FOUND, "존재하지 않는 세관"),
 	NOT_FOUND_USER(NOT_FOUND, "존재하지 않는 회원"),
-	DUPLICATE_ID(BAD_REQUEST,"이미 존재하는 아이디"),
+	DUPLICATE_ID(BAD_REQUEST, "이미 존재하는 아이디"),
 
 	//공매품
-	NOT_FOUND_ITEM(NOT_FOUND,"존재하지 않는 공매품"),
+	NOT_FOUND_ITEM(NOT_FOUND, "존재하지 않는 공매품"),
 
 	//입찰
 	NOT_FOUND_BID(NOT_FOUND, "존재하지 않는 입찰"),
-	BID_NOT_PROGRESS(BAD_REQUEST,"진행중이지 않은 경매"),
+	BID_NOT_PROGRESS(BAD_REQUEST, "진행중이지 않은 경매"),
 
 	//webSocket
 	INVALID_JSON_DATA(INTERNAL_SERVER_ERROR, "데이터 JSON 변환 에러");

@@ -20,6 +20,8 @@ import project.pickme.common.exception.BusinessException;
 import project.pickme.item.domain.Item;
 import project.pickme.bid.dto.response.OneBidItemDto;
 import project.pickme.item.repository.ItemMapper;
+import project.pickme.payment.dto.SavePaymentDto;
+import project.pickme.payment.repository.PaymentMapper;
 import project.pickme.user.service.MailService;
 import project.pickme.user.domain.User;
 import project.pickme.user.repository.UserMapper;
@@ -31,6 +33,7 @@ public class BidService {
 	private final ItemMapper itemMapper;
 	private final UserMapper userMapper;
 	private final BidMapper bidMapper;
+	private final PaymentMapper paymentMapper;
 	private final MailService mailService;
 
 	public OneBidItemDto showOneBidItem(User user, Long itemId) {
@@ -57,12 +60,12 @@ public class BidService {
 	}
 
 	@Transactional
-	public void selectBid(Long bidId, SelectedBidDto selectedBidDto) throws MessagingException {
-		Bid bid = bidMapper.findBidById(bidId).orElseThrow(() -> new BusinessException(NOT_FOUND_BID));
+	public void selectBid(SelectedBidDto selectedBidDto) throws MessagingException {
+		Bid bid = bidMapper.findBidById(selectedBidDto.getBidId()).orElseThrow(() -> new BusinessException(NOT_FOUND_BID));
 
-		bidMapper.updateBidSuccess(bidId);
-		userMapper.minusPoint(bid.getUserId(), bid.getPrice());    //포인트 차감
-		//TODO: 포인트 사용 내역 저장
+		bidMapper.updateBidSuccess(selectedBidDto.getBidId());
+		userMapper.minusPoint(bid.getUserId(), bid.getPrice());
+		paymentMapper.save(SavePaymentDto.createOf(selectedBidDto.getUserId(), selectedBidDto.getBidId()));
 
 		//낙찰자에게 메일 전송
 		mailService.sendSuccessfulBidMail(selectedBidDto, bid.getUserEmail());

@@ -12,4 +12,6 @@ public interface ItemMapper {
 	Optional<Item> findItemById(Long itemId);
 
 	void insertItem(ItemDto itemDto);
+
+	void deleteAll();
 }

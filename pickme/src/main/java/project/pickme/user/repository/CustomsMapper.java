@@ -16,4 +16,6 @@ public interface CustomsMapper {
 	void saveAll(List<Customs> customs);
 
 	void deleteAll();
+
+	void save(Customs customs);
 }
