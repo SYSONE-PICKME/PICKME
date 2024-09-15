@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PICKME</title>
+
+    <link rel="stylesheet" th:href="@{/css/common/index.css}">
+    <link rel="stylesheet" th:href="@{/css/common/header.css}">
+    <link rel="stylesheet" th:href="@{/css/common/footer.css}">
+    <link rel="stylesheet" th:href="@{/item/css/list.css}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script th:src="@{/item/js/filtering.js}"></script>
+</head>
+<body>
+<!-- 헤더 -->
+<div th:replace="~{fragments/header :: header}">header content</div>
+
+<!-- 메인 -->
+<main>
+    <nav class="category">
+        <ul>
+            <li><a th:href="@{/}"><img th:src="@{/images/clothes.png}">#의류</a></li>
+            <li><a th:href="@{/}"><img th:src="@{/images/tableware.png}">#생활용품</a></li>
+            <li><a th:href="@{/}"><img th:src="@{/images/fridge.png}">#디지털</a></li>
+            <li><a th:href="@{/}"><img th:src="@{/images/furniture.png}">#가구</a></li>
+            <li><a th:href="@{/}"><img th:src="@{/images/battery.png}">#소모품</a></li>
+        </ul>
+    </nav>
+
+    <div class="auction-list">
+        <div class="header-section">
+            <h2>모든 경매 물품</h2>
+            <div class="toggle-switch">
+                <input type="checkbox" id="toggle" onchange="filterItems()">
+                <label for="toggle"></label>
+            </div>
+        </div>
+        <div class="product-grid">
+            <div class="product-card" th:each="item : ${items}" th:data-status="${item.status}">
+                <div class="status-label" th:text="${item.status == 'OPEN' ? '진행중' : '마감'}"></div>
+                <img th:src="@{${item.imgUrl}}" alt="product image" class="product-image">
+                <div class="product-info">
+                    <h3 th:text="${item.name}"></h3>
+                    <p>공매예정가격: <span th:text="${item.price}">36000</span> 원</p>
+                    <p>공매시작일시: <span th:text="${item.startTime}"></span></p>
+                    <p>공매마감일시: <span th:text="${item.endTime}"></span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- 푸터 -->
+<!--<div th:replace="fragments/footer :: footer"></div>-->
+<div th:replace="~{fragments/footer :: footer}">footer content</div>
+</body>
+</html>

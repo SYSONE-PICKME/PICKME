@@ -14,6 +14,7 @@ import project.pickme.bid.dto.reqeust.AddBidDto;
 import project.pickme.bid.dto.response.BidCreateDto;
 import project.pickme.bid.dto.response.MaxPriceDto;
 import project.pickme.bid.dto.response.SelectedBidDto;
+import project.pickme.bid.dto.SuccessfulBidDto;
 import project.pickme.bid.repository.BidMapper;
 import project.pickme.common.exception.BusinessException;
 import project.pickme.item.domain.Item;
@@ -69,5 +70,9 @@ public class BidService {
 
 	private Item getItem(Long itemId) {
 		return itemMapper.findItemById(itemId).orElseThrow(() -> new BusinessException(NOT_FOUND_ITEM));
+	}
+
+	public List<SuccessfulBidDto> findMySuccessfulBid(User user) {
+		return bidMapper.findMySuccessfulBid(user.getId());
 	}
 }

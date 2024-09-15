@@ -22,6 +22,6 @@ public class ChargeController {
 		UserDto.Info userInfo = chargeService.getUserInfo(user.getId());
 		model.addAttribute("user", userInfo);
 
-		return "charge/charge.html";
+		return "charge/charge";
 	}
 }

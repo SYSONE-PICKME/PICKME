@@ -25,6 +25,7 @@ public class FindItemDto {
 		private String customsTel;
 
 		private String images;
+		private boolean isLiked;
 	}
 
 	@Getter
@@ -42,6 +43,7 @@ public class FindItemDto {
 		private final String customsTel;
 
 		private final List<String> imageUrls;
+		private final boolean isLiked;
 
 		public Info(GetOne dto) {
 			this.id = dto.getItemId();
@@ -55,6 +57,19 @@ public class FindItemDto {
 			this.customsName = dto.getCustomsName();
 			this.customsTel = dto.getCustomsTel();
 			this.imageUrls = Arrays.asList(dto.getImages().split(","));
+			this.isLiked = dto.isLiked();
 		}
+	}
+
+	@Getter
+	@NoArgsConstructor
+	public static class GetAll {
+		private Long id;
+		private String name;
+		private long price;
+		private LocalDateTime startTime;
+		private LocalDateTime endTime;
+		private String status;
+		private String imgUrl;
 	}
 }

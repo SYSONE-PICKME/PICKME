@@ -1,3 +1,15 @@
+cloud:
+  aws:
+    credentials:
+      access-key: ENC(NGIBt94mdxksvrtX3cwK8IGYpslgaEmMDR+ik+j7B5k=)
+      secret-key: ENC(F6dlxgrUivJXkJGGfU0B1AGNfzAszDZof8/YZqlq2Wr7yn+Bqq04zQS861YSv8foTQ4vQnWYKSg=)
+    s3:
+      bucket: pickmepickme
+    region:
+      static: ap-northeast-2
+    stack:
+      auto: false
+
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: project.pickme
@@ -12,6 +24,11 @@ spring:
     password: ENC(DvMAgRb3Z9VLlmqfrEESA/guiD7i2Oec)
   config:
     import: "classpath:application-secret.yml"
+  servlet:
+    multipart:
+      enabled: true
+      max-request-size: 300MB
+      max-file-size: 50MB
 
   mail:
     host: smtp.naver.com
