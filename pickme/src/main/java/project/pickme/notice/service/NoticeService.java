@@ -67,10 +67,15 @@ public class NoticeService {
 		Customs customs = getCustomsById(campaignDto.getCustomsId());
 		Notice existingNotice = noticeMapper.selectById(campaignDto.getId());
 		String existingImageUrl = extractImageUrl(existingNotice.getContent());
-		if (campaignDto.getImageUrl() != null && !campaignDto.getImageUrl().equals(existingImageUrl)) {
+
+		String updatedImageUrl = (campaignDto.getImageUrl() != null && !campaignDto.getImageUrl().isEmpty())
+			? campaignDto.getImageUrl()	: existingImageUrl;
+		CampaignDto updatedCampaignDto = campaignDto.withUpdatedImageUrl(updatedImageUrl);
+
+		if (!updatedImageUrl.equals(existingImageUrl)) {
 			deleteExistingImage(existingImageUrl);
 		}
-		Notice updatedNotice = campaignDto.toEntity(customs);
+		Notice updatedNotice = updatedCampaignDto.toEntity(customs);
 		noticeMapper.update(updatedNotice);
 	}
 

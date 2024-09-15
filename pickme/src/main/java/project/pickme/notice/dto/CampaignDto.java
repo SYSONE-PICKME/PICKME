@@ -72,4 +72,18 @@ public class CampaignDto extends NoticeDto {
 			.imageUrl(imageUrl)
 			.build();
 	}
+
+	public CampaignDto withUpdatedImageUrl(String newImageUrl) {
+		return CampaignDto.campaignBuilder()
+			.id(this.getId())
+			.title(this.getTitle())
+			.content(this.getContent())
+			.createTime(this.getCreateTime())
+			.customsId(this.getCustomsId())
+			.customsName(this.getCustomsName())
+			.customsRole(this.getCustomsRole())
+			.imageUrl(newImageUrl)
+			.imageFile(this.imageFile)
+			.build();
+	}
 }
