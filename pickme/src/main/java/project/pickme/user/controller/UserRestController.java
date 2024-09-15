@@ -14,7 +14,7 @@ public class UserRestController {
 	private final UserService userService;
 
 	@PostMapping("/user/check-id")
-	public ResponseEntity<?> checkDuplicateUserId(@RequestBody String id){
+	public ResponseEntity<?> checkDuplicateUserId(@RequestBody String id) {
 		userService.checkDuplicateId(id);
 		return ResponseEntity.ok("사용 가능한 아이디");
 	}
