@@ -33,7 +33,7 @@ public class ItemController {
 		model.addAttribute("type", Type.values());
 		model.addAttribute("categories", Category.values());
 
-		return "item/create-item";
+		return "item/createItem";
 	}
 
 	@PostMapping("/create")
@@ -49,6 +49,6 @@ public class ItemController {
 	public String getItemList(@CurrentUser Customs customs, Model model) {
 		model.addAttribute("itemList", itemService.findItemsByCustomsId(customs.getId()));
 
-		return "item/customs-item-list";
+		return "item/customsItemList";
 	}
 }
