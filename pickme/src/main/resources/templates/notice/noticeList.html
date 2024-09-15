@@ -5,8 +5,8 @@
   <title>공지사항</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" th:href="@{/notice/css/noticeList.css}">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" th:href="@{/css/notice/noticeList.css}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
 </head>
@@ -18,7 +18,7 @@
           <div th:each="notice : ${notices}" class="notice-item" th:data-notice-id="${notice.id}">
             <div class="notice-content">
               <div class="notice-icon">
-                <img th:src="@{${notice.title.startsWith('공지') ? '/images/notice.png' : '/images/campaign.png'}}" alt="공지 아이콘">
+                <img th:src="${notice.title.startsWith('공지') ? '/images/notice.png' : '/images/campaign.png'}" alt="공지 아이콘" src="">
               </div>
               <div class="notice-text">
                 <h3 class="notice-title" th:text="${notice.title}">공지사항 제목</h3>
@@ -51,7 +51,7 @@
     <div id="deleteModal" class="modal">
       <div class="modal-content">
         <div class="modal-icon">
-          <img src="/images/warning.png" alt="경고 아이콘">
+          <img th:src="@{/images/warning.png}" alt="경고 아이콘" src="">
         </div>
         <h2>공지사항을 삭제하시겠습니까?</h2>
         <p>삭제된 공지사항은 영구 삭제되어 복구할 수 없습니다.</p>
@@ -62,6 +62,6 @@
       </div>
     </div>
 
-  <script th:src="@{/notice/js/noticeList.js}"></script>
+  <script th:src="@{/js/notice/noticeList.js}"></script>
 </body>
 </html>

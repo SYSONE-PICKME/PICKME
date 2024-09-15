@@ -19,8 +19,4 @@ public class Notice {
 	private String content;
 	private LocalDateTime createTime;
 	private Customs customs;
-
-	public void updateContent(String content) {
-		this.content = content;
-	}
 }

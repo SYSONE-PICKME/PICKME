@@ -21,7 +21,8 @@ public class CampaignDto extends NoticeDto {
 	private MultipartFile imageFile;
 
 	@Builder(builderMethodName = "campaignBuilder")
-	public CampaignDto(Long id,
+	public CampaignDto(
+		Long id,
 		String title,
 		String content,
 		LocalDateTime createTime,
@@ -37,32 +38,35 @@ public class CampaignDto extends NoticeDto {
 
 	@Override
 	public Notice toEntity(Customs customs) {
-		Notice notice = super.toEntity(customs);
-		if (this.imageUrl != null) {
-			notice.updateContent(notice.getContent() + "\n[Image URL: " + this.imageUrl + "]");
+		String fullContent = getContent();
+		if (this.imageUrl != null && !this.imageUrl.isEmpty()) {
+			fullContent += "\n[Image URL: " + this.imageUrl + "]";
 		}
-		return notice;
+		return Notice.builder()
+			.id(getId())
+			.title(getTitle())
+			.content(fullContent)
+			.createTime(getCreateTime())
+			.customs(customs)
+			.build();
 	}
 
 	public static CampaignDto fromEntity(Notice notice) {
-		NoticeDto baseDto = NoticeDto.fromEntity(notice);
 		String content = notice.getContent();
 		String imageUrl = null;
-
 		int index = content.lastIndexOf("[Image URL: ");
 		if (index != -1) {
 			imageUrl = content.substring(index + 12, content.length() - 1);
 			content = content.substring(0, index).trim();
 		}
-
 		return CampaignDto.campaignBuilder()
-			.id(baseDto.getId())
-			.title(baseDto.getTitle())
+			.id(notice.getId())
+			.title(notice.getTitle())
 			.content(content)
-			.createTime(baseDto.getCreateTime())
-			.customsId(baseDto.getCustomsId())
-			.customsName(baseDto.getCustomsName())
-			.customsRole(baseDto.getCustomsRole())
+			.createTime(notice.getCreateTime())
+			.customsId(notice.getCustoms().getId())
+			.customsName(notice.getCustoms().getName())
+			.customsRole(notice.getCustoms().getRole())
 			.imageUrl(imageUrl)
 			.build();
 	}

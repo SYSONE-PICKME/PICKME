@@ -1,13 +1,13 @@
 package project.pickme.notice.service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
+import com.amazonaws.services.s3.AmazonS3Client;
 import lombok.RequiredArgsConstructor;
+import project.pickme.config.S3Config;
 import project.pickme.notice.domain.Notice;
 import project.pickme.notice.dto.CampaignDto;
 import project.pickme.notice.dto.NoticeDto;
@@ -22,16 +22,18 @@ public class NoticeService {
 
 	private final NoticeMapper noticeMapper;
 	private final CustomsMapper customsMapper;
+	private final AmazonS3Client amazonS3Client;
+	private final S3Config s3Config;
 
-	public List<NoticeDto> getAllNotice() {
+	public List<NoticeDto> getAllNotices() {
 		return noticeMapper.selectAll().stream()
-			.map(NoticeDto::fromEntity)
+			.map(this::convertToAppropriateDto)
 			.collect(Collectors.toList());
 	}
 
-	public NoticeDto getNoticeOrCampaignById(Long id) {
+	public NoticeDto getNoticeById(Long id) {
 		if (id == null) {
-			return new NoticeDto();
+			return null;
 		}
 		Notice notice = noticeMapper.selectById(id);
 		return convertToAppropriateDto(notice);
@@ -39,8 +41,7 @@ public class NoticeService {
 
 	@Transactional
 	public Long createNotice(NoticeDto noticeDto) {
-		Optional<Customs> customsOptional = customsMapper.findById(noticeDto.getCustomsId());
-		Customs customs = customsOptional.get();
+		Customs customs = getCustomsById(noticeDto.getCustomsId());
 		Notice notice = noticeDto.toEntity(customs);
 		noticeMapper.insert(notice);
 		return notice.getId();
@@ -48,24 +49,34 @@ public class NoticeService {
 
 	@Transactional
 	public void updateNotice(NoticeDto noticeDto) {
-		Optional<Customs> customsOptional = customsMapper.findById(noticeDto.getCustomsId());
-		Customs customs = customsOptional.get();
+		Customs customs = getCustomsById(noticeDto.getCustomsId());
 		Notice notice = noticeDto.toEntity(customs);
 		noticeMapper.update(notice);
 	}
 
 	@Transactional
-	public void deleteNotice(Long id) {
-		noticeMapper.delete(id);
+	public CampaignDto createCampaign(CampaignDto campaignDto) {
+		Customs customs = getCustomsById(campaignDto.getCustomsId());
+		Notice notice = campaignDto.toEntity(customs);
+		noticeMapper.insert(notice);
+		return CampaignDto.fromEntity(notice);
 	}
 
 	@Transactional
-	public CampaignDto createCampaign(CampaignDto campaignDto) {
-		Optional<Customs> customsOptional = customsMapper.findById(campaignDto.getCustomsId());
-		Customs customs = customsOptional.get();
-		Notice notice = campaignDto.toEntity(customs);
-		noticeMapper.insert(notice);
-		return CampaignDto.fromEntity(noticeMapper.selectById(notice.getId()));
+	public void updateCampaign(CampaignDto campaignDto) {
+		Customs customs = getCustomsById(campaignDto.getCustomsId());
+		Notice existingNotice = noticeMapper.selectById(campaignDto.getId());
+		String existingImageUrl = extractImageUrl(existingNotice.getContent());
+		if (campaignDto.getImageUrl() != null && !campaignDto.getImageUrl().equals(existingImageUrl)) {
+			deleteExistingImage(existingImageUrl);
+		}
+		Notice updatedNotice = campaignDto.toEntity(customs);
+		noticeMapper.update(updatedNotice);
+	}
+
+	@Transactional
+	public void deleteNotice(Long id) {
+		noticeMapper.delete(id);
 	}
 
 	private NoticeDto convertToAppropriateDto(Notice notice) {
@@ -76,5 +87,27 @@ public class NoticeService {
 			return CampaignDto.fromEntity(notice);
 		}
 		return NoticeDto.fromEntity(notice);
+	}
+
+	private String extractImageUrl(String content) {
+		int start = content.lastIndexOf("[Image URL: ");
+		if (start != -1) {
+			start += 12;
+			int end = content.indexOf("]", start);
+			return content.substring(start, end);
+		}
+		return null;
+	}
+
+	private void deleteExistingImage(String imageUrl) {
+		if (imageUrl != null) {
+			String fileName = imageUrl.substring(imageUrl.lastIndexOf("/") + 1);
+			amazonS3Client.deleteObject(s3Config.getBucket(), fileName);
+		}
+	}
+
+	private Customs getCustomsById(String customsId) {
+		return customsMapper.findById(customsId)
+			.orElseThrow(() -> new RuntimeException("Customs not found"));
 	}
 }
