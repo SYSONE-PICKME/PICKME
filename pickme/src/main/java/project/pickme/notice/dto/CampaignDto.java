@@ -54,10 +54,12 @@ public class CampaignDto extends NoticeDto {
 	public static CampaignDto fromEntity(Notice notice) {
 		String content = notice.getContent();
 		String imageUrl = null;
-		int index = content.lastIndexOf("[Image URL: ");
-		if (index != -1) {
-			imageUrl = content.substring(index + 12, content.length() - 1);
-			content = content.substring(0, index).trim();
+		if (content != null) {
+			int index = content.lastIndexOf("[Image URL: ");
+			if (index != -1) {
+				imageUrl = content.substring(index + 12, content.length() - 1);
+				content = content.substring(0, index).trim();
+			}
 		}
 		return CampaignDto.campaignBuilder()
 			.id(notice.getId())

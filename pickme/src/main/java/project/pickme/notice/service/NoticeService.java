@@ -83,7 +83,11 @@ public class NoticeService {
 		if (notice == null) {
 			return null;
 		}
-		if (notice.getContent().contains("[Image URL: ")) {
+		String content = notice.getContent();
+		if (content == null) {
+			return NoticeDto.fromEntity(notice);
+		}
+		if (content.contains("[Image URL: ")) {
 			return CampaignDto.fromEntity(notice);
 		}
 		return NoticeDto.fromEntity(notice);
@@ -99,6 +103,18 @@ public class NoticeService {
 		return null;
 	}
 
+	private String updateImageUrlInContent(String content, String newImageUrl) {
+		if (content == null) {
+			return "[Image URL: " + newImageUrl + "]";
+		}
+		int index = content.lastIndexOf("[Image URL: ");
+		if (index != -1) {
+			return content.substring(0, index) + "[Image URL: " + newImageUrl + "]";
+		} else {
+			return content + "\n[Image URL: " + newImageUrl + "]";
+		}
+	}
+
 	private void deleteExistingImage(String imageUrl) {
 		if (imageUrl != null) {
 			String fileName = imageUrl.substring(imageUrl.lastIndexOf("/") + 1);
@@ -107,7 +123,6 @@ public class NoticeService {
 	}
 
 	private Customs getCustomsById(String customsId) {
-		return customsMapper.findById(customsId)
-			.orElseThrow(() -> new RuntimeException("Customs not found"));
+		return customsMapper.findById(customsId).get();
 	}
 }
