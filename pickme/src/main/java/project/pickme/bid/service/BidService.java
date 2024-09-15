@@ -48,10 +48,10 @@ public class BidService {
 
 	@Transactional
 	public MaxPriceDto addBid(AddBidDto addBidDto) {    //입찰하는 메서드
-		User user = userMapper.findUserById(addBidDto.getUserId()).orElseThrow(() -> new BusinessException(NOT_FOUND_USER));
 		Item item = getItem(addBidDto.getItemId());
 
 		if (item.isOpen()) {
+			User user = userMapper.findUserById(addBidDto.getUserId()).orElseThrow(() -> new BusinessException(NOT_FOUND_USER));
 			BidCreateDto bidCreateDto = BidCreateDto.create(addBidDto.getPrice(), user.getId(), item.getId());
 			bidMapper.save(bidCreateDto);
 
