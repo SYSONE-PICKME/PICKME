@@ -2,22 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="project.pickme.bid.repository.BidMapper">
     <resultMap id="BidResultMap" type="project.pickme.bid.domain.Bid">
-        <id property="id" column="id" />
-        <result property="price" column="price" />
-        <result property="bidTime" column="bid_time" />
-        <result property="isSuccess" column="is_success" />
-        <association property="user" column="user_id" javaType="project.pickme.user.domain.User" select="project.pickme.user.repository.UserMapper.findUserById"/>
-        <association property="item" column="item_id" javaType="project.pickme.item.domain.Item" />
+        <id property="id" column="id"/>
+        <result property="price" column="price"/>
+        <result property="bidTime" column="bid_time"/>
+        <result property="isSuccess" column="is_success"/>
+        <association property="user" column="user_id" javaType="project.pickme.user.domain.User"
+                     select="project.pickme.user.repository.UserMapper.findUserById"/>
+        <association property="item" column="item_id" javaType="project.pickme.item.domain.Item"/>
     </resultMap>
 
     <select id="findAll" resultMap="BidResultMap">
-        select
-            b.bid_id as id,
-            b.price,
-            b.bid_time,
-            b.is_success,
-            u.id as user_id,
-            i.item_id as item_id
+        select b.bid_id  as id,
+               b.price,
+               b.bid_time,
+               b.is_success,
+               u.id      as user_id,
+               i.item_id as item_id
         from Bid b
                  left join User u on b.user_id = u.id
                  left join Item i on b.item_id = i.item_id
@@ -25,11 +25,12 @@
 
     <insert id="save" parameterType="project.pickme.bid.dto.BidCreateDto" useGeneratedKeys="true" keyProperty="bidId">
         insert into Bid(item_id, user_id, price, bid_time, is_success)
-        values(#{itemId}, #{userId}, #{price}, #{bidTime}, #{isSuccess})
+        values (#{itemId}, #{userId}, #{price}, #{bidTime}, #{isSuccess})
     </insert>
 
     <delete id="deleteAll">
-        delete from Bid
+        delete
+        from Bid
     </delete>
 
     <select id="findMaxBidByItemId" parameterType="long" resultType="long">
@@ -40,13 +41,12 @@
     </select>
 
     <select id="findBidById" parameterType="long" resultMap="BidResultMap">
-        select
-            b.bid_id as id,
-            b.price,
-            b.bid_time,
-            b.is_success,
-            u.id as user_id,
-            i.item_id as item_id
+        select b.bid_id  as id,
+               b.price,
+               b.bid_time,
+               b.is_success,
+               u.id      as user_id,
+               i.item_id as item_id
         from Bid b
                  left join User u on b.user_id = u.id
                  left join Item i on b.item_id = i.item_id
@@ -64,5 +64,23 @@
         from Bid
         where item_id = #{itemId}
         order by price
+    </select>
+
+    <select id="findMySuccessfulBid">
+        select i.item_id as itemNum,
+               i.name as itemName,
+               c.name as customsName,
+               b.price as price,
+               img.url as imgUrl
+        from Item i
+                 join Bid b
+                      on i.item_id = b.item_id
+                 join Customs c
+                      on c.id = i.customs_id
+                 join Image img
+                      on img.item_id = i.item_id
+        where b.is_success = 1
+          and b.user_id = #{id}
+          and img.seq = 0;
     </select>
 </mapper>
