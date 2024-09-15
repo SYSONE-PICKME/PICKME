@@ -42,8 +42,7 @@
                i.status     as status,
                img.url      as url
         from Item i
-                 left join Image img
-                           on i.item_id = img.item_id
+                 left join Image img on i.item_id = img.item_id
         where customs_id = #{customsId}
           and img.seq = 0;
     </select>
