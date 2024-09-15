@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.apache.ibatis.annotations.Mapper;
 import project.pickme.bid.domain.Bid;
 import project.pickme.bid.dto.BidCreateDto;
+import project.pickme.bid.dto.SuccessfulBidDto;
 
 @Mapper
 public interface BidMapper {
@@ -22,4 +23,6 @@ public interface BidMapper {
 	Optional<Bid> findBidById(Long bidId);
 
 	void updateBidSuccess(Long bidId);
+
+	List<SuccessfulBidDto> findMySuccessfulBid(String id);
 }
