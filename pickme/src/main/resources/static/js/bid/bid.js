@@ -21,6 +21,10 @@ document.addEventListener("DOMContentLoaded", function () {
     myPointElement.textContent = formatCurrency(myPoint);
 });
 
+document.querySelector('.recharge-btn').addEventListener('click', function() {
+    window.location.href = '/user/charge';
+});
+
 //웹소켓 부분
 function sendBidToServer(socket, price, itemId, userId){
     const message = {
