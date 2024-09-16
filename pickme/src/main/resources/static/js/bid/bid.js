@@ -33,6 +33,41 @@ function sendBidToServer(socket, price, itemId, userId){
     socket.send(JSON.stringify(message));
     console.log("입찰 금액 전송: ", message);
 }
+//변수 선언
+let selectedPrice = null;
+let selectedBid = null;
+
+const handlers = {
+    priceUpdate: function(data){
+        if(data.maxPrice != undefined){
+            updateMaxPrice(data.maxPrice);
+            addData(data.maxPrice);
+            selectedPrice = data.maxPrice;
+            selectedBid = data.bidId;
+        }
+    },
+    bidResult: function(data){
+        if (data.result === 'success') {
+            displayConfetti();
+            modal.open("입찰에 성공하셨습니다~");
+        }
+        if (data.result === 'fail'){
+            modal.open("입찰에 실패했습니다.");
+        }
+    }
+};
+
+function handleSocketMessage(event) {
+    const data = JSON.parse(event.data);
+    console.log("서버로부터 받음: ", data);
+
+    const handler = handlers[data.type];
+    if(handler) {
+        handler(data);
+    } else {
+        console.warn("알 수 없는 메세지 타입", data.type);
+    }
+}
 
 document.addEventListener("DOMContentLoaded", function () {
     const modal = new Modal("modal", "modal-message", "modal-confirm");
@@ -60,42 +95,6 @@ document.addEventListener("DOMContentLoaded", function () {
             socket.send(JSON.stringify(message));
             socket.close();
             console.log("화면 나감 메시지 전송", message);
-        }
-    };
-
-    const handleSocketMessage = (event) => {
-        const data = JSON.parse(event.data);
-        console.log("서버로부터 받음: ", data);
-
-        const handler = handlers[data.type];
-        if(handler) {
-            handler(data);
-        } else {
-            console.warn("알 수 없는 메세지 타입", data.type);
-        }
-    };
-
-    //변수 선언
-    let selectedPrice = null;
-    let selectedBid = null;
-
-    const handlers = {
-        priceUpdate: function(data){
-            if(data.maxPrice != undefined){
-                updateMaxPrice(data.maxPrice);
-                addData(data.maxPrice);
-                selectedPrice = data.maxPrice;
-                selectedBid = data.bidId;
-            }
-        },
-        bidResult: function(data){
-            if (data.result === 'success') {
-                displayConfetti();
-                modal.open("입찰에 성공하셨습니다~");
-            }
-            if (data.result === 'fail'){
-                modal.open("입찰에 실패했습니다.");
-            }
         }
     };
 

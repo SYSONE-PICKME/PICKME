@@ -68,11 +68,11 @@ public class BidService {
 		mailService.sendSuccessfulBidMail(selectedBidDto, bid.getUserEmail());
 	}
 
-	private Item getItem(Long itemId) {
-		return itemMapper.findItemById(itemId).orElseThrow(() -> new BusinessException(NOT_FOUND_ITEM));
-	}
-
 	public List<SuccessfulBidDto> findMySuccessfulBid(User user) {
 		return bidMapper.findMySuccessfulBid(user.getId());
+	}
+
+	private Item getItem(Long itemId) {
+		return itemMapper.findItemById(itemId).orElseThrow(() -> new BusinessException(NOT_FOUND_ITEM));
 	}
 }
