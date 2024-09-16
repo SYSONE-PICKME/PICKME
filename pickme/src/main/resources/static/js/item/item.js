@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     const li = document.createElement('li');
                     li.innerHTML = `
                                 <img src="${e.target.result}" alt="${file.name}">
-                                <button type="button" class="delBtn" aria-label="삭제">X</button>
+                                <button type="button" class="delBtn" aria-label="삭제">x</button>
                             `;
                     preview.appendChild(li);
 
