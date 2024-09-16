@@ -21,8 +21,7 @@ import project.pickme.bid.dto.SuccessfulBidDto;
 import project.pickme.bid.repository.BidMapper;
 import project.pickme.common.exception.BusinessException;
 import project.pickme.item.domain.Item;
-import project.pickme.bid.dto.response.OneBidItemDto;
-import project.pickme.item.repository.ItemMapper;
+import project.pickme.item.repository.FindItemMapper;
 import project.pickme.payment.dto.SavePaymentDto;
 import project.pickme.payment.repository.PaymentMapper;
 import project.pickme.user.service.MailService;
@@ -33,22 +32,15 @@ import project.pickme.user.repository.UserMapper;
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class BidService {
-	private final ItemMapper itemMapper;
+	private final FindItemMapper itemMapper;
 	private final UserMapper userMapper;
 	private final BidMapper bidMapper;
 	private final PaymentMapper paymentMapper;
 	private final MailService mailService;
 
-	public OneBidItemDto showOneBidItem(User user, Long itemId) {
-		Item item = getItem(itemId);
-
-		//TODO: 이미지 조회 로직, Item 쪽으로 옮기는게 나을 듯
-		return OneBidItemDto.createOf(item, user,"test.png");
-	}
-
 	@Transactional
 	public MaxPriceDto addBid(AddBidDto addBidDto) {    //입찰하는 메서드
-		Item item = getItem(addBidDto.getItemId());
+		Item item = itemMapper.findItemById(addBidDto.getItemId()).orElseThrow(() -> new BusinessException(NOT_FOUND_ITEM));
 
 		if (item.isOpen()) {
 			User user = userMapper.findUserById(addBidDto.getUserId()).orElseThrow(() -> new BusinessException(NOT_FOUND_USER));
@@ -81,9 +73,5 @@ public class BidService {
 
 	public List<SuccessfulBidDto> findMySuccessfulBid(User user) {
 		return bidMapper.findMySuccessfulBid(user.getId());
-	}
-
-	private Item getItem(Long itemId) {
-		return itemMapper.findItemById(itemId).orElseThrow(() -> new BusinessException(NOT_FOUND_ITEM));
 	}
 }

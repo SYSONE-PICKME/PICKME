@@ -20,7 +20,8 @@ import project.pickme.user.repository.CustomsMapper;
 
 @SpringBootTest
 @ActiveProfiles("test")
-class ItemMapperTest {
+class FindItemMapperTest {
+	@Autowired private FindItemMapper findItemMapper;
 	@Autowired private ItemMapper itemMapper;
 	@Autowired private CustomsMapper customsMapper;
 
@@ -45,7 +46,7 @@ class ItemMapperTest {
 	@DisplayName("아이템 아이디로 아이템 한개를 찾을 수 있다.")
 	void findItemById() {
 	    // given // when
-		Item findItem = itemMapper.findItemById(itemId).get();
+		Item findItem = findItemMapper.findItemById(itemId).get();
 
 		// then
 		Assertions.assertThat(findItem)

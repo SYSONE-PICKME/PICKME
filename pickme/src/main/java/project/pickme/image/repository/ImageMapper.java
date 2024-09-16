@@ -1,8 +1,8 @@
-package project.pickme.item.repository;
+package project.pickme.image.repository;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import project.pickme.item.dto.ImageDto;
+import project.pickme.image.dto.ImageDto;
 
 @Mapper
 public interface ImageMapper {
