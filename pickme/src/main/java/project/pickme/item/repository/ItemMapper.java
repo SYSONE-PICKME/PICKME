@@ -1,5 +1,6 @@
 package project.pickme.item.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -12,4 +13,6 @@ public interface ItemMapper {
 	Optional<Item> findItemById(Long itemId);
 
 	void insertItem(ItemDto itemDto);
+
+	List<ItemDto> findItemsByCustomsId(String customsId);
 }
