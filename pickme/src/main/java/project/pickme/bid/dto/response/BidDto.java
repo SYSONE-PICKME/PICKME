@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
-public class BidCreateDto {
+public class BidDto {
 	private Long bidId;    //save 후 반환 받은 저장된 BidId
 	private long price;
 	private LocalDateTime bidTime;
@@ -20,8 +20,8 @@ public class BidCreateDto {
 	private String userId;
 	private Long itemId;
 
-	public static BidCreateDto create(long price, String userId, Long itemId) {
-		return BidCreateDto.builder()
+	public static BidDto create(long price, String userId, Long itemId) {
+		return BidDto.builder()
 			.price(price)
 			.bidTime(LocalDateTime.now())
 			.isSuccess(false)

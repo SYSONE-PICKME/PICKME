@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
-import project.pickme.bid.dto.response.BidCreateDto;
+import project.pickme.bid.dto.response.BidDto;
 import project.pickme.bid.repository.BidMapper;
 import project.pickme.item.dto.ItemDto;
 import project.pickme.item.repository.ItemMapper;
@@ -59,10 +59,10 @@ class PaymentMapperTest {
 	@DisplayName("포인트 결제 내역을 저장할 수 있다.")
 	void save() {
 	    // given
-		BidCreateDto bidCreateDto = BidCreateDto.create(11000l, "testUser", itemId);
-		bidMapper.save(bidCreateDto);
+		BidDto bidDto = BidDto.create(11000l, "testUser", itemId);
+		bidMapper.save(bidDto);
 
-		SavePaymentDto savePaymentDto = SavePaymentDto.createOf("testUser", bidCreateDto.getBidId());
+		SavePaymentDto savePaymentDto = SavePaymentDto.createOf("testUser", bidDto.getBidId());
 
 		// when //then
 		paymentMapper.save(savePaymentDto);

@@ -8,7 +8,7 @@ import java.util.NoSuchElementException;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
-import project.pickme.bid.dto.response.OneBidItemDto;
+import project.pickme.item.dto.OneBidItemDto;
 import project.pickme.common.exception.BusinessException;
 import project.pickme.item.domain.Item;
 import project.pickme.item.dto.FindItemDto;

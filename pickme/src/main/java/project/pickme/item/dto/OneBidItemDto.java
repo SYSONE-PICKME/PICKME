@@ -1,4 +1,4 @@
-package project.pickme.bid.dto.response;
+package project.pickme.item.dto;
 
 import java.time.LocalDateTime;
 

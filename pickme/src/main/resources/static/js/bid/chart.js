@@ -1,7 +1,7 @@
 const ctx = document.querySelector('#myChart').getContext('2d');
-let labels = []; // 초기화
-let data = [];   // 초기화
-let xValueCounter = 1; // 초기화
+let labels = [];
+let data = [];
+let xValueCounter = 1;
 
 export function initChartData(allPrice, startPrice) {
     if (allPrice.length > 0) {

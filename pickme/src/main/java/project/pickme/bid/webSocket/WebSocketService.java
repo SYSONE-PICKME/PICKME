@@ -56,7 +56,6 @@ public class WebSocketService {
 	}
 
 	public void sendResultAllClient(SelectedBidDto selectedBidDto) {
-		//TODO: 아무도 입찰 안한경우 처리 해야함
 		//성공한 유저
 		String userId = selectedBidDto.getUserId();
 		Long itemId = selectedBidDto.getItemId();

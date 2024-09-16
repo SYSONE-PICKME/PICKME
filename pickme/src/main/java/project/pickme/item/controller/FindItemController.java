@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.RequiredArgsConstructor;
-import project.pickme.bid.dto.response.OneBidItemDto;
+import project.pickme.item.dto.OneBidItemDto;
 import project.pickme.common.annotation.CurrentUser;
 import project.pickme.item.service.FindItemService;
 import project.pickme.item.dto.FindItemDto;

@@ -13,7 +13,7 @@ import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import project.pickme.bid.domain.Bid;
 import project.pickme.bid.dto.reqeust.AddBidDto;
-import project.pickme.bid.dto.response.BidCreateDto;
+import project.pickme.bid.dto.response.BidDto;
 import project.pickme.bid.dto.response.BidDetailsDto;
 import project.pickme.bid.dto.response.MaxPriceDto;
 import project.pickme.bid.dto.response.SelectedBidDto;
@@ -44,10 +44,10 @@ public class BidService {
 
 		if (item.isOpen()) {
 			User user = userMapper.findUserById(addBidDto.getUserId()).orElseThrow(() -> new BusinessException(NOT_FOUND_USER));
-			BidCreateDto bidCreateDto = BidCreateDto.create(addBidDto.getPrice(), user.getId(), item.getId());
-			bidMapper.save(bidCreateDto);
+			BidDto bidDto = BidDto.create(addBidDto.getPrice(), user.getId(), item.getId());
+			bidMapper.save(bidDto);
 
-			return MaxPriceDto.createOf(bidCreateDto.getBidId(), addBidDto.getPrice());
+			return MaxPriceDto.createOf(bidDto.getBidId(), addBidDto.getPrice(), addBidDto.getUserId());
 		}
 
 		throw new BusinessException(BID_NOT_PROGRESS);

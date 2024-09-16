@@ -10,8 +10,9 @@ public class MaxPriceDto {
 	private final String type = "priceUpdate";
 	private Long bidId;
 	private long maxPrice;
+	private String userId;
 
-	public static MaxPriceDto createOf(Long bidId, long maxPrice) {
-		return new MaxPriceDto(bidId, maxPrice);
+	public static MaxPriceDto createOf(Long bidId, long maxPrice, String userId) {
+		return new MaxPriceDto(bidId, maxPrice, userId);
 	}
 }
