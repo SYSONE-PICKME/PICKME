@@ -1,24 +1,31 @@
 import Modal from './modal.js';
-import {addData} from './chart.js';
+import {initChartData, addData} from './chart.js';
 import {validBid, formatCurrency, updateMaxPrice } from './price.js';
 
 let myPoint;
+let selectedPrice = null;
+let selectedBid = null;
+
+function fetchBidDetails() {
+    $.ajax({
+        url: `/user/bid/details/${itemId}`,
+        method: 'GET',
+        success: function (response) {
+            if (response.success) {
+                const bidDetails = response.data;
+                document.querySelector('.max-price').textContent = formatCurrency(parseInt(bidDetails.maxPrice));
+                document.querySelector('.my-point').textContent = formatCurrency(parseInt(bidDetails.myPoint));
+                initChartData(bidDetails.allPrice);
+            }
+        }
+    })
+}
 
 document.addEventListener("DOMContentLoaded", function () {
     // 시작 가격
     const startPriceElement = document.querySelector('.price');
     const startPrice = parseInt(startPriceElement.textContent);
     startPriceElement.textContent = formatCurrency(startPrice);
-
-    // 현재 최고가
-    const maxPriceElement = document.querySelector('.max-price');
-    const maxPrice = parseInt(maxPriceElement.textContent);
-    maxPriceElement.textContent = formatCurrency(maxPrice);
-
-    // 보유 포인트
-    const myPointElement = document.querySelector('.my-point');
-    myPoint = parseInt(myPointElement.textContent);
-    myPointElement.textContent = formatCurrency(myPoint);
 });
 
 document.querySelector('.recharge-btn').addEventListener('click', function() {
@@ -37,9 +44,6 @@ function sendBidToServer(socket, price, itemId, userId){
     socket.send(JSON.stringify(message));
     console.log("입찰 금액 전송: ", message);
 }
-//변수 선언
-let selectedPrice = null;
-let selectedBid = null;
 
 const handlers = {
     priceUpdate: function(data){
@@ -81,6 +85,8 @@ document.addEventListener("DOMContentLoaded", function () {
     let socket = new WebSocket(`ws://localhost:8099/connect/${itemId}/${userId}`);
     socket.onopen = () => console.log("웹 소켓 open");
 
+    fetchBidDetails();
+
     const createSocketConnection = () => {
         socket = new WebSocket(`ws://localhost:8099/connect/${itemId}/${userId}`);
         socket.onopen = () => console.log("웹 소켓 open");
@@ -107,6 +113,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.addEventListener('visibilitychange', function () {
         if (document.visibilityState === 'visible') {
             createSocketConnection();
+            fetchBidDetails();
         } else if (document.visibilityState === 'hidden') {
             closeSocketConnection();
         }

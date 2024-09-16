@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import project.pickme.bid.domain.Bid;
 import project.pickme.bid.dto.reqeust.AddBidDto;
 import project.pickme.bid.dto.response.BidCreateDto;
+import project.pickme.bid.dto.response.BidDetailsDto;
 import project.pickme.bid.dto.response.MaxPriceDto;
 import project.pickme.bid.dto.response.SelectedBidDto;
 import project.pickme.bid.dto.SuccessfulBidDto;
@@ -40,10 +41,9 @@ public class BidService {
 
 	public OneBidItemDto showOneBidItem(User user, Long itemId) {
 		Item item = getItem(itemId);
-		List<Long> allPrice = bidMapper.findAllPriceByItemId(item.getId());
 
-		//TODO: 이미지 조회 로직
-		return OneBidItemDto.createOf(item, user, allPrice, "test.png");
+		//TODO: 이미지 조회 로직, Item 쪽으로 옮기는게 나을 듯
+		return OneBidItemDto.createOf(item, user,"test.png");
 	}
 
 	@Transactional
@@ -71,6 +71,12 @@ public class BidService {
 
 		//낙찰자에게 메일 전송
 		mailService.sendSuccessfulBidMail(selectedBidDto, bid.getUserEmail());
+	}
+
+	public BidDetailsDto showBidDetails(Long itemId, User user) {
+		List<Long> allPrice = bidMapper.findAllPriceByItemId(itemId);
+
+		return BidDetailsDto.createOf(allPrice, user.getPoint());
 	}
 
 	public List<SuccessfulBidDto> findMySuccessfulBid(User user) {

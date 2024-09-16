@@ -40,7 +40,7 @@ public class S3Service {
 			amazonS3.putObject(new PutObjectRequest(bucket, fileName, inputStream, objectMetadata)        // 객체를 S3에 업로드
 				.withCannedAcl(CannedAccessControlList.PublicRead));        // 업로드된 객체에 대한 공개 읽기 권한을 설정
 		} catch (IOException e) {
-			throw new BusinessException(IMAGE_UPLOAD_FAILED);
+			// throw new BusinessException(IMAGE_UPLOAD_FAILED);
 		}
 
 		return amazonS3.getUrl(bucket, fileName).toString();

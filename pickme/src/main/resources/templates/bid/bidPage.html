@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/bid/bidPage.css">
     <link rel="stylesheet" href="/css/bid/modal.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 </head>
 <body>
 <header class="header">
@@ -49,11 +50,11 @@
         <div class="bid-info">
             <div class="bid-info-row">
                 <span class="bold-text">현재 최고가</span>
-                <span class="max-price" th:text="*{maxPrice}"></span>
+                <span class="max-price"></span>
             </div>
             <div class="bid-info-row">
                 <span class="bold-text">보유 포인트 <button class="recharge-btn">충전</button></span>
-                <span class="my-point" th:text="*{myPoint}"></span>
+                <span class="my-point"></span>
             </div>
             <div class="bid-info-row">
                 <span class="bold-text">남은 시간</span>
@@ -73,7 +74,6 @@
 <script>
     const itemId = [[${oneBidItemDto.itemId}]];
     const userId = '[[${oneBidItemDto.userId}]]';
-    const allPrice = [[${oneBidItemDto.allPrice}]];
 </script>
 <script type="module" src="/js/bid/modal.js"></script>
 <script src="/js/bid/timer.js"></script>
