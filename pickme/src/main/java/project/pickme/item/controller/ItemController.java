@@ -33,15 +33,21 @@ public class ItemController {
 		model.addAttribute("type", Type.values());
 		model.addAttribute("categories", Category.values());
 
-		return "item/create-item";
+		return "item/createItem";
 	}
 
 	@PostMapping("/create")
-	public String insertItem(@ModelAttribute ItemFormDto itemFormDto,
-		@RequestPart(value = "files", required = false) MultipartFile[] files, @CurrentUser
+	public String insertItem(@ModelAttribute ItemFormDto itemFormDto, @CurrentUser
 	Customs customs) throws IOException {
-		itemService.save(itemFormDto, files, customs);
+		itemService.save(itemFormDto, customs);
 
 		return "redirect:/customs/item/create";
+	}
+
+	@GetMapping("/list")
+	public String getItemList(@CurrentUser Customs customs, Model model) {
+		model.addAttribute("itemList", itemService.findItemsByCustomsId(customs.getId()));
+
+		return "item/customsItemList";
 	}
 }

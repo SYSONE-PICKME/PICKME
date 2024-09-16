@@ -26,23 +26,12 @@
 
     <div class="form-row">
         <div class="form-col">
-            <label for="auctionStartDate">경매 시작 날짜</label>
-            <input type="date" id="auctionStartDate" name="startDate" required>
-        </div>
-        <div class="form-col">
             <label for="auctionStartTime">경매 시작 시간</label>
-            <input type="time" id="auctionStartTime" name="startTime" required>
-        </div>
-    </div>
-
-    <div class="form-row">
-        <div class="form-col">
-            <label for="auctionEndDate">경매 마감 날짜</label>
-            <input type="date" id="auctionEndDate" name="endDate" required>
+            <input type="datetime-local" id="auctionStartTime" name="startTime" required>
         </div>
         <div class="form-col">
             <label for="auctionEndTime">경매 마감 시간</label>
-            <input type="time" id="auctionEndTime" name="endTime" required>
+            <input type="datetime-local" id="auctionEndTime" name="endTime" required>
         </div>
     </div>
 
@@ -59,7 +48,7 @@
         <label for="category">관련 법규</label>
         <div th:each="law : ${laws}">
             <input type="checkbox" th:id="'law-' + ${law.id}" th:value="${law.id}" th:name="lawId[]">
-            <label th:for="'law-' + ${law.id}" th:text="${law.title}"></label>
+            <label th:for="'law-' + ${law.id}" th:text="${law.title}" id="categoryLabel"></label>
         </div>
     </div>
 
@@ -72,11 +61,12 @@
     </div>
 
     <div class="filebox clearfix">
-        <div class="inputFile">
+        <label for="inputFile">사진 첨부</label>
+        <div class="inputFile" id="inputFile">
             <label for="AddImgs" class="addImgBtn">+</label>
+            <ul id="Preview" class="sortable"></ul>
             <input type="file" id="AddImgs" name="files" class="upload-hidden" accept="image/*" multiple>
         </div>
-        <ul id="Preview" class="sortable"></ul>
     </div>
 
     <button type="submit">경매 등록하기</button>

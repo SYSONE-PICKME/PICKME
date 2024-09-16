@@ -6,7 +6,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class ImageDto {
-	private Long itemId;
+	private long itemId;
 	private String name;
 	private String url;
 	private int seq;

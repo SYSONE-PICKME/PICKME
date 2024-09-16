@@ -11,7 +11,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import project.pickme.bid.dto.response.BidResult;
+import project.pickme.bid.dto.response.BidResultDto;
 import project.pickme.bid.dto.response.SelectedBidDto;
 import project.pickme.bid.repository.BidMapper;
 
@@ -61,11 +61,11 @@ public class WebSocketService {
 		String userId = selectedBidDto.getUserId();
 		Long itemId = selectedBidDto.getItemId();
 		
-		sendToClient(userId, BidResult.success());
+		sendToClient(userId, BidResultDto.success());
 		closeSessionByUserId(itemId, userId);
 
 		//실패한 유저
-		sendToAllClient(itemId, BidResult.fail());
+		sendToAllClient(itemId, BidResultDto.fail());
 		closeAllConnection(itemId);
 	}
 

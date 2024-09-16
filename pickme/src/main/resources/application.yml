@@ -29,7 +29,6 @@ spring:
       enabled: true
       max-request-size: 300MB
       max-file-size: 50MB
-
   mail:
     host: smtp.naver.com
     port: 465

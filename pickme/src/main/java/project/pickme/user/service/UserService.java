@@ -1,6 +1,6 @@
 package project.pickme.user.service;
 
-import static project.pickme.common.exception.ErrorCode.*;
+import static project.pickme.user.exception.UserErrorCode.*;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -22,7 +22,7 @@ public class UserService {
 	private final BCryptPasswordEncoder passwordEncoder;
 
 	@Transactional
-	public void signUp(SignUpDto signUpDto){
+	public void signUp(SignUpDto signUpDto) {
 		User user = createUser(signUpDto);
 		userMapper.save(user);
 	}
