@@ -1,4 +1,4 @@
-package project.pickme.config;
+package project.pickme.s3.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -37,5 +37,4 @@ public class S3Config {
 			.withCredentials(new AWSStaticCredentialsProvider(awsCredentials))
 			.build();
 	}
-
 }
