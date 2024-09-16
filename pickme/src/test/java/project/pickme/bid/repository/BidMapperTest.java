@@ -1,6 +1,8 @@
 package project.pickme.bid.repository;
 
+import static java.time.LocalDateTime.*;
 import static org.assertj.core.api.Assertions.*;
+import static project.pickme.item.constant.Status.*;
 import static project.pickme.user.constant.Type.*;
 
 import java.util.Collection;
@@ -18,8 +20,12 @@ import org.springframework.test.context.ActiveProfiles;
 
 import project.pickme.bid.domain.Bid;
 import project.pickme.bid.dto.response.BidCreateDto;
+import project.pickme.item.dto.ItemDto;
+import project.pickme.item.repository.ItemMapper;
 import project.pickme.user.constant.Role;
+import project.pickme.user.domain.Customs;
 import project.pickme.user.domain.User;
+import project.pickme.user.repository.CustomsMapper;
 import project.pickme.user.repository.UserMapper;
 
 @SpringBootTest
@@ -27,10 +33,19 @@ import project.pickme.user.repository.UserMapper;
 class BidMapperTest {
 	@Autowired private BidMapper bidMapper;
 	@Autowired private UserMapper userMapper;
+	@Autowired private ItemMapper itemMapper;
+	@Autowired private CustomsMapper customsMapper;
+
+	private Long itemId;
 
 	@BeforeEach
 	void setUp(){
-		//TODO: 공매 품 저장 해야함 지금은 db에 데이터 넣었음
+		customsMapper.save(Customs.createCustoms("incheon", "1234", "incheon", "02-123-1234"));
+
+		ItemDto itemDto = new ItemDto("테스트", 1, USER,10000l, now(), now(), CLOSED, "incheon");
+		itemMapper.insertItem(itemDto);
+		itemId = itemDto.getItemId();
+
 		User user = createUser("testUser");
 		userMapper.save(user);
 	}
@@ -38,14 +53,16 @@ class BidMapperTest {
 	@AfterEach
 	void tearDown() {
 		bidMapper.deleteAll();
+		itemMapper.deleteAll();
 		userMapper.deleteAll();
+		customsMapper.deleteAll();
 	}
 
 	@Test
 	@DisplayName("입찰을 저장할 수 있다.")
 	void save() {
 	    // given
-		BidCreateDto bid = BidCreateDto.create(1000, "testUser", 1l);
+		BidCreateDto bid = BidCreateDto.create(1000, "testUser", itemId);
 
 		// when
 		bidMapper.save(bid);
@@ -61,7 +78,7 @@ class BidMapperTest {
 	@DisplayName("저장된 입찰 아이디를 반환받을 수 있다.")
 	void saveReturnId() {
 		// given
-		BidCreateDto bid = BidCreateDto.create(1000, "testUser", 2l);
+		BidCreateDto bid = BidCreateDto.create(1000, "testUser", itemId);
 
 		// when
 		bidMapper.save(bid);
@@ -76,7 +93,6 @@ class BidMapperTest {
 	void findMaxBidByItemId() {
 	    // given
 		User user = userMapper.findUserById("testUser").get();
-		Long itemId = 1l;
 		BidCreateDto bid1 = BidCreateDto.create(1000, user.getId(), itemId);
 		BidCreateDto bid2 = BidCreateDto.create(10000, user.getId(), itemId);
 
@@ -95,7 +111,6 @@ class BidMapperTest {
 	void findBidById() {
 	    // given
 		User user = userMapper.findUserById("testUser").get();
-		Long itemId = 1l;
 		BidCreateDto bid1 = BidCreateDto.create(1000, user.getId(), itemId);
 		BidCreateDto bid2 = BidCreateDto.create(10000, user.getId(), itemId);
 
@@ -116,7 +131,6 @@ class BidMapperTest {
 	Collection<DynamicTest> updateBidSuccess(){
 		//given
 		User user = userMapper.findUserById("testUser").get();
-		Long itemId = 1l;
 		BidCreateDto bid = BidCreateDto.create(1000, user.getId(), itemId);
 		bidMapper.save(bid);
 
@@ -142,7 +156,6 @@ class BidMapperTest {
 	void findAllPriceByItemId() {
 	    // given
 		User user = userMapper.findUserById("testUser").get();
-		Long itemId = 1l;
 		BidCreateDto bid1 = BidCreateDto.create(1000, user.getId(), itemId);
 		BidCreateDto bid2 = BidCreateDto.create(10000, user.getId(), itemId);
 		BidCreateDto bid3 = BidCreateDto.create(100000, user.getId(), itemId);
@@ -152,7 +165,7 @@ class BidMapperTest {
 		bidMapper.save(bid3);
 
 	    // when
-		List<Long> allPriceByItemId = bidMapper.findAllPriceByItemId(1l);
+		List<Long> allPriceByItemId = bidMapper.findAllPriceByItemId(itemId);
 
 		// then
 		assertThat(allPriceByItemId).hasSize(3)

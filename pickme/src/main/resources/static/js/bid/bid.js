@@ -113,18 +113,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     };
 
-    const handleSocketMessage = (event) => {
-        const data = JSON.parse(event.data);
-        console.log("서버로부터 받음: ", data);
-
-        const handler = handlers[data.type];
-        if(handler) {
-            handler(data);
-        } else {
-            console.warn("알 수 없는 메세지 타입", data.type);
-        }
-    };
-
     //변수 선언
     let selectedPrice = null;
     let selectedBid = null;
@@ -146,6 +134,18 @@ document.addEventListener("DOMContentLoaded", function () {
             if (data.result === 'fail'){
                 modal.open("입찰에 실패했습니다.");
             }
+        }
+    };
+
+    const handleSocketMessage = (event) => {
+        const data = JSON.parse(event.data);
+        console.log("서버로부터 받음: ", data);
+
+        const handler = handlers[data.type];
+        if(handler) {
+            handler(data);
+        } else {
+            console.warn("알 수 없는 메세지 타입", data.type);
         }
     };
 

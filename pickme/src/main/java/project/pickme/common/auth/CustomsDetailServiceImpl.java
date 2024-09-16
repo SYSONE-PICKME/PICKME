@@ -1,6 +1,6 @@
 package project.pickme.common.auth;
 
-import static project.pickme.common.exception.ErrorCode.*;
+import static project.pickme.user.exception.UserErrorCode.*;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

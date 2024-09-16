@@ -6,15 +6,15 @@ import lombok.Getter;
 
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
-public class BidResult {
+public class BidResultDto {
 	private final String type = "bidResult";
 	private String result;
 
-	public static BidResult success() {
-		return new BidResult("success");
+	public static BidResultDto success() {
+		return new BidResultDto("success");
 	}
 
-	public static BidResult fail() {
-		return new BidResult("fail");
+	public static BidResultDto fail() {
+		return new BidResultDto("fail");
 	}
 }

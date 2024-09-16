@@ -72,8 +72,11 @@ public class WebSocketHandler extends TextWebSocketHandler {
 	private void selectBid(String payload) {
 		try {
 			SelectedBidDto selectedBidDto = objectMapper.readValue(payload, SelectedBidDto.class);
+			if(selectedBidDto.getBidId() == null){	//아무도 입찰하지 않은 경우
+				return;
+			}
 			webSocketService.sendResultAllClient(selectedBidDto);
-			bidService.selectBid(selectedBidDto.getBidId(), selectedBidDto);    //낙찰처리
+			bidService.selectBid(selectedBidDto);    //낙찰처리
 		} catch (MessagingException | JsonProcessingException e) {
 			log.error("Error selectBid", e);
 		}

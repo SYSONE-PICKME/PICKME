@@ -14,5 +14,7 @@ public interface ItemMapper {
 
 	void insertItem(ItemDto itemDto);
 
+	void deleteAll();
+
 	List<ItemDto> findItemsByCustomsId(String customsId);
 }
