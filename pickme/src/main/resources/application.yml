@@ -11,7 +11,9 @@ spring:
     username: ENC(zo3xgo3TXMih7zIQ/wwSkg==)
     password: ENC(DvMAgRb3Z9VLlmqfrEESA/guiD7i2Oec)
   config:
-    import: "classpath:application-secret.yml"
+    import:
+      - "classpath:application-secret.yml"
+      - "classpath:application-s3.yml"
   servlet:
     multipart:
       enabled: true
