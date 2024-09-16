@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>낙찰 안내</title>
+</head>
+<body style="font-family: 'IBM Plex Sans KR', sans-serif; background-color: #f4f4f4; margin: 0; padding: 0;">
+<div style="max-width: 80vw; margin: 5vh auto; background-color: #ffffff; border: 1px solid #dddddd; border-radius: 8px; overflow: hidden; box-sizing: border-box;">
+    <div style="padding: 0; text-align: center; color: #ffffff;">
+        <img src="https://pickmepickme.s3.ap-northeast-2.amazonaws.com/mail.jpg" alt="헤더 이미지" style="width: 100%; height: auto; display: block;">
+    </div>
+    <div style="margin-top: 50px; padding-left: 2vw; color: black;">
+        <p style="font-weight: bold; font-size: 14px;">안녕하세요, 고객님.</p>
+        <p style="font-weight: bold; font-size: 14px;">아래의 상품이 성공적으로 낙찰되었습니다.</p>
+    </div>
+    <div style="display: flex; align-items: stretch; padding: 2vw; width: 100%; box-sizing: border-box;">
+        <img src="https://pickmepickme.s3.ap-northeast-2.amazonaws.com/computer.jpg" alt="상품 이미지" style="max-width: 25vw; height: auto; margin-right: 2vw; border-radius: 8px; object-fit: cover;"> <!-- TODO: th:src="${itemImage}"로 변경해야함 -->
+        <div style="flex: 1; width: 100%; display: flex; align-items: center;">
+            <div style="border: 1px solid #dddddd; border-radius: 8px; padding: 2vw; background-color: #f9f9f9; width: 100%; box-sizing: border-box;">
+                <strong style="display: block; font-size: 3.5vw; margin-top: 0; color: #333333;">상품명: <span th:text="${itemName}">[상품명]</span></strong>
+                <p style="margin: 1vw 0; color: #555555; font-size: 3vw;">낙찰 금액: <span th:text="${price}">[낙찰 금액]</span> 원</p>
+            </div>
+        </div>
+    </div>
+    <div style="text-align: center; padding: 2vw; background-color: #F6FFF8; color: black; border-top: 1px solid #dddddd; font-size: 2.5vw;">
+        <p style="font-weight: bold; font-size: 14px;">&copy; 2024 PICKME 공매 시스템.</p>
+    </div>
+</div>
+</body>
+</html>

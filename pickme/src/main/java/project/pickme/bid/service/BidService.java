@@ -1,24 +1,30 @@
 package project.pickme.bid.service;
 
-import static project.pickme.common.exception.ErrorCode.*;
-import static project.pickme.item.constant.Status.*;
+import static project.pickme.bid.exception.BidErrorCode.*;
+import static project.pickme.item.exception.ItemErrorCode.*;
+import static project.pickme.user.exception.UserErrorCode.*;
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import project.pickme.bid.domain.Bid;
-import project.pickme.bid.dto.AddBidDto;
-import project.pickme.bid.dto.BidCreateDto;
-import project.pickme.bid.dto.MaxPriceDto;
+import project.pickme.bid.dto.reqeust.AddBidDto;
+import project.pickme.bid.dto.response.BidCreateDto;
+import project.pickme.bid.dto.response.MaxPriceDto;
+import project.pickme.bid.dto.response.SelectedBidDto;
 import project.pickme.bid.dto.SuccessfulBidDto;
 import project.pickme.bid.repository.BidMapper;
 import project.pickme.common.exception.BusinessException;
 import project.pickme.item.domain.Item;
-import project.pickme.bid.dto.OneBidItemDto;
+import project.pickme.bid.dto.response.OneBidItemDto;
 import project.pickme.item.repository.ItemMapper;
+import project.pickme.payment.dto.SavePaymentDto;
+import project.pickme.payment.repository.PaymentMapper;
+import project.pickme.user.service.MailService;
 import project.pickme.user.domain.User;
 import project.pickme.user.repository.UserMapper;
 
@@ -29,37 +35,42 @@ public class BidService {
 	private final ItemMapper itemMapper;
 	private final UserMapper userMapper;
 	private final BidMapper bidMapper;
+	private final PaymentMapper paymentMapper;
+	private final MailService mailService;
 
 	public OneBidItemDto showOneBidItem(User user, Long itemId) {
 		Item item = getItem(itemId);
 		List<Long> allPrice = bidMapper.findAllPriceByItemId(item.getId());
 
 		//TODO: 이미지 조회 로직
-		return OneBidItemDto.of(item, user, allPrice, "test.png");
+		return OneBidItemDto.createOf(item, user, allPrice, "test.png");
 	}
 
 	@Transactional
 	public MaxPriceDto addBid(AddBidDto addBidDto) {    //입찰하는 메서드
-		User user = userMapper.findUserById(addBidDto.getUserId())
-			.orElseThrow(() -> new BusinessException(NOT_FOUND_USER));
 		Item item = getItem(addBidDto.getItemId());
 
-		if (item.getStatus().equals(OPEN)) {
+		if (item.isOpen()) {
+			User user = userMapper.findUserById(addBidDto.getUserId()).orElseThrow(() -> new BusinessException(NOT_FOUND_USER));
 			BidCreateDto bidCreateDto = BidCreateDto.create(addBidDto.getPrice(), user.getId(), item.getId());
 			bidMapper.save(bidCreateDto);
 
-			return MaxPriceDto.create(bidCreateDto.getBidId(), addBidDto.getPrice());
+			return MaxPriceDto.createOf(bidCreateDto.getBidId(), addBidDto.getPrice());
 		}
 
 		throw new BusinessException(BID_NOT_PROGRESS);
 	}
 
 	@Transactional
-	public void closeBid(Long bidId) {
-		Bid bid = bidMapper.findBidById(bidId).orElseThrow(() -> new BusinessException(NOT_FOUND_BID));
+	public void selectBid(SelectedBidDto selectedBidDto) throws MessagingException {
+		Bid bid = bidMapper.findBidById(selectedBidDto.getBidId()).orElseThrow(() -> new BusinessException(NOT_FOUND_BID));
 
-		bidMapper.updateBidSuccess(bidId);
-		userMapper.minusPoint(bid.getUserId(), bid.getPrice());    //포인트 차감
+		bidMapper.updateBidSuccess(selectedBidDto.getBidId());
+		userMapper.minusPoint(bid.getUserId(), bid.getPrice());
+		paymentMapper.save(SavePaymentDto.createOf(selectedBidDto.getUserId(), selectedBidDto.getBidId()));
+
+		//낙찰자에게 메일 전송
+		mailService.sendSuccessfulBidMail(selectedBidDto, bid.getUserEmail());
 	}
 
 	private Item getItem(Long itemId) {

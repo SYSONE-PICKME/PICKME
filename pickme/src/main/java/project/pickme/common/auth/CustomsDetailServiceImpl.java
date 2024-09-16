@@ -1,6 +1,6 @@
 package project.pickme.common.auth;
 
-import static project.pickme.common.exception.ErrorCode.*;
+import static project.pickme.user.exception.UserErrorCode.*;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -19,7 +19,7 @@ public class CustomsDetailServiceImpl implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String id) throws UsernameNotFoundException {
-		Customs customs = customsMapper.findById(id).orElseThrow(() -> new BusinessException(NOT_FOUND_CUSTOMS));
+		Customs customs = customsMapper.findByCustomsId(id).orElseThrow(() -> new BusinessException(NOT_FOUND_CUSTOMS));
 		return new CustomsDetailsImpl(customs);
 	}
 }

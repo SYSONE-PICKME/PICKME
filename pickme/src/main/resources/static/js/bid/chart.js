@@ -1,6 +1,5 @@
 // 차트를 그릴 캔버스 가져오기
 const ctx = document.querySelector('#myChart').getContext('2d');
-
 let labels, data;
 
 if (allPrice.length > 0) {

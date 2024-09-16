@@ -10,7 +10,12 @@ import project.pickme.user.domain.Customs;
 @Mapper
 public interface CustomsMapper {
 	List<Customs> findAll();
-	Optional<Customs> findById(String id);
+
+	Optional<Customs> findByCustomsId(String id);
+
 	void saveAll(List<Customs> customs);
+
 	void deleteAll();
+
+	void save(Customs customs);
 }

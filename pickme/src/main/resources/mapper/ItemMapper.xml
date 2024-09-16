@@ -32,6 +32,10 @@
         values (#{name}, #{code}, #{type}, #{price}, #{startTime}, #{endTime}, #{status}, #{customsId})
     </insert>
 
+    <delete id="deleteAll">
+        delete from Item
+    </delete>
+
     <select id="findItemsByCustomsId">
         select i.item_id    as itemId,
                i.price      as price,
@@ -46,5 +50,4 @@
         where customs_id = #{customsId}
           and img.seq = 0;
     </select>
-
 </mapper>

@@ -1,4 +1,4 @@
-package project.pickme.bid.dto;
+package project.pickme.bid.dto.response;
 
 import java.time.LocalDateTime;
 
@@ -10,10 +10,10 @@ import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
 public class BidCreateDto {
-	private Long bidId;    //save 후 반환 받을 저장된 BidId
+	private Long bidId;    //save 후 반환 받은 저장된 BidId
 	private long price;
 	private LocalDateTime bidTime;
 	private boolean isSuccess;

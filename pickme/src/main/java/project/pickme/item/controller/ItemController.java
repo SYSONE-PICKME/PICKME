@@ -37,10 +37,9 @@ public class ItemController {
 	}
 
 	@PostMapping("/create")
-	public String insertItem(@ModelAttribute ItemFormDto itemFormDto,
-		@RequestPart(value = "files", required = false) MultipartFile[] files, @CurrentUser
+	public String insertItem(@ModelAttribute ItemFormDto itemFormDto, @CurrentUser
 	Customs customs) throws IOException {
-		itemService.save(itemFormDto, files, customs);
+		itemService.save(itemFormDto, customs);
 
 		return "redirect:/customs/item/create";
 	}
