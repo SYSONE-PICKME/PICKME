@@ -1,4 +1,4 @@
-package project.pickme.bid.dto;
+package project.pickme.bid.dto.response;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -25,7 +25,7 @@ public class OneBidItemDto {
 	private String userId;
 	private long myPoint;
 
-	public static OneBidItemDto of(Item item, User user, List<Long> allPrice, String imageUrl) {
+	public static OneBidItemDto createOf(Item item, User user, List<Long> allPrice, String imageUrl) {
 		return OneBidItemDto.builder()
 			.itemId(item.getId())
 			.imageUrl(imageUrl)

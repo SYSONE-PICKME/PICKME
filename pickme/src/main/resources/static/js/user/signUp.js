@@ -10,22 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-//이메일 필드 다 입력한 경우 활성화 시키기
-document.addEventListener('DOMContentLoaded', () => {
-    const emailInput = document.getElementById('email');
-    const emailDomainSelect = document.getElementById('emailDomain');
-    const emailButton = document.getElementById('email-btn');
-
-    const toggleEmailButton = () => {
-        emailButton.disabled = !(emailInput.value && emailDomainSelect.value)
-    }
-
-    emailInput.addEventListener('input', toggleEmailButton);
-    emailDomainSelect.addEventListener('change', toggleEmailButton);
-    toggleEmailButton();
-});
-
-//아이디 필드 입력한 경우 버튼 활성화
+// //아이디 필드 입력한 경우 버튼 활성화
 document.addEventListener('DOMContentLoaded', () => {
     const idInput = document.getElementById('id');
     const checkButton = document.getElementById('check-btn');

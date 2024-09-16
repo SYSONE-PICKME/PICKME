@@ -23,7 +23,7 @@
                  left join Item i on b.item_id = i.item_id
     </select>
 
-    <insert id="save" parameterType="project.pickme.bid.dto.BidCreateDto" useGeneratedKeys="true" keyProperty="bidId">
+    <insert id="save" parameterType="project.pickme.bid.dto.response.BidCreateDto" useGeneratedKeys="true" keyProperty="bidId">
         insert into Bid(item_id, user_id, price, bid_time, is_success)
         values (#{itemId}, #{userId}, #{price}, #{bidTime}, #{isSuccess})
     </insert>
