@@ -1,5 +1,7 @@
 package project.pickme.s3.service;
 
+import static project.pickme.item.exception.ItemErrorCode.*;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.UUID;
