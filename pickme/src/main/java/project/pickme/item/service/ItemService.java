@@ -1,54 +1,34 @@
 package project.pickme.item.service;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.server.ResponseStatusException;
-
-import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.model.CannedAccessControlList;
-import com.amazonaws.services.s3.model.ObjectMetadata;
-import com.amazonaws.services.s3.model.PutObjectRequest;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import project.pickme.common.annotation.CurrentUser;
 import project.pickme.item.constant.Status;
-import project.pickme.item.dto.ImageDto;
 import project.pickme.item.dto.ItemDto;
 import project.pickme.item.dto.ItemFormDto;
 import project.pickme.item.dto.LawDto;
 import project.pickme.item.dto.ItemLawDto;
-import project.pickme.item.repository.ImageMapper;
 import project.pickme.item.repository.ItemMapper;
 import project.pickme.item.repository.LawMapper;
 import project.pickme.item.repository.ItemLawMapper;
+import project.pickme.s3.service.S3Service;
 import project.pickme.user.domain.Customs;
 
-@Slf4j
-@Component
 @Service
 @RequiredArgsConstructor
 public class ItemService {
 	private final LawMapper lawMapper;
 	private final ItemMapper itemMapper;
 	private final ItemLawMapper itemLawMapper;
-	private final ImageMapper imageMapper;
 
-	private final AmazonS3 amazonS3;
+	private final S3Service s3Service;
 
-	@Value("${cloud.aws.s3.bucket}")
-	private String bucket;
-
-	public void save(ItemFormDto itemFormDto, MultipartFile[] files, @CurrentUser Customs customs) throws IOException {
+	public void save(ItemFormDto itemFormDto, MultipartFile[] files, Customs customs) throws IOException {
 		LocalDateTime start = LocalDateTime.of(itemFormDto.getStartDate(), itemFormDto.getStartTime());
 		LocalDateTime end = LocalDateTime.of(itemFormDto.getEndDate(), itemFormDto.getEndTime());
 
@@ -62,7 +42,7 @@ public class ItemService {
 			ItemLawDto itemLawDto = new ItemLawDto(id, itemDto.getItemId());
 			itemLawMapper.insertLaw(itemLawDto);
 		}
-		uploadImages(itemDto, files);
+		s3Service.uploadImages(itemDto, files);
 	}
 
 	public List<LawDto> findAllLaws() {
@@ -98,9 +78,11 @@ public class ItemService {
 			long itemId = itemDto.getItemId();
 			String name = file.getOriginalFilename();
 			String url = uploadImage(file);
-			int seq = sequence;
-			imageMapper.insertImage(new ImageDto(itemId, name, url, seq));
+			imageMapper.insertImage(new ImageDto(itemId, name, url, sequence));
 			sequence++;
 		}
 	}
-}
+
+	public List<ItemDto> findItemsByCustomsId(String customsId) {
+		return itemMapper.findItemsByCustomsId(customsId);
+	}
