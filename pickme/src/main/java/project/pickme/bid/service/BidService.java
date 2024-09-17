@@ -25,7 +25,6 @@ import project.pickme.item.domain.Item;
 import project.pickme.item.repository.FindItemMapper;
 import project.pickme.payment.dto.SavePaymentDto;
 import project.pickme.payment.repository.PaymentMapper;
-import project.pickme.user.service.MailService;
 import project.pickme.user.domain.User;
 import project.pickme.user.repository.UserMapper;
 

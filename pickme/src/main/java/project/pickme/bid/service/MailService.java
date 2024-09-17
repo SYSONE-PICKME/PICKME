@@ -1,4 +1,4 @@
-package project.pickme.user.service;
+package project.pickme.bid.service;
 
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -39,7 +39,7 @@ public class MailService {
 	private String buildBidEmailContent(SelectedBidDto selectedBidDto, long price){
 		Context context = new Context();
 		context.setVariable("itemName", selectedBidDto.getItemName());
-		context.setVariable("imageUrl", "https://pickmepickme.s3.ap-northeast-2.amazonaws.com/computer.jpg"); //TODO: selectedBidDto.getImageUrl로 수정하기
+		context.setVariable("imageUrl", selectedBidDto.getItemImage());
 		context.setVariable("price", price);
 
 		return templateEngine.process("/user/bidMail", context);
