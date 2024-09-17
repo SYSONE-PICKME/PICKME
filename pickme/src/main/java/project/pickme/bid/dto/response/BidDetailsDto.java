@@ -10,10 +10,15 @@ import lombok.Getter;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class BidDetailsDto {
 	private List<Long> allPrice;
-	private Long maxPrice;
+	private long maxPrice;
+	private String userId; //현재 최고가 유저
+	private Long bidId;
 	private long myPoint;
 
-	public static BidDetailsDto createOf(List<Long> allPrice, long point) {
-		return new BidDetailsDto(allPrice, allPrice.getLast(), point);
+	public static BidDetailsDto createOf(List<PriceDto> priceDtos, long point) {
+		PriceDto last = priceDtos.getLast();
+		List<Long> allPrice = priceDtos.stream().map(PriceDto::getPrice).toList();
+
+		return new BidDetailsDto(allPrice, last.getPrice(), last.getUserId(), last.getBidId(), point);
 	}
 }

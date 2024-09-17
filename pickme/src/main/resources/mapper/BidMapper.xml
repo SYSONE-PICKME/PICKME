@@ -60,7 +60,7 @@
     </update>
 
     <select id="findAllPriceByItemId" parameterType="long" resultType="project.pickme.bid.dto.response.PriceDto">
-        select b.price, u.id as userId
+        select b.price, u.id as userId, b.bid_id as bidId
         from Bid b
         left join User u on b.user_id = u.id
         where b.item_id = #{itemId}

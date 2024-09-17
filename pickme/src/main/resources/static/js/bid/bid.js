@@ -15,10 +15,16 @@ function fetchBidDetails() {
         success: function (response) {
             if (response.success) {
                 const bidDetails = response.data;
+
                 document.querySelector('.max-price').textContent = formatCurrency(parseInt(bidDetails.maxPrice));
                 myPoint = parseInt(bidDetails.myPoint);
                 document.querySelector('.my-point').textContent = formatCurrency(myPoint);
-                initChartData(bidDetails.allPrice);
+
+                selectedPrice = bidDetails.maxPrice;
+                selectedUserId = bidDetails.userId;
+                selectedBid = bidDetails.bidId;
+
+                initChartData(bidDetails.allPrice); //입찰 추이 차트 초기화
             }
         }
     })
@@ -31,10 +37,12 @@ document.addEventListener("DOMContentLoaded", function () {
     const startPriceElement = document.querySelector('.price');
     const startPrice = parseInt(startPriceElement.textContent);
     startPriceElement.textContent = formatCurrency(startPrice);
-});
 
-document.querySelector('.recharge-btn').addEventListener('click', function() {
-    window.location.href = '/user/charge';
+    fetchBidDetails();  //입찰 정보 가져오기
+
+    document.querySelector('.recharge-btn').addEventListener('click', function() {
+        window.location.href = '/user/charge';
+    });
 });
 
 //웹소켓 부분
@@ -67,11 +75,20 @@ function sendEndToServer(socket) {  //종료 메세지 전송
     console.log("경매 종료 메세지 전송", message);
 }
 
+function sendExitToServer(socket) {
+    const message = {
+        type: 'EXIT',
+        itemId: itemId,
+        userId: userId
+    };
+    socket.send(JSON.stringify(message));
+    socket.close();
+    console.log("화면 나감 메시지 전송", message);
+}
+
 document.addEventListener("DOMContentLoaded", function () {
     let socket = new WebSocket(`ws://localhost:8099/connect/${itemId}/${userId}`);
     socket.onopen = () => console.log("웹 소켓 open");
-
-    fetchBidDetails();
 
     const createSocketConnection = () => {
         socket = new WebSocket(`ws://localhost:8099/connect/${itemId}/${userId}`);
@@ -83,23 +100,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const closeSocketConnection = () => {
         if (socket && socket.readyState === WebSocket.OPEN) {
-            const message = {
-                type: 'EXIT',
-                itemId: itemId,
-                userId: userId
-            };
-            socket.send(JSON.stringify(message));
-            socket.close();
-            console.log("화면 나감 메시지 전송", message);
+            sendExitToServer(socket);
         }
     };
 
     const handlers = {
         priceUpdate: function(data){
-            if(data.maxPrice != undefined){
-                updateMaxPrice(data.maxPrice);
-                addData(data.maxPrice);
-                selectedPrice = data.maxPrice;
+            if(data.price != undefined){
+                updateMaxPrice(data.price);
+                addData(data.price);
+                selectedPrice = data.price;
                 selectedBid = data.bidId;
                 selectedUserId = data.userId;
             }

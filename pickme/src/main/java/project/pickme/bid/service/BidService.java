@@ -15,8 +15,9 @@ import project.pickme.bid.domain.Bid;
 import project.pickme.bid.dto.reqeust.AddBidDto;
 import project.pickme.bid.dto.response.BidDto;
 import project.pickme.bid.dto.response.BidDetailsDto;
-import project.pickme.bid.dto.response.MaxPriceDto;
-import project.pickme.bid.dto.response.SelectedBidDto;
+import project.pickme.bid.dto.response.PriceDto;
+import project.pickme.bid.dto.response.UpdatePriceBidDto;
+import project.pickme.bid.dto.reqeust.SelectedBidDto;
 import project.pickme.bid.dto.SuccessfulBidDto;
 import project.pickme.bid.repository.BidMapper;
 import project.pickme.common.exception.BusinessException;
@@ -39,7 +40,7 @@ public class BidService {
 	private final MailService mailService;
 
 	@Transactional
-	public MaxPriceDto addBid(AddBidDto addBidDto) {    //입찰하는 메서드
+	public UpdatePriceBidDto addBid(AddBidDto addBidDto) {    //입찰하는 메서드
 		Item item = itemMapper.findItemById(addBidDto.getItemId()).orElseThrow(() -> new BusinessException(NOT_FOUND_ITEM));
 
 		if (item.isOpen()) {
@@ -47,14 +48,14 @@ public class BidService {
 			BidDto bidDto = BidDto.create(addBidDto.getPrice(), user.getId(), item.getId());
 			bidMapper.save(bidDto);
 
-			return MaxPriceDto.createOf(bidDto.getBidId(), addBidDto.getPrice(), addBidDto.getUserId());
+			return UpdatePriceBidDto.createOf(bidDto.getBidId(), addBidDto.getPrice(), addBidDto.getUserId());
 		}
 
 		throw new BusinessException(BID_NOT_PROGRESS);
 	}
 
 	@Transactional
-	public void selectBid(SelectedBidDto selectedBidDto) throws MessagingException {
+	public void selectBid(SelectedBidDto selectedBidDto) throws MessagingException {	//TODO: REST API로 하기
 		Bid bid = bidMapper.findBidById(selectedBidDto.getBidId()).orElseThrow(() -> new BusinessException(NOT_FOUND_BID));
 
 		bidMapper.updateBidSuccess(selectedBidDto.getBidId());
@@ -66,9 +67,9 @@ public class BidService {
 	}
 
 	public BidDetailsDto showBidDetails(Long itemId, User user) {
-		List<Long> allPrice = bidMapper.findAllPriceByItemId(itemId);
+		List<PriceDto> allPrices = bidMapper.findAllPriceByItemId(itemId);
 
-		return BidDetailsDto.createOf(allPrice, user.getPoint());
+		return BidDetailsDto.createOf(allPrices, user.getPoint());
 	}
 
 	public List<SuccessfulBidDto> findMySuccessfulBid(User user) {

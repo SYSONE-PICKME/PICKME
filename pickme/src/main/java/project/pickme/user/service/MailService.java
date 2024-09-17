@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
-import project.pickme.bid.dto.response.SelectedBidDto;
+import project.pickme.bid.dto.reqeust.SelectedBidDto;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.thymeleaf.context.Context;

@@ -20,8 +20,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import project.pickme.bid.dto.reqeust.AddBidDto;
 import project.pickme.bid.dto.reqeust.ExitMemberDto;
-import project.pickme.bid.dto.response.MaxPriceDto;
-import project.pickme.bid.dto.response.SelectedBidDto;
+import project.pickme.bid.dto.response.UpdatePriceBidDto;
+import project.pickme.bid.dto.reqeust.SelectedBidDto;
 import project.pickme.bid.service.BidService;
 
 @Component
@@ -62,8 +62,8 @@ public class WebSocketHandler extends TextWebSocketHandler {
 	private void addBid(String payload) {
 		try {
 			AddBidDto addBidDto = objectMapper.readValue(payload, AddBidDto.class);
-			MaxPriceDto maxPriceDto = bidService.addBid(addBidDto);
-			webSocketService.sendToAllClient(addBidDto.getItemId(), maxPriceDto);
+			UpdatePriceBidDto updatePriceBidDto = bidService.addBid(addBidDto);
+			webSocketService.sendToAllClient(addBidDto.getItemId(), updatePriceBidDto);
 		} catch (JsonProcessingException e) {
 			log.error("Error addBid", e);
 		}

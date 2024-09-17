@@ -3,30 +3,26 @@ package project.pickme.bid.dto.response;
 import java.time.LocalDateTime;
 
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@Getter
+@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Builder
-public class BidDto {
-	private Long bidId;    //save 후 반환 받은 저장된 BidId
-	private long price;
+public class BidDto extends PriceDto {
 	private LocalDateTime bidTime;
 	private boolean isSuccess;
-	private String userId;
 	private Long itemId;
 
+	private BidDto(Long bidId, long price, String userId, LocalDateTime bidTime, boolean isSuccess, Long itemId) {
+		super(bidId, price, userId);
+		this.bidTime = bidTime;
+		this.isSuccess = isSuccess;
+		this.itemId = itemId;
+	}
+
 	public static BidDto create(long price, String userId, Long itemId) {
-		return BidDto.builder()
-			.price(price)
-			.bidTime(LocalDateTime.now())
-			.isSuccess(false)
-			.userId(userId)
-			.itemId(itemId)
-			.build();
+		return new BidDto(null, price, userId, LocalDateTime.now(), false, itemId);
 	}
 }
