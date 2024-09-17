@@ -6,5 +6,5 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface DeliveryMapper {
-	List<Long> registeredInvoiceItemId();
+	List<Long> getRegisteredInvoiceItemId();
 }

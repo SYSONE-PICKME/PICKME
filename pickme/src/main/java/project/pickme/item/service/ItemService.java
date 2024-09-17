@@ -54,10 +54,10 @@ public class ItemService {
 	}
 
 	public List<ItemDto> findItemsByCustomsId(String customsId) {
-		List<ItemDto> itemList = itemMapper.findItemsByCustomsId(customsId);
+		List<ItemDto> items = itemMapper.findItemsByCustomsId(customsId);
 		List<Long> succesfulBidItemIdList = bidMapper.successfulBidItemId();
-		List<Long> deliveryRegisterdItemIdList = deliveryMapper.registeredInvoiceItemId();
-		for (ItemDto item : itemList) {
+		List<Long> deliveryRegisterdItemIdList = deliveryMapper.getRegisteredInvoiceItemId();
+		for (ItemDto item : items) {
 			Long itemId = item.getItemId();
 			if (succesfulBidItemIdList.contains(itemId) && deliveryRegisterdItemIdList.contains(itemId)) {
 				item.setIsSuccess(Boolean.TRUE);
@@ -69,6 +69,7 @@ public class ItemService {
 				item.setIsSuccess(Boolean.FALSE);
 			}
 		}
-		return itemList;
+
+		return items;
 	}
 }

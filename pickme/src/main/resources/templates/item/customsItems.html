@@ -30,7 +30,7 @@
             <hr>
         </div>
         <div class="product-grid">
-            <div class="product-card" th:each="item : ${itemList}">
+            <div class="product-card" th:each="item : ${items}">
                 <img th:src="@{${item.url}}" alt="product image" class="product-image">
                 <div class="product-info">
                     <h3 th:text="${item.name}"></h3>
@@ -41,7 +41,7 @@
 
                     <!-- 물품 정보 수정 버튼: 입찰이 성공하면 보이지않음-->
                     <input type="button" id="updateItem" value="물품 정보 수정" th:if="!${item.isSuccess}"
-                           th:onclick="'window.location.href=\'/customs/item/update?itemId=' + ${item.itemId} + '\''">
+                           th:onclick="'window.location.href=\'/customs/items/update?itemId=' + ${item.itemId} + '\''">
 
                     <!-- 송장등록 버튼: 공매 성공했지만 송장번호가 등록되지 않은 경우 표시 -->
                     <input type="button" id="resisterDelivery" value="송장등록"

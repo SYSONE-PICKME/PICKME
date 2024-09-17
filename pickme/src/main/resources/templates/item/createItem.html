@@ -13,7 +13,7 @@
 </head>
 <body>
 <h1>새 경매 등록</h1>
-<form action="/customs/item/create" method="post" enctype="multipart/form-data">
+<form action="/customs/items" method="post" enctype="multipart/form-data">
     <div class="form-group">
         <label for="title">상품명</label>
         <input type="text" id="title" name="name" required>
@@ -56,7 +56,7 @@
         <label for="category">입찰대상</label>
         <select id="type" name="type" required>
             <option value="" disabled selected>선택하세요</option>
-            <option th:each="tt : ${type}" th:value="${tt}" th:text="${tt.value}">선택해주세요</option>
+            <option th:each="type : ${types}" th:value="${type}" th:text="${type.value}">선택해주세요</option>
         </select>
     </div>
 
