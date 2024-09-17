@@ -12,11 +12,9 @@ import project.pickme.user.domain.Customs;
 
 import project.pickme.s3.service.S3Service;
 
-import project.pickme.bid.repository.BidMapper;
 import project.pickme.item.repository.ItemMapper;
 import project.pickme.item.repository.LawMapper;
 import project.pickme.item.repository.ItemLawMapper;
-import project.pickme.delivery.repository.DeliveryMapper;
 
 import project.pickme.item.dto.ItemDto;
 import project.pickme.item.dto.ItemFormDto;
@@ -28,9 +26,7 @@ import project.pickme.item.dto.ItemLawDto;
 public class ItemService {
 	private final LawMapper lawMapper;
 	private final ItemMapper itemMapper;
-	private final BidMapper bidMapper;
 	private final ItemLawMapper itemLawMapper;
-	private final DeliveryMapper deliveryMapper;
 
 	private final S3Service s3Service;
 
@@ -53,23 +49,8 @@ public class ItemService {
 		return lawMapper.findAllLaws();
 	}
 
+	// 등록한 경매 전체 조회 및 낙찰된 물품은 마감처리
 	public List<ItemDto> findItemsByCustomsId(String customsId) {
-		List<ItemDto> items = itemMapper.findItemsByCustomsId(customsId);
-		List<Long> succesfulBidItemIdList = bidMapper.successfulBidItemId();
-		List<Long> deliveryRegisterdItemIdList = deliveryMapper.getRegisteredInvoiceItemId();
-		for (ItemDto item : items) {
-			Long itemId = item.getItemId();
-			if (succesfulBidItemIdList.contains(itemId) && deliveryRegisterdItemIdList.contains(itemId)) {
-				item.setIsSuccess(Boolean.TRUE);
-				item.setIsRegisteredInvoiceNum(Boolean.TRUE);
-			} else if (succesfulBidItemIdList.contains(itemId)) {
-				item.setIsSuccess(Boolean.TRUE);
-				item.setIsRegisteredInvoiceNum(Boolean.FALSE);
-			} else {
-				item.setIsSuccess(Boolean.FALSE);
-			}
-		}
-
-		return items;
+		return itemMapper.findItemsByCustomsId(customsId);
 	}
 }
