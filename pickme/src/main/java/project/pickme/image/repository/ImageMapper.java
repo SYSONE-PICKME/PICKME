@@ -7,4 +7,6 @@ import project.pickme.image.dto.ImageDto;
 @Mapper
 public interface ImageMapper {
 	void insertImage(ImageDto imageDto);
+
+	void deleteAll();
 }

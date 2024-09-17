@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="project.pickme.item.repository.FindItemMapper">
+
     <resultMap id="oneItemResultMap" type="project.pickme.item.domain.Item">
         <id property="id" column="item_id"/>
         <result property="name" column="name"/>
@@ -88,4 +89,19 @@
         on i.item_id = img.item_id
         and img.seq = 1
     </select>
+
+    <select id="findItemByIdWithImage" parameterType="long" resultType="project.pickme.item.dto.OneBidItemDto">
+        select it.item_id    as itemId,
+               im.url        as imageUrl,
+               it.name,
+               it.price      as startPrice,
+               it.start_time as startTime,
+               it.end_time   as endTime,
+               null as userId
+        from Item it
+        left join Image im
+        on it.item_id = im.item_id and im.seq = 0
+        where it.item_id = #{itemId}
+    </select>
+
 </mapper>
