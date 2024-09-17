@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>캠페인</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/notice/campaignContent.css}">
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+<div class="container">
+    <h1>캠페인</h1>
+
+    <div class="notice-content" th:object="${campaign}">
+        <h2 th:text="*{title}"></h2>
+        <p class="date" th:text="${#temporals.format(campaign.createTime, 'yyyy.MM.dd')}"></p>
+        <div class="campaign-content">
+            <img th:if="${campaign.imageUrl != null and !campaign.imageUrl.isEmpty()}"
+                 th:src="@{${campaign.imageUrl}}"
+                 alt="캠페인 이미지">
+        </div>
+    </div>
+    <div class="nav-content">
+        <div class="navigation-buttons">
+            <div class="nav-arrows">
+                <a th:href="@{/customs/campaigns/{id}(id=${previousCampaignId})}" class="nav-content-btn" title="이전글"><i class="fas fa-chevron-left"></i></a>
+                <a th:href="@{/customs/campaigns/{id}(id=${nextCampaignId})}" class="nav-content-btn" title="다음글"><i class="fas fa-chevron-right"></i></a>
+            </div>
+            <div class="action-buttons">
+                <a th:href="@{/customs/campaigns/edit/{id}(id=${campaign.id})}" class="content-btn">수 정</a>
+                <a th:href="@{/customs/campaigns/delete/{id}(id=${campaign.id})}" class="content-btn">삭 제</a>
+                <a href="/customs/campaigns" class="content-btn">목록보기</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="~{fragments/footer :: footer}">footer content</div>
+<script src="/js/notice.js"></script>
+</body>
+</html>

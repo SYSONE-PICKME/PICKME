@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>캠페인</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/notice/campaignForm.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+<div class="container">
+    <h1 th:text="${isEditing != null && isEditing ? '캠페인 수정' : '새 캠페인 등록'}">새 캠페인 등록</h1>
+    <div class="card">
+        <form th:action="${isEditing ? '/customs/campaigns/edit/' + (campaign != null ? campaign.id : '') : '/customs/campaigns/create'}"
+              method="post" enctype="multipart/form-data" id="campaignForm">
+            <input type="hidden" name="id" th:if="${isEditing}" th:value="${campaign.id}">
+            <div class="form-group">
+                <label for="title">제목</label>
+                <input type="text" id="title" name="title" th:value="${campaign?.title}" placeholder="제목을 입력하세요" required>
+            </div>
+            <div class="form-group">
+                <label for="customs_campaign">공지 기관</label>
+                <input type="text" id="customs_campaign" th:value="${customsName}" readonly>
+                <input type="hidden" name="customsId" th:value="${customsId}">
+            </div>
+            <div class="form-group image-upload-area">
+                <input type="file" id="campaignImage" name="imageFile" accept="image/*" th:required="${!isEditing}">
+                <div class="image-preview">
+                    <img id="previewImage" th:src="${campaign != null and campaign.imageUrl != null ? campaign.imageUrl : '/images/camera.png'}" alt="미리보기 이미지">
+                    <p>클릭하여 이미지 업로드</p>
+                </div>
+            </div>
+            <div class="button-group">
+                <a href="/customs/campaigns" class="cancel-btn">작성 취소</a>
+                <button type="submit" class="submit-btn" th:text="${isEditing ? '수정하기' : '등록하기'}">등록하기</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script th:src="@{/js/notice/campaignForm.js}"></script>
+</body>
+</html>
