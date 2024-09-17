@@ -6,23 +6,31 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
+
 import project.pickme.item.constant.Status;
+import project.pickme.user.domain.Customs;
+
+import project.pickme.s3.service.S3Service;
+
+import project.pickme.bid.repository.BidMapper;
+import project.pickme.item.repository.ItemMapper;
+import project.pickme.item.repository.LawMapper;
+import project.pickme.item.repository.ItemLawMapper;
+import project.pickme.delivery.repository.DeliveryMapper;
+
 import project.pickme.item.dto.ItemDto;
 import project.pickme.item.dto.ItemFormDto;
 import project.pickme.item.dto.LawDto;
 import project.pickme.item.dto.ItemLawDto;
-import project.pickme.item.repository.ItemMapper;
-import project.pickme.item.repository.LawMapper;
-import project.pickme.item.repository.ItemLawMapper;
-import project.pickme.s3.service.S3Service;
-import project.pickme.user.domain.Customs;
 
 @Service
 @RequiredArgsConstructor
 public class ItemService {
 	private final LawMapper lawMapper;
 	private final ItemMapper itemMapper;
+	private final BidMapper bidMapper;
 	private final ItemLawMapper itemLawMapper;
+	private final DeliveryMapper deliveryMapper;
 
 	private final S3Service s3Service;
 
@@ -46,6 +54,21 @@ public class ItemService {
 	}
 
 	public List<ItemDto> findItemsByCustomsId(String customsId) {
-		return itemMapper.findItemsByCustomsId(customsId);
+		List<ItemDto> itemList = itemMapper.findItemsByCustomsId(customsId);
+		List<Long> succesfulBidItemIdList = bidMapper.successfulBidItemId();
+		List<Long> deliveryRegisterdItemIdList = deliveryMapper.registeredInvoiceItemId();
+		for (ItemDto item : itemList) {
+			Long itemId = item.getItemId();
+			if (succesfulBidItemIdList.contains(itemId) && deliveryRegisterdItemIdList.contains(itemId)) {
+				item.setIsSuccess(Boolean.TRUE);
+				item.setIsRegisteredInvoiceNum(Boolean.TRUE);
+			} else if (succesfulBidItemIdList.contains(itemId)) {
+				item.setIsSuccess(Boolean.TRUE);
+				item.setIsRegisteredInvoiceNum(Boolean.FALSE);
+			} else {
+				item.setIsSuccess(Boolean.FALSE);
+			}
+		}
+		return itemList;
 	}
 }
