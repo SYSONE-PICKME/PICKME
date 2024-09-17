@@ -60,10 +60,10 @@ public class BidService {
 
 		bidMapper.updateBidSuccess(selectedBidDto.getBidId());
 		userMapper.minusPoint(bid.getUserId(), bid.getPrice());
-		paymentMapper.save(SavePaymentDto.createOf(selectedBidDto.getUserId(), selectedBidDto.getBidId()));
+		paymentMapper.save(SavePaymentDto.createOf(bid.getUserId(), selectedBidDto.getBidId()));
 
 		//낙찰자에게 메일 전송
-		mailService.sendSuccessfulBidMail(selectedBidDto, bid.getUserEmail());
+		mailService.sendSuccessfulBidMail(selectedBidDto, bid.getUserEmail(), bid.getPrice());
 	}
 
 	public BidDetailsDto showBidDetails(Long itemId, User user) {

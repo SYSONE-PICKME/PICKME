@@ -55,11 +55,8 @@ public class WebSocketService {
 		}
 	}
 
-	public void sendResultAllClient(SelectedBidDto selectedBidDto) {
+	public void sendResultAllClient(Long itemId, String userId) {
 		//성공한 유저
-		String userId = selectedBidDto.getUserId();
-		Long itemId = selectedBidDto.getItemId();
-		
 		sendToClient(userId, BidResultDto.success());
 		closeSessionByUserId(itemId, userId);
 

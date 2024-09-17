@@ -8,7 +8,6 @@ public class SelectedBidDto {
 	private Long itemId;
 	private Long bidId;
 	private String userId;    //낙찰된 사람 아이디
-	private long price;
 	private String itemName;
 	private String itemImage;
 }

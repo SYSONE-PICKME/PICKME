@@ -3,7 +3,6 @@ import {initChartData, addData} from './chart.js';
 import {validBid, formatCurrency, updateMaxPrice } from './price.js';
 
 let myPoint;
-let selectedPrice = null;
 let selectedBid = null;
 let selectedUserId = null;
 let modal;
@@ -16,11 +15,11 @@ function fetchBidDetails() {
             if (response.success) {
                 const bidDetails = response.data;
 
+                //TODO: 넘어온 데이터가 null인 경우 처리 해야함
                 document.querySelector('.max-price').textContent = formatCurrency(parseInt(bidDetails.maxPrice));
                 myPoint = parseInt(bidDetails.myPoint);
                 document.querySelector('.my-point').textContent = formatCurrency(myPoint);
 
-                selectedPrice = bidDetails.maxPrice;
                 selectedUserId = bidDetails.userId;
                 selectedBid = bidDetails.bidId;
 
@@ -66,7 +65,6 @@ function sendEndToServer(socket) {  //종료 메세지 전송
         type: 'BID_END',
         itemId: itemId,
         bidId: selectedBid,
-        price: selectedPrice,
         userId: selectedUserId,
         itemName: itemName,
         itemImage: itemImage
@@ -108,8 +106,8 @@ document.addEventListener("DOMContentLoaded", function () {
         priceUpdate: function(data){
             if(data.price != undefined){
                 updateMaxPrice(data.price);
-                addData(data.price);
-                selectedPrice = data.price;
+                addData(data.price);    //입찰 추이 차트 업데이트
+
                 selectedBid = data.bidId;
                 selectedUserId = data.userId;
             }
