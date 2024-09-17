@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import lombok.RequiredArgsConstructor;
 import project.pickme.common.annotation.CurrentUser;
@@ -39,7 +40,7 @@ public class ItemController {
 	Customs customs) throws IOException {
 		itemService.save(itemFormDto, customs);
 
-		return "redirect:/customs/item/create";
+		return "redirect:/customs/item/list";
 	}
 
 	@GetMapping("/list")
@@ -47,5 +48,11 @@ public class ItemController {
 		model.addAttribute("itemList", itemService.findItemsByCustomsId(customs.getId()));
 
 		return "item/customsItemList";
+	}
+
+	@GetMapping("/update")
+	public String showStatusPage(@RequestParam("itemId") Long itemId, Model model) {
+		model.addAttribute("itemId", itemId);
+		return "/item/updateItem";
 	}
 }
