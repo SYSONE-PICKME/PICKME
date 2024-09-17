@@ -2,11 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="project.pickme.notice.mapper.NoticeMapper">
+
     <resultMap id="noticeResultMap" type="project.pickme.notice.domain.Notice">
         <id property="id" column="notice_id"/>
         <result property="title" column="title"/>
         <result property="content" column="content"/>
         <result property="createTime" column="create_at"/>
+        <result property="type" column="type"/>
         <association property="customs" javaType="project.pickme.user.domain.Customs">
             <id property="id" column="customs_customs_id"/>
             <result property="name" column="name"/>
@@ -15,67 +17,90 @@
     </resultMap>
 
     <select id="selectAll" resultMap="noticeResultMap">
-        select
+        SELECT
             n.notice_id,
             n.customs_id,
             n.title,
-            n.content,
+            COALESCE(n.content, '') AS content,
             n.create_at,
-            c.id as customs_customs_id,
+            n.type,
+            c.id AS customs_customs_id,
             c.role,
             c.name
-        from
+        FROM
             Notice n
-        left join
+        LEFT JOIN
             Customs c
-        on
+            ON
             n.customs_id = c.id
-        order by
-            notice_id desc;
+        ORDER BY
+            n.notice_id DESC;
+    </select>
+
+    <select id="selectByType" parameterType="string" resultMap="noticeResultMap">
+        SELECT
+            n.notice_id,
+            n.customs_id,
+            n.title,
+            COALESCE(n.content, '') AS content,
+            n.create_at,
+            n.type,
+            c.id AS customs_customs_id,
+            c.role,
+            c.name
+        FROM
+            Notice n
+        LEFT JOIN
+            Customs c
+            ON
+            n.customs_id = c.id
+        WHERE
+            n.type = #{type}
+        ORDER BY
+            n.notice_id DESC;
     </select>
 
     <select id="selectById" parameterType="long" resultMap="noticeResultMap">
-        select
+        SELECT
             n.notice_id,
             n.customs_id,
             n.title,
-            n.content,
+            COALESCE(n.content, '') AS content,
             n.create_at,
-            c.id as customs_customs_id,
+            n.type,
+            c.id AS customs_customs_id,
             c.role,
             c.name
-        from
+        FROM
             Notice n
-        left join
+        LEFT JOIN
             Customs c
-        on
+            ON
             n.customs_id = c.id
-        where
-            notice_id = #{id}
+        WHERE
+            n.notice_id = #{id};
     </select>
 
-    <insert id="insert" parameterType="project.pickme.notice.dto.NoticeDto"
+    <insert id="insert" parameterType="project.pickme.notice.domain.Notice"
             useGeneratedKeys="true" keyProperty="id" keyColumn="notice_id">
-        insert into
-            Notice(customs_id, title, content)
-        values
-            (#{customs.id}, #{title}, #{content})
+        INSERT INTO Notice (customs_id, title, content, type)
+        VALUES (#{customs.id}, #{title}, #{content}, #{type});
     </insert>
 
-    <update id="update" parameterType="project.pickme.notice.dto.NoticeDto">
-        update
+    <update id="update" parameterType="project.pickme.notice.domain.Notice">
+        UPDATE
             Notice
-        set
-            title = #{title}, content = #{content}
-        where
-            notice_id = #{id}
+        SET
+            title = #{title},
+            content = #{content},
+            type = #{type}
+        WHERE
+            notice_id = #{id};
     </update>
 
     <delete id="delete" parameterType="long">
-        delete from
-            Notice
-        where
-            notice_id = #{id}
+        DELETE FROM Notice
+        WHERE notice_id = #{id};
     </delete>
 
 </mapper>

@@ -11,48 +11,30 @@
 </head>
 <body>
 <div class="container">
-    <h1 th:text="${isEditing != null && isEditing ? '공지글 수정' : '새 공지글 등록'}">새 공지글 등록</h1>
-    <div class="tab-container">
-        <button class="tab" th:classappend="${!isCampaign ? 'active' : ''}" data-tab="notice">
-            <img src="/images/notice.png" alt="공지사항 아이콘">
-            공지사항 등록
-        </button>
-        <button class="tab" th:classappend="${isCampaign ? 'active' : ''}" data-tab="campaign">
-            <img src="/images/campaign.png" alt="캠페인 아이콘">
-            캠페인 등록
-        </button>
-    </div>
-    <div class="card">
-        <form th:action="${isEditing != null && isEditing ? '/customs/notice/edit/' + notice.id : '/customs/notice/create'}"
-              method="post" enctype="multipart/form-data" id="noticeForm">
-            <input type="hidden" name="type" id="noticeType" th:value="${isCampaign ? 'campaign' : 'notice'}">
-            <input type="hidden" name="id" th:if="${isEditing}" th:value="${notice.id}">
-            <div class="form-group">
-                <label for="title">제목</label>
-                <input type="text" id="title" name="title" th:value="${notice?.title}" placeholder="제목을 입력하세요" required>
-            </div>
-            <div class="form-group">
-                <label for="customs_notice">공지 기관</label>
-                <input type="text" id="customs_notice" th:value="${customsName}" readonly>
-                <input type="hidden" name="customsId" th:value="${customsId}">
-            </div>
-            <div id="noticeContent" class="form-group" th:style="${isCampaign ? 'display: none;' : ''}">
-                <label for="content">내용</label>
-                <textarea id="content" name="content" placeholder="내용을 작성해주세요" th:text="${!isCampaign ? notice?.content : ''}"></textarea>
-            </div>
-            <div id="campaignContent" class="form-group image-upload-area" th:style="${!isCampaign ? 'display: none;' : ''}">
-                <input type="file" id="campaignImage" name="imageFile" accept="image/*">
-                <div class="image-preview">
-                    <img id="previewImage" th:src="${isCampaign && notice?.imageUrl != null ? notice.imageUrl : '/images/camera.png'}" alt="미리보기 이미지">
-                    <p>클릭하여 이미지 업로드</p>
-                </div>
-            </div>
-            <div class="button-group">
-                <a href="/customs/notice" class="cancel-btn">작성 취소</a>
-                <button type="submit" class="submit-btn" th:text="${isEditing ? '수정하기' : '등록하기'}">등록하기</button>
-            </div>
-        </form>
-    </div>
+    <h1 th:text="${isEditing != null && isEditing ? '공지 수정' : '새 공지 등록'}">새 공지 등록</h1>
+</div>
+<div class="card">
+    <form th:action="${isEditing != null && isEditing && notice != null ? '/customs/notices/edit/' + notice.id : '/customs/notices/create'}"
+          method="post" enctype="multipart/form-data" id="noticeForm">
+        <input type="hidden" name="id" th:if="${isEditing && notice != null}" th:value="${notice.id}">
+        <div class="form-group">
+            <label for="title">제목</label>
+            <input type="text" id="title" name="title" th:value="${notice != null ? notice.title : ''}" placeholder="제목을 입력하세요" required>
+        </div>
+        <div class="form-group">
+            <label for="customs_notice">공지 기관</label>
+            <input type="text" id="customs_notice" th:value="${customsName}" readonly>
+            <input type="hidden" name="customsId" th:value="${customsId}">
+        </div>
+        <div id="noticeContent" class="form-group">
+            <label for="content">내용</label>
+            <textarea id="content" name="content" th:text="${notice != null ? notice.content : ''}" placeholder="내용을 작성해주세요"></textarea>
+        </div>
+        <div class="button-group">
+            <a href="/customs/notices" class="cancel-btn">작성 취소</a>
+            <button type="submit" class="submit-btn" th:text="${isEditing ? '수정하기' : '등록하기'}">등록하기</button>
+        </div>
+    </form>
 </div>
 
 <script th:src="@{/js/notice/noticeForm.js}"></script>

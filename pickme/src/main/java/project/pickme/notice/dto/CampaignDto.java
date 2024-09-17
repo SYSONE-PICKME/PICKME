@@ -16,74 +16,38 @@ import project.pickme.user.domain.Customs;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CampaignDto extends NoticeDto {
-	private String imageUrl;
+@Builder
+public class CampaignDto {
+	private Long id;
+	private String title;
+	private LocalDateTime createTime;
+	private String customsId;
+	private String customsName;
+	private Role customsRole;
 	private MultipartFile imageFile;
+	private String imageUrl;
 
-	@Builder(builderMethodName = "campaignBuilder")
-	public CampaignDto(
-		Long id,
-		String title,
-		String content,
-		LocalDateTime createTime,
-		String customsId,
-		String customsName,
-		Role customsRole,
-		String imageUrl,
-		MultipartFile imageFile) {
-		super(id, title, content, createTime, customsId, customsName, customsRole);
-		this.imageUrl = imageUrl;
-		this.imageFile = imageFile;
-	}
-
-	@Override
-	public Notice toEntity(Customs customs) {
-		String fullContent = getContent();
-		if (this.imageUrl != null && !this.imageUrl.isEmpty()) {
-			fullContent += "\n[Image URL: " + this.imageUrl + "]";
-		}
+	public Notice toEntity(Customs customs, String imageUrl) {
 		return Notice.builder()
-			.id(getId())
-			.title(getTitle())
-			.content(fullContent)
-			.createTime(getCreateTime())
+			.id(id)
+			.title(title)
+			.content(imageUrl)
+			.createTime(createTime != null ? createTime : LocalDateTime.now())
+			.type("CAMPAIGN")
 			.customs(customs)
 			.build();
 	}
 
 	public static CampaignDto fromEntity(Notice notice) {
-		String content = notice.getContent();
-		String imageUrl = null;
-		if (content != null) {
-			int index = content.lastIndexOf("[Image URL: ");
-			if (index != -1) {
-				imageUrl = content.substring(index + 12, content.length() - 1);
-				content = content.substring(0, index).trim();
-			}
-		}
-		return CampaignDto.campaignBuilder()
+		Customs customs = notice.getCustoms();
+		return CampaignDto.builder()
 			.id(notice.getId())
 			.title(notice.getTitle())
-			.content(content)
 			.createTime(notice.getCreateTime())
-			.customsId(notice.getCustoms().getId())
-			.customsName(notice.getCustoms().getName())
-			.customsRole(notice.getCustoms().getRole())
-			.imageUrl(imageUrl)
-			.build();
-	}
-
-	public CampaignDto withUpdatedImageUrl(String newImageUrl) {
-		return CampaignDto.campaignBuilder()
-			.id(this.getId())
-			.title(this.getTitle())
-			.content(this.getContent())
-			.createTime(this.getCreateTime())
-			.customsId(this.getCustomsId())
-			.customsName(this.getCustomsName())
-			.customsRole(this.getCustomsRole())
-			.imageUrl(newImageUrl)
-			.imageFile(this.imageFile)
+			.customsId(customs.getId())
+			.customsName(customs.getName())
+			.customsRole(customs.getRole())
+			.imageUrl(notice.getContent())
 			.build();
 	}
 }

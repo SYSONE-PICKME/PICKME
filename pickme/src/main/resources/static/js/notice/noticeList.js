@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
             const noticeId = this.getAttribute('data-notice-id');
-            window.location.href = `/customs/notice/noticeContent/${noticeId}`;
+            window.location.href = `/customs/notices/${noticeId}`;
         });
     });
     goToPage(1);
@@ -78,28 +78,17 @@ const cancelBtn = document.getElementById("cancel-btn");
 let noticeIdToDelete = null;
 
 function confirmDelete(noticeId) {
-    noticeIdToDelete = noticeId;
-    modal.style.display = "flex";
+    if (noticeId) {
+        noticeIdToDelete = noticeId;
+        modal.style.display = "flex";
+    } else {
+        console.error("Invalid notice ID");
+    }
 }
 
 confirmBtn.addEventListener('click', function() {
     if (noticeIdToDelete) {
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', `/customs/notice/delete/${noticeIdToDelete}`, true);
-        xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.onload = function() {
-            if (xhr.status === 200) {
-                alert("삭제 완료");
-                modal.style.display = "none";
-                location.reload();
-            } else {
-                alert("삭제에 실패했습니다.");
-            }
-        };
-        xhr.onerror = function() {
-            alert("삭제 요청 중 오류 발생");
-        };
-        xhr.send();
+        window.location.href = `/customs/notices/delete/${noticeIdToDelete}`;
     }
 });
 

@@ -30,7 +30,8 @@ public class NoticeDto {
 			.id(id)
 			.title(title)
 			.content(content)
-			.createTime(createTime)
+			.createTime(createTime != null ? createTime : LocalDateTime.now())
+			.type("NOTICE")
 			.customs(customs)
 			.build();
 	}
@@ -45,15 +46,6 @@ public class NoticeDto {
 			.customsId(customs.getId())
 			.customsName(customs.getName())
 			.customsRole(customs.getRole())
-			.build();
-	}
-
-	public static NoticeDto updateNoticeDto(Long id, NoticeDto noticeDto) {
-		return NoticeDto.builder()
-			.id(id)
-			.title(noticeDto.getTitle())
-			.content(noticeDto.getContent())
-			.customsId(noticeDto.getCustomsId())
 			.build();
 	}
 }

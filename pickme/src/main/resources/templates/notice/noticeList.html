@@ -11,57 +11,57 @@
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
 </head>
 <body>
-    <div class="container">
-      <h1>공지사항</h1>
-      <div class="main-card">
-        <div class="notice-list">
-          <div th:each="notice : ${notices}" class="notice-item" th:data-notice-id="${notice.id}">
-            <div class="notice-content">
-              <div class="notice-icon">
-                <img th:src="${notice.title.startsWith('공지') ? '/images/notice.png' : '/images/campaign.png'}" alt="공지 아이콘" src="">
-              </div>
-              <div class="notice-text">
-                <h3 class="notice-title" th:text="${notice.title}">공지사항 제목</h3>
-                <p>
-                  <span th:text="'@' + ${notice.customsName}"></span>
-                  <span th:text="${#temporals.format(notice.createTime, 'yyyy-MM-dd')}">날짜</span>
-                </p>
-              </div>
-            </div>
-            <div class="notice-actions">
-              <a th:href="@{/customs/notice/edit/{id}(id=${notice.id})}" class="btn btn-primary">수정</a>
-              <a href="javascript:void(0);" class="btn btn-secondary" onclick="confirmDelete('[[${notice.id}]]')">삭제</a>
-            </div>
+<div class="container">
+  <h1>공지사항</h1>
+  <div class="main-card">
+    <div class="notice-list">
+      <div th:each="notice : ${notices}" class="notice-item" th:data-notice-id="${notice.id}">
+        <div class="notice-content">
+          <div class="notice-icon">
+            <img th:src="@{/images/notice.png}" alt="공지 아이콘">
+          </div>
+          <div class="notice-text">
+            <h3 class="notice-title" th:text="${notice.title}">공지사항 제목</h3>
+            <p>
+              <span th:text="'@' + ${notice.customsName}"></span>
+              <span th:text="${#temporals.format(notice.createTime, 'yyyy-MM-dd')}">날짜</span>
+            </p>
           </div>
         </div>
-      </div>
-      <div class="bottom-container">
-        <div class="pagination-wrapper">
-          <div class="pagination">
-            <button class="prev-btn" id="prevBtn">&lt;</button>
-            <div class="page-indicators" id="pageIndicators">
-            </div>
-            <button class="next-btn" id="nextBtn">&gt;</button>
-          </div>
-        </div>
-        <a th:href="@{/customs/notice/new}" class="btn btn-write">등록하기</a>
-      </div>
-    </div>
-
-    <div id="deleteModal" class="modal">
-      <div class="modal-content">
-        <div class="modal-icon">
-          <img th:src="@{/images/warning.png}" alt="경고 아이콘" src="">
-        </div>
-        <h2>공지사항을 삭제하시겠습니까?</h2>
-        <p>삭제된 공지사항은 영구 삭제되어 복구할 수 없습니다.</p>
-        <div class="modal-footer">
-          <button id="confirm-btn" class="btn btn-confirm">확인</button>
-          <button id="cancel-btn" class="btn btn-cancel">취소</button>
+        <div class="notice-actions">
+          <a th:href="@{/customs/notices/edit/{id}(id=${notice.id})}" class="btn btn-primary">수정</a>
+          <button class="btn btn-secondary delete-btn" th:onclick="'confirmDelete(' + ${notice.id} + ')'">삭제</button>
         </div>
       </div>
     </div>
+  </div>
+  <div class="bottom-container">
+    <div class="pagination-wrapper">
+      <div class="pagination">
+        <button class="prev-btn" id="prevBtn">&lt;</button>
+        <div class="page-indicators" id="pageIndicators">
+        </div>
+        <button class="next-btn" id="nextBtn">&gt;</button>
+      </div>
+    </div>
+    <a th:href="@{/customs/notices/new}" class="btn btn-write">등록하기</a>
+  </div>
+</div>
 
-  <script th:src="@{/js/notice/noticeList.js}"></script>
+<div id="deleteModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-icon">
+      <img th:src="@{/images/warning.png}" alt="경고 아이콘" src="">
+    </div>
+    <h2>공지사항을 삭제하시겠습니까?</h2>
+    <p>삭제된 공지사항은 영구 삭제되어 복구할 수 없습니다.</p>
+    <div class="modal-footer">
+      <button id="confirm-btn" class="btn btn-confirm">확인</button>
+      <button id="cancel-btn" class="btn btn-cancel">취소</button>
+    </div>
+  </div>
+</div>
+
+<script th:src="@{/js/notice/noticeList.js}"></script>
 </body>
 </html>

@@ -12,36 +12,27 @@
 </head>
 <body>
 <div class="container">
-    <h1 th:text="${notice instanceof T(project.pickme.notice.dto.CampaignDto) ? '캠페인' : '공지사항'}"></h1>
+    <h1>공지사항</h1>
 
     <div class="notice-content" th:object="${notice}">
         <h2 th:text="*{title}"></h2>
         <p class="date" th:text="${#temporals.format(notice.createTime, 'yyyy.MM.dd')}"></p>
-
-        <div th:if="${notice instanceof T(project.pickme.notice.dto.CampaignDto)}" class="campaign-content">
-            <img th:if="${notice.imageUrl != null and !notice.imageUrl.isEmpty()}"
-                 th:src="@{${notice.imageUrl}}"
-                 alt="캠페인 이미지">
+        <div class="notice-body" th:utext="${#strings.replace(#strings.escapeXml(notice.content), '&#10;', '&lt;br&gt;')}">
         </div>
-        <div th:unless="${notice instanceof T(project.pickme.notice.dto.CampaignDto)}" class="notice-body"
-             th:utext="${#strings.replace(#strings.escapeXml(notice.content), '&#10;', '&lt;br&gt;')}">
-        </div>
-
     </div>
     <div class="nav-content">
         <div class="navigation-buttons">
             <div class="nav-arrows">
-                <a th:href="@{/customs/notice/{id}(id=${previousNoticeId})}" class="nav-content-btn" title="이전글"><i class="fas fa-chevron-left"></i></a>
-                <a th:href="@{/customs/notice/{id}(id=${nextNoticeId})}" class="nav-content-btn" title="다음글"><i class="fas fa-chevron-right"></i></a>
+                <a th:href="@{/customs/notices/{id}(id=${previousNoticeId})}" class="nav-content-btn" title="이전글"><i class="fas fa-chevron-left"></i></a>
+                <a th:href="@{/customs/notices/{id}(id=${nextNoticeId})}" class="nav-content-btn" title="다음글"><i class="fas fa-chevron-right"></i></a>
             </div>
             <div class="action-buttons">
-                <a th:href="@{/customs/notice/edit/{id}(id=${notice.id})}" class="content-btn">수 정</a>
-                <a th:href="@{/customs/notice/delete/{id}(id=${notice.id})}" class="content-btn">삭 제</a>
-                <a href="/customs/notice" class="content-btn">목록보기</a>
+                <a th:href="@{/customs/notices/edit/{id}(id=${notice.id})}" class="content-btn">수 정</a>
+                <a th:href="@{/customs/notices/delete/{id}(id=${notice.id})}" class="content-btn">삭 제</a>
+                <a href="/customs/notices" class="content-btn">목록보기</a>
             </div>
         </div>
     </div>
-
 </div>
 <div th:replace="~{fragments/footer :: footer}">footer content</div>
 <script src="/js/notice.js"></script>

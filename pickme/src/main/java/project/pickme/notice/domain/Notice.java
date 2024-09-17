@@ -18,5 +18,6 @@ public class Notice {
 	private String title;
 	private String content;
 	private LocalDateTime createTime;
+	private String type;
 	private Customs customs;
 }
