@@ -1,15 +1,3 @@
-cloud:
-  aws:
-    credentials:
-      access-key: ENC(NGIBt94mdxksvrtX3cwK8IGYpslgaEmMDR+ik+j7B5k=)
-      secret-key: ENC(F6dlxgrUivJXkJGGfU0B1AGNfzAszDZof8/YZqlq2Wr7yn+Bqq04zQS861YSv8foTQ4vQnWYKSg=)
-    s3:
-      bucket: pickmepickme
-    region:
-      static: ap-northeast-2
-    stack:
-      auto: false
-
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: project.pickme
@@ -23,7 +11,9 @@ spring:
     username: ENC(zo3xgo3TXMih7zIQ/wwSkg==)
     password: ENC(DvMAgRb3Z9VLlmqfrEESA/guiD7i2Oec)
   config:
-    import: "classpath:application-secret.yml"
+    import:
+      - "classpath:application-secret.yml"
+      - "classpath:application-s3.yml"
   servlet:
     multipart:
       enabled: true

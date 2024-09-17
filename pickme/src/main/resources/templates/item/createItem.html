@@ -56,7 +56,7 @@
         <label for="category">입찰대상</label>
         <select id="type" name="type" required>
             <option value="" disabled selected>선택하세요</option>
-            <option th:each="tt : ${type}" th:value="${tt}" th:text="${tt}">선택해주세요</option>
+            <option th:each="tt : ${type}" th:value="${tt}" th:text="${tt.value}">선택해주세요</option>
         </select>
     </div>
 
