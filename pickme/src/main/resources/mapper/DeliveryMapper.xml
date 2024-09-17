@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="project.pickme.delivery.repository.DeliveryMapper">
+
+    <select id="registeredInvoiceItemId">
+        select i.item_id as itemId
+        from Item i
+                 left join Delivery d
+                           on i.item_id = d.item_id
+        where invoice_number is not null;
+    </select>
+
+</mapper>
