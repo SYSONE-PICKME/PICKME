@@ -142,7 +142,7 @@ document.addEventListener("DOMContentLoaded", function () {
         bidResult: function(data){
             if (data.result === 'success') {
                 displayConfetti();
-                modal.open("입찰에 성공하셨습니다~");
+                modal.bidSuccessModalOpen("입찰에 성공하셨습니다~");
             }
             if (data.result === 'fail'){
                 modal.open("입찰에 실패했습니다.");
