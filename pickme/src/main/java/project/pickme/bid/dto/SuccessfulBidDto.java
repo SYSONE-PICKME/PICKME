@@ -4,9 +4,10 @@ import lombok.Getter;
 
 @Getter
 public class SuccessfulBidDto {
-	private String imgUrl;
 	private String itemNum;
+	private String userId;
 	private String itemName;
-	private String customsName;
 	private long price;
+	private String imgUrl;
+	private String customsName;
 }
