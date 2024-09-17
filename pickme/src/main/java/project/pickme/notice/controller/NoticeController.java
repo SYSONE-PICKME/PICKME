@@ -23,7 +23,7 @@ public class NoticeController {
 	private final NoticeService noticeService;
 
 	@GetMapping
-	public String listNotices(Model model) {
+	public String showNotices(Model model) {
 		List<NoticeDto> notices = noticeService.getAllNotices();
 		model.addAttribute("notices", notices);
 		return "notice/noticeList";
@@ -56,7 +56,7 @@ public class NoticeController {
 
 	@PostMapping("/edit/{id}")
 	public String updateNotice(@PathVariable("id") Long id, @ModelAttribute NoticeDto noticeDto) {
-		noticeDto.setId(id);
+		noticeDto = noticeDto.withId(id);
 		noticeService.updateNotice(noticeDto);
 		return "redirect:/customs/notices/" + id;
 	}

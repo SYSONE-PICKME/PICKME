@@ -25,6 +25,18 @@ public class NoticeDto {
 	private String customsName;
 	private Role customsRole;
 
+	public NoticeDto withId(Long id) {
+		return NoticeDto.builder()
+			.id(id)
+			.title(title)
+			.content(content)
+			.createTime(createTime)
+			.customsId(customsId)
+			.customsName(customsName)
+			.customsRole(customsRole)
+			.build();
+	}
+
 	public Notice toEntity(Customs customs) {
 		return Notice.builder()
 			.id(id)

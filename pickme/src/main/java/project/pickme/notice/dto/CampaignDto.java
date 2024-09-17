@@ -27,6 +27,19 @@ public class CampaignDto {
 	private MultipartFile imageFile;
 	private String imageUrl;
 
+	public CampaignDto withId(Long id) {
+		return CampaignDto.builder()
+			.id(id)
+			.title(title)
+			.createTime(createTime)
+			.customsId(customsId)
+			.customsName(customsName)
+			.customsRole(customsRole)
+			.imageFile(imageFile)
+			.imageUrl(imageUrl)
+			.build();
+	}
+
 	public Notice toEntity(Customs customs, String imageUrl) {
 		return Notice.builder()
 			.id(id)

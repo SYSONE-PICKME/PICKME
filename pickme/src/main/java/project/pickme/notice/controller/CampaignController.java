@@ -20,7 +20,7 @@ public class CampaignController {
 	private final CampaignService campaignService;
 
 	@GetMapping
-	public String listCampaigns(Model model) {
+	public String showCampaigns(Model model) {
 		List<CampaignDto> campaigns = campaignService.getAllCampaigns();
 		model.addAttribute("campaigns", campaigns);
 		return "notice/campaignList";
@@ -53,7 +53,7 @@ public class CampaignController {
 
 	@PostMapping("/edit/{id}")
 	public String updateCampaign(@PathVariable("id") Long id, @ModelAttribute CampaignDto campaignDto) throws IOException {
-		campaignDto.setId(id);
+		campaignDto = campaignDto.withId(id);
 		campaignService.updateCampaign(campaignDto);
 		return "redirect:/customs/campaigns/" + id;
 	}

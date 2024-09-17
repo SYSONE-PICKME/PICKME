@@ -71,6 +71,6 @@ public class CampaignService {
 	}
 
 	private Customs getCustomsById(String customsId) {
-		return customsMapper.findByCustomsId(customsId).get();		// todo: 예외처리 해야함
+		return customsMapper.findByCustomsId(customsId).get();		// todo: Optional은 예외처리 해야한다고 함
 	}
 }
