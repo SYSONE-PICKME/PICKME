@@ -33,21 +33,31 @@
     </insert>
 
     <delete id="deleteAll">
-        delete from Item
+        delete
+        from Item
     </delete>
 
+    <!--is_success를 통해 마감 여부 지정-->
     <select id="findItemsByCustomsId">
         select i.item_id    as itemId,
-               i.price      as price,
-               i.customs_id as customsId,
                i.name       as name,
+               img.url      as imgUrl,
                i.start_time as startTime,
                i.end_time   as endTime,
-               i.status     as status,
-               img.url      as url
+               i.price      as price,
+               b.is_success as isSuccess
         from Item i
-                 left join Image img on i.item_id = img.item_id
-        where customs_id = #{customsId}
-          and img.seq = 0;
+                 left join (SELECT item_id, MAX(bid_time), is_success
+                            FROM Bid
+                            where is_success = 1
+                            GROUP BY item_id) b
+                           on i.item_id = b.item_id
+                 left join Delivery d on i.item_id = d.item_id
+                 left join (select item_id, url
+                            from Image
+                            where seq = 0) img
+                           on i.item_id = img.item_id
+        where customs_id = #{id}
+        order by isSuccess;
     </select>
 </mapper>
