@@ -9,7 +9,6 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
-    <script src="/js/item/item.js"></script>
 </head>
 <body>
 <h1>새 경매 등록</h1>
@@ -48,12 +47,12 @@
         <label for="category">관련 법규</label>
         <div th:each="law : ${laws}">
             <input type="checkbox" th:id="'law-' + ${law.id}" th:value="${law.id}" th:name="lawId[]">
-            <label th:for="'law-' + ${law.id}" th:text="${law.title}" id="categoryLabel"></label>
+            <label th:for="'law-' + ${law.id}" th:text="${law.title}" id="checkbox"></label>
         </div>
     </div>
 
     <div class="form-group">
-        <label for="category">입찰대상</label>
+        <label for="type">입찰대상</label>
         <select id="type" name="type" required>
             <option value="" disabled selected>선택하세요</option>
             <option th:each="type : ${types}" th:value="${type}" th:text="${type.value}">선택해주세요</option>
@@ -71,5 +70,7 @@
 
     <button type="submit">경매 등록하기</button>
 </form>
+
+<script src="/js/item/item.js"></script>
 </body>
 </html>
