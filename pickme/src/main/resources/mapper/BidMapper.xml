@@ -67,27 +67,51 @@
         order by price
     </select>
 
+    <!--내 낙찰 정보 조회-->
     <select id="findMySuccessfulBid">
-        select i.item_id as itemNum,
-               i.name    as itemName,
-               c.name    as customsName,
-               b.price   as price,
-               img.url   as imgUrl
-        from Item i
-                 join Bid b
-                      on i.item_id = b.item_id
-                 join Customs c
-                      on c.id = i.customs_id
-                 join Image img
-                      on img.item_id = i.item_id
-        where b.is_success = 1
-          and b.user_id = #{id}
-          and img.seq = 0;
+        SELECT b.item_id    as itemNum,
+               b.user_id    as userId,
+               i.name       as itemName,
+               b.price      as price,
+               img.url      as imgUrl,
+               i.customs_id as customsId,
+               c.name       as customsName
+        FROM (SELECT item_id, MAX(bid_time), user_id, price
+              FROM Bid
+              where is_success = 1
+              GROUP BY item_id) b
+                 join Item i on b.item_id = i.item_id
+                 join (select item_id, url
+                       from Image
+                       where seq = 0) img
+                      on i.item_id = img.item_id
+                 join Customs c on i.customs_id = c.id
+        where b.user_id = #{id};
     </select>
 
-    <select id="successfulBidItemId">
-        select item_id
-        from Bid
-        where is_success = 1;
+    <!-- 배송 관리에서 사용(낙찰된 제품)-->
+    <select id="findSuccessfulBidByCustomerId">
+        select i.item_id        as itemId,
+               i.name           as name,
+               img.url          as imgUrl,
+               i.start_time     as startTime,
+               i.end_time       as endTime,
+               d.invoice_number as invoiceNum,
+               d.status         as status,
+               d.code           as code
+        from Item i
+                 left join (SELECT item_id, MAX(bid_time), is_success
+                            FROM Bid
+                            where is_success = 1
+                            GROUP BY item_id) b
+                           on i.item_id = b.item_id
+                 left join Delivery d on i.item_id = d.item_id
+                 left join (select item_id, url
+                            from Image
+                            where seq = 0) img
+                           on i.item_id = img.item_id
+        where customs_id = #{id}
+          and b.is_success = 1;
     </select>
+
 </mapper>
