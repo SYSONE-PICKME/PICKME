@@ -1,4 +1,4 @@
 tracker:
   api:
-    client-id: ENC(JLmIxUSk726qsVHq7F4K+WG1HdKR004QyJB/+FFa7O+YJMI+CPC8sw==)
-    client-secret: ENC(Ign1S6BBiO32YsN2uacGQffZm3QIXxj20DdKH9yE9U9xKDpZ1aSbQhiHRgItlmVCTgb8VhuFU3UstfEy0TGPqg==)
+    clientId: ENC(JLmIxUSk726qsVHq7F4K+WG1HdKR004QyJB/+FFa7O+YJMI+CPC8sw==)
+    clientSecret: ENC(Ign1S6BBiO32YsN2uacGQffZm3QIXxj20DdKH9yE9U9xKDpZ1aSbQhiHRgItlmVCTgb8VhuFU3UstfEy0TGPqg==)
