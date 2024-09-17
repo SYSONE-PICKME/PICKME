@@ -23,7 +23,8 @@
                  left join Item i on b.item_id = i.item_id
     </select>
 
-    <insert id="save" parameterType="project.pickme.bid.dto.response.BidCreateDto" useGeneratedKeys="true" keyProperty="bidId">
+    <insert id="save" parameterType="project.pickme.bid.dto.response.BidCreateDto" useGeneratedKeys="true"
+            keyProperty="bidId">
         insert into Bid(item_id, user_id, price, bid_time, is_success)
         values (#{itemId}, #{userId}, #{price}, #{bidTime}, #{isSuccess})
     </insert>
@@ -68,10 +69,10 @@
 
     <select id="findMySuccessfulBid">
         select i.item_id as itemNum,
-               i.name as itemName,
-               c.name as customsName,
-               b.price as price,
-               img.url as imgUrl
+               i.name    as itemName,
+               c.name    as customsName,
+               b.price   as price,
+               img.url   as imgUrl
         from Item i
                  join Bid b
                       on i.item_id = b.item_id
@@ -82,5 +83,11 @@
         where b.is_success = 1
           and b.user_id = #{id}
           and img.seq = 0;
+    </select>
+
+    <select id="successfulBidItemId">
+        select item_id
+        from Bid
+        where is_success = 1;
     </select>
 </mapper>
