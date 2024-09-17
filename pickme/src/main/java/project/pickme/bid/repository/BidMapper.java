@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import project.pickme.bid.domain.Bid;
 import project.pickme.bid.dto.response.BidDto;
 import project.pickme.bid.dto.SuccessfulBidDto;
+import project.pickme.bid.dto.response.PriceDto;
 
 @Mapper
 public interface BidMapper {
@@ -18,7 +19,7 @@ public interface BidMapper {
 
 	Long findMaxBidByItemId(Long itemId);
 
-	List<Long> findAllPriceByItemId(Long itemId);
+	List<PriceDto> findAllPriceByItemId(Long itemId);
 
 	Optional<Bid> findBidById(Long bidId);
 

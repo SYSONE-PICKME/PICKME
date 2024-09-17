@@ -20,6 +20,7 @@ import org.springframework.test.context.ActiveProfiles;
 
 import project.pickme.bid.domain.Bid;
 import project.pickme.bid.dto.response.BidDto;
+import project.pickme.bid.dto.response.PriceDto;
 import project.pickme.item.dto.ItemDto;
 import project.pickme.item.repository.ItemMapper;
 import project.pickme.user.constant.Role;
@@ -165,11 +166,16 @@ class BidMapperTest {
 		bidMapper.save(bid3);
 
 	    // when
-		List<Long> allPriceByItemId = bidMapper.findAllPriceByItemId(itemId);
+		List<PriceDto> allPrices = bidMapper.findAllPriceByItemId(itemId);
 
 		// then
-		assertThat(allPriceByItemId).hasSize(3)
-			.containsExactlyInAnyOrder(1000l, 10000l, 100000l);
+		assertThat(allPrices).hasSize(3)
+			.extracting(PriceDto::getPrice, PriceDto::getUserId)
+			.containsExactly(
+				tuple(1000L, "testUser"),
+				tuple(10000L, "testUser"),
+				tuple(100000L, "testUser")
+			);
 	}
 
 	private static User createUser(String id) {
