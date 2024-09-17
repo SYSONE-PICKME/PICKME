@@ -12,7 +12,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import project.pickme.bid.dto.response.BidResultDto;
-import project.pickme.bid.repository.BidMapper;
 
 @Service
 @RequiredArgsConstructor

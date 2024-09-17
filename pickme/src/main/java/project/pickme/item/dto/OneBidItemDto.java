@@ -7,8 +7,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-import project.pickme.item.domain.Item;
-import project.pickme.user.domain.User;
 
 @Getter
 @Setter
@@ -22,16 +20,4 @@ public class OneBidItemDto {
 	private LocalDateTime startTime;
 	private LocalDateTime endTime;
 	private String userId;
-	//
-	// public static OneBidItemDto createOf(Item item, User user, String imageUrl) {
-	// 	return OneBidItemDto.builder()
-	// 		.itemId(item.getId())
-	// 		.imageUrl(imageUrl)
-	// 		.name(item.getName())
-	// 		.startPrice(item.getPrice())
-	// 		.startTime(item.getStartTime())
-	// 		.endTime(item.getEndTime())
-	// 		.userId(user.getId())
-	// 		.build();
-	// }
 }

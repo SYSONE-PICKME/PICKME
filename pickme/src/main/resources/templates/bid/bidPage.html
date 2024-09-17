@@ -23,7 +23,7 @@
 <div class="container" th:object="${oneBidItemDto}">
     <h2>입찰중</h2>
     <div class="item-details">
-        <img src="/images/test.jpg" class="item-image">
+        <img th:src="*{imageUrl}" class="item-image">
         <div class="item-info">
             <h2 th:text="*{name}" class="item-name"></h2>
             <table class="item-timeline">

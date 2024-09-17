@@ -1,7 +1,5 @@
 package project.pickme.item.service;
 
-import static project.pickme.item.exception.ItemErrorCode.*;
-
 import java.util.List;
 import java.util.NoSuchElementException;
 
