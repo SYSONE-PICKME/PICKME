@@ -26,6 +26,4 @@ public interface BidMapper {
 	void updateBidSuccess(Long bidId);
 
 	List<SuccessfulBidDto> findMySuccessfulBid(String id);
-
-	List<Long> successfulBidItemId();
 }
