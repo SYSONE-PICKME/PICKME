@@ -15,13 +15,11 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jakarta.annotation.PostConstruct;
-import com.fasterxml.jackson.databind.JsonNode;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import project.pickme.bid.dto.reqeust.AddBidDto;
 import project.pickme.bid.dto.reqeust.ExitMemberDto;
 import project.pickme.bid.dto.response.UpdatePriceBidDto;
-import project.pickme.bid.dto.reqeust.SelectedBidDto;
 import project.pickme.bid.service.BidService;
 
 @Component
@@ -51,8 +49,6 @@ public class WebSocketHandler extends TextWebSocketHandler {
 			Consumer<String> command = commandMap.get(type);
 			if (command != null) {
 				command.accept(payload);
-			} else {
-				log.warn("알 수 없는 타입: {}", type);
 			}
 		} catch (Exception e) {
 			log.error(e.getMessage());

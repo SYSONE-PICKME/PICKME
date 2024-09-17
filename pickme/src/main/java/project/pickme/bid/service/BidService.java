@@ -55,7 +55,7 @@ public class BidService {
 	}
 
 	@Transactional
-	public void selectBid(SelectedBidDto selectedBidDto) throws MessagingException {	//TODO: REST API로 하기
+	public void selectBid(SelectedBidDto selectedBidDto) throws MessagingException {
 		Bid bid = bidMapper.findBidById(selectedBidDto.getBidId()).orElseThrow(() -> new BusinessException(NOT_FOUND_BID));
 
 		bidMapper.updateBidSuccess(selectedBidDto.getBidId());

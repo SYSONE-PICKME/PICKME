@@ -12,7 +12,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import project.pickme.bid.dto.response.BidResultDto;
-import project.pickme.bid.dto.reqeust.SelectedBidDto;
 import project.pickme.bid.repository.BidMapper;
 
 @Service
@@ -21,7 +20,6 @@ import project.pickme.bid.repository.BidMapper;
 public class WebSocketService {
 	private final WebSocketSessionRepository webSocketSessionRepository;
 	private final ObjectMapper objectMapper;
-	private final BidMapper bidMapper;
 
 	public void saveInItem(long itemId, String userId, WebSocketSession session) {
 		webSocketSessionRepository.saveUserInItem(itemId, userId, session);
