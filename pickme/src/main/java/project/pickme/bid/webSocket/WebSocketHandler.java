@@ -15,7 +15,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jakarta.annotation.PostConstruct;
-import jakarta.mail.MessagingException;
+import com.fasterxml.jackson.databind.JsonNode;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import project.pickme.bid.dto.reqeust.AddBidDto;
@@ -71,13 +71,16 @@ public class WebSocketHandler extends TextWebSocketHandler {
 
 	private void selectBid(String payload) {
 		try {
-			SelectedBidDto selectedBidDto = objectMapper.readValue(payload, SelectedBidDto.class);
-			if(selectedBidDto.getBidId() == null){	//아무도 입찰하지 않은 경우
+			JsonNode jsonNode = objectMapper.readTree(payload);
+			Long itemId = jsonNode.get("itemId").asLong();
+			String userId = jsonNode.get("userId").asText();
+
+			if(userId == null){
 				return;
 			}
-			webSocketService.sendResultAllClient(selectedBidDto.getItemId(), selectedBidDto.getUserId());
-			bidService.selectBid(selectedBidDto);    //낙찰처리
-		} catch (MessagingException | JsonProcessingException e) {
+
+			webSocketService.sendResultAllClient(itemId, userId);
+		} catch (JsonProcessingException e) {
 			log.error("Error selectBid", e);
 		}
 	}

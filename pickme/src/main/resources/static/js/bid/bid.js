@@ -24,7 +24,34 @@ function fetchBidDetails() {
                 selectedBid = bidDetails.bidId;
 
                 initChartData(bidDetails.allPrice); //입찰 추이 차트 초기화
+
+                console.log("데이터 초기화: ", bidDetails);
             }
+        }
+    })
+}
+
+function endBid() {
+    const itemName = document.querySelector('.item-name').textContent;
+    const itemImage = document.querySelector('.item-image').textContent;
+
+    const selectedBidDto = {
+        itemId: itemId,
+        bidId: selectedBid,
+        itemName: itemName,
+        itemImage: itemImage
+    };
+
+    $.ajax({
+        url: "/user/bid/end",
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(selectedBidDto),
+        success: function (response) {
+            console.log("공매 종료 요청 성공: ", response);
+        },
+        error: function (error) {
+            console.error("공매 종료 요청 실패: ", error);
         }
     })
 }
@@ -148,6 +175,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     window.addEventListener('bidEnded', (event) => {
         sendEndToServer(socket);
+        endBid();
     });
 
     document.querySelector('.bid-btn').addEventListener('click', function () {
