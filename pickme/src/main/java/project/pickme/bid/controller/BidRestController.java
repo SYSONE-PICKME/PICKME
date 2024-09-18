@@ -35,6 +35,6 @@ public class BidRestController {
 	public ResponseEntity<?> endBid(@RequestBody SelectedBidDto selectedBidDto) throws MessagingException {
 		bidService.selectBid(selectedBidDto);
 
-		return ResponseEntity.ok("공매 종료 성공");
+		return ResponseEntity.ok(BaseResponse.ok());
 	}
 }
