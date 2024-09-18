@@ -1,0 +1,87 @@
+body {
+    font-family: "IBM Plex Sans KR", sans-serif;
+    background-color: #f7f7f7;
+}
+
+.container {
+    width: 60%;
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #000;
+}
+
+section {
+    margin-bottom: 40px;
+}
+
+.info-section,
+.password-section {
+    padding: 20px 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+}
+
+label {
+    font-size: 1rem;
+    font-weight: bold;
+    align-self: center;
+}
+
+input {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    width: 100%;
+}
+
+form {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 20px;
+}
+
+#businessField {
+    display: contents; /* 부모의 grid 레이아웃을 유지 */
+    visibility: hidden;
+}
+
+.button-group {
+    grid-column: span 2;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.cancel-btn {
+    border: 1px solid #000000;
+    border-radius: 10px;
+    background-color: #ffffff;
+}
+
+.submit-btn {
+    background-color: #000;
+    color: #fff;
+}

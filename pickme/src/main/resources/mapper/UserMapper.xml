@@ -7,7 +7,18 @@
     </insert>
 
     <select id="findUserById" parameterType="String" resultType="project.pickme.user.domain.User">
-        select * from User where id = #{id}
+        select id,
+               password,
+               role,
+               name,
+               email,
+               type,
+               addr,
+               phone_num    as phoneNum,
+               business_num as businessNum,
+               point
+        from User
+        where id = #{id}
     </select>
 
     <delete id="deleteAll">
