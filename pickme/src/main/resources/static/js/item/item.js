@@ -13,31 +13,31 @@ document.addEventListener('DOMContentLoaded', function () {
         return;
     }
 
-    form.addEventListener('submit', async function (event) {
+    form.addEventListener('submit', function (event) {
         event.preventDefault(); // 기본 폼 제출 동작 방지
         console.log('폼 제출 이벤트 발생');
 
         const formData = new FormData(form);
+        const xhr = new XMLHttpRequest();
 
-        try {
-            console.log('폼 데이터 전송 시작');
-            const response = await fetch(form.action, {
-                method: 'POST',
-                body: formData
-            });
+        xhr.open('POST', form.action, true);
 
-            console.log('서버 응답:', response);
-
-            if (response.ok) {
+        xhr.onload = function () {
+            if (xhr.status === 200) {
                 alert('등록 성공했습니다.');
                 window.location.href = '/customs/items'; // 성공 후 이동할 페이지 URL
             } else {
                 alert('등록 실패했습니다. 다시 시도해 주세요.');
             }
-        } catch (error) {
+        };
+
+        xhr.onerror = function () {
             alert('네트워크 오류가 발생했습니다. 나중에 다시 시도해 주세요.');
-            console.error('네트워크 오류:', error);
-        }
+            console.error('네트워크 오류:', xhr.statusText);
+        };
+
+        console.log('폼 데이터 전송 시작');
+        xhr.send(formData);
     });
 
     function handleFiles(files) {
