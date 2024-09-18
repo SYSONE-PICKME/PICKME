@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import project.pickme.bid.domain.Bid;
 import project.pickme.bid.dto.response.BidCreateDto;
-import project.pickme.bid.dto.SuccessfulBidDto;
+import project.pickme.item.dto.ItemDto;
 
 @Mapper
 public interface BidMapper {
@@ -25,5 +25,5 @@ public interface BidMapper {
 
 	void updateBidSuccess(Long bidId);
 
-	List<SuccessfulBidDto> findMySuccessfulBid(String id);
+	List<ItemDto> findMySuccessfulBid(String id);
 }

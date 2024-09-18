@@ -31,6 +31,6 @@ public class BidController {
 	public String successfulBidList(@CurrentUser User user, Model model) {
 		model.addAttribute("successfulBidList", bidService.findMySuccessfulBid(user));
 
-		return "bid/successfulBidList";
+		return "bid/mySuccessfulBidList";
 	}
 }
