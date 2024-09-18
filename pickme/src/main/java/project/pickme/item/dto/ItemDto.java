@@ -18,14 +18,17 @@ public class ItemDto {
 	private String imgUrl;
 	private String name;
 	private int code;
+	private String deliveryStatus;
+	private String deliveryCode;
 	private Type type;
 	private long price;
 	private LocalDateTime startTime;
 	private LocalDateTime endTime;
 	private Status status;
 	private String customsId;
-	private Boolean isSuccess;
-	private Boolean isRegisteredInvoiceNum;
+	private int isSuccess;
+	private long invoiceNumber;
+	private String customsName;
 
 	// itemId를 제외한 생성자
 	public ItemDto(String name, int code, Type type, long price, LocalDateTime startTime, LocalDateTime endTime,
