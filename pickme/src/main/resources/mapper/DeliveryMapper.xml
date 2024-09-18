@@ -1,13 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="project.pickme.delivery.repository.DeliveryMapper">
-
-    <select id="getRegisteredInvoiceItemId">
-        select i.item_id as itemId
+    <!--송장등록 및 배송현황 확인 페이지-->
+    <select id="findCustomsSuccessfulItems">
+        with LatestBids as (select item_id,
+                                   user_id,
+                                   bid_time,
+                                   is_success,
+                                   price,
+                                   row_number() over (partition by item_id order by bid_time desc) as rn
+                            from Bid
+                            where is_success = 1)
+        select i.item_id        as itemId,
+               lb.user_id       as userId,
+               i.name           as name,
+               img.url          as imgUrl,
+               i.start_time     as startTime,
+               i.end_time       as endTime,
+               d.invoice_number as invoiceNumber,
+               d.status         as deliveryStatus,
+               d.code           as deliveryCode,
+               lb.is_success    as isSuccess,
+               lb.price         as price,
+               c.id             as customsId,
+               c.name           as customsName
         from Item i
-                 left join Delivery d
-                           on i.item_id = d.item_id
-        where invoice_number is not null;
+                 left join Customs c on i.customs_id = c.id
+                 left join LatestBids lb on i.item_id = lb.item_id and lb.rn = 1
+                 left join Delivery d on i.item_id = d.item_id
+                 left join (select item_id, url
+                            from Image
+                            where seq = 0) img on i.item_id = img.item_id
+        where lb.is_success = 1
+          and c.id = #{id}
     </select>
 
 </mapper>
