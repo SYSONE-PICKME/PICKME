@@ -15,7 +15,7 @@ import project.pickme.user.constant.Type;
 @AllArgsConstructor
 public class ItemDto {
 	private long itemId;
-	private String url;
+	private String imgUrl;
 	private String name;
 	private int code;
 	private Type type;

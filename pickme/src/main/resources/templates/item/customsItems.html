@@ -1,11 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PICKME</title>
-
     <link rel="stylesheet" th:href="@{/css/common/index.css}">
     <link rel="stylesheet" th:href="@{/css/common/header.css}">
     <link rel="stylesheet" th:href="@{/css/common/footer.css}">
@@ -30,28 +28,23 @@
             <hr>
         </div>
         <div class="product-grid">
-            <div class="product-card" th:each="item : ${items}">
-                <img th:src="@{${item.url}}" alt="product image" class="product-image">
+            <div class="product-card" th:each="item : ${items}"
+                 th:attr="style=${item.status.name() == 'CLOSED'} ? 'background-color: rgba(128, 128, 128, 0.5); opacity: 0.5; pointer-events: none;' : ''">
+                <!-- 마감 박스 -->
+                <span class="status-label" th:if="${item.status.name() == 'CLOSED'}">마감</span>
+
+                <img th:src="@{${item.imgUrl}}" alt="product image" class="product-image">
                 <div class="product-info">
                     <h3 th:text="${item.name}"></h3>
                     <p>공매번호: <span th:text="${item.itemId}"></span></p>
                     <p>공매예정가격: <span th:text="${item.price}"></span>원</p>
                     <p>공매시작일시: <span th:text="${item.startTime}"></span></p>
                     <p>공매시작일시: <span th:text="${item.startTime}"></span></p>
+                    <p>상태: <span th:text="${item.status}"></span></p>
 
                     <!-- 물품 정보 수정 버튼: 입찰이 성공하면 보이지않음-->
-                    <input type="button" id="updateItem" value="물품 정보 수정" th:if="!${item.isSuccess}"
+                    <input type="button" id="updateItem" value="물품 정보 수정" th:if="${item.status.name()=='NOT_OPEN'}"
                            th:onclick="'window.location.href=\'/customs/items/update?itemId=' + ${item.itemId} + '\''">
-
-                    <!-- 송장등록 버튼: 공매 성공했지만 송장번호가 등록되지 않은 경우 표시 -->
-                    <input type="button" id="resisterDelivery" value="송장등록"
-                           th:if="${item.isSuccess} and !${item.isRegisteredInvoiceNum}"
-                           th:onclick="'window.location.href=\'/customs/delivery/register?itemId=' + ${item.itemId} + '\''">
-
-                    <!-- 배송현황 버튼: 송장번호가 등록된 경우 표시 -->
-                    <input type="button" id="deliveryStatus" value="배송현황"
-                           th:if="${item.isRegisteredInvoiceNum}"
-                           th:onclick="'window.location.href=\'/customs/delivery/status?itemId=' + ${item.itemId} + '\''">
                 </div>
             </div>
         </div>
