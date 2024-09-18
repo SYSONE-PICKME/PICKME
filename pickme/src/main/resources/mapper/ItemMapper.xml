@@ -37,10 +37,10 @@
         from Item
     </delete>
 
-    <!--뷰(ItemStatusView) 생성해서 조회-->
+    <!--마감처리-->
     <select id="findItemsByCustomsId">
         select *
-        from ItemStatusView
-        where customsId = #{id};
+        from ClosedItem
+        where customsId=#{id};
     </select>
 </mapper>
