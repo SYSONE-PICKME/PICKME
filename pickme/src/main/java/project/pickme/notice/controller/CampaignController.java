@@ -36,8 +36,8 @@ public class CampaignController {
 	}
 
 	@PostMapping("/create")
-	public String createCampaign(@ModelAttribute CampaignDto campaignDto) throws IOException {
-		Long campaignId = campaignService.createCampaign(campaignDto);
+	public String createCampaign(@ModelAttribute CampaignDto campaignDto, @CurrentUser Customs customs) throws IOException {
+		Long campaignId = campaignService.createCampaign(campaignDto, customs);
 		return "redirect:/customs/campaigns/" + campaignId;
 	}
 
@@ -52,9 +52,9 @@ public class CampaignController {
 	}
 
 	@PostMapping("/edit/{id}")
-	public String updateCampaign(@PathVariable("id") Long id, @ModelAttribute CampaignDto campaignDto) throws IOException {
+	public String updateCampaign(@PathVariable("id") Long id, @ModelAttribute CampaignDto campaignDto, @CurrentUser Customs customs) throws IOException {
 		campaignDto = campaignDto.withId(id);
-		campaignService.updateCampaign(campaignDto);
+		campaignService.updateCampaign(campaignDto, customs);
 		return "redirect:/customs/campaigns/" + id;
 	}
 

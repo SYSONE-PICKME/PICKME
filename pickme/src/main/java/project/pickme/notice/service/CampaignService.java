@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
+import project.pickme.common.annotation.CurrentUser;
 import project.pickme.notice.domain.Notice;
 import project.pickme.notice.dto.CampaignDto;
 import project.pickme.notice.mapper.NoticeMapper;
@@ -37,8 +38,7 @@ public class CampaignService {
 	}
 
 	@Transactional
-	public Long createCampaign(CampaignDto campaignDto) throws IOException {
-		Customs customs = getCustomsById(campaignDto.getCustomsId());
+	public Long createCampaign(CampaignDto campaignDto, @CurrentUser Customs customs) throws IOException {
 		String imageUrl = processImageUpload(campaignDto, null);
 		Notice notice = campaignDto.toEntity(customs, imageUrl);
 		noticeMapper.insert(notice);
@@ -46,8 +46,7 @@ public class CampaignService {
 	}
 
 	@Transactional
-	public void updateCampaign(CampaignDto campaignDto) throws IOException {
-		Customs customs = getCustomsById(campaignDto.getCustomsId());
+	public void updateCampaign(CampaignDto campaignDto, @CurrentUser Customs customs) throws IOException {
 		Notice existingCampaign = noticeMapper.selectById(campaignDto.getId());
 		String imageUrl = processImageUpload(campaignDto, existingCampaign);
 		Notice notice = campaignDto.toEntity(customs, imageUrl);

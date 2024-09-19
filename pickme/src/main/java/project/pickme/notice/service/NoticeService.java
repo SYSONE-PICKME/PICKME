@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.amazonaws.services.s3.AmazonS3Client;
 import lombok.RequiredArgsConstructor;
+import project.pickme.common.annotation.CurrentUser;
 import project.pickme.notice.domain.Notice;
 import project.pickme.notice.dto.CampaignDto;
 import project.pickme.notice.dto.NoticeDto;
@@ -39,16 +40,22 @@ public class NoticeService {
 	}
 
 	@Transactional
-	public Long createNotice(NoticeDto noticeDto) {
-		Customs customs = getCustomsById(noticeDto.getCustomsId());
+	public Long createNotice(NoticeDto noticeDto, Customs customs) {
 		Notice notice = noticeDto.toEntity(customs);
 		noticeMapper.insert(notice);
 		return notice.getId();
 	}
 
+	// @Transactional
+	// public Long createNotice(NoticeDto noticeDto) {
+	// 	Customs customs = getCustomsById(noticeDto.getCustomsId());
+	// 	Notice notice = noticeDto.toEntity(customs);
+	// 	noticeMapper.insert(notice);
+	// 	return notice.getId();
+	// }
+
 	@Transactional
-	public void updateNotice(NoticeDto noticeDto) {
-		Customs customs = getCustomsById(noticeDto.getCustomsId());
+	public void updateNotice(NoticeDto noticeDto, @CurrentUser Customs customs) {
 		Notice notice = noticeDto.toEntity(customs);
 		noticeMapper.update(notice);
 	}

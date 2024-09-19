@@ -39,8 +39,8 @@ public class NoticeController {
 	}
 
 	@PostMapping("/create")
-	public String createNotice(@ModelAttribute NoticeDto noticeDto) {
-		Long id = noticeService.createNotice(noticeDto);
+	public String createNotice(@ModelAttribute NoticeDto noticeDto, @CurrentUser Customs customs) {
+		Long id = noticeService.createNotice(noticeDto, customs);
 		return "redirect:/customs/notices/" + id;
 	}
 
@@ -55,9 +55,9 @@ public class NoticeController {
 	}
 
 	@PostMapping("/edit/{id}")
-	public String updateNotice(@PathVariable("id") Long id, @ModelAttribute NoticeDto noticeDto) {
+	public String updateNotice(@PathVariable("id") Long id, @ModelAttribute NoticeDto noticeDto, @CurrentUser Customs customs) {
 		noticeDto = noticeDto.withId(id);
-		noticeService.updateNotice(noticeDto);
+		noticeService.updateNotice(noticeDto, customs);
 		return "redirect:/customs/notices/" + id;
 	}
 
