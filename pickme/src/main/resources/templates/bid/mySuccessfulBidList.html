@@ -41,10 +41,9 @@
 
                     <!-- 배송현황 버튼: 송장번호가 등록된 경우 표시 -->
                     <input type="button" id="deliveryStatus" value="배송현황"
-                           th:if="${item.invoiceNumber !=0}"
+                           th:if="${item.invoiceNumber}"
                            th:onclick="'window.location.href=\'/user/delivery/status?itemId=' + ${item.itemId} + '\''">
-                    <p th:if="${item.invoiceNumber!=0}">송장번호:<span th:text="${item.invoiceNumber}"></span></p>
-
+                    <p th:if="${item.invoiceNumber}">송장번호:<span th:text="${item.invoiceNumber}"></span></p>
                 </div>
             </div>
         </div>

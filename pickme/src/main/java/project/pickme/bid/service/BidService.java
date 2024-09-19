@@ -20,7 +20,7 @@ import project.pickme.bid.repository.BidMapper;
 import project.pickme.common.exception.BusinessException;
 import project.pickme.item.domain.Item;
 import project.pickme.bid.dto.response.OneBidItemDto;
-import project.pickme.item.dto.ItemDto;
+import project.pickme.bid.dto.MySuccessfulBidDto;
 import project.pickme.item.repository.ItemMapper;
 import project.pickme.payment.dto.SavePaymentDto;
 import project.pickme.payment.repository.PaymentMapper;
@@ -51,7 +51,8 @@ public class BidService {
 		Item item = getItem(addBidDto.getItemId());
 
 		if (item.isOpen()) {
-			User user = userMapper.findUserById(addBidDto.getUserId()).orElseThrow(() -> new BusinessException(NOT_FOUND_USER));
+			User user = userMapper.findUserById(addBidDto.getUserId())
+				.orElseThrow(() -> new BusinessException(NOT_FOUND_USER));
 			BidCreateDto bidCreateDto = BidCreateDto.create(addBidDto.getPrice(), user.getId(), item.getId());
 			bidMapper.save(bidCreateDto);
 
@@ -63,7 +64,8 @@ public class BidService {
 
 	@Transactional
 	public void selectBid(SelectedBidDto selectedBidDto) throws MessagingException {
-		Bid bid = bidMapper.findBidById(selectedBidDto.getBidId()).orElseThrow(() -> new BusinessException(NOT_FOUND_BID));
+		Bid bid = bidMapper.findBidById(selectedBidDto.getBidId())
+			.orElseThrow(() -> new BusinessException(NOT_FOUND_BID));
 
 		bidMapper.updateBidSuccess(selectedBidDto.getBidId());
 		userMapper.minusPoint(bid.getUserId(), bid.getPrice());
@@ -77,7 +79,7 @@ public class BidService {
 		return itemMapper.findItemById(itemId).orElseThrow(() -> new BusinessException(NOT_FOUND_ITEM));
 	}
 
-	public List<ItemDto> findMySuccessfulBid(User user) {
+	public List<MySuccessfulBidDto> findMySuccessfulBid(User user) {
 		return bidMapper.findMySuccessfulBid(user.getId());
 	}
 }
