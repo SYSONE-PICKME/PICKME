@@ -19,7 +19,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
 import project.pickme.bid.domain.Bid;
-import project.pickme.bid.dto.response.BidCreateDto;
+import project.pickme.bid.dto.response.BidDto;
+import project.pickme.bid.dto.response.PriceDto;
 import project.pickme.item.dto.ItemDto;
 import project.pickme.item.repository.ItemMapper;
 import project.pickme.user.constant.Role;
@@ -62,7 +63,7 @@ class BidMapperTest {
 	@DisplayName("입찰을 저장할 수 있다.")
 	void save() {
 	    // given
-		BidCreateDto bid = BidCreateDto.create(1000, "testUser", itemId);
+		BidDto bid = BidDto.create(1000, "testUser", itemId);
 
 		// when
 		bidMapper.save(bid);
@@ -78,7 +79,7 @@ class BidMapperTest {
 	@DisplayName("저장된 입찰 아이디를 반환받을 수 있다.")
 	void saveReturnId() {
 		// given
-		BidCreateDto bid = BidCreateDto.create(1000, "testUser", itemId);
+		BidDto bid = BidDto.create(1000, "testUser", itemId);
 
 		// when
 		bidMapper.save(bid);
@@ -93,8 +94,8 @@ class BidMapperTest {
 	void findMaxBidByItemId() {
 	    // given
 		User user = userMapper.findUserById("testUser").get();
-		BidCreateDto bid1 = BidCreateDto.create(1000, user.getId(), itemId);
-		BidCreateDto bid2 = BidCreateDto.create(10000, user.getId(), itemId);
+		BidDto bid1 = BidDto.create(1000, user.getId(), itemId);
+		BidDto bid2 = BidDto.create(10000, user.getId(), itemId);
 
 		bidMapper.save(bid1);
 		bidMapper.save(bid2);
@@ -111,8 +112,8 @@ class BidMapperTest {
 	void findBidById() {
 	    // given
 		User user = userMapper.findUserById("testUser").get();
-		BidCreateDto bid1 = BidCreateDto.create(1000, user.getId(), itemId);
-		BidCreateDto bid2 = BidCreateDto.create(10000, user.getId(), itemId);
+		BidDto bid1 = BidDto.create(1000, user.getId(), itemId);
+		BidDto bid2 = BidDto.create(10000, user.getId(), itemId);
 
 		bidMapper.save(bid1);
 		bidMapper.save(bid2);
@@ -131,7 +132,7 @@ class BidMapperTest {
 	Collection<DynamicTest> updateBidSuccess(){
 		//given
 		User user = userMapper.findUserById("testUser").get();
-		BidCreateDto bid = BidCreateDto.create(1000, user.getId(), itemId);
+		BidDto bid = BidDto.create(1000, user.getId(), itemId);
 		bidMapper.save(bid);
 
 		return List.of(
@@ -156,20 +157,25 @@ class BidMapperTest {
 	void findAllPriceByItemId() {
 	    // given
 		User user = userMapper.findUserById("testUser").get();
-		BidCreateDto bid1 = BidCreateDto.create(1000, user.getId(), itemId);
-		BidCreateDto bid2 = BidCreateDto.create(10000, user.getId(), itemId);
-		BidCreateDto bid3 = BidCreateDto.create(100000, user.getId(), itemId);
+		BidDto bid1 = BidDto.create(1000, user.getId(), itemId);
+		BidDto bid2 = BidDto.create(10000, user.getId(), itemId);
+		BidDto bid3 = BidDto.create(100000, user.getId(), itemId);
 
 		bidMapper.save(bid1);
 		bidMapper.save(bid2);
 		bidMapper.save(bid3);
 
 	    // when
-		List<Long> allPriceByItemId = bidMapper.findAllPriceByItemId(itemId);
+		List<PriceDto> allPrices = bidMapper.findAllPriceByItemId(itemId);
 
 		// then
-		assertThat(allPriceByItemId).hasSize(3)
-			.containsExactlyInAnyOrder(1000l, 10000l, 100000l);
+		assertThat(allPrices).hasSize(3)
+			.extracting(PriceDto::getPrice, PriceDto::getUserId)
+			.containsExactly(
+				tuple(1000L, "testUser"),
+				tuple(10000L, "testUser"),
+				tuple(100000L, "testUser")
+			);
 	}
 
 	private static User createUser(String id) {

@@ -1,4 +1,4 @@
-package project.pickme.item.dto;
+package project.pickme.image.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

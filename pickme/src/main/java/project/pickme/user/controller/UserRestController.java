@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
+import project.pickme.common.response.BaseResponse;
 import project.pickme.user.service.UserService;
 
 @RestController
@@ -16,6 +17,6 @@ public class UserRestController {
 	@PostMapping("/user/check-id")
 	public ResponseEntity<?> checkDuplicateUserId(@RequestBody String id) {
 		userService.checkDuplicateId(id);
-		return ResponseEntity.ok("사용 가능한 아이디");
+		return ResponseEntity.ok(BaseResponse.ok("사용 가능한 아이디"));
 	}
 }
