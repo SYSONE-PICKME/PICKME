@@ -32,7 +32,6 @@ public class BidRestController {
 
 	@PostMapping("/end")
 	public BaseResponse<?> endBid(@RequestBody SelectedBidDto selectedBidDto) throws MessagingException {
-		System.out.println(selectedBidDto.getItemImage());
 		bidService.selectBid(selectedBidDto);
 
 		return BaseResponse.ok();
