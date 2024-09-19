@@ -15,8 +15,15 @@ function fetchBidDetails() {
             if (response.success) {
                 const bidDetails = response.data;
 
-                //TODO: 넘어온 데이터가 null인 경우 처리 해야함
-                document.querySelector('.max-price').textContent = formatCurrency(parseInt(bidDetails.maxPrice));
+                if (bidDetails.maxPrice === 0) {
+                    const startPriceElement = document.querySelector('.starting-price .price');
+                    const startPrice = parseInt(startPriceElement.textContent.replace(/,/g, ''));
+
+                    document.querySelector('.max-price').textContent = formatCurrency(startPrice);
+                } else {
+                    document.querySelector('.max-price').textContent = formatCurrency(bidDetails.maxPrice);
+                }
+
                 myPoint = parseInt(bidDetails.myPoint);
                 document.querySelector('.my-point').textContent = formatCurrency(myPoint);
 
@@ -24,8 +31,6 @@ function fetchBidDetails() {
                 selectedBid = bidDetails.bidId;
 
                 initChartData(bidDetails.allPrice); //입찰 추이 차트 초기화
-
-                console.log("데이터 초기화: ", bidDetails);
             }
         }
     })
