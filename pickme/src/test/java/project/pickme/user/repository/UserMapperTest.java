@@ -13,6 +13,7 @@ import org.springframework.test.context.ActiveProfiles;
 
 import project.pickme.user.constant.Role;
 import project.pickme.user.domain.User;
+import project.pickme.user.dto.UpdateInfoDto;
 
 @SpringBootTest
 @ActiveProfiles("test")
@@ -85,8 +86,25 @@ class UserMapperTest {
 		userMapper.updatePassword(newPassword, user.getId());
 	    
 	    // then
-		User findUser = userMapper.findUserById(user.getId()).get();
-		assertThat(findUser.getPassword()).isEqualTo(newPassword);
+		User updatedUser = userMapper.findUserById(user.getId()).get();
+		assertThat(updatedUser.getPassword()).isEqualTo(newPassword);
+	}
+
+	@Test
+	@DisplayName("내 정보를 업데이트 할 수 있다.")
+	void updateMyInfo() {
+	    // given
+		User user = createUser("user", 10000);
+		userMapper.save(user);
+		UpdateInfoDto updateInfoDto = new UpdateInfoDto("새로운 이름", "새로운 주소", user.getEmail(), user.getPhoneNum(), user.getBusinessNum());
+
+	    // when
+		userMapper.updateMyInfo(updateInfoDto, user.getId());
+
+	    // then
+		User updatedUser = userMapper.findUserById(user.getId()).get();
+		assertThat(updatedUser).extracting("name", "addr")
+			.containsExactly("새로운 이름", "새로운 주소");
 	}
 
 	private static User createUser(String id, long point) {

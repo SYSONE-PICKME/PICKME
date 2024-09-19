@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import project.pickme.user.domain.User;
+import project.pickme.user.dto.UpdateInfoDto;
 import project.pickme.user.dto.UserDto;
 
 @Mapper
@@ -21,4 +22,6 @@ public interface UserMapper {
 	void updatePointById(UserDto.UpdatePoint userDto);
 
 	void updatePassword(@Param("password") String password, @Param("userId") String userId);
+
+	void updateMyInfo(@Param("updateInfoDto") UpdateInfoDto updateInfoDto, @Param("userId") String userId);
 }

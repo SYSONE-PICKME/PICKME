@@ -1,5 +1,5 @@
 //사업자인 경우에만 사업자 등록번호 필드 보여주기
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     let userType = document.getElementById('userTypeInput').value;
 
     if (userType === 'BUSINESS') {
@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+//비밀번호 업데이트
 document.addEventListener('DOMContentLoaded', () => {
     const newPassword = document.getElementById('new-password');
     const passwordConfirm = document.getElementById('confirm-password');
@@ -33,10 +34,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const originPassword = document.getElementById('origin-password').value;
 
-        // 비밀번호 값 확인을 위해 로그 출력
-        console.log('New Password:', newPassword.value);
-        console.log('Current Password:', originPassword);
-
         $.ajax({
             url: '/user/password',
             type: 'PUT',
@@ -45,12 +42,44 @@ document.addEventListener('DOMContentLoaded', () => {
                 originPassword: originPassword,
                 newPassword: newPassword.value
             }),
-            success: function(response) {
+            success: function (response) {
                 alert('비밀번호가 성공적으로 변경되었습니다.');
             },
-            error: function(xhr) {
+            error: function (xhr) {
                 alert(xhr.responseText);
             }
         });
     });
 });
+
+//내 정보 업데이트
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelector('.info-form').addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const name = document.getElementById('name').value;
+        const addr = document.getElementById('address').value;
+        const email = document.getElementById('email').value;
+        const phoneNum = document.getElementById('phone').value;
+        const businessNum = document.getElementById('businessNumber').value;
+
+        $.ajax({
+            url: '/user/info',
+            type: 'PUT',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                name: name,
+                addr: addr,
+                email: email,
+                phoneNum: phoneNum,
+                businessNum: businessNum
+            }),
+            success: function (response) {
+                alert('내정보가 정상적으로 변경되었습니다.');
+            },
+            error: function (xhr) {
+                alert(xhr.responseText);
+            }
+        })
+    })
+})

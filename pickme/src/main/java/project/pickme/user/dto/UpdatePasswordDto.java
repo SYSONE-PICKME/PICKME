@@ -1,9 +1,9 @@
 package project.pickme.user.dto;
 
-import lombok.Data;
+import lombok.Getter;
 
-@Data
-public class PasswordDto {
+@Getter
+public class UpdatePasswordDto {
 	private String originPassword;
 	private String newPassword;
 }

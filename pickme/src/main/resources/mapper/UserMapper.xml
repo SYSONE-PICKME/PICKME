@@ -42,4 +42,14 @@
         set password = #{password}
         where id = #{userId}
     </update>
+
+    <update id="updateMyInfo">
+        update User
+        set name = #{updateInfoDto.name},
+            email = #{updateInfoDto.email},
+            phone_num = #{updateInfoDto.phoneNum},
+            addr = #{updateInfoDto.addr},
+            business_num = #{updateInfoDto.businessNum}
+        where id = #{userId}
+    </update>
 </mapper>

@@ -24,7 +24,7 @@ public class BidRestController {
 	private final BidService bidService;
 
 	@GetMapping("/details/{itemId}")
-	public BaseResponse<?> showBidDetails(@PathVariable("itemId") Long itemId, @CurrentUser User user){
+	public BaseResponse<?> showBidDetails(@PathVariable("itemId") Long itemId, @CurrentUser User user) {
 		BidDetailsDto bidDetailsDto = bidService.showBidDetails(itemId, user);
 
 		return BaseResponse.ok(bidDetailsDto);

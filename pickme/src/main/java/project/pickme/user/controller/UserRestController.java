@@ -10,7 +10,8 @@ import lombok.RequiredArgsConstructor;
 import project.pickme.common.annotation.CurrentUser;
 import project.pickme.common.response.BaseResponse;
 import project.pickme.user.domain.User;
-import project.pickme.user.dto.PasswordDto;
+import project.pickme.user.dto.UpdatePasswordDto;
+import project.pickme.user.dto.UpdateInfoDto;
 import project.pickme.user.service.UserService;
 
 @RestController
@@ -26,17 +27,16 @@ public class UserRestController {
 		return BaseResponse.ok("사용 가능한 아이디");
 	}
 
+	@PutMapping("/info")
+	public BaseResponse<?> updateInfo(@RequestBody UpdateInfoDto updateInfoDto, @CurrentUser User user){
+		userService.updateInfo(updateInfoDto, user);
 
-	// @PutMapping("/info")
-	// public BaseResponse<?> updateInfo(@RequestBody UpdateInfoDto updateInfoDto, @CurrentUser User user){
-	// 	userService.updateInfo(updateInfoDto, user);
-	//
-	// 	return BaseResponse.ok();
-	// }
+		return BaseResponse.ok();
+	}
 
 	@PutMapping("/password")
-	public BaseResponse<?> updatePassword(@RequestBody PasswordDto passwordDto, @CurrentUser User user){
-		userService.updatePassword(passwordDto, user);
+	public BaseResponse<?> updatePassword(@RequestBody UpdatePasswordDto updatePasswordDto, @CurrentUser User user){
+		userService.updatePassword(updatePasswordDto, user);
 
 		return BaseResponse.ok();
 	}
