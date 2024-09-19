@@ -4,9 +4,31 @@ body {
     padding: 0;
 }
 
+.background-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    margin-left:6%;
+}
+
+.green-background {
+    position: absolute;
+    width: 100%;
+    height: 40vh;
+    background-color: rgba(246, 255, 248);
+    border-top-left-radius: 100vh;    /* 변경: 왼쪽 상단 모서리 */
+    border-bottom-left-radius: 100vh; /* 변경: 왼쪽 하단 모서리 */
+    /*transform: translateY(-50%);
+    transition: transform 0.3s ease-out;*/
+}
+
 .only-margin {
     margin-left: 15%;
     margin-right: 15%;
+    margin-bottom: 100px;
 }
 
 .container {
@@ -18,7 +40,7 @@ body {
 /* 캠페인 섹션 */
 .top-container {
     display: flex;
-    gap: 40px;
+    gap: 20px;
     margin-bottom: 20px;
 }
 
@@ -155,11 +177,14 @@ body {
     justify-content: space-between;
     margin-bottom: 20px;
     font-weight: 600;
+    padding: 0px;
 }
 
 .navigation button {
+    min-height: 130px;
     font-family: "IBM Plex Sans KR", sans-serif;
-    font-weight: 500;
+    font-weight: 700;
+    font-size: 1rem;
     flex: 1;
     padding: 15px;
     border: none;
@@ -168,14 +193,15 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border-bottom-right-radius: 30px;
+    border-top-left-radius: 30px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
 .navigation button img {
-    width: clamp(48px, 3vw, 56px);
-    height: clamp(48px, 3vw, 56px);
-    margin-bottom: 5px;
+    width: clamp(56px, 3vw, 72px);
+    height: clamp(56px, 3vw, 72px);
+    margin-bottom: 15px;
 }
 
 /* 제품 */
@@ -191,22 +217,31 @@ body {
     height: auto;
     min-height: 400px;
     background-color: white;
-    border-radius: 10px;
+    border-bottom-right-radius: 30px;
     overflow: hidden;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
     position: relative;
+    transition: box-shadow 0.3s ease-in-out;
 }
-
 
 .product-card .status {
     position: absolute;
     top: 10px;
     left: 10px;
-    background-color: red;
-    color: white;
     padding: 5px 10px;
     border-radius: 5px;
     font-size: 12px;
+    font-weight: bold;
+}
+
+.status-open {
+    background-color: #FF0000;
+    color: #FFF;
+}
+
+.status-closed {
+    background-color: black;
+    color: #FFF;
 }
 
 .product-card img {
@@ -217,7 +252,7 @@ body {
 
 .product-info {
     padding: 15px;
-    flex-grow: 1; /* 남은 공간을 채우도록 하는 설정(아래 4개) */
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -225,36 +260,36 @@ body {
 
 .product-info h3 {
     margin: 0 0 10px 0;
-    font-size: 14px;
-    font-weight: 600;
+    font-size: 16px;
+    font-weight: 700;
     color: #333;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 2; /* 최대 2줄 넘어가면 ... 으로 표현 */
+    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
 }
 
 .product-info p {
     margin: 5px 0;
-    font-size: 12px;
+    font-size: 14px;
     color: #666;
-    font-weight: 400;
+    font-weight: 700;
 }
 
 .auction-date {
-    font-weight: 600;
+    font-weight: 700;
     color: #4CAF50;
 }
 
 .auction-end_date {
-    font-weight: 600;
+    font-weight: 700;
     color: #FF0000;
 }
 
 .product-info .price {
     color: #4CAF50;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 /* 페이지네이션 */
@@ -264,29 +299,50 @@ body {
     align-items: center;
     margin-top: 20px;
 }
-
+/*
 .pagination .prev,
 .pagination .next {
     background-color: transparent;
     border: none;
     font-size: 20px;
     cursor: pointer;
+    color: #2EC44F;
+}
+*/
+
+.pagination .prev,
+.pagination .next {
+    background-color: white;
+    color: #2EC44F;
+    border: none;
+    width: 40px;
+    height: 40px;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 0;
 }
 
 .page-dots {
     display: flex;
-    gap: 5px;
+    gap: 10px;
+    margin: 0 20px;
 }
 
 .dot {
     width: 10px;
     height: 10px;
-    background-color: #ccc;
+    background-color: #FFF;
+    border: 2px solid #000;
     border-radius: 50%;
+    cursor: pointer;
 }
 
 .dot.active {
-    background-color: #4CAF50;
+    background-color: #2EC44F;
 }
 
 /* 반응형 디자인
