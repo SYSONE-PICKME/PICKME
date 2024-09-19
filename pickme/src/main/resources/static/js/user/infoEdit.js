@@ -58,10 +58,10 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
 
         const name = document.getElementById('name').value;
-        const addr = document.getElementById('address').value;
+        const addr = document.getElementById('addr').value;
         const email = document.getElementById('email').value;
-        const phoneNum = document.getElementById('phone').value;
-        const businessNum = document.getElementById('businessNumber').value;
+        const phoneNum = document.getElementById('phoneNum').value;
+        const businessNum = document.getElementById('businessNum').value;
 
         $.ajax({
             url: '/user/info',
@@ -82,4 +82,24 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         })
     })
+})
+
+document.addEventListener('DOMContentLoaded', () => {
+    const infoForm = document.querySelector('.info-form');
+    const passwordForm = document.querySelector('.password-form');
+    const infoCancelButton = document.querySelector('.info-form .cancel-btn');
+    const passwordCancelButton = document.querySelector('.password-form .cancel-btn');
+    const passwordSubmitButton = document.querySelector('.password-form .submit-btn');
+
+    // 초기화 로직: 내 정보 폼
+    infoCancelButton.addEventListener('click', () => {
+        infoForm.reset();
+    });
+
+    // 초기화 로직: 비밀번호 폼
+    passwordCancelButton.addEventListener('click', () => {
+        passwordForm.reset();  // 비밀번호 폼을 초기 상태로 복원
+        passwordSubmitButton.disabled = true;  // 버튼 비활성화
+        document.getElementById('password-match-message').style.visibility = 'hidden';
+    });
 })
