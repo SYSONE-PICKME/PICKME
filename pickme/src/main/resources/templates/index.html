@@ -7,12 +7,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" th:href="@{/css/common/index.css}">
+    <link rel="stylesheet" th:href="@{/css/userMain.css}">
     <link rel="stylesheet" th:href="@{/css/common/header.css}">
     <link rel="stylesheet" th:href="@{/css/common/footer.css}">
 </head>
 <body>
+<div class="background-container">
+    <div class="green-background"></div>
+</div>
 <div class="only-margin">
     <div class="container">
         <div class="top-container">
@@ -20,7 +22,6 @@
                 <section class="campaign">
                     <img th:src="@{/images/imsi.png}" alt="캠페인" src="">
                 </section>
-
             </div>
             <div class="top-buttons">
                 <button class="custom-admin">
@@ -35,87 +36,32 @@
         </div>
 
         <div class="navigation">
-            <button><img th:src="@{/images/annoucement.png}" alt="배송" src="">배송현황</button>
-            <button><img th:src="@{/images/search-engine.png}" alt="공매물품조회" src="">공매물품조회</button>
-            <button><img th:src="@{/images/auction.png}" alt="입찰목록" src="">입찰목록</button>
-            <button><img th:src="@{/images/point.png}" alt="포인트등록" src="">포인트등록</button>
-            <button><img th:src="@{/images/myPage.png}" alt="마이페이지" src="">마이페이지</button>
-            <button><img th:src="@{/images/data-analysis.png}" alt="통계" src="">통계</button>
+            <button id="nav-btn-left" ><img th:src="@{/images/annoucement.png}" alt="배송" src="">배송현황</button>
+            <button class="nav-btn-cen" th:onclick="|location.href='@{/user/item/list}'|"><img th:src="@{/images/search-engine.png}" alt="공매물품조회" src="">공매물품조회</button>
+            <button class="nav-btn-cen" th:if="${userId != null}"
+                    th:onclick="|location.href='@{/user/item/' + ${userId}}'|">
+                <img th:src="@{/images/auction.png}" alt="입찰목록" src="">입찰목록
+            </button>
+            <button class="nav-btn-cen" th:if="${userId == null}"
+                    th:onclick="|location.href='@{/user/loginForm}'|">
+                <img th:src="@{/images/auction.png}" alt="입찰목록" src="">입찰목록
+            </button>
+            <button class="nav-btn-cen" ><img th:src="@{/images/point.png}" alt="포인트등록" src="">포인트등록</button>
+            <button class="nav-btn-cen" ><img th:src="@{/images/myPage.png}" alt="마이페이지" src="">마이페이지</button>
+            <button id="nav-btn-right"><img th:src="@{/images/data-analysis.png}" alt="통계" src="">통계</button>
         </div>
 
         <section class="products-grid">
-            <div class="product-card">
-                <span class="status">진행중</span>
-                <img th:src="@{/images/planning.jpg}" alt="제품 1" src="">
+            <div th:each="item : ${items}" class="product-card">
+                <div class="product-card-background"></div>
+                <span class="status" th:classappend="${item.status == 'OPEN' ? 'status-open' : (item.status == 'NOT_OPEN' ? 'status-not-open' : 'status-closed')}"
+                      th:text="${item.status == 'OPEN' ? '진행중' : (item.status == 'NOT_OPEN' ? '진행 예정' : '마감')}">진행중</span>
+                <img th:src="@{${item.imgUrl}}" alt="제품" src="">
                 <div class="product-info">
-                    <h3>Jumper Laptop16 InchDDR4 16G5SD 512Value LaptopSlimFHD</h3>
-                    <p>공매예상가격 <span class="price">36000원</span></p>
-                    <p>
-                        <span class="auction-label">공매시작시간</span>
-                        <span class="auction-date">2024-09-05 10:00</span><br>
-                        <span class="auction-label">공매마감시간</span>
-                        <span class="auction-end_date">2024-09-06 10:00</span>
-                    </p>
-                </div>
-            </div>
-
-            <div class="product-card">
-                <span class="status">진행중</span>
-                <img th:src="@{/images/planning.jpg}" alt="제품 1" src="">
-                <div class="product-info">
-                    <h3>Jumper Laptop16 InchDDR4 16G5SD 512Value LaptopSlimFHD</h3>
-                    <p>공매예상가격 <span class="price">36000원</span></p>
-                    <p>
-                        <span class="auction-label">공매시작시간</span>
-                        <span class="auction-date">2024-09-05 10:00</span><br>
-                        <span class="auction-label">공매마감시간</span>
-                        <span class="auction-end_date">2024-09-06 10:00</span>
-                    </p>
-                </div>
-            </div>
-
-            <div class="product-card">
-                <span class="status">진행중</span>
-                <img th:src="@{/images/planning.jpg}" alt="제품 1" src="">
-                <div class="product-info">
-                    <h3>Jumper Laptop16 InchDDR4 16G5SD 512Value LaptopSlimFHD</h3>
-                    <p>공매예상가격 <span class="price">36000원</span></p>
-                    <p>
-                        <span class="auction-label">공매시작시간</span>
-                        <span class="auction-date">2024-09-05 10:00</span><br>
-                        <span class="auction-label">공매마감시간</span>
-                        <span class="auction-end_date">2024-09-06 10:00</span>
-                    </p>
-                </div>
-            </div>
-
-            <div class="product-card">
-                <span class="status">진행중</span>
-                <img th:src="@{/images/planning.jpg}" alt="제품 1" src="">
-                <div class="product-info">
-                    <h3>Jumper Laptop16 InchDDR4 16G5SD 512Value LaptopSlimFHD</h3>
-                    <p>공매예상가격 <span class="price">36000원</span></p>
-                    <p>
-                        <span class="auction-label">공매시작시간</span>
-                        <span class="auction-date">2024-09-05 10:00</span><br>
-                        <span class="auction-label">공매마감시간</span>
-                        <span class="auction-end_date">2024-09-06 10:00</span>
-                    </p>
-                </div>
-            </div>
-
-            <div class="product-card">
-                <span class="status">진행중</span>
-                <img th:src="@{/images/planning.jpg}" alt="제품 1" src="">
-                <div class="product-info">
-                    <h3>Jumper Laptop16 InchDDR4 16G5SD 512Value LaptopSlimFHD</h3>
-                    <p>공매예상가격 <span class="price">36000원</span></p>
-                    <p>
-                        <span class="auction-label">공매시작시간</span>
-                        <span class="auction-date">2024-09-05 10:00</span><br>
-                        <span class="auction-label">공매마감시간</span>
-                        <span class="auction-end_date">2024-09-06 10:00</span>
-                    </p>
+                    <h3 th:text="${item.name}">제품 이름</h3>
+                    <p>공매예상가격 <span class="price" th:text="'￦  ' + ${item.price}">가격</span></p>
+                    <p class="auction-label">공매시작시간<span class="auction-date" th:text="'  '+ ${#temporals.format(item.startTime, 'yyyy-MM-dd HH:mm')}">공매시작시간</span></p>
+                    <p class="auction-label">공매마감시간<span class="auction-end_date" th:text="'  '+ ${#temporals.format(item.endTime, 'yyyy-MM-dd HH:mm')}">공매마감시간</span></p>
                 </div>
             </div>
         </section>

@@ -3,6 +3,7 @@ export default class Modal {
         this.modal = document.getElementById(modalId);
         this.modalMessage = document.getElementById(messageElementId);
         this.confirmBtn = document.getElementById(confirmButtonId);
+        this.iconElement = document.querySelector('.icon-container .icon');
 
         this.init();
     }
@@ -24,5 +25,12 @@ export default class Modal {
 
     close(){
         this.modal.style.display = "none";
+    }
+
+    bidSuccessModalOpen(message){
+        this.iconElement.textContent = '🏆';
+
+        this.modalMessage.textContent = message;
+        this.modal.style.display = "block";
     }
 }

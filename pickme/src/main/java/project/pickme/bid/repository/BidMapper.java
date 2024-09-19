@@ -6,12 +6,18 @@ import java.util.Optional;
 import org.apache.ibatis.annotations.Mapper;
 
 import project.pickme.bid.domain.Bid;
+
 import project.pickme.bid.dto.response.BidCreateDto;
 import project.pickme.bid.dto.MySuccessfulBidDto;
 
+import project.pickme.bid.dto.response.BidDto;
+import project.pickme.bid.dto.SuccessfulBidDto;
+import project.pickme.bid.dto.response.PriceDto;
+
+
 @Mapper
 public interface BidMapper {
-	void save(BidCreateDto bid);
+	void save(BidDto bid);
 
 	List<Bid> findAll();
 
@@ -19,7 +25,7 @@ public interface BidMapper {
 
 	Long findMaxBidByItemId(Long itemId);
 
-	List<Long> findAllPriceByItemId(Long itemId);
+	List<PriceDto> findAllPriceByItemId(Long itemId);
 
 	Optional<Bid> findBidById(Long bidId);
 

@@ -26,7 +26,8 @@
         /*]]>*/
     </script>
     <script th:src="@{/js/item/image.js}"></script>
-    <script th:src="@{/item/js/like.js}"></script>
+    <script th:src="@{/js/item/like.js}"></script>
+    <script th:src="@{/js/item/countdown.js}"></script>
 </head>
 <body>
 <!-- 헤더 -->
@@ -42,10 +43,21 @@
             </div>
 
             <div class="thumbnail-images">
-                <img th:src="${item.imageUrls[1]}" class="thumbnail" alt="섬네일1" onclick="changeImage(this)">
-                <img th:src="${item.imageUrls[2]}" class="thumbnail" alt="섬네일2" onclick="changeImage(this)">
-                <img th:src="${item.imageUrls[3]}" class="thumbnail" alt="섬네일3" onclick="changeImage(this)">
-                <img th:src="${item.imageUrls[4]}" class="thumbnail" alt="섬네일4" onclick="changeImage(this)">
+                <!-- 첫 번째 이미지 -->
+                <img th:if="${item.imageUrls.size() > 1}" th:src="${item.imageUrls[1]}" class="thumbnail" onclick="changeImage(this)">
+                <img th:if="${item.imageUrls.size() <= 1}" th:src="@{/images/default_img.png}" class="thumbnail">
+
+                <!-- 두 번째 이미지 -->
+                <img th:if="${item.imageUrls.size() > 2}" th:src="${item.imageUrls[2]}" class="thumbnail" onclick="changeImage(this)">
+                <img th:if="${item.imageUrls.size() <= 2}" th:src="@{/images/default_img.png}" class="thumbnail">
+
+                <!-- 세 번째 이미지 -->
+                <img th:if="${item.imageUrls.size() > 3}" th:src="${item.imageUrls[3]}" class="thumbnail" onclick="changeImage(this)">
+                <img th:if="${item.imageUrls.size() <= 3}" th:src="@{/images/default_img.png}" class="thumbnail">
+
+                <!-- 네 번째 이미지 -->
+                <img th:if="${item.imageUrls.size() > 4}" th:src="${item.imageUrls[4]}" class="thumbnail" onclick="changeImage(this)">
+                <img th:if="${item.imageUrls.size() <= 4}" th:src="@{/images/default_img.png}" class="thumbnail">
             </div>
         </div>
 
@@ -55,7 +67,7 @@
                 <i class="far fa-heart"></i>
             </button>
             <div class="action-sub-details" style="width:670px; height:320px">
-                <p>공매 번호: <span th:text="${item.id}"></span></p>
+                <p>공매 번호: <span th:text="${item.id}" th:data-item-id="${item.id}"></span></p>
                 <p>세관명: <span th:text="${item.customsName}"></span></p>
                 <p>입찰 대상: <span th:text="${item.target}"></span></p>
                 <p>공매시작일시: <span th:text="${item.startTime}"></span></p>
@@ -83,6 +95,5 @@
 <!-- 푸터 -->
 <!--<div th:replace="fragments/footer :: footer"></div>-->
 <div th:replace="~{fragments/footer :: footer}">footer content</div>
-<script th:src="@{/js/item/countdown.js}"></script>
 </body>
 </html>
