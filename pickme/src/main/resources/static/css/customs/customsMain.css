@@ -4,11 +4,13 @@ body {
     padding: 0;
     background-color: #fff;
 }
+
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
 }
+
 .section-title {
     font-size: 24px;
     font-weight: bold;
@@ -16,6 +18,7 @@ body {
     display: flex;
     align-items: center;
 }
+
 .section-title::before {
     content: '';
     display: inline-block;
@@ -24,6 +27,7 @@ body {
     background-color: #4CAF50;
     margin-right: 10px;
 }
+
 .notice-card {
     background: #ffffff;
     border-radius: 12px;
@@ -31,10 +35,12 @@ body {
     display: flex;
     overflow: hidden;
 }
+
 .notice-buttons {
     width: 25%;
     padding: 20px;
 }
+
 .notice-buttons button {
     display: block;
     width: 100%;
@@ -49,14 +55,17 @@ body {
     cursor: pointer;
     transition: all 0.3s ease;
 }
+
 .notice-buttons button.active {
     background-color: #4CAF50;
     color: white;
 }
+
 .notice-list {
     flex-grow: 1;
     padding: 20px;
 }
+
 .notice-item {
     display: flex;
     justify-content: space-between;
@@ -64,21 +73,26 @@ body {
     padding: 15px 0;
     border-bottom: 1px solid #eee;
 }
+
 .notice-item:last-child {
     border-bottom: none;
 }
+
 .notice-content {
     flex-grow: 1;
 }
+
 .notice-content strong {
     display: block;
     margin-bottom: 5px;
 }
+
 .notice-content span {
     color: #888;
     font-size: 0.9em;
     margin-right: 10px;
 }
+
 .notice-link {
     color: #4CAF50;
     background-color: #e8f5e9;
@@ -92,10 +106,12 @@ body {
     font-weight: bold;
     transition: background-color 0.3s ease;
 }
+
 .notice-link:hover {
     background-color: #4CAF50;
     color: white;
 }
+
 .icon {
    color: #4CAF50;
    font-style: normal;
@@ -114,6 +130,7 @@ body {
     margin-top: 40px;
     width: 100%;
 }
+
 .footer-button {
     display: flex;
     align-items: center;
@@ -129,24 +146,29 @@ body {
     transition: all 0.3s ease;
     border: 1px solid #f0f0f0;
 }
+
 .footer-button:hover {
     box-shadow: 0 8px 20px rgba(0,0,0,0.15), 0 0 0 1px rgba(0,0,0,0.08);
     transform: translateY(-3px);
 }
+
 .footer-button img {
     width: 50px;
     height: 50px;
     margin-right: 20px;
 }
+
 .footer-button-text {
     display: flex;
     flex-direction: column;
 }
+
 .footer-button-text strong {
     font-size: 24px;
     margin-bottom: 5px;
     color: #333;
 }
+
 .footer-button-text span {
     font-size: 16px;
     color: #666;
