@@ -4,6 +4,7 @@ let data = [];
 let xValueCounter = 1;
 
 export function initChartData(allPrice, startPrice) {
+    console.log(startPrice);
     if (allPrice.length > 0) {
         labels = allPrice.map((_, index) => index + 1); // x축 라벨은 1부터 시작하여 allPrice 크기만큼 설정
         data = allPrice.slice(); // y축 데이터는 allPrice로 설정

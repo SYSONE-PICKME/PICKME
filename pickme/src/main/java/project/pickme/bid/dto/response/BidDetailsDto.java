@@ -1,6 +1,7 @@
 package project.pickme.bid.dto.response;
 
-import java.util.Collections;
+import static java.util.Collections.*;
+
 import java.util.List;
 
 import lombok.AccessLevel;
@@ -18,7 +19,7 @@ public class BidDetailsDto {
 
 	public static BidDetailsDto createOf(List<PriceDto> priceDtos, long point) {
 		if (priceDtos.isEmpty()) {
-			return new BidDetailsDto(Collections.emptyList(), 0, null, null, point);
+			return new BidDetailsDto(emptyList(), 0, null, null, point);
 		}
 
 		PriceDto last = priceDtos.getLast();
