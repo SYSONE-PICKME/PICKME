@@ -27,6 +27,7 @@
     </script>
     <script th:src="@{/js/item/image.js}"></script>
     <script th:src="@{/js/item/like.js}"></script>
+    <script th:src="@{/js/item/countdown.js}"></script>
 </head>
 <body>
 <!-- 헤더 -->
@@ -66,7 +67,7 @@
                 <i class="far fa-heart"></i>
             </button>
             <div class="action-sub-details" style="width:670px; height:320px">
-                <p>공매 번호: <span th:text="${item.id}"></span></p>
+                <p>공매 번호: <span th:text="${item.id}" th:data-item-id="${item.id}"></span></p>
                 <p>세관명: <span th:text="${item.customsName}"></span></p>
                 <p>입찰 대상: <span th:text="${item.target}"></span></p>
                 <p>공매시작일시: <span th:text="${item.startTime}"></span></p>
@@ -94,6 +95,5 @@
 <!-- 푸터 -->
 <!--<div th:replace="fragments/footer :: footer"></div>-->
 <div th:replace="~{fragments/footer :: footer}">footer content</div>
-<script th:src="@{/js/item/countdown.js}"></script>
 </body>
 </html>
