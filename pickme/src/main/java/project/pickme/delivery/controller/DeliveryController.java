@@ -3,8 +3,8 @@ package project.pickme.delivery.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -39,11 +39,10 @@ public class DeliveryController {
 	}
 
 	// TODO: 송장 등록 하는거 다시 해야함.
-	@PostMapping("/admin")
-	public String saveInvoiceNumber(@ModelAttribute DeliveryFormDto deliveryFormDto) {
+	@PostMapping
+	public String saveInvoiceNumber(@RequestBody DeliveryFormDto deliveryFormDto) {
 		deliveryService.saveDelivery(deliveryFormDto);
-
-		return "redirect:/customs/delivery/admin";
+		return "redirect:/customs/delivery";
 	}
 
 	// TODO: 배송 상황 아직 미구현
