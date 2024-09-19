@@ -135,7 +135,7 @@ body {
     display: flex;
     align-items: center;
     background-color: #fff;
-    padding: 20px;
+    padding: 10px;
     border-radius: 12px;
     box-shadow: 0 6px 16px rgba(0,0,0,0.1), 0 0 0 1px rgba(0,0,0,0.05);
     cursor: pointer;
@@ -153,8 +153,8 @@ body {
 }
 
 .footer-button img {
-    width: 50px;
-    height: 50px;
+    width: clamp(20px, 3vw, 50px);
+    height: clamp(20px, 3vw, 50px);
     margin-right: 20px;
 }
 
@@ -164,12 +164,12 @@ body {
 }
 
 .footer-button-text strong {
-    font-size: 24px;
+    font-size: calc(10px + 0.8vw);
     margin-bottom: 5px;
     color: #333;
 }
 
 .footer-button-text span {
-    font-size: 16px;
+    font-size: calc(7px + 0.5vw);
     color: #666;
 }

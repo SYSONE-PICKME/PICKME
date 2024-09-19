@@ -6,7 +6,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" th:href="@{/css/csutoms/customsMain.css}">
+  <link rel="stylesheet" th:href="@{/css/customs/customsMain.css}">
   <link rel="stylesheet" th:href="@{/css/customs/customsHeader.css}">
 </head>
 <body>
@@ -40,23 +40,23 @@
       </div>
     </a>
     <a href="/admin/auction" class="footer-button">
+      <img th:src="@{/images/campaign.png}" alt="캠페인 관리">
+      <div class="footer-button-text">
+        <strong>캠페인 관리</strong>
+        <span>자세히 보기 ></span>
+      </div>
+    </a>
+    <a href="/admin/user" class="footer-button">
       <img th:src="@{/images/auction.png}" alt="경매 관리">
       <div class="footer-button-text">
         <strong>경매 관리</strong>
         <span>자세히 보기 ></span>
       </div>
     </a>
-    <a href="/admin/user" class="footer-button">
-      <img th:src="@{/images/myPage.png}" alt="사용자 관리">
-      <div class="footer-button-text">
-        <strong>사용자 관리</strong>
-        <span>자세히 보기 ></span>
-      </div>
-    </a>
     <a href="/admin/inquiry" class="footer-button">
-      <img th:src="@{/images/phone.png}" alt="문의 관리">
+      <img th:src="@{/images/delivery-courier.png}" alt="배송 관리">
       <div class="footer-button-text">
-        <strong>문의 관리</strong>
+        <strong>배송 관리</strong>
         <span>자세히 보기 ></span>
       </div>
     </a>

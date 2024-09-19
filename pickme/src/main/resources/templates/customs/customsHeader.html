@@ -15,13 +15,13 @@
     </div>
     <div class="header-content">
         <div class="logo-nav">
-            <div class="logo">PICK-ME</div>
+            <a th:href="@{/customs/home}" class="logo">PICK-ME</a>
             <nav>
                 <ul>
-                    <li><a href="#">공지 관리</a></li>
-                    <li><a href="#">경매 관리</a></li>
-                    <li><a href="#">사용자 관리</a></li>
-                    <li><a href="#">문의 관리</a></li>
+                    <li><a th:href="@{/customs/notices}">공지 관리</a></li>
+                    <li><a th:href="@{/customs/campaigns}">캠페인 관리</a></li>
+                    <li><a th:href="@{/customs/home}">경매 관리</a></li>
+                    <li><a th:href="@{/customs/home}">배송 관리</a></li>
                 </ul>
             </nav>
         </div>
