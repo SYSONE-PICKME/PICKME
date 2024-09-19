@@ -12,5 +12,5 @@ import project.pickme.item.dto.FindItemDto;
 public interface FindItemMapper {
 	Optional<FindItemDto.GetOne> findById(@Param("id") Long id, @Param("userId") String currentUserId);
 
-	List<FindItemDto.GetAll> findAll();
+	List<FindItemDto.GetAll> findAll(String userId);
 }

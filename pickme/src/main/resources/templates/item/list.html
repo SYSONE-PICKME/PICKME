@@ -6,16 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PICKME</title>
 
+    //css
     <link rel="stylesheet" th:href="@{/css/common/index.css}">
     <link rel="stylesheet" th:href="@{/css/common/header.css}">
     <link rel="stylesheet" th:href="@{/css/common/footer.css}">
-    <link rel="stylesheet" th:href="@{/item/css/list.css}">
+    <link rel="stylesheet" th:href="@{/css/item/list.css}">
 
+    //font
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <script th:src="@{/item/js/filtering.js}"></script>
+    //icon
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    //jquery
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    //js
+    <script th:src="@{/js/item/filtering.js}"></script>
+    <script th:src="@{/js/item/like.js}"></script>
 </head>
 <body>
 <!-- 헤더 -->
@@ -44,6 +54,9 @@
         <div class="product-grid">
             <div class="product-card" th:each="item : ${items}" th:data-status="${item.status}">
                 <div class="status-label" th:text="${item.status == 'OPEN' ? '진행중' : '마감'}"></div>
+                <button id="likeButton" class="heart" type="button" th:data-liked="${item.isLiked}" th:data-item-id="${item.id}" th:data-action-url="@{/user/item/{id}/like(id=${item.id})}">
+                    <i class="far fa-heart"></i>
+                </button>
                 <img th:src="@{${item.imgUrl}}" alt="product image" class="product-image">
                 <div class="product-info">
                     <h3 th:text="${item.name}"></h3>
