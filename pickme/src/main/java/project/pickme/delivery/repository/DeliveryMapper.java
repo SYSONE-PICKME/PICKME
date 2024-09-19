@@ -4,9 +4,12 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import project.pickme.item.dto.ItemDto;
+import project.pickme.delivery.dto.DeliveryManageDto;
 
 @Mapper
 public interface DeliveryMapper {
-	List<ItemDto> findCustomsSuccessfulItems(String id);
+	List<DeliveryManageDto> findCustomsSuccessfulItems(String id);
+
+	// TODO: 다시 해야함
+	void saveDeliveryInfo(long itemId, String userId, String invoiceNumber, String code, String status);
 }
