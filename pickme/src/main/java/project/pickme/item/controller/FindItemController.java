@@ -30,8 +30,8 @@ public class FindItemController {
 	}
 
 	@GetMapping("/list")
-	public String getAllItems(Model model) {
-		List<FindItemDto.GetAll> items = itemService.findAll();
+	public String getAllItems(@CurrentUser User user, Model model) {
+		List<FindItemDto.GetAll> items = itemService.findAll(user.getId());
 		model.addAttribute("items", items);
 
 		return "item/list";

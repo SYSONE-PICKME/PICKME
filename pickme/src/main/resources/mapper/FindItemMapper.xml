@@ -72,7 +72,7 @@
         c.id, c.name, c.tel, m.like_id, m.status
     </select>
 
-    <select id = "findAll" resultType="project.pickme.item.dto.FindItemDto$GetAll">
+    <select id = "findAll" parameterType="string" resultType="project.pickme.item.dto.FindItemDto$GetAll">
         select
         i.item_id as id,
         i.name,
@@ -80,7 +80,13 @@
         i.start_time as startTime,
         i.end_time as endTime,
         i.status,
-        img.url as imgUrl
+        img.url as imgUrl,
+
+        -- Mine table
+        case
+        when m.like_id is not null and m.status = 1 then 1
+        else 0
+        end as isLiked
 
         from
         Item i
@@ -88,6 +94,11 @@
         join Image img
         on i.item_id = img.item_id
         and img.seq = 1
+
+        -- Join Mine table
+        left join Mine m
+        on i.item_id = m.item_id
+        and m.user_id = #{userId}
     </select>
 
     <select id="findItemByIdWithImage" parameterType="long" resultType="project.pickme.item.dto.OneBidItemDto">

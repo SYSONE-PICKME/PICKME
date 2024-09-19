@@ -19,4 +19,6 @@ public interface FindItemMapper {
 	Optional<Item> findItemById(Long itemId);
 
 	OneBidItemDto findItemByIdWithImage(Long itemId);
+
+	List<FindItemDto.GetAll> findAll(String userId);
 }
