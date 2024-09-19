@@ -40,8 +40,8 @@ public class NoticeController {
 
 	@PostMapping("/create")
 	public String createNotice(@ModelAttribute NoticeDto noticeDto) {
-		Long noticeId = noticeService.createNotice(noticeDto);
-		return "redirect:/customs/notices/" + noticeId;
+		Long id = noticeService.createNotice(noticeDto);
+		return "redirect:/customs/notices/" + id;
 	}
 
 	@GetMapping("/edit/{id}")

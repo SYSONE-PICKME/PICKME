@@ -23,7 +23,6 @@ public class NoticeDto {
 	private LocalDateTime createTime;
 	private String customsId;
 	private String customsName;
-	private Role customsRole;
 
 	public NoticeDto withId(Long id) {
 		return NoticeDto.builder()
@@ -33,7 +32,6 @@ public class NoticeDto {
 			.createTime(createTime)
 			.customsId(customsId)
 			.customsName(customsName)
-			.customsRole(customsRole)
 			.build();
 	}
 
@@ -57,7 +55,6 @@ public class NoticeDto {
 			.createTime(notice.getCreateTime())
 			.customsId(customs.getId())
 			.customsName(customs.getName())
-			.customsRole(customs.getRole())
 			.build();
 	}
 }

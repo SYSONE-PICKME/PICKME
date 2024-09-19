@@ -10,9 +10,9 @@ import lombok.RequiredArgsConstructor;
 import project.pickme.notice.domain.Notice;
 import project.pickme.notice.dto.CampaignDto;
 import project.pickme.notice.mapper.NoticeMapper;
+import project.pickme.s3.service.S3Service;
 import project.pickme.user.domain.Customs;
 import project.pickme.user.repository.CustomsMapper;
-import project.pickme.util.S3FileUploadService;
 
 @Service
 @RequiredArgsConstructor
@@ -21,7 +21,7 @@ public class CampaignService {
 
 	private final NoticeMapper noticeMapper;
 	private final CustomsMapper customsMapper;
-	private final S3FileUploadService s3FileUploadService;
+	private final S3Service s3Service;
 
 	public List<CampaignDto> getAllCampaigns() {
 		return noticeMapper.selectByType("CAMPAIGN").stream()
@@ -42,7 +42,7 @@ public class CampaignService {
 		Customs customs = getCustomsById(campaignDto.getCustomsId());
 		String imageUrl = null;
 		if (campaignDto.getImageFile() != null && !campaignDto.getImageFile().isEmpty()) {
-			imageUrl = s3FileUploadService.uploadFile(campaignDto.getImageFile());
+			imageUrl = s3Service.uploadImage(campaignDto.getImageFile());
 		}
 		Notice notice = campaignDto.toEntity(customs, imageUrl);
 		noticeMapper.insert(notice);
@@ -53,8 +53,10 @@ public class CampaignService {
 	public void updateCampaign(CampaignDto campaignDto) throws IOException {
 		Customs customs = getCustomsById(campaignDto.getCustomsId());
 		String imageUrl = null;
+		Notice existingCampaign = noticeMapper.selectById(campaignDto.getId());
 		if (campaignDto.getImageFile() != null && !campaignDto.getImageFile().isEmpty()) {
-			imageUrl = s3FileUploadService.uploadFile(campaignDto.getImageFile());
+			deleteExistingImage(existingCampaign);
+			imageUrl = s3Service.uploadImage(campaignDto.getImageFile());
 		} else {
 			Notice existingNotice = noticeMapper.selectById(campaignDto.getId());
 			if (existingNotice != null && "CAMPAIGN".equals(existingNotice.getType())) {
@@ -67,10 +69,19 @@ public class CampaignService {
 
 	@Transactional
 	public void deleteCampaign(Long id) {
+		Notice existingCampaign = noticeMapper.selectById(id);
+		deleteExistingImage(existingCampaign);
 		noticeMapper.delete(id);
 	}
 
 	private Customs getCustomsById(String customsId) {
 		return customsMapper.findByCustomsId(customsId).get();		// todo: Optional은 예외처리 해야한다고 함
 	}
+
+	private void deleteExistingImage(Notice existingCampaign) {
+		if (existingCampaign != null && "CAMPAIGN".equals(existingCampaign.getType()) && existingCampaign.getContent() != null) {
+			s3Service.deleteFile(existingCampaign.getContent());
+		}
+	}
+
 }

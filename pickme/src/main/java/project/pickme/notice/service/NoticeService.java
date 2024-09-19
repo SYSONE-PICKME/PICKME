@@ -15,7 +15,6 @@ import project.pickme.notice.mapper.NoticeMapper;
 import project.pickme.s3.config.S3Config;
 import project.pickme.user.domain.Customs;
 import project.pickme.user.repository.CustomsMapper;
-import project.pickme.util.S3FileUploadService;
 
 @Service
 @RequiredArgsConstructor

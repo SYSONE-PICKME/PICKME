@@ -23,7 +23,6 @@ public class CampaignDto {
 	private LocalDateTime createTime;
 	private String customsId;
 	private String customsName;
-	private Role customsRole;
 	private MultipartFile imageFile;
 	private String imageUrl;
 
@@ -34,7 +33,6 @@ public class CampaignDto {
 			.createTime(createTime)
 			.customsId(customsId)
 			.customsName(customsName)
-			.customsRole(customsRole)
 			.imageFile(imageFile)
 			.imageUrl(imageUrl)
 			.build();
@@ -59,7 +57,6 @@ public class CampaignDto {
 			.createTime(notice.getCreateTime())
 			.customsId(customs.getId())
 			.customsName(customs.getName())
-			.customsRole(customs.getRole())
 			.imageUrl(notice.getContent())
 			.build();
 	}
