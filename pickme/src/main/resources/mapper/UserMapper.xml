@@ -36,4 +36,10 @@
         set point = #{point}
         where id = #{id}
     </update>
+
+    <update id="updatePassword">
+        update User
+        set password = #{password}
+        where id = #{userId}
+    </update>
 </mapper>

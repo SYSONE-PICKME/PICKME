@@ -36,11 +36,11 @@ public class UserService {
 
 	@Transactional
 	public void updatePassword(PasswordDto password, User user) {
-		if(!passwordEncoder.matches(password.getNewPassword(), user.getPassword())){
+		if(!passwordEncoder.matches(password.getOriginPassword(), user.getPassword())){
 			throw new BusinessException(INVALID_PASSWORD);
 		}
 
-		userMapper.updatePassword(password.getNewPassword(), user.getId());
+		userMapper.updatePassword(passwordEncoder.encode(password.getNewPassword()), user.getId());
 	}
 
 	private User createUser(SignUpDto signUpDto) {

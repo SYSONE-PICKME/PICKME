@@ -72,6 +72,22 @@ class UserMapperTest {
 		User afterMinusPointUser = userMapper.findUserById("pointUser").get();
 		assertThat(afterMinusPointUser.getPoint()).isEqualTo(50000);
 	}
+	
+	@Test
+	@DisplayName("비밀번호를 업데이트 할 수 있다.")
+	void updatePassword() {
+	    // given
+		User user = createUser("user", 10000);
+		userMapper.save(user);
+		String newPassword = "updatePassword";
+
+		// when
+		userMapper.updatePassword(newPassword, user.getId());
+	    
+	    // then
+		User findUser = userMapper.findUserById(user.getId()).get();
+		assertThat(findUser.getPassword()).isEqualTo(newPassword);
+	}
 
 	private static User createUser(String id, long point) {
 		return User.builder()
