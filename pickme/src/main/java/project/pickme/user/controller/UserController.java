@@ -43,8 +43,10 @@ public class UserController {
 		return "user/loginForm";
 	}
 
-	@GetMapping("myPage")
-	public String myPage(@CurrentUser User user){
+	@GetMapping("/myPage")
+	public String myPage(@CurrentUser User user, Model model) {
+		model.addAttribute("user", user);
+
 		return "user/myPage";
 	}
 }

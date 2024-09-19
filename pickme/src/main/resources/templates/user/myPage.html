@@ -15,16 +15,16 @@
 <div th:replace="~{fragments/header :: header}">header content</div>
 
 <main>
-    <div class="container">
+    <div class="container" th:object="${user}">
         <div class="sidebar">
             <div class="profile-section">
                 <div class="welcome-text">
-                    <span class="name">최성연님</span>
+                    <span class="name" th:text="|${user.name}님|"></span>
                 </div>
                 <div class="points">
                     <span class="points-label">보유 포인트</span>
                     <div class="points-info">
-                        <span class="points-amount">720,000 P</span>
+                        <span class="points-amount" id="points-amount" th:text="*{point}">720,000 P</span>
                         <button class="recharge-button">충전</button>
                     </div>
                 </div>
@@ -43,4 +43,5 @@
 </main>
 <div th:replace="~{fragments/footer :: footer}">footer content</div>
 </body>
+<script src="/js/user/myPage.js"></script>
 </html>
