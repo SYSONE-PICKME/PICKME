@@ -42,10 +42,21 @@
             </div>
 
             <div class="thumbnail-images">
-                <img th:src="${item.imageUrls[1]}" class="thumbnail" alt="섬네일1" onclick="changeImage(this)">
-                <img th:src="${item.imageUrls[2]}" class="thumbnail" alt="섬네일2" onclick="changeImage(this)">
-                <img th:src="${item.imageUrls[3]}" class="thumbnail" alt="섬네일3" onclick="changeImage(this)">
-                <img th:src="${item.imageUrls[4]}" class="thumbnail" alt="섬네일4" onclick="changeImage(this)">
+                <!-- 첫 번째 이미지 -->
+                <img th:if="${item.imageUrls.size() > 1}" th:src="${item.imageUrls[1]}" class="thumbnail" onclick="changeImage(this)">
+                <img th:if="${item.imageUrls.size() <= 1}" th:src="@{/images/default_img.png}" class="thumbnail">
+
+                <!-- 두 번째 이미지 -->
+                <img th:if="${item.imageUrls.size() > 2}" th:src="${item.imageUrls[2]}" class="thumbnail" onclick="changeImage(this)">
+                <img th:if="${item.imageUrls.size() <= 2}" th:src="@{/images/default_img.png}" class="thumbnail">
+
+                <!-- 세 번째 이미지 -->
+                <img th:if="${item.imageUrls.size() > 3}" th:src="${item.imageUrls[3]}" class="thumbnail" onclick="changeImage(this)">
+                <img th:if="${item.imageUrls.size() <= 3}" th:src="@{/images/default_img.png}" class="thumbnail">
+
+                <!-- 네 번째 이미지 -->
+                <img th:if="${item.imageUrls.size() > 4}" th:src="${item.imageUrls[4]}" class="thumbnail" onclick="changeImage(this)">
+                <img th:if="${item.imageUrls.size() <= 4}" th:src="@{/images/default_img.png}" class="thumbnail">
             </div>
         </div>
 

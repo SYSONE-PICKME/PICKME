@@ -6,26 +6,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PICKME</title>
 
-    //css
+    <!-- css -->
     <link rel="stylesheet" th:href="@{/css/common/index.css}">
     <link rel="stylesheet" th:href="@{/css/common/header.css}">
     <link rel="stylesheet" th:href="@{/css/common/footer.css}">
     <link rel="stylesheet" th:href="@{/css/item/list.css}">
 
-    //font
+    <!-- font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
 
-    //icon
+    <!-- icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
-    //jquery
+    <!-- jquery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    //js
+    <!-- js -->
     <script th:src="@{/js/item/filtering.js}"></script>
     <script th:src="@{/js/item/like.js}"></script>
+    <script th:src="@{/js/item/request.js}"></script>
 </head>
 <body>
 <!-- 헤더 -->
@@ -59,7 +60,7 @@
                 </button>
                 <img th:src="@{${item.imgUrl}}" alt="product image" class="product-image">
                 <div class="product-info">
-                    <h3 th:text="${item.name}"></h3>
+                    <h3 class="item-name" th:data-item-id="${item.id}" th:text="${item.name}"></h3>
                     <p>공매예정가격: <span th:text="${item.price}">36000</span> 원</p>
                     <p>공매시작일시: <span th:text="${item.startTime}"></span></p>
                     <p>공매마감일시: <span th:text="${item.endTime}"></span></p>
