@@ -4,9 +4,31 @@ body {
     padding: 0;
 }
 
+.background-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    margin-left:6%;
+}
+
+.green-background {
+    position: absolute;
+    width: 100%;
+    height: 40vh;
+    background-color: rgba(246, 255, 248);
+    border-top-left-radius: 100vh;    /* 변경: 왼쪽 상단 모서리 */
+    border-bottom-left-radius: 100vh; /* 변경: 왼쪽 하단 모서리 */
+    /*transform: translateY(-50%);
+    transition: transform 0.3s ease-out;*/
+}
+
 .only-margin {
     margin-left: 15%;
     margin-right: 15%;
+    margin-bottom: 100px;
 }
 
 .container {
@@ -18,7 +40,7 @@ body {
 /* 캠페인 섹션 */
 .top-container {
     display: flex;
-    gap: 40px;
+    gap: 20px;
     margin-bottom: 20px;
 }
 
@@ -155,6 +177,7 @@ body {
     justify-content: space-between;
     margin-bottom: 20px;
     font-weight: 600;
+    padding: 0px;
 }
 
 .navigation button {
@@ -170,8 +193,9 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    border-radius: 5px;
-    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+    border-bottom-right-radius: 30px;
+    border-top-left-radius: 30px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
 .navigation button img {
@@ -275,7 +299,7 @@ body {
     align-items: center;
     margin-top: 20px;
 }
-
+/*
 .pagination .prev,
 .pagination .next {
     background-color: transparent;
@@ -283,6 +307,23 @@ body {
     font-size: 20px;
     cursor: pointer;
     color: #2EC44F;
+}
+*/
+
+.pagination .prev,
+.pagination .next {
+    background-color: white;
+    color: #2EC44F;
+    border: none;
+    width: 40px;
+    height: 40px;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 0;
 }
 
 .page-dots {
@@ -297,6 +338,7 @@ body {
     background-color: #FFF;
     border: 2px solid #000;
     border-radius: 50%;
+    cursor: pointer;
 }
 
 .dot.active {
