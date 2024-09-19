@@ -110,8 +110,8 @@ body {
 }
 
 .top-buttons button img {
-    width: clamp(72px, 3vw, 96px);
-    height: clamp(72px, 3vw, 96px);
+    width: clamp(24px, 4vw, 96px);
+    height: clamp(24px, 4vw, 96px);
     margin-bottom: 10px;
 }
 
@@ -221,8 +221,6 @@ body {
 .product-card {
     width: 100%;
     height: 450px;
-    /*height: auto;
-    min-height: 400px;*/
     background-color: white;
     border-bottom-right-radius: 30px;
     overflow: hidden;
