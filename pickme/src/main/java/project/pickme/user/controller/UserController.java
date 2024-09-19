@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import project.pickme.common.annotation.CurrentUser;
+import project.pickme.user.domain.User;
 import project.pickme.user.dto.LoginDto;
 import project.pickme.user.dto.SignUpDto;
 import project.pickme.user.service.UserService;
@@ -39,5 +41,10 @@ public class UserController {
 	@GetMapping("/loginForm")
 	public String loginForm(@ModelAttribute("loginDto") LoginDto loginDto){
 		return "user/loginForm";
+	}
+
+	@GetMapping("myPage")
+	public String myPage(@CurrentUser User user){
+		return "user/myPage";
 	}
 }
