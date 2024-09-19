@@ -2,9 +2,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Carrier Dropdown Example</title>
+    <link rel="stylesheet" href="/css/delivery/register.css">
 </head>
 <body>
-<p>송장 등록 폼</p>
+<h1>Carrier List</h1>
+<form id="deliveryForm" action="/customs/delivery/admin" method="post">
+    <input type="hidden" name="itemId" id="itemIdInput">
+    <input type="hidden" name="userId" id="userIdInput">
+    <select id="carrierDropdown" name="code">
+        <option value="" class="loading">Loading...</option>
+    </select>
+    <label for="invoiceNumber">송장번호</label>
+    <input type="text" name="invoiceNumber" id="invoiceNumber">
+    <input type="submit">
+</form>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="/js/delivery/register.js"></script>
 </body>
 </html>
