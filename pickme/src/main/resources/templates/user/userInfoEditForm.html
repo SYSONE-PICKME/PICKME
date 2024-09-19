@@ -4,69 +4,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>개인정보 수정 페이지</title>
-    <link rel="stylesheet" th:href="@{/css/common/index.css}">
+    <title>PICKME</title>
+
     <link rel="stylesheet" th:href="@{/css/common/header.css}">
     <link rel="stylesheet" th:href="@{/css/common/footer.css}">
     <link rel="stylesheet" href="/css/user/infoEdit.css">
+    <link rel="stylesheet" href="/css/user/myPage.css">
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 <div th:replace="~{fragments/header :: header}">header content</div>
+
 <main>
     <div class="container" th:object="${user}">
-
-        <input type="hidden" id="userTypeInput" th:value="${user.type}">
-
-        <h1>개인정보 수정</h1>
-        <section class="info-section">
-            <h2>내 정보</h2>
-            <form class="info-form">
-                <label for="name">이름</label>
-                <input type="text" id="name" th:value="*{name}">
-
-                <label for="address">주소</label>
-                <input type="text" id="address" th:value="*{addr}">
-
-                <label for="email">이메일</label>
-                <input type="email" id="email" th:value="*{email}">
-
-                <label for="phone">전화번호</label>
-                <input type="text" id="phone" th:value="*{phoneNum}">
-
-                <div id="businessField" style="visibility: hidden;">
-                    <label for="businessNumber">사업자 등록번호</label>
-                    <input type="text" id="businessNumber" th:value="*{businessNum}">
+        <div class="sidebar">
+            <div class="profile-section">
+                <div class="welcome-text">
+                    <span class="name" th:text="|${user.name}님|"></span>
                 </div>
-
-                <div class="button-group">
-                    <button type="button" class="cancel-btn">취소</button>
-                    <button type="submit" class="submit-btn">저장</button>
+                <div class="points">
+                    <span class="points-label">보유 포인트</span>
+                    <div class="points-info">
+                        <span class="points-amount" id="points-amount" th:text="*{point}">720,000 P</span>
+                        <button class="recharge-button">충전</button>
+                    </div>
                 </div>
-            </form>
-        </section>
+            </div>
+            <ul class="menu">
+                <li><img src="/images/myInfo.png"> 개인정보 수정</li>
+                <li><img src="/images/like.png"> 관심 상품</li>
+                <li><img src="/images/payment.png"> 내 결제 목록</li>
+                <li><img src="/images/point.png"> 포인트 내역</li>
+            </ul>
+        </div>
 
-        <section class="password-section">
-            <h2>비밀번호</h2>
-            <form class="password-form">
-                <label for="current-password">현재 비밀번호</label>
-                <input type="password" id="current-password" placeholder="영어, 숫자 또는 특수문자 포함 20자 이내">
+        <div class="content">
+            <input type="hidden" id="userTypeInput" th:value="${user.type}">
+            <div class="page-title">개인정보 수정</div>
 
-                <label for="new-password">새 비밀번호</label>
-                <input type="password" id="new-password" placeholder="영어, 숫자 또는 특수문자 포함 20자 이내">
+            <section class="info-section">
+                <h2>내 정보</h2>
+                <form class="info-form">
+                    <label for="name">이름</label>
+                    <input type="text" id="name" th:value="*{name}">
 
-                <label for="confirm-password">새 비밀번호 확인</label>
-                <input type="password" id="confirm-password" placeholder="영어, 숫자 또는 특수문자 포함 20자 이내">
+                    <label for="address">주소</label>
+                    <input type="text" id="address" th:value="*{addr}">
 
-                <div class="button-group">
-                    <button type="button" class="cancel-btn">취소</button>
-                    <button type="submit" class="submit-btn">저장</button>
-                </div>
-            </form>
-        </section>
+                    <label for="email">이메일</label>
+                    <input type="email" id="email" th:value="*{email}">
+
+                    <label for="phone">전화번호</label>
+                    <input type="text" id="phone" th:value="*{phoneNum}">
+
+                    <div id="businessField" style="visibility: hidden;">
+                        <label for="businessNumber">사업자 등록번호</label>
+                        <input type="text" id="businessNumber" th:value="*{businessNum}">
+                    </div>
+
+                    <div class="button-group">
+                        <button type="button" class="cancel-btn">취소</button>
+                        <button type="submit" class="submit-btn">저장</button>
+                    </div>
+                </form>
+            </section>
+
+            <section class="password-section">
+                <h2>비밀번호</h2>
+                <form class="password-form">
+                    <label for="current-password">현재 비밀번호</label>
+                    <input type="password" id="current-password" placeholder="영어, 숫자 또는 특수문자 포함 20자 이내">
+
+                    <label for="new-password">새 비밀번호</label>
+                    <input type="password" id="new-password" placeholder="영어, 숫자 또는 특수문자 포함 20자 이내">
+
+                    <label for="confirm-password">새 비밀번호 확인</label>
+                    <input type="password" id="confirm-password" placeholder="영어, 숫자 또는 특수문자 포함 20자 이내">
+
+                    <div class="button-group">
+                        <button type="button" class="cancel-btn">취소</button>
+                        <button type="submit" class="submit-btn">저장</button>
+                    </div>
+                </form>
+            </section>
+        </div>
     </div>
 </main>
 <div th:replace="~{fragments/footer :: footer}">footer content</div>
-<script src="/js/user/infoEdit.js"></script>
 </body>
+<script src="/js/user/myPage.js"></script>
+<script src="/js/user/infoEdit.js"></script>
 </html>

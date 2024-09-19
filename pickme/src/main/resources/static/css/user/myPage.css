@@ -76,14 +76,6 @@ body {
     color: #2EC44F;
 }
 
-.content {
-    flex-grow: 1;
-    background-color: #ffffff;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-}
-
 .profile-section h2 {
     font-size: 1.5rem;
     color: #6fcf97;

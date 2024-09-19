@@ -43,17 +43,10 @@ public class UserController {
 		return "user/loginForm";
 	}
 
-	@GetMapping("/info/editForm")
-	public String editForm(@CurrentUser User user, Model model) {
-		model.addAttribute("user", user);
-		System.out.println(user.toString());
-		return "user/userInfoEditForm";
-	}
-
 	@GetMapping("/myPage")
 	public String myPage(@CurrentUser User user, Model model) {
 		model.addAttribute("user", user);
 
-		return "user/myPage";
+		return "user/userInfoEditForm";
 	}
 }
