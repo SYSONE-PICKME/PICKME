@@ -8,19 +8,21 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.RequiredArgsConstructor;
-import project.pickme.item.FindItemService;
+import project.pickme.common.annotation.CurrentUser;
 import project.pickme.item.dto.FindItemDto;
+import project.pickme.item.service.FindItemService;
+import project.pickme.user.domain.User;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/")
+@RequestMapping("/user")
 public class MainpageController {
 
 	private final FindItemService itemService;
 
 	@GetMapping
-	public String showMain(Model model) {
-		List<FindItemDto.GetAll> items = itemService.findAll();
+	public String showMain(@CurrentUser User user, Model model) {
+		List<FindItemDto.GetAll> items = itemService.findAll(user.getId());
 		model.addAttribute("items", items);
 		return "index";
 	}
