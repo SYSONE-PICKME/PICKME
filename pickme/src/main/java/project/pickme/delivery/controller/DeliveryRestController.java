@@ -13,7 +13,7 @@ import lombok.RequiredArgsConstructor;
 import project.pickme.delivery.service.DeliveryService;
 
 @RequiredArgsConstructor
-@RequestMapping("/tracking/")
+@RequestMapping("/tracking")
 @RestController
 public class DeliveryRestController {
 	private final DeliveryService deliveryService;

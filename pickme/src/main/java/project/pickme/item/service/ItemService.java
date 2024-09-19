@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 
 import project.pickme.item.constant.Status;
+import project.pickme.item.dto.SuccessfullCustomsItemDto;
 import project.pickme.user.domain.Customs;
 
 import project.pickme.s3.service.S3Service;
@@ -50,7 +51,7 @@ public class ItemService {
 	}
 
 	// 등록한 경매 전체 조회 및 낙찰된 물품은 마감처리
-	public List<ItemDto> findItemsByCustomsId(String customsId) {
+	public List<SuccessfullCustomsItemDto> findItemsByCustomsId(String customsId) {
 		return itemMapper.findItemsByCustomsId(customsId);
 	}
 }

@@ -29,9 +29,9 @@
         </div>
         <div class="product-grid">
             <div class="product-card" th:each="item : ${items}"
-                 th:attr="style=${item.status.name() == 'CLOSED'} ? 'background-color: rgba(128, 128, 128, 0.5); opacity: 0.5; pointer-events: none;' : ''">
+                 th:attr="style=${item.status == 'CLOSED'} ? 'background-color: rgba(128, 128, 128, 0.5); opacity: 0.5; pointer-events: none;' : ''">
                 <!-- 마감 박스 -->
-                <span class="status-label" th:if="${item.status.name() == 'CLOSED'}">마감</span>
+                <span class="status-label" th:if="${item.status == 'CLOSED'}">마감</span>
 
                 <img th:src="@{${item.imgUrl}}" alt="product image" class="product-image">
                 <div class="product-info">
@@ -42,8 +42,8 @@
                     <p>공매시작일시: <span th:text="${item.startTime}"></span></p>
                     <p>상태: <span th:text="${item.status}"></span></p>
 
-                    <!-- 물품 정보 수정 버튼: 입찰이 성공하면 보이지않음-->
-                    <input type="button" id="updateItem" value="물품 정보 수정" th:if="${item.status.name()=='NOT_OPEN'}"
+                    <!-- 물품 정보 수정 버튼: 입찰이 진행 전일때만 보임-->
+                    <input type="button" id="updateItem" value="물품 정보 수정" th:if="${item.status=='NOT_OPEN'}"
                            th:onclick="'window.location.href=\'/customs/items/update?itemId=' + ${item.itemId} + '\''">
                 </div>
             </div>
