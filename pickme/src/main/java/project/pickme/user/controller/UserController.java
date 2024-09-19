@@ -49,4 +49,11 @@ public class UserController {
 		System.out.println(user.toString());
 		return "user/userInfoEditForm";
 	}
+
+	@GetMapping("/myPage")
+	public String myPage(@CurrentUser User user, Model model) {
+		model.addAttribute("user", user);
+
+		return "user/myPage";
+	}
 }
