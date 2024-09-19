@@ -12,8 +12,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import project.pickme.bid.dto.response.BidResultDto;
-import project.pickme.bid.dto.response.SelectedBidDto;
-import project.pickme.bid.repository.BidMapper;
 
 @Service
 @RequiredArgsConstructor
@@ -21,7 +19,6 @@ import project.pickme.bid.repository.BidMapper;
 public class WebSocketService {
 	private final WebSocketSessionRepository webSocketSessionRepository;
 	private final ObjectMapper objectMapper;
-	private final BidMapper bidMapper;
 
 	public void saveInItem(long itemId, String userId, WebSocketSession session) {
 		webSocketSessionRepository.saveUserInItem(itemId, userId, session);
@@ -55,12 +52,8 @@ public class WebSocketService {
 		}
 	}
 
-	public void sendResultAllClient(SelectedBidDto selectedBidDto) {
-		//TODO: 아무도 입찰 안한경우 처리 해야함
+	public void sendResultAllClient(Long itemId, String userId) {
 		//성공한 유저
-		String userId = selectedBidDto.getUserId();
-		Long itemId = selectedBidDto.getItemId();
-		
 		sendToClient(userId, BidResultDto.success());
 		closeSessionByUserId(itemId, userId);
 

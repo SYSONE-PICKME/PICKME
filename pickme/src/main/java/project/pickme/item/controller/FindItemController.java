@@ -9,8 +9,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.RequiredArgsConstructor;
+import project.pickme.item.dto.OneBidItemDto;
 import project.pickme.common.annotation.CurrentUser;
-import project.pickme.item.FindItemService;
+import project.pickme.item.service.FindItemService;
 import project.pickme.item.dto.FindItemDto;
 import project.pickme.user.domain.User;
 
@@ -34,5 +35,13 @@ public class FindItemController {
 		model.addAttribute("items", items);
 
 		return "item/list";
+	}
+
+	@GetMapping("/bid/{id}")
+	public String show(@CurrentUser User user, @PathVariable("id") Long id, Model model) {
+		OneBidItemDto oneBidItemDto = itemService.showOneBidItem(user, id);
+		model.addAttribute("oneBidItemDto", oneBidItemDto);
+
+		return "bid/bidPage";
 	}
 }

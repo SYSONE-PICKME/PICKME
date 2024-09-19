@@ -15,13 +15,11 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jakarta.annotation.PostConstruct;
-import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import project.pickme.bid.dto.reqeust.AddBidDto;
 import project.pickme.bid.dto.reqeust.ExitMemberDto;
-import project.pickme.bid.dto.response.MaxPriceDto;
-import project.pickme.bid.dto.response.SelectedBidDto;
+import project.pickme.bid.dto.response.UpdatePriceBidDto;
 import project.pickme.bid.service.BidService;
 
 @Component
@@ -51,8 +49,6 @@ public class WebSocketHandler extends TextWebSocketHandler {
 			Consumer<String> command = commandMap.get(type);
 			if (command != null) {
 				command.accept(payload);
-			} else {
-				log.warn("알 수 없는 타입: {}", type);
 			}
 		} catch (Exception e) {
 			log.error(e.getMessage());
@@ -62,8 +58,8 @@ public class WebSocketHandler extends TextWebSocketHandler {
 	private void addBid(String payload) {
 		try {
 			AddBidDto addBidDto = objectMapper.readValue(payload, AddBidDto.class);
-			MaxPriceDto maxPriceDto = bidService.addBid(addBidDto);
-			webSocketService.sendToAllClient(addBidDto.getItemId(), maxPriceDto);
+			UpdatePriceBidDto updatePriceBidDto = bidService.addBid(addBidDto);
+			webSocketService.sendToAllClient(addBidDto.getItemId(), updatePriceBidDto);
 		} catch (JsonProcessingException e) {
 			log.error("Error addBid", e);
 		}
@@ -71,13 +67,16 @@ public class WebSocketHandler extends TextWebSocketHandler {
 
 	private void selectBid(String payload) {
 		try {
-			SelectedBidDto selectedBidDto = objectMapper.readValue(payload, SelectedBidDto.class);
-			if(selectedBidDto.getBidId() == null){	//아무도 입찰하지 않은 경우
+			JsonNode jsonNode = objectMapper.readTree(payload);
+			Long itemId = jsonNode.get("itemId").asLong();
+			String userId = jsonNode.get("userId").asText();
+
+			if(userId == null){
 				return;
 			}
-			webSocketService.sendResultAllClient(selectedBidDto);
-			bidService.selectBid(selectedBidDto);    //낙찰처리
-		} catch (MessagingException | JsonProcessingException e) {
+
+			webSocketService.sendResultAllClient(itemId, userId);
+		} catch (JsonProcessingException e) {
 			log.error("Error selectBid", e);
 		}
 	}
