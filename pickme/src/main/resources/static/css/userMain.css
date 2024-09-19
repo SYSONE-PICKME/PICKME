@@ -158,8 +158,10 @@ body {
 }
 
 .navigation button {
+    min-height: 130px;
     font-family: "IBM Plex Sans KR", sans-serif;
-    font-weight: 500;
+    font-weight: 700;
+    font-size: 1rem;
     flex: 1;
     padding: 15px;
     border: none;
@@ -169,13 +171,13 @@ body {
     flex-direction: column;
     align-items: center;
     border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
 }
 
 .navigation button img {
-    width: clamp(48px, 3vw, 56px);
-    height: clamp(48px, 3vw, 56px);
-    margin-bottom: 5px;
+    width: clamp(56px, 3vw, 72px);
+    height: clamp(56px, 3vw, 72px);
+    margin-bottom: 15px;
 }
 
 /* 제품 */
@@ -193,7 +195,7 @@ body {
     background-color: white;
     border-bottom-right-radius: 30px;
     overflow: hidden;
-    box-shadow: 0 0 30px rgba(0,0,0,0.2);
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
     position: relative;
     transition: box-shadow 0.3s ease-in-out;
 }
@@ -235,7 +237,7 @@ body {
 .product-info h3 {
     margin: 0 0 10px 0;
     font-size: 16px;
-    font-weight: 600;
+    font-weight: 700;
     color: #333;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -248,22 +250,22 @@ body {
     margin: 5px 0;
     font-size: 14px;
     color: #666;
-    font-weight: 400;
+    font-weight: 700;
 }
 
 .auction-date {
-    font-weight: 600;
+    font-weight: 700;
     color: #4CAF50;
 }
 
 .auction-end_date {
-    font-weight: 600;
+    font-weight: 700;
     color: #FF0000;
 }
 
 .product-info .price {
     color: #4CAF50;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 /* 페이지네이션 */
@@ -280,22 +282,25 @@ body {
     border: none;
     font-size: 20px;
     cursor: pointer;
+    color: #2EC44F;
 }
 
 .page-dots {
     display: flex;
-    gap: 5px;
+    gap: 10px;
+    margin: 0 20px;
 }
 
 .dot {
     width: 10px;
     height: 10px;
-    background-color: #ccc;
+    background-color: #FFF;
+    border: 2px solid #000;
     border-radius: 50%;
 }
 
 .dot.active {
-    background-color: #4CAF50;
+    background-color: #2EC44F;
 }
 
 /* 반응형 디자인
