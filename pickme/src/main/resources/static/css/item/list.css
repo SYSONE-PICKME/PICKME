@@ -115,6 +115,7 @@ h2 {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     transition: transform 0.3s;
+    margin-bottom: 30px;
 }
 
 .product-card:hover {
@@ -123,7 +124,7 @@ h2 {
 
 .product-image {
     width: 100%;
-    height: auto;
+    height: 300px;
 }
 
 .product-info {
@@ -185,4 +186,14 @@ h2 {
 
 .heart.active .fa-heart {
   color: red; /* 꽉 찬 하트 색상 */
+}
+
+.item-name {
+    cursor: pointer;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+
+.item-name:hover {
+    color: #666666;  /* hover 시 색상 변경 (빨간색 계열) */
+    text-decoration: underline;  /* 텍스트 밑줄 추가 */
 }
