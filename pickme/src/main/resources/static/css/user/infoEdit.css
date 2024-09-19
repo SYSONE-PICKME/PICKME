@@ -15,7 +15,7 @@ section {
     border-radius: 10px;
     padding: 20px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-    max-height: 830px;
+    max-height: 850px;
 }
 
 .info-section,
@@ -52,7 +52,7 @@ form {
 }
 
 #businessField {
-    display: contents; /* 부모의 grid 레이아웃을 유지 */
+    display: contents;
     visibility: hidden;
 }
 
@@ -82,4 +82,16 @@ button {
 .submit-btn {
     background-color: #000;
     color: #fff;
+}
+
+.error-message-container {
+    height: 20px;
+}
+
+.field-error-message {
+    color: red;
+    font-size: 0.9rem;
+    margin-top: 5px;
+    visibility: hidden;
+    opacity: 0;
 }

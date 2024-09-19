@@ -19,4 +19,6 @@ public interface UserMapper {
 	void minusPoint(@Param("userId") String userId, @Param("price") long price);
 
 	void updatePointById(UserDto.UpdatePoint userDto);
+
+	void updatePassword(@Param("password") String password, @Param("userId") String userId);
 }

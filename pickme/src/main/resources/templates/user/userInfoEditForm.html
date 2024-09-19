@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="/css/user/infoEdit.css">
     <link rel="stylesheet" href="/css/user/myPage.css">
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 </head>
 <body>
 <div th:replace="~{fragments/header :: header}">header content</div>
@@ -72,14 +73,17 @@
             <section class="password-section">
                 <h2>비밀번호</h2>
                 <form class="password-form">
-                    <label for="current-password">현재 비밀번호</label>
-                    <input type="password" id="current-password" placeholder="영어, 숫자 또는 특수문자 포함 20자 이내">
+                    <label for="origin-password">현재 비밀번호</label>
+                    <input type="password" id="origin-password" placeholder="영어, 숫자 또는 특수문자 포함 20자 이내">
 
                     <label for="new-password">새 비밀번호</label>
                     <input type="password" id="new-password" placeholder="영어, 숫자 또는 특수문자 포함 20자 이내">
 
                     <label for="confirm-password">새 비밀번호 확인</label>
                     <input type="password" id="confirm-password" placeholder="영어, 숫자 또는 특수문자 포함 20자 이내">
+                    <div class="error-message-container">
+                        <p id="password-match-message" class="field-error-message">비밀번호가 일치하지 않습니다.</p>
+                    </div>
 
                     <div class="button-group">
                         <button type="button" class="cancel-btn">취소</button>
