@@ -167,3 +167,22 @@ h2 {
         grid-template-columns: 1fr; /* 모바일 화면에서는 1개씩 표시 */
     }
 }
+
+.heart {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.heart .fa-heart {
+  color: #ccc; /* 빈 하트 색상 */
+  transition: color 0.3s;
+}
+
+.heart.active .fa-heart {
+  color: red; /* 꽉 찬 하트 색상 */
+}

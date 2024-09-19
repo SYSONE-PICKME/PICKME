@@ -21,7 +21,7 @@ public class FindItemService {
 		return new FindItemDto.Info(item);
 	}
 
-	public List<FindItemDto.GetAll> findAll() {
-		return itemMapper.findAll();
+	public List<FindItemDto.GetAll> findAll(String userId) {
+		return itemMapper.findAll(userId);
 	}
 }
