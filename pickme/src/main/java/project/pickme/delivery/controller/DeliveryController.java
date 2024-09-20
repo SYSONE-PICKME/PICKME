@@ -35,7 +35,7 @@ public class DeliveryController {
 		model.addAttribute("userId", userId);
 		model.addAttribute("deliveryInfo", new DeliveryFormDto());// 폼을 위한 객체
 
-		return "/delivery/register"; // Thymeleaf 페이지로 이동
+		return "/delivery/register";
 	}
 
 	// TODO: 송장 등록 하는거 다시 해야함.
