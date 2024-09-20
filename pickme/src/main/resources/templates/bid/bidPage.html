@@ -1,78 +1,82 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="ko">
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>입찰중</title>
+    <title>PICKME</title>
+
+    <link rel="stylesheet" th:href="@{/css/common/header.css}">
+    <link rel="stylesheet" th:href="@{/css/common/footer.css}">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap"
+          rel="stylesheet">
     <link rel="stylesheet" href="/css/bid/bidPage.css">
     <link rel="stylesheet" href="/css/bid/modal.css">
-    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+
 </head>
 <body>
+<div th:replace="~{fragments/header :: header}">header content</div>
 
-<header class="header">
-    합리적인 경매가 이루어지는 곳
-</header>
+<main>
 
-<div id="confetti-wrapper"></div>
-<div th:replace="~{bid/modal :: modal}"></div>
+    <div id="confetti-wrapper"></div>
+    <div th:replace="~{bid/modal :: modal}"></div>
 
-<div class="container" th:object="${oneBidItemDto}">
-    <h2>입찰중</h2>
-    <div class="item-details">
-        <img th:src="*{imageUrl}" class="item-image" alt="">
-        <div class="item-info">
-            <h2 th:text="*{name}" class="item-name"></h2>
-            <table class="item-timeline">
-                <tr>
-                    <td>공매 번호</td>
-                    <td th:text="*{itemId}" class="item-id"></td>
-                </tr>
-                <tr>
-                    <td>공매시작일시</td>
-                    <td th:text="*{startTime}"></td>
-                </tr>
-                <tr>
-                    <td>공매마감일시</td>
-                    <td th:text="*{endTime}" class="end-time"></td>
-                </tr>
-            </table>
-            <div class="starting-price">
-                공매시작 가격 <span class="price" th:text="*{startPrice}"></span>
+    <div class="container" th:object="${oneBidItemDto}">
+        <h2>입찰중</h2>
+        <div class="item-details">
+            <img th:src="*{imageUrl}" class="item-image" alt="">
+            <div class="item-info">
+                <h2 th:text="*{name}" class="item-name"></h2>
+                <table class="item-timeline">
+                    <tr>
+                        <td>공매 번호</td>
+                        <td th:text="*{itemId}" class="item-id"></td>
+                    </tr>
+                    <tr>
+                        <td>공매시작일시</td>
+                        <td th:text="*{startTime}"></td>
+                    </tr>
+                    <tr>
+                        <td>공매마감일시</td>
+                        <td th:text="*{endTime}" class="end-time"></td>
+                    </tr>
+                </table>
+                <div class="starting-price">
+                    공매시작 가격 <span class="price" th:text="*{startPrice}"></span>
+                </div>
+            </div>
+        </div>
+        <div class="bid-details">
+            <div class="chart-info">
+                <canvas id="myChart"></canvas>
+            </div>
+            <div class="bid-info">
+                <div class="bid-info-row">
+                    <span class="bold-text">현재 최고가</span>
+                    <span class="max-price"></span>
+                </div>
+                <div class="bid-info-row">
+                    <span class="bold-text">보유 포인트 <button class="recharge-btn">충전</button></span>
+                    <span class="my-point"></span>
+                </div>
+                <div class="bid-info-row">
+                    <span class="bold-text">남은 시간</span>
+                    <span class="time" id="time-remaining"></span>
+                </div>
+                <div class="line"></div>
+                <div class="bid-amount">
+                    <label for="price" class="bold-text">입찰 금액</label>
+                    <input type="text" id="price" class="amount-input" placeholder="금액 입력">
+                    <span class="won">원</span>
+                </div>
+                <button class="bid-btn">입찰하기</button>
             </div>
         </div>
     </div>
-    <div class="bid-details">
-        <div class="chart-info">
-            <canvas id="myChart"></canvas>
-        </div>
-        <div class="bid-info">
-            <div class="bid-info-row">
-                <span class="bold-text">현재 최고가</span>
-                <span class="max-price"></span>
-            </div>
-            <div class="bid-info-row">
-                <span class="bold-text">보유 포인트 <button class="recharge-btn">충전</button></span>
-                <span class="my-point"></span>
-            </div>
-            <div class="bid-info-row">
-                <span class="bold-text">남은 시간</span>
-                <span class="time" id="time-remaining"></span>
-            </div>
-            <div class="line"></div>
-            <div class="bid-amount">
-                <label for="price" class="bold-text">입찰 금액</label>
-                <input type="text" id="price" class="amount-input" placeholder="금액 입력">
-                <span class="won">원</span>
-            </div>
-            <button class="bid-btn">입찰하기</button>
-        </div>
-    </div>
-</div>
-
+</main>
+<div th:replace="~{fragments/footer :: footer}">footer content</div>
 <script>
     const itemId = [[${oneBidItemDto.itemId}]];
     const userId = '[[${oneBidItemDto.userId}]]';
