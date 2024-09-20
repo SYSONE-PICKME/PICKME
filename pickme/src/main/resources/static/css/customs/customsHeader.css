@@ -1,0 +1,93 @@
+body {
+    font-family: "IBM Plex Sans KR", sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+}
+
+.top-black-bar {
+    font-family: "IBM Plex Sans KR", sans-serif;
+    background-color: #000;
+    min-height: 20px;
+    color: #2EC44F;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 15px 40px;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+}
+
+.logo-nav {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    text-decoration: none;
+    color: inherit;
+    font-size: calc(12px + 0.9vw);
+    font-weight: bold;
+    margin-right: 60px;
+    margin-left: 20px;
+}
+
+.logo:visited {
+    color: inherit;
+}
+
+.logo:hover {
+    color: inherit;
+}
+
+nav ul {
+    font-family: "IBM Plex Sans KR", sans-serif;
+    font-weight: 600;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+nav ul li {
+    margin-right: 40px;
+}
+
+nav ul li:last-child {
+    margin-right: 0;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-size: calc(7px + 0.5vw);
+    padding: 5px 10px;
+}
+
+nav ul li a.active {
+    color: #4CAF50;
+    font-weight: bold;
+}
+
+.logout-btn {
+    padding: 8px 15px;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-right: 50px;
+}
+
+.logout-btn:hover {
+    background-color: #e0e0e0;
+}
