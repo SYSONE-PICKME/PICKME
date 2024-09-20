@@ -27,6 +27,10 @@ public class FindItemService {
 		return itemMapper.findAll(userId);
 	}
 
+	public List<FindItemDto.GetAll> findTop20() {
+		return itemMapper.findTop20();
+	}
+
 	public OneBidItemDto showOneBidItem(User user, Long itemId) {
 		OneBidItemDto onBidItemDto = itemMapper.findItemByIdWithImage(itemId);
 		onBidItemDto.setUserId(user.getId());
