@@ -39,7 +39,7 @@ public class MailService {
 	private String buildBidEmailContent(SelectedBidDto selectedBidDto, long price){
 		Context context = new Context();
 		context.setVariable("itemName", selectedBidDto.getItemName());
-		context.setVariable("imageUrl", selectedBidDto.getItemImage());
+		context.setVariable("itemImage", selectedBidDto.getItemImage());
 		context.setVariable("price", price);
 
 		return templateEngine.process("/user/bidMail", context);

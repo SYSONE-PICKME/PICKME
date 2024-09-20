@@ -15,7 +15,7 @@
         <p style="font-weight: bold; font-size: 14px;">아래의 상품이 성공적으로 낙찰되었습니다.</p>
     </div>
     <div style="display: flex; align-items: stretch; padding: 2vw; width: 100%; box-sizing: border-box;">
-        <img src="https://pickmepickme.s3.ap-northeast-2.amazonaws.com/computer.jpg" alt="상품 이미지" style="max-width: 25vw; height: auto; margin-right: 2vw; border-radius: 8px; object-fit: cover;"> <!-- TODO: th:src="${itemImage}"로 변경해야함 -->
+        <img th:src="${itemImage}" alt="상품 이미지" style="max-width: 25vw; height: auto; margin-right: 2vw; border-radius: 8px; object-fit: cover;">
         <div style="flex: 1; width: 100%; display: flex; align-items: center;">
             <div style="border: 1px solid #dddddd; border-radius: 8px; padding: 2vw; background-color: #f9f9f9; width: 100%; box-sizing: border-box;">
                 <strong style="display: block; font-size: 3.5vw; margin-top: 0; color: #333333;">상품명: <span th:text="${itemName}">[상품명]</span></strong>
