@@ -14,18 +14,24 @@ function fetchBidDetails() {
         success: function (response) {
             if (response.success) {
                 const bidDetails = response.data;
+                let startPrice;
 
-                //TODO: 넘어온 데이터가 null인 경우 처리 해야함
-                document.querySelector('.max-price').textContent = formatCurrency(parseInt(bidDetails.maxPrice));
+                if (bidDetails.maxPrice === 0) {
+                    const startPriceElement = document.querySelector('.starting-price .price');
+                    startPrice = parseInt(startPriceElement.textContent.replace(/,/g, ''));
+
+                    document.querySelector('.max-price').textContent = formatCurrency(startPrice);
+                } else {
+                    document.querySelector('.max-price').textContent = formatCurrency(bidDetails.maxPrice);
+                }
+
                 myPoint = parseInt(bidDetails.myPoint);
                 document.querySelector('.my-point').textContent = formatCurrency(myPoint);
 
                 selectedUserId = bidDetails.userId;
                 selectedBid = bidDetails.bidId;
 
-                initChartData(bidDetails.allPrice); //입찰 추이 차트 초기화
-
-                console.log("데이터 초기화: ", bidDetails);
+                initChartData(bidDetails.allPrice, startPrice); //입찰 추이 차트 초기화
             }
         }
     })
@@ -33,7 +39,7 @@ function fetchBidDetails() {
 
 function endBid() {
     const itemName = document.querySelector('.item-name').textContent;
-    const itemImage = document.querySelector('.item-image').textContent;
+    const itemImage = document.querySelector('.item-image').src;
 
     const selectedBidDto = {
         itemId: itemId,
@@ -85,16 +91,10 @@ function sendBidToServer(socket, price, itemId, userId){    //입찰 전송
 }
 
 function sendEndToServer(socket) {  //종료 메세지 전송
-    const itemName = document.querySelector('.item-name').textContent;
-    const itemImage = document.querySelector('.item-image').textContent;
-    
     const message = {
         type: 'BID_END',
         itemId: itemId,
-        bidId: selectedBid,
         userId: selectedUserId,
-        itemName: itemName,
-        itemImage: itemImage
     };
     socket.send(JSON.stringify(message));
     console.log("경매 종료 메세지 전송", message);
@@ -112,11 +112,11 @@ function sendExitToServer(socket) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-    let socket = new WebSocket(`ws://localhost:8099/connect/${itemId}/${userId}`);
+    let socket = new WebSocket(`ws://192.168.0.157:8099/connect/${itemId}/${userId}`);
     socket.onopen = () => console.log("웹 소켓 open");
 
     const createSocketConnection = () => {
-        socket = new WebSocket(`ws://localhost:8099/connect/${itemId}/${userId}`);
+        socket = new WebSocket(`ws://192.168.0.157:8099/connect/${itemId}/${userId}`);
         socket.onopen = () => console.log("웹 소켓 open");
         socket.onmessage = handleSocketMessage;
         socket.onerror = (error) => console.log("에러 발생:", error);
