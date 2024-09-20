@@ -8,10 +8,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/userMain.css}">
-    <link rel="stylesheet" th:href="@{/css/common/header.css}">
+    <link rel="stylesheet" th:href="@{/css/common/userMainHeader.css}">
     <link rel="stylesheet" th:href="@{/css/common/footer.css}">
 </head>
 <body>
+<div th:replace="~{fragments/userMainHeader :: header}">header content</div>
 <div class="background-container">
     <div class="green-background"></div>
 </div>
@@ -46,8 +47,8 @@
                     th:onclick="|location.href='@{/user/loginForm}'|">
                 <img th:src="@{/images/auction.png}" alt="입찰목록" src="">입찰목록
             </button>
-            <button class="nav-btn-cen" ><img th:src="@{/images/point.png}" alt="포인트등록" src="">포인트등록</button>
-            <button class="nav-btn-cen" ><img th:src="@{/images/myPage.png}" alt="마이페이지" src="">마이페이지</button>
+            <button class="nav-btn-cen" th:onclick="|location.href='@{/user/charge}'|"><img th:src="@{/images/point.png}" alt="포인트등록" src="">포인트등록</button>
+            <button class="nav-btn-cen" th:onclick="|location.href='@{/user/myPage}'|"><img th:src="@{/images/myPage.png}" alt="마이페이지" src="">마이페이지</button>
             <button id="nav-btn-right"><img th:src="@{/images/data-analysis.png}" alt="통계" src="">통계</button>
         </div>
 
