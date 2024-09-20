@@ -13,16 +13,19 @@ import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import project.pickme.bid.domain.Bid;
 import project.pickme.bid.dto.reqeust.AddBidDto;
+
+import project.pickme.bid.dto.reqeust.SelectedBidDto;
+import project.pickme.bid.repository.BidMapper;
+import project.pickme.common.exception.BusinessException;
+import project.pickme.item.domain.Item;
+import project.pickme.bid.dto.MySuccessfulBidDto;
+
 import project.pickme.bid.dto.response.BidDto;
 import project.pickme.bid.dto.response.BidDetailsDto;
 import project.pickme.bid.dto.response.PriceDto;
 import project.pickme.bid.dto.response.UpdatePriceBidDto;
-import project.pickme.bid.dto.reqeust.SelectedBidDto;
-import project.pickme.bid.dto.SuccessfulBidDto;
-import project.pickme.bid.repository.BidMapper;
-import project.pickme.common.exception.BusinessException;
-import project.pickme.item.domain.Item;
 import project.pickme.item.repository.FindItemMapper;
+
 import project.pickme.payment.dto.SavePaymentDto;
 import project.pickme.payment.repository.PaymentMapper;
 import project.pickme.user.domain.User;
@@ -40,10 +43,12 @@ public class BidService {
 
 	@Transactional
 	public UpdatePriceBidDto addBid(AddBidDto addBidDto) {    //입찰하는 메서드
-		Item item = itemMapper.findItemById(addBidDto.getItemId()).orElseThrow(() -> new BusinessException(NOT_FOUND_ITEM));
+		Item item = itemMapper.findItemById(addBidDto.getItemId())
+			.orElseThrow(() -> new BusinessException(NOT_FOUND_ITEM));
 
 		if (item.isOpen()) {
-			User user = userMapper.findUserById(addBidDto.getUserId()).orElseThrow(() -> new BusinessException(NOT_FOUND_USER));
+			User user = userMapper.findUserById(addBidDto.getUserId())
+				.orElseThrow(() -> new BusinessException(NOT_FOUND_USER));
 			BidDto bidDto = BidDto.create(addBidDto.getPrice(), user.getId(), item.getId());
 			bidMapper.save(bidDto);
 
@@ -55,7 +60,8 @@ public class BidService {
 
 	@Transactional
 	public void selectBid(SelectedBidDto selectedBidDto) throws MessagingException {
-		Bid bid = bidMapper.findBidById(selectedBidDto.getBidId()).orElseThrow(() -> new BusinessException(NOT_FOUND_BID));
+		Bid bid = bidMapper.findBidById(selectedBidDto.getBidId())
+			.orElseThrow(() -> new BusinessException(NOT_FOUND_BID));
 
 		bidMapper.updateBidSuccess(selectedBidDto.getBidId());
 		userMapper.minusPoint(bid.getUserId(), bid.getPrice());
@@ -71,7 +77,7 @@ public class BidService {
 		return BidDetailsDto.createOf(allPrices, user.getPoint());
 	}
 
-	public List<SuccessfulBidDto> findMySuccessfulBid(User user) {
+	public List<MySuccessfulBidDto> findMySuccessfulBid(User user) {
 		return bidMapper.findMySuccessfulBid(user.getId());
 	}
 }

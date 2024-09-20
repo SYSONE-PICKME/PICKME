@@ -1,13 +1,22 @@
+body {
+    font-family: "IBM Plex Sans KR", sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+}
+
+/* 레이아웃 스타일 */
 .product-grid {
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
+/* 컴포넌트 스타일 */
 .product-card {
+    margin-bottom: auto;
+    padding: 0 20px;
     display: flex;
     align-items: center;
-    padding: 20px;
     border: 1px solid #e0e0e0;
     border-radius: 10px;
     background-color: #fff;
@@ -22,23 +31,65 @@
     margin-right: 20px;
 }
 
+.overlay-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%; /* .product-card 전체를 덮음 */
+    height: 100%; /* .product-card 전체를 덮음 */
+    background-color: rgba(0, 0, 0, 0.5); /* 검정색 반투명 배경 */
+    z-index: 1; /* 내용물보다 뒤에 위치 */
+}
+
 .product-info {
+    padding: 15px;
+    position: relative;
     flex: 1;
+    z-index: 2;
 }
 
-.product-info h3 {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 10px;
+/* 상태에 따라 스타일 추가 */
+.product-card.closed2 {
+    background-color: rgba(128, 128, 128, 0.5) !important;
+    opacity: 0.5 !important;
+    pointer-events: none !important;
 }
 
-.product-info p {
-    font-size: 14px;
-    margin: 5px 0;
+.status-label {
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    position: inherit;
+    width: 50px;
+    font-size: medium;
+    height: 20px;
+    text-align: center;
+    display: inline-flex;
+    float: right;
+    background-color: black;
+    color: white;
+    padding: 5px;
+    font-weight: 600;
+}
+
+/* 미디어 쿼리 */
+@media (max-width: 768px) {
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .product-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 input[type="button"] {
-    margin: 5px;
+    position: absolute; /* 부모 요소(.product-info) 기준으로 배치 */
+    bottom: 20px; /* 하단에서 10px 띄움 */
+    right: 10px; /* 오른쪽에서 10px 띄움 */
+    margin: 0; /* 불필요한 여백 제거 */
     background-color: #f0fff0;
     color: #28a745;
     border: 1px solid #28a745;
@@ -46,7 +97,7 @@ input[type="button"] {
     padding: 5px 15px;
     font-size: 14px;
     cursor: pointer;
-    float: right;
+    width: auto; /* 한 줄 차지하지 않도록 자동 크기 조정 */
 }
 
 input[type="button"]:hover {
