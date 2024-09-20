@@ -1,0 +1,97 @@
+.page-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+section {
+    margin-bottom: 10px;
+}
+
+.content {
+    flex-grow: 1;
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    max-height: 850px;
+}
+
+.info-section,
+.password-section {
+    padding: 5px 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+}
+
+label {
+    font-size: 0.9rem;
+    font-weight: bold;
+    align-self: center;
+}
+
+input {
+    padding: 10px;
+    font-size: 0.9rem;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    width: 95%;
+}
+
+form {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 15px;
+}
+
+#businessField {
+    display: contents;
+    visibility: hidden;
+}
+
+.button-group {
+    grid-column: span 2;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.cancel-btn {
+    border: 1px solid #000000;
+    border-radius: 10px;
+    background-color: #ffffff;
+}
+
+.submit-btn {
+    background-color: #000;
+    color: #fff;
+}
+
+.error-message-container {
+    height: 20px;
+}
+
+.field-error-message {
+    color: red;
+    font-size: 0.9rem;
+    margin-top: 5px;
+    visibility: hidden;
+    opacity: 0;
+}

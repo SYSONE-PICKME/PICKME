@@ -15,7 +15,7 @@ $(document).ready(function () {
             data: id,
             success: function (response) {
                 // 서버에서 받은 응답을 idCheckResult 요소에 표시
-                idCheckResult.text(response).css('color', 'green');
+                idCheckResult.text(response.data).css('color', 'green');
                 signUpButton.prop('disabled', false);
             },
             error: function (xhr) {

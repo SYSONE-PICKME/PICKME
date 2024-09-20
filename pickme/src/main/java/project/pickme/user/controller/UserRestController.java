@@ -1,22 +1,43 @@
 package project.pickme.user.controller;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
+import project.pickme.common.annotation.CurrentUser;
 import project.pickme.common.response.BaseResponse;
+import project.pickme.user.domain.User;
+import project.pickme.user.dto.UpdatePasswordDto;
+import project.pickme.user.dto.UpdateInfoDto;
 import project.pickme.user.service.UserService;
 
 @RestController
+@RequestMapping("/user")
 @RequiredArgsConstructor
 public class UserRestController {
 	private final UserService userService;
 
-	@PostMapping("/user/check-id")
-	public ResponseEntity<?> checkDuplicateUserId(@RequestBody String id) {
+	@PostMapping("/check-id")
+	public BaseResponse<?> checkDuplicateUserId(@RequestBody String id) {
 		userService.checkDuplicateId(id);
-		return ResponseEntity.ok(BaseResponse.ok("사용 가능한 아이디"));
+
+		return BaseResponse.ok("사용 가능한 아이디");
+	}
+
+	@PutMapping("/info")
+	public BaseResponse<?> updateInfo(@RequestBody UpdateInfoDto updateInfoDto, @CurrentUser User user){
+		userService.updateInfo(updateInfoDto, user);
+
+		return BaseResponse.ok();
+	}
+
+	@PutMapping("/password")
+	public BaseResponse<?> updatePassword(@RequestBody UpdatePasswordDto updatePasswordDto, @CurrentUser User user){
+		userService.updatePassword(updatePasswordDto, user);
+
+		return BaseResponse.ok();
 	}
 }
