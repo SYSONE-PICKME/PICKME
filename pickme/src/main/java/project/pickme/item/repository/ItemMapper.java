@@ -3,6 +3,7 @@ package project.pickme.item.repository;
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import project.pickme.item.dto.ItemDto;
+import project.pickme.item.dto.SuccessfullCustomsItemDto;
 
 @Mapper
 public interface ItemMapper {
@@ -10,5 +11,5 @@ public interface ItemMapper {
 
 	void deleteAll();
 
-	List<ItemDto> findItemsByCustomsId(String customsId);
+	List<SuccessfullCustomsItemDto> findItemsByCustomsId(String customsId);
 }

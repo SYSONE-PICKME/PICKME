@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="project.pickme.delivery.repository.DeliveryMapper">
+
+    <!--낙찰된 공매품 송장등록 및 배송현황 확인 페이지 /delivery-->
+    <select id="findCustomsSuccessfulItems">
+        select i.item_id        as itemId,
+               b.user_id        as userId,
+               i.name           as name,
+               img.url          as imgUrl,
+               d.invoice_number as invoiceNumber,
+               d.code           as deliveryCode,
+               b.price          as price,
+               c.name           as customsName
+        from Item i
+                 left join Customs c on i.customs_id = c.id
+                 left join Bid b on i.item_id = b.item_id
+                 left join Delivery d on i.item_id = d.item_id
+                 left join (select item_id, url
+                            from Image
+                            where seq = 0) img on i.item_id = img.item_id
+        where b.is_success = 1
+          and c.id = #{id};
+    </select>
+
+    <insert id="saveDeliveryInfo">
+        insert into Delivery(user_id, item_id, invoice_number, code, status)
+        values (#{userId}, #{itemId}, #{invoiceNumber}, #{code}, #{status})
+    </insert>
+
+</mapper>

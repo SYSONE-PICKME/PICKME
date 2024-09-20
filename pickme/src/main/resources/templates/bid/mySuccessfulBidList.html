@@ -17,6 +17,7 @@
           rel="stylesheet">
 
     <link rel="stylesheet" href="/css/bid/success.css">
+    <title>Title</title>
 </head>
 <body>
 <!-- 헤더 -->
@@ -26,26 +27,28 @@
 <main>
     <div class="auction-list">
         <div class="header-section">
-            <h2>등록한 공매 목록</h2>
+            <h2>낙찰목록</h2>
             <hr>
         </div>
         <div class="product-grid">
-            <div class="product-card" th:each="item : ${itemList}">
-                <img th:src="@{${item.url}}" alt="product image" class="product-image">
+            <div class="product-card" th:each="item : ${successfulBidList}">
+                <img th:src="@{${item.imgUrl}}" alt="product image" class="product-image">
                 <div class="product-info">
                     <h3 th:text="${item.name}"></h3>
                     <p>공매번호: <span th:text="${item.itemId}"></span></p>
-                    <p>공매예정가격: <span th:text="${item.price}"></span>원</p>
-                    <p>공매시작일시: <span th:text="${item.startTime}"></span></p>
-                    <p>공매시작일시: <span th:text="${item.startTime}"></span></p>
-                    <input type="button" id="updateItem" value="물품 정보 수정">
-                    <input type="button" id="resisterDelivery" value="송장등록">
+                    <p><span th:text="${item.customsName}"></span></p>
+                    <p>결제금액: <span th:text="${item.price}"></span>원</p>
+
+                    <!-- 배송현황 버튼: 송장번호가 등록된 경우 표시 -->
+                    <input type="button" id="deliveryStatus" value="배송현황"
+                           th:if="${item.invoiceNumber}"
+                           th:onclick="'window.location.href=\'/user/delivery/status?itemId=' + ${item.itemId} + '\''">
+                    <p th:if="${item.invoiceNumber}">송장번호:<span th:text="${item.invoiceNumber}"></span></p>
                 </div>
             </div>
         </div>
     </div>
 </main>
-
 <!-- 푸터 -->
 <div th:replace="~{fragments/footer :: footer}">footer content</div>
 

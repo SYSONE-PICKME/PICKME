@@ -4,9 +4,12 @@ import java.util.List;
 import java.util.Optional;
 
 import org.apache.ibatis.annotations.Mapper;
+
 import project.pickme.bid.domain.Bid;
+
+import project.pickme.bid.dto.MySuccessfulBidDto;
+
 import project.pickme.bid.dto.response.BidDto;
-import project.pickme.bid.dto.SuccessfulBidDto;
 import project.pickme.bid.dto.response.PriceDto;
 
 @Mapper
@@ -25,5 +28,5 @@ public interface BidMapper {
 
 	void updateBidSuccess(Long bidId);
 
-	List<SuccessfulBidDto> findMySuccessfulBid(String id);
+	List<MySuccessfulBidDto> findMySuccessfulBid(String id);
 }
