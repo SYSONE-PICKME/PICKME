@@ -44,7 +44,7 @@
         <div style="display: flex;">
         <div class="image-container">
             <div class="main-image">
-                <img id="largeImage" th:src="${item.imageUrls[0]}" alt="메인 이미지" style="width:650px; height:400px">
+                <img id="largeImage" th:src="${item.imageUrls[0]}">
             </div>
 
             <div class="thumbnail-images">
@@ -66,12 +66,12 @@
             </div>
         </div>
 
-        <div class="auction-details" style="width:800px; height:560px">
+        <div class="auction-details">
             <h2><span th:text="${item.name}"></span></h2>
             <button id="likeButton" class="heart" type="button" th:data-liked="${item.isLiked}" th:data-item-id="${item.id}" th:data-action-url="@{/user/item/{id}/like(id=${item.id})}">
                 <i class="far fa-heart"></i>
             </button>
-            <div class="action-sub-details" style="width:670px; height:350px">
+            <div class="action-sub-details">
                 <div id="title">
                     <p>공매 번호</p>
                     <p>세관명</p>
@@ -80,7 +80,7 @@
                     <p>공매마감일시</p>
                 </div>
                 <div id="content">
-                    <p th:text="${item.id}" th:data-item-id="${item.id}"></p>
+                    <p id="item-id" th:text="${item.id}" th:data-item-id="${item.id}"></p>
                     <p th:text="${item.customsName}"></p>
                     <p th:text="${item.target}"></p>
                     <p th:text="${item.startTime}"></p>
@@ -100,8 +100,8 @@
         </div>
         </div>
 
-        <div>
-            <button class="bid-button" id="bid-button" style="width:1430px; height:70px;"></button>
+        <div id="bid-container">
+            <button class="bid-button" id="bid-button"></button>
         </div>
 
         <div class="action-buttons" style="display: flex;">
@@ -113,7 +113,7 @@
                 <img src="/images/law.png" style="width:20%; height:auto">
                 <p>관련 법규</p>
             </button>
-            <div class="contact-info" style="width:800px; height: 200px;">
+            <div class="contact-info">
                 <div id="dept-container">
                     <span id="dept">담당 부서</span>
                     <p th:text="${item.customsName}"></p>

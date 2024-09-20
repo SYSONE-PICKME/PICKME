@@ -2,7 +2,7 @@ $(document).ready(function() {
     const startDate = new Date(startTime.toString()).getTime();
     const endDate = new Date(endTime.toString()).getTime();
     const $bidButton = $('#bid-button');
-    const itemId = $('.action-sub-details p span').data('item-id');
+    const itemId = $('#item-id').data('item-id');
 
     function disableButton() {
         $bidButton.prop('disabled', true)
