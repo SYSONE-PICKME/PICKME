@@ -14,25 +14,16 @@ import lombok.RequiredArgsConstructor;
 import project.pickme.bid.domain.Bid;
 import project.pickme.bid.dto.reqeust.AddBidDto;
 
-import project.pickme.bid.dto.response.BidCreateDto;
-import project.pickme.bid.dto.response.MaxPriceDto;
-import project.pickme.bid.dto.response.SelectedBidDto;
+import project.pickme.bid.dto.reqeust.SelectedBidDto;
 import project.pickme.bid.repository.BidMapper;
 import project.pickme.common.exception.BusinessException;
 import project.pickme.item.domain.Item;
-import project.pickme.bid.dto.response.OneBidItemDto;
 import project.pickme.bid.dto.MySuccessfulBidDto;
-import project.pickme.item.repository.ItemMapper;
 
 import project.pickme.bid.dto.response.BidDto;
 import project.pickme.bid.dto.response.BidDetailsDto;
 import project.pickme.bid.dto.response.PriceDto;
 import project.pickme.bid.dto.response.UpdatePriceBidDto;
-import project.pickme.bid.dto.reqeust.SelectedBidDto;
-import project.pickme.bid.dto.SuccessfulBidDto;
-import project.pickme.bid.repository.BidMapper;
-import project.pickme.common.exception.BusinessException;
-import project.pickme.item.domain.Item;
 import project.pickme.item.repository.FindItemMapper;
 
 import project.pickme.payment.dto.SavePaymentDto;
@@ -52,10 +43,12 @@ public class BidService {
 
 	@Transactional
 	public UpdatePriceBidDto addBid(AddBidDto addBidDto) {    //입찰하는 메서드
-		Item item = itemMapper.findItemById(addBidDto.getItemId()).orElseThrow(() -> new BusinessException(NOT_FOUND_ITEM));
+		Item item = itemMapper.findItemById(addBidDto.getItemId())
+			.orElseThrow(() -> new BusinessException(NOT_FOUND_ITEM));
 
 		if (item.isOpen()) {
-			User user = userMapper.findUserById(addBidDto.getUserId()).orElseThrow(() -> new BusinessException(NOT_FOUND_USER));
+			User user = userMapper.findUserById(addBidDto.getUserId())
+				.orElseThrow(() -> new BusinessException(NOT_FOUND_USER));
 			BidDto bidDto = BidDto.create(addBidDto.getPrice(), user.getId(), item.getId());
 			bidMapper.save(bidDto);
 
