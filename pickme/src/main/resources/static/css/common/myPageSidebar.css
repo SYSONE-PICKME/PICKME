@@ -4,9 +4,15 @@ body {
 }
 
 .container {
-    display: flex;
+    /*display: flex;
     height: 100vh;
-    max-width: 65%;
+    max-width: 60%;
+    margin: 20px auto;
+    padding: 20px;*/
+    display: flex;
+    min-height: 100vh;
+    max-width: 1200px;
+    width: 60%;
     margin: 20px auto;
     padding: 20px;
 }
@@ -87,7 +93,7 @@ body {
 }
 
 .points {
-    background-color: #ffffff;
+    background-color: #fff;
     border: solid 1px #F1F1F1;
     border-radius: 10px;
     padding: 20px;
@@ -130,4 +136,36 @@ body {
 
 .recharge-button:hover {
     background-color: #ddd;
+}
+
+.welcome-text {
+    font-size: 1vw !important;
+}
+
+.menu li {
+    font-size: 0.9vw !important;
+}
+
+.points-amount {
+    font-size: 1.2vw !important;
+}
+
+.recharge-button {
+    font-size: 0.9vw !important;
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    min-width: 250px;
+    margin-right: 20px;
+}
+
+@media screen and (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
 }
