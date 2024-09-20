@@ -46,14 +46,14 @@
         <span>자세히 보기 ></span>
       </div>
     </a>
-    <a href="/admin/user" class="footer-button">
+    <a th:onclick="|location.href='@{/customs/items}'|" class="footer-button">
       <img th:src="@{/images/auction.png}" alt="경매 관리">
       <div class="footer-button-text">
         <strong>경매 관리</strong>
         <span>자세히 보기 ></span>
       </div>
     </a>
-    <a href="/admin/inquiry" class="footer-button">
+    <a th:onclick="|location.href='@{/customs/delivery}'|" class="footer-button">
       <img th:src="@{/images/delivery-courier.png}" alt="배송 관리">
       <div class="footer-button-text">
         <strong>배송 관리</strong>

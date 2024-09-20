@@ -1,5 +1,6 @@
 package project.pickme.item.dto;
 
+import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 
 import lombok.Getter;
@@ -14,4 +15,9 @@ public class SuccessfullCustomsItemDto {
 	private long price;
 	private String customsName;
 	private String status;
+
+	public String formatPrice(long price) {
+		DecimalFormat df = new DecimalFormat("#,###");
+		return "￦" + df.format(price);
+	}
 }
