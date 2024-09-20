@@ -25,12 +25,16 @@ hr {
 }
 
 .current-points, .updated-points {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     width: 40%;
     text-align: center;
     background-color: #F1F1F1;
     border-radius: 20px;
-    padding: 30px;
+    padding: 15px;
     margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .current-points {
@@ -42,7 +46,7 @@ hr {
 }
 
 .current-points div, .updated-points div {
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: 500;
 }
 
@@ -82,9 +86,8 @@ input[type="radio"] {
 
 .custom-radio {
     width: 290px;
-    text-align: center;
     display: inline-block;
-    padding: 10px 20px;
+    padding: 10px 40px;
     border: 3px solid #ddd;
     border-radius: 35px;
     font-size: 1.6rem;
@@ -102,7 +105,7 @@ input[type="radio"] {
     height: 20px;
     border-radius: 50%;
     border: 2px solid #ccc;
-    margin-right: 10px;
+    margin-right: 20px;
     transition: all 0.3s ease;
 }
 
@@ -115,7 +118,7 @@ input[type="radio"] {
 .radio-button input[type="radio"]:checked + .custom-radio::before {
     background-color: #2EC44F;
     border-color: #66bb6a;
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M20.29 5.71a1 1 0 00-1.41 0l-9.59 9.59L5.12 11a1 1 0 00-1.41 1.41l5 5a1 1 0 001.41 0l10-10a1 1 0 000-1.41z"/></svg>');
+    background-image: url('/images/accept.png');
     background-size: 12px;
     background-position: center;
     background-repeat: no-repeat;
@@ -150,7 +153,12 @@ input[type="radio"] {
 .charge-btn:hover {
     background-color: #4ab069;
 }
-
+/*
 .icon {
     font-size: 2.5em;
+}
+*/
+.next-arrow {
+    width: clamp(20px, 3vw, 40px);
+    height: clamp(20px, 3vw, 40px);
 }

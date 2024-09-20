@@ -109,8 +109,11 @@ body {
 }
 
 .points-amount {
-    font-weight: bold;
-    font-size: 1.5rem;
+    font-weight: 600;
+    font-size: 1.3vw;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .recharge-button {
@@ -120,7 +123,9 @@ body {
     border-radius: 20px;
     padding: 5px 15px;
     cursor: pointer;
-    font-weight: bold;
+    font-size: 0.9vw;
+    font-weight: 600;
+    white-space: nowrap;
 }
 
 .recharge-button:hover {
