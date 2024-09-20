@@ -1,0 +1,82 @@
+body {
+    background-color: #f9f9f9;
+}
+
+.point-history {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    font-weight: bold;
+    align-items: center;
+    margin-bottom: 100px;
+    padding: 40px;
+}
+
+.history-item {
+    display: flex;
+    width: 50%;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #FFFFFF;
+    padding: 15px 20px;
+    border-radius: 10px;
+    border: solid 1px #D9D9D9;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+.details {
+    display: flex;
+    flex-direction: column;
+}
+
+.amount {
+    font-weight: bold;
+    color: #007bff;
+}
+
+.status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 30px;
+    border-radius: 50%;
+    font-weight: bold;
+    font-size: 16px;
+    color: #fff;
+}
+
+.charge {
+    border-radius: 10px;
+    border: solid 1px #2EC44F;
+    background-color: #FFFFFF;
+    position: relative;
+}
+
+.charge::before {
+    content: "충전";
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #2EC44F;
+    font-weight: 600;
+}
+
+.payment {
+    border-radius: 10px;
+    border: solid 1px #ff0000;
+    background-color: #FFFFFF;
+    position: relative;
+}
+
+.payment::before {
+    content: "결제";
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #ff0000;
+    font-weight: 600;
+}

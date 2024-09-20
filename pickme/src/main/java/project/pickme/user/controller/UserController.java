@@ -1,7 +1,5 @@
 package project.pickme.user.controller;
 
-import java.util.List;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,7 +13,6 @@ import lombok.RequiredArgsConstructor;
 import project.pickme.common.annotation.CurrentUser;
 import project.pickme.user.domain.User;
 import project.pickme.user.dto.LoginDto;
-import project.pickme.user.dto.PointHistoryDto;
 import project.pickme.user.dto.SignUpDto;
 import project.pickme.user.service.UserService;
 
@@ -55,9 +52,8 @@ public class UserController {
 
 	@GetMapping("/point/history")
 	public String showPointHistory(@CurrentUser User user, Model model) {
-		List<PointHistoryDto> pointHistory = userService.showHistory(user);
-		model.addAttribute("pointHistory", pointHistory);
+		model.addAttribute("pointHistory", userService.showHistory(user));
 
-		return null;
+		return "/user/pointHistory";
 	}
 }
