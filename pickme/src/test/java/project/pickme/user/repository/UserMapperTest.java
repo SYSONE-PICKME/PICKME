@@ -160,9 +160,9 @@ class UserMapperTest {
 
 		// then
 		assertThat(pointHistory).hasSize(2)
-			.extracting("price", "type")
-			.containsExactly(Tuple.tuple(10000l, 1),
-				Tuple.tuple(1000l, 0));
+			.extracting("price", "type", "currentPoint")
+			.containsExactly(Tuple.tuple(10000l, 1, 10000l),
+				Tuple.tuple(1000l, 0, 9000l));
 	}
 
 	private static User createUser(String id, long point) {

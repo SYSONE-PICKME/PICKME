@@ -54,17 +54,22 @@
     </update>
 
     <select id="findPointHistory" parameterType="String" resultType="project.pickme.user.dto.PointHistoryDto">
-        select p.payment_time as time, price, 0 as type
-        from Payment p
-        left join Bid b
-        on p.bid_id = b.bid_id and b.is_success = 1
-        where p.user_id = #{userId}
+        select time,
+               price,
+               type,
+               sum(case when type = 1 then price else -price end)
+                   over (order by time, type desc rows between unbounded preceding and current row ) as currentPoint
+        from (select p.payment_time as time, price, 0 as type
+              from Payment p
+                       left join Bid b
+                                 on p.bid_id = b.bid_id and b.is_success = 1
+              where p.user_id = #{userId}
 
-        union
+              union
 
-        select charge_time as time, price, 1 as type
-        from Charge
-        where user_id = #{userId}
+              select charge_time as time, price, 1 as type
+              from Charge
+              where user_id = #{userId}) as history
         order by time, type desc
     </select>
 </mapper>

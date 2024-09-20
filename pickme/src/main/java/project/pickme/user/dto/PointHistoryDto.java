@@ -9,4 +9,5 @@ public class PointHistoryDto {
 	private LocalDateTime time;
 	private long price;
 	private int type;
+	private long currentPoint;
 }

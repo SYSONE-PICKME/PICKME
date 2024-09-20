@@ -56,6 +56,7 @@ public class UserController {
 	@GetMapping("/point/history")
 	public String showPointHistory(@CurrentUser User user, Model model) {
 		List<PointHistoryDto> pointHistory = userService.showHistory(user);
+		model.addAttribute("pointHistory", pointHistory);
 
 		return null;
 	}
