@@ -1,6 +1,17 @@
 body {
     font-family: "IBM Plex Sans KR", sans-serif;
     background-color: #f9f9f9;
+    margin: 0px;
+    padding: 0px;
+}
+
+.content {
+    flex-grow: 1;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    max-height: 850px;
 }
 
 h2 {
@@ -75,9 +86,10 @@ hr {
 }
 
 .radio-button {
-    position: relative;
-    margin-left: auto;
-    margin-right: auto;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
 }
 
 input[type="radio"] {
@@ -85,28 +97,33 @@ input[type="radio"] {
 }
 
 .custom-radio {
-    width: 290px;
-    display: inline-block;
+    width: 65%;
+    display: flex;
     padding: 10px 40px;
     border: 3px solid #ddd;
     border-radius: 35px;
-    font-size: 1.6rem;
+    font-size: clamp(8px, 1.2vw, 24px);
     font-weight: 300;
     color: #333;
     cursor: pointer;
     transition: all 0.3s ease;
-    margin-bottom: 15px;
+    margin: 20px;
+    align-items: center;
+    justify-content: flex-start;
+    white-space: nowrap;
 }
 
 .custom-radio::before {
     content: "";
     display: inline-block;
-    width: 20px;
-    height: 20px;
+    width: 1.4vw;
+    height: 1.4vw;
     border-radius: 50%;
     border: 2px solid #ccc;
-    margin-right: 20px;
+    margin-right: 10px;
+    align-self: center;
     transition: all 0.3s ease;
+
 }
 
 .radio-button input[type="radio"]:checked + .custom-radio {
@@ -153,12 +170,8 @@ input[type="radio"] {
 .charge-btn:hover {
     background-color: #4ab069;
 }
-/*
-.icon {
-    font-size: 2.5em;
-}
-*/
+
 .next-arrow {
-    width: clamp(20px, 3vw, 40px);
-    height: clamp(20px, 3vw, 40px);
+    width: clamp(15px, 3vw, 30px);
+    height: clamp(15px, 3vw, 30px);
 }
