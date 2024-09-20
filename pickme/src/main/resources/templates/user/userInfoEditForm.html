@@ -9,7 +9,7 @@
     <link rel="stylesheet" th:href="@{/css/common/header.css}">
     <link rel="stylesheet" th:href="@{/css/common/footer.css}">
     <link rel="stylesheet" href="/css/user/infoEdit.css">
-    <link rel="stylesheet" href="/css/user/myPage.css">
+    <link rel="stylesheet" th:href="@{/css/common/myPageSidebar.css}">
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 </head>
@@ -18,26 +18,7 @@
 
 <main>
     <div class="container" th:object="${user}">
-        <div class="sidebar">
-            <div class="profile-section">
-                <div class="welcome-text">
-                    <span class="name" th:text="|${user.name}님|"></span>
-                </div>
-                <div class="points">
-                    <span class="points-label">보유 포인트</span>
-                    <div class="points-info">
-                        <span class="points-amount" id="points-amount" th:text="*{point}">720,000 P</span>
-                        <button class="recharge-button">충전</button>
-                    </div>
-                </div>
-            </div>
-            <ul class="menu">
-                <li><img src="/images/myInfo.png"> 개인정보 수정</li>
-                <li><img src="/images/like.png"> 관심 상품</li>
-                <li><img src="/images/payment.png"> 내 결제 목록</li>
-                <li><img src="/images/point.png"> 포인트 내역</li>
-            </ul>
-        </div>
+        <div th:replace="~{fragments/myPageSidebar :: sidebar}">sidebar content</div>
 
         <div class="content">
             <input type="hidden" id="userTypeInput" th:value="${user.type}">
@@ -58,7 +39,7 @@
                     <label for="phoneNum">전화번호</label>
                     <input type="text" id="phoneNum" th:value="*{phoneNum}">
 
-                    <div id="businessField" style="visibility: hidden;">
+                    <div id="businessField">
                         <label for="businessNum">사업자 등록번호</label>
                         <input type="text" id="businessNum" th:value="*{businessNum}">
                     </div>
@@ -81,6 +62,7 @@
 
                     <label for="confirm-password">새 비밀번호 확인</label>
                     <input type="password" id="confirm-password" placeholder="영어, 숫자 또는 특수문자 포함 20자 이내">
+
                     <div class="error-message-container">
                         <p id="password-match-message" class="field-error-message">비밀번호가 일치하지 않습니다.</p>
                     </div>
@@ -94,6 +76,7 @@
         </div>
     </div>
 </main>
+
 <div th:replace="~{fragments/footer :: footer}">footer content</div>
 </body>
 <script src="/js/user/myPage.js"></script>
