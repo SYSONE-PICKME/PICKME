@@ -5,13 +5,21 @@ body {
 }
 
 .container {
-    width: 80%;
+    width: 75%;
     margin: auto;
     text-align: center;
 }
 
+.image-container {
+    width: 50%;
+    height: 45%;
+}
+
 .main-image img {
-    margin: 20px 0;
+    margin-top: 20px;
+    margin-bottom: 5px;
+    width: 600px;
+    height: 350px;
 }
 
 .thumbnail-images {
@@ -21,8 +29,8 @@ body {
 }
 
 .thumbnail {
-    width: 153px;
-    height: 140px;
+    width: 145px;
+    height: 135px;
     cursor: pointer;
     border: 2px solid transparent;
     transition: border 0.3s;
@@ -34,6 +42,8 @@ body {
 
 .auction-details {
     position: relative;
+    width: 50%;
+    height: 45%;
     margin-top: 20px;
     margin-left: 50px;
     border: solid;
@@ -45,7 +55,7 @@ body {
     margin-top: 30px;
     margin-bottom: 25px;
     padding-left: 35px;
-    font-size: 30px;
+    font-size: 1.5rem;
     font-weight: 500;
     text-align: left;
 }
@@ -61,6 +71,8 @@ body {
     font-weight: 400;
     color: #49454F;
     text-align: left;
+    width: 90%;
+    height: 75%;
     margin-left: auto;
     margin-right: auto;
     padding-top: 25px;
@@ -90,7 +102,8 @@ body {
 }
 
 #price-container div {
-    margin-top: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     width: 50%;
 }
 
@@ -107,7 +120,11 @@ body {
 
 #price-container div p {
     font-weight: 500;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
+}
+
+#bid-container {
+    width: 100%;
 }
 
 .bid-button {
@@ -121,6 +138,8 @@ body {
     border-radius: 20px;
     background-color: black;
     cursor: not-allowed;
+    width: 100%;
+    height: 6vh;
 }
 
 #bid-button.active {
@@ -140,8 +159,8 @@ body {
 
 .action-buttons button {
     font-family: "IBM Plex Sans KR", sans-serif;
-    width: 330px;
-    height: 200px;
+    width: 20%;
+    height: 18vh;
     margin-right: 30px;
     border-radius: 40px;
     cursor: pointer;
@@ -151,6 +170,7 @@ body {
     padding-top: 15px;
     background-color: #FFFFFF;
     border: 2px solid #2EC44F;
+    margin-left: 2%;
 }
 
 #unit-button p {
@@ -174,7 +194,9 @@ body {
 }
 
 .contact-info {
-    margin-left: 25px;
+    width: 50%;
+    height: 18vh;
+    margin-left: 50px;
     font-size: 18px;
     border: solid;
     border-color: #B2B2B2;
@@ -224,7 +246,7 @@ body {
     position: absolute;
     top: 20%;
     right: 40px;
-    width: 15%;
+    width: 13%;
     border-radius: 50px;
 }
 
