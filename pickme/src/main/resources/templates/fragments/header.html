@@ -15,10 +15,10 @@
             <span class="header_text">합법적인 경매가 이루어지는 곳</span>
         </div>
         <nav class="main-nav">
-            <a href="/" class="logo">PICKME</a>
+            <a th:href="@{/user}" class="logo">PICKME</a>
             <ul class="nav-links">
                 <li><a href="/notice_link">공지사항</a></li>
-                <li><a href="/item_list">공매물품조회</a></li>
+                <li><a th:href="@{/user/item/list}">공매물품조회</a></li>
                 <li><a href="/auction_list">입찰 목록</a></li>
                 <li><a href="/point">포인트등록</a></li>
                 <li><a href="/mypage">마이페이지</a></li>
