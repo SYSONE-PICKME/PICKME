@@ -7,7 +7,18 @@
     </insert>
 
     <select id="findUserById" parameterType="String" resultType="project.pickme.user.domain.User">
-        select * from User where id = #{id}
+        select id,
+               password,
+               role,
+               name,
+               email,
+               type,
+               addr,
+               phone_num    as phoneNum,
+               business_num as businessNum,
+               point
+        from User
+        where id = #{id}
     </select>
 
     <delete id="deleteAll">
@@ -24,5 +35,21 @@
         update User
         set point = #{point}
         where id = #{id}
+    </update>
+
+    <update id="updatePassword">
+        update User
+        set password = #{password}
+        where id = #{userId}
+    </update>
+
+    <update id="updateMyInfo">
+        update User
+        set name = #{updateInfoDto.name},
+            email = #{updateInfoDto.email},
+            phone_num = #{updateInfoDto.phoneNum},
+            addr = #{updateInfoDto.addr},
+            business_num = #{updateInfoDto.businessNum}
+        where id = #{userId}
     </update>
 </mapper>
