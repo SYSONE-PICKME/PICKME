@@ -36,7 +36,6 @@
     <div class="container" th:object="${user}">
         <div th:replace="~{fragments/myPageSidebar :: sidebar}">sidebar content</div>
         <div class="content">
-<!--            <div class="card-section">-->
                 <input type="hidden" id="userId" th:value="${user.id}">
                 <h2>포인트 충전</h2>
                 <hr>
@@ -49,7 +48,6 @@
                     </div>
                     <div class="icon">
                         <img class="next-arrow" th:src="@{/images/next.png}" alt="포인트" src=""/>
-    <!--                    <i class="fas fa-solid fa-arrow-right" style="color: #2ec44f;"></i>-->
                     </div>
                     <div class="updated-points">
                         <p>충전 후 포인트</p>
