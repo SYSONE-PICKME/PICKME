@@ -27,8 +27,8 @@
     <ul class="menu">
         <li><img src="/images/myInfo.png"> 개인정보 수정</li>
         <li><img src="/images/like.png"> 관심 상품</li>
-        <li><img src="/images/payment.png"> 내 결제 목록</li>
-        <li><img src="/images/point.png"> 포인트 내역</li>
+        <li><img src="/images/payment.png" th:onclick="|location.href='@{/user/successful-bid-list}'|" alt="결제 목록"> 내 결제 목록</li>
+        <li><img src="/images/point.png" th:onclick="|location.href='@{/user/point/history}'|" alt="포인트 내역"> 포인트 내역</li>
     </ul>
 </div>
 </body>

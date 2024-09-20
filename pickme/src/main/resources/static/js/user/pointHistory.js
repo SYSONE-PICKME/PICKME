@@ -6,18 +6,16 @@ document.addEventListener("DOMContentLoaded", function () {
     const historyItems = document.querySelectorAll('.history-item');
 
     historyItems.forEach(item => {
-        const statusElement = item.querySelector('.status');
-        const priceTypeElement = item.querySelector('.price-type');
         const priceAmountElement = item.querySelector('.price-amount');
+        const currentPointAmountElement = item.querySelector('.current-point-amount');
+        const type = item.getAttribute('data-type');
 
-        if (statusElement.classList.contains('charge')) {
-            priceTypeElement.textContent = '충전 금액: ';
-            priceAmountElement.textContent = formatCurrency(parseFloat(priceAmountElement.textContent));
+        if (type === '1') {
             priceAmountElement.style.color = '#007BFF';
-        } else if (statusElement.classList.contains('payment')) {
-            priceTypeElement.textContent = '결제 금액: ';
             priceAmountElement.textContent = formatCurrency(parseFloat(priceAmountElement.textContent));
+        } else if (type === '0') {
             priceAmountElement.style.color = '#FF0000';
+            priceAmountElement.textContent = formatCurrency(parseFloat(priceAmountElement.textContent));
         }
 
         const dateElement = item.querySelector('.date');
@@ -25,7 +23,6 @@ document.addEventListener("DOMContentLoaded", function () {
             dateElement.textContent = dateElement.textContent.replace('T', ' ');
         }
 
-        const currentPointAmountElement = item.querySelector('.current-point-amount');
         currentPointAmountElement.style.color = '#2EC44F';
         currentPointAmountElement.textContent = formatCurrency(parseFloat(currentPointAmountElement.textContent));
     });

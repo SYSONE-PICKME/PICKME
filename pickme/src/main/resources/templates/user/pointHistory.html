@@ -1,43 +1,48 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PICKME</title>
-
-    <link rel="stylesheet" th:href="@{/css/common/index.css}">
     <link rel="stylesheet" th:href="@{/css/common/header.css}">
     <link rel="stylesheet" th:href="@{/css/common/footer.css}">
-
+    <link rel="stylesheet" th:href="@{/css/common/myPageSidebar.css}">
     <link rel="stylesheet" href="/css/user/pointHistory.css">
 </head>
 <body>
 <div th:replace="~{fragments/header :: header}">header content</div>
 
 <main>
-    <div class="content">
-        <div class="point-history">
-            <div class="history-item" th:each="pointHistory : ${pointHistory}">
-                <div class="details">
-                    <p class="price">
-                        <span class="price-type"></span>
-                        <span class="price-amount" th:text="${pointHistory.price}"></span> 원
-                    </p>
-                    <p>
-                        날짜: <span class="date" th:text="${pointHistory.time}"></span>
-                    </p>
-                    <p class="current-point">
-                        보유 포인트: <span class="current-point-amount" th:text="${pointHistory.currentPoint}"></span> 원
-                    </p>
+    <div class="container">
+        <div th:replace="~{fragments/myPageSidebar :: sidebar}">sidebar content</div>
+
+        <div class="content">
+            <div class="page-title">포인트 사용 내역</div>
+            <div class="point-history">
+                <div class="history-item" th:each="pointHistory : ${pointHistory}" th:data-type="${pointHistory.type}">
+                    <div class="item-icon">
+                        <img th:src="${pointHistory.type == 1 ? '/images/chargeCoin.png' : '/images/paymentCoin.png'}"
+                             alt="icon"/>
+                    </div>
+                    <div class="details">
+                        <p class="price">
+                            <span class="price-type" th:text="${pointHistory.type == 1 ? '충전 금액: ' : '결제 금액: '}"></span>
+                            <span class="price-amount" th:text="${pointHistory.price}"></span> 원
+                        </p>
+                        <p>
+                            보유 포인트: <span class="current-point-amount" th:text="${pointHistory.currentPoint}"></span> 원
+                        </p>
+                    </div>
+                    <div class="date-box">
+                        <span class="date" th:text="${pointHistory.time}"></span>
+                    </div>
                 </div>
-                <div class="status" th:classappend="${pointHistory.type == 1 ? 'charge' : 'payment'}"></div>
             </div>
         </div>
     </div>
 </main>
-
 <div th:replace="~{fragments/footer :: footer}">footer content</div>
 </body>
+<script src="/js/user/myPage.js"></script>
 <script src="/js/user/pointHistory.js"></script>
 </html>
