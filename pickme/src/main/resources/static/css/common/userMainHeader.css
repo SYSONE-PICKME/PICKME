@@ -15,10 +15,9 @@ header {
     background-color: #2EC44F;
     min-height: 20px;
     color: #000;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 700;
-    padding: 15px 40px;
-
+    padding: 1px 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -38,7 +37,6 @@ header {
 
 .header-login {
     color: #fff;
-
     text-decoration: none;
     margin-right: 20px;
     padding: 5px 5px;
@@ -50,7 +48,7 @@ header {
 .header-logo {
     text-decoration: none;
     color: inherit;
-    font-size: calc(12px + 0.9vw);
+    font-size: calc(10px + 0.9vw);
     font-weight: bold;
     margin-right: 60px;
     margin-left: 20px;
@@ -69,9 +67,9 @@ header {
 
 .logout-btn {
     font-family: "IBM Plex Sans KR", sans-serif;
-    font-size: calc(8px + 0.4vw);
+    font-size: calc(6px + 0.4vw);
     font-weight: 700;
-    padding: 8px 25px;
+    padding: 4px 20px;
     background-color: #fff;
     color: #000;
     border: none;
@@ -86,7 +84,7 @@ header {
 
 .header-buttons {
     gap: 30px;
-    font-size: calc(8px + 0.4vw);
+    font-size: calc(6px + 0.4vw);
     display: flex;
     align-items: center;
 }
