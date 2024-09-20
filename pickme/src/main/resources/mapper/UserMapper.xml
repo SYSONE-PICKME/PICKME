@@ -52,4 +52,19 @@
             business_num = #{updateInfoDto.businessNum}
         where id = #{userId}
     </update>
+
+    <select id="findPointHistory" parameterType="String" resultType="project.pickme.user.dto.PointHistoryDto">
+        select p.payment_time as time, price, 0 as type
+        from Payment p
+        left join Bid b
+        on p.bid_id = b.bid_id and b.is_success = 1
+        where p.user_id = #{userId}
+
+        union
+
+        select charge_time as time, price, 1 as type
+        from Charge
+        where user_id = #{userId}
+        order by time, type desc
+    </select>
 </mapper>

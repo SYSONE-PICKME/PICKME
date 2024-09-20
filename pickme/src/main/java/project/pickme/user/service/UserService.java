@@ -2,6 +2,8 @@ package project.pickme.user.service;
 
 import static project.pickme.user.exception.UserErrorCode.*;
 
+import java.util.List;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,6 +13,7 @@ import project.pickme.common.exception.BusinessException;
 import project.pickme.user.constant.Role;
 import project.pickme.user.constant.Type;
 import project.pickme.user.domain.User;
+import project.pickme.user.dto.PointHistoryDto;
 import project.pickme.user.dto.UpdatePasswordDto;
 import project.pickme.user.dto.SignUpDto;
 import project.pickme.user.dto.UpdateInfoDto;
@@ -47,6 +50,10 @@ public class UserService {
 	@Transactional
 	public void updateInfo(UpdateInfoDto updateInfoDto, User user) {
 		userMapper.updateMyInfo(updateInfoDto, user.getId());
+	}
+
+	public List<PointHistoryDto> showHistory(User user) {
+		return userMapper.findPointHistory(user.getId());
 	}
 
 	private User createUser(SignUpDto signUpDto) {
