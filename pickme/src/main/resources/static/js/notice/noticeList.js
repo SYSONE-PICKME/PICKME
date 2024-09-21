@@ -88,7 +88,17 @@ function confirmDelete(noticeId) {
 
 confirmBtn.addEventListener('click', function() {
     if (noticeIdToDelete) {
-        window.location.href = `/customs/notices/delete/${noticeIdToDelete}`;
+        $.ajax({
+            url: `/customs/notices/delete/${noticeIdToDelete}`,
+            type: 'DELETE',
+            success: function(response) {
+                modal.style.display = "none";
+                $(`[data-notice-id="${noticeIdToDelete}"]`).remove();
+            },
+            error: function() {
+                alert('삭제에 실패하였습니다.');
+            }
+        });
     }
 });
 

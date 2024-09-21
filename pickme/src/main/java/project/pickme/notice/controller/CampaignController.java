@@ -3,6 +3,9 @@ package project.pickme.notice.controller;
 import java.io.IOException;
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -59,13 +62,14 @@ public class CampaignController {
 		return "redirect:/customs/campaigns/" + id;
 	}
 
-	@GetMapping("/delete/{id}")
-	public String deleteCampaign(@PathVariable("id") Long id) {
-		try {
+	@DeleteMapping("/delete/{id}")
+	@ResponseBody
+	public ResponseEntity<String> deleteCampaign(@PathVariable("id") Long id) {
+		try{
 			campaignService.deleteCampaign(id);
-			return "redirect:/customs/campaigns";
-		} catch (Exception e) {
-			return "redirect:/customs/campaigns?error=deletefailed";		//todo : AJAX시도할 때 이상한 값 넘어와서 걸어뒀는데 AJAX로 바꿀 때 없애기
+			return ResponseEntity.ok("삭제 성공");
+		}catch (Exception e){
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("삭제 실패");
 		}
 	}
 

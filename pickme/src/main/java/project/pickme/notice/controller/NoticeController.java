@@ -2,13 +2,18 @@ package project.pickme.notice.controller;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import lombok.RequiredArgsConstructor;
 import project.pickme.common.annotation.CurrentUser;
 import project.pickme.notice.dto.NoticeDto;
@@ -62,13 +67,14 @@ public class NoticeController {
 		return "redirect:/customs/notices/" + id;
 	}
 
-	@GetMapping("/delete/{id}")
-	public String deleteNotice(@PathVariable("id") Long id) {
+	@DeleteMapping("/delete/{id}")
+	@ResponseBody
+	public ResponseEntity<String> deleteNotice(@PathVariable("id") Long id) {
 		try {
 			noticeService.deleteNotice(id);
-			return "redirect:/customs/notices";
+			return ResponseEntity.ok("삭제 성공");
 		} catch (Exception e) {
-			return "redirect:/customs/notices?error=deletefailed";		// todo: 마찬가지로 AJAX로 변경할 때 처리
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("삭제 실패");
 		}
 	}
 

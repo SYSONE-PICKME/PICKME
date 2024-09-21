@@ -89,7 +89,17 @@ function confirmDelete(campaignId) {
 
 confirmBtn.addEventListener('click', function() {
     if (campaignIdToDelete) {
-        window.location.href = `/customs/campaigns/delete/${campaignIdToDelete}`;
+        $.ajax({
+            url: `/customs/campaigns/delete/${campaignIdToDelete}`,
+            type: 'DELETE',
+            success: function(response) {
+                modal.style.display = "none";
+                $(`[data-campaign-id="${campaignIdToDelete}"]`).remove();
+            },
+            error: function() {
+                alert('삭제에 실패하였습니다.');
+            }
+        });
     }
 });
 
