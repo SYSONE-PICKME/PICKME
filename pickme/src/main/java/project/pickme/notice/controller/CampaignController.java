@@ -20,9 +20,10 @@ public class CampaignController {
 	private final CampaignService campaignService;
 
 	@GetMapping
-	public String showCampaigns(Model model) {
+	public String showCampaigns(Model model, @CurrentUser Customs customs) {
 		List<CampaignDto> campaigns = campaignService.getAllCampaigns();
 		model.addAttribute("campaigns", campaigns);
+		model.addAttribute("customsId",customs.getId());
 		return "notice/campaignList";
 	}
 

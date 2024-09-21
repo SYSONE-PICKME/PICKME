@@ -23,9 +23,10 @@ public class NoticeController {
 	private final NoticeService noticeService;
 
 	@GetMapping
-	public String showNotices(Model model) {
+	public String showNotices(Model model, @CurrentUser Customs customs) {
 		List<NoticeDto> notices = noticeService.getAllNotices();
 		model.addAttribute("notices", notices);
+		model.addAttribute("customsId",customs.getId());
 		return "notice/noticeList";
 	}
 

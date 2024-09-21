@@ -27,8 +27,10 @@
                 <a th:href="@{/customs/notices/{id}(id=${nextNoticeId})}" class="nav-content-btn" title="다음글"><i class="fas fa-chevron-right"></i></a>
             </div>
             <div class="action-buttons">
-                <a th:href="@{/customs/notices/edit/{id}(id=${notice.id})}" class="content-btn">수 정</a>
-                <a th:href="@{/customs/notices/delete/{id}(id=${notice.id})}" class="content-btn">삭 제</a>
+                <a th:href="@{/customs/notices/edit/{id}(id=${notice.id})}" class="content-btn"
+                   th:if="${notice.customsId==customsId}">수 정</a>
+                <a th:href="@{/customs/notices/delete/{id}(id=${notice.id})}" class="content-btn"
+                   th:if="${notice.customsId==customsId}">삭 제</a>
                 <a href="/customs/notices" class="content-btn">목록보기</a>
             </div>
         </div>
