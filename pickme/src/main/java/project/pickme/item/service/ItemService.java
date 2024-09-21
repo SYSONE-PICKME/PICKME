@@ -8,7 +8,10 @@ import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 
 import project.pickme.item.constant.Status;
+import project.pickme.item.dto.OriginalItemDto;
 import project.pickme.item.dto.SuccessfullCustomsItemDto;
+import project.pickme.item.dto.UpdateDto;
+import project.pickme.item.dto.UpdateItemFormDto;
 import project.pickme.user.domain.Customs;
 
 import project.pickme.s3.service.S3Service;
@@ -53,5 +56,28 @@ public class ItemService {
 	// 등록한 경매 전체 조회 및 낙찰된 물품은 마감처리
 	public List<SuccessfullCustomsItemDto> findItemsByCustomsId(String customsId) {
 		return itemMapper.findItemsByCustomsId(customsId);
+	}
+
+	public List<Long> getLawsByItemId(long itemId) {
+		return itemLawMapper.findLawsByItemId(itemId);
+	}
+
+	public String[] getImagesByItemId(long itemId) {
+		return itemMapper.findImagesByItemId(itemId);
+	}
+
+	public OriginalItemDto getItemById(long itemId) {
+		return itemMapper.findItemByItemId(itemId);
+	}
+
+	public void updateItemByItemId(Customs customs, UpdateItemFormDto updateItemFormDto, long itemId) {
+		if (customs.getId().equals(itemMapper.findItemByItemId(itemId).getCustomsId())) {
+			itemLawMapper.deleteLaw(itemId);
+			for (long id : updateItemFormDto.getLawId()) {
+				itemLawMapper.insertLaw(new ItemLawDto(id, itemId));
+			}
+			itemMapper.updateItem(
+				new UpdateDto(updateItemFormDto.getStartTime(), updateItemFormDto.getEndTime(), itemId));
+		}
 	}
 }
