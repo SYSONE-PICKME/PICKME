@@ -50,7 +50,7 @@
                     <p>상태: <span th:text="${item.status}"></span></p>
                     <!-- 물품 정보 수정 버튼: 입찰이 진행 전일때만 보임 -->
                     <input type="button" id="updateItem" value="물품 정보 수정" th:if="${item.status == 'NOT_OPEN'}"
-                           th:onclick="'window.location.href=\'/customs/items/update?itemId=' + ${item.itemId} + '\''">
+                           th:onclick="|window.location.href='/customs/items/edit/${item.itemId}'|"/>
                 </div>
             </div>
 
