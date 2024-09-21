@@ -8,7 +8,7 @@ body {
 .sidebar-container {
     position: fixed;
     top: 20%;
-    left: 5%;
+    left: 10%;
     width: 220px;
     border-radius: 12px;
     background-color: white;

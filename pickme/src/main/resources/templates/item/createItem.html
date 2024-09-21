@@ -4,72 +4,77 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PICKME</title>
-    <link rel="stylesheet" href="/css/item/item.css">
+<!--    <link rel="stylesheet" href="/css/item/item.css">-->
     <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" th:href="@{/css/customs/customsSidebar.css}">
+    <link rel="stylesheet" th:href="@{/css/customs/customsHeader.css}">
 </head>
 <body>
-<h1>새 경매 등록</h1>
-<form action="/customs/items" method="post" enctype="multipart/form-data">
-    <div class="form-group">
-        <label for="title">상품명</label>
-        <input type="text" id="title" name="name" required>
-    </div>
+<div th:replace="~{customs/customsHeader :: header}">header content</div>
+<div th:replace="~{customs/customsSidebar :: sidebar}"></div>
+<!--<h1>새 경매 등록</h1>-->
+<!--<form action="/customs/items" method="post" enctype="multipart/form-data">-->
+<!--    <div class="form-group">-->
+<!--        <label for="title">상품명</label>-->
+<!--        <input type="text" id="title" name="name" required>-->
+<!--    </div>-->
 
-    <div class="form-group">
-        <label for="startPrice">시작가</label>
-        <input type="number" id="startPrice" name="price" required>
-    </div>
+<!--    <div class="form-group">-->
+<!--        <label for="startPrice">시작가</label>-->
+<!--        <input type="number" id="startPrice" name="price" required>-->
+<!--    </div>-->
 
-    <div class="form-row">
-        <div class="form-col">
-            <label for="auctionStartTime">경매 시작 시간</label>
-            <input type="datetime-local" id="auctionStartTime" name="startTime" required>
-        </div>
-        <div class="form-col">
-            <label for="auctionEndTime">경매 마감 시간</label>
-            <input type="datetime-local" id="auctionEndTime" name="endTime" required>
-        </div>
-    </div>
+<!--    <div class="form-row">-->
+<!--        <div class="form-col">-->
+<!--            <label for="auctionStartTime">경매 시작 시간</label>-->
+<!--            <input type="datetime-local" id="auctionStartTime" name="startTime" required>-->
+<!--        </div>-->
+<!--        <div class="form-col">-->
+<!--            <label for="auctionEndTime">경매 마감 시간</label>-->
+<!--            <input type="datetime-local" id="auctionEndTime" name="endTime" required>-->
+<!--        </div>-->
+<!--    </div>-->
 
-    <div class="form-group">
-        <label for="category">카테고리</label>
-        <select id="category" name="code" required>
-            <option value="" disabled selected>분류</option>
-            <option th:each="category : ${categories}" th:value="${category.code}"
-                    th:text="${category.name}"></option>
-        </select>
-    </div>
+<!--    <div class="form-group">-->
+<!--        <label for="category">카테고리</label>-->
+<!--        <select id="category" name="code" required>-->
+<!--            <option value="" disabled selected>분류</option>-->
+<!--            <option th:each="category : ${categories}" th:value="${category.code}"-->
+<!--                    th:text="${category.name}"></option>-->
+<!--        </select>-->
+<!--    </div>-->
 
-    <div class="form-group">
-        <label for="category">관련 법규</label>
-        <div th:each="law : ${laws}">
-            <input type="checkbox" th:id="'law-' + ${law.id}" th:value="${law.id}" th:name="lawId[]">
-            <label th:for="'law-' + ${law.id}" th:text="${law.title}" id="checkbox"></label>
-        </div>
-    </div>
+<!--    <div class="form-group">-->
+<!--        <label for="category">관련 법규</label>-->
+<!--        <div th:each="law : ${laws}">-->
+<!--            <input type="checkbox" th:id="'law-' + ${law.id}" th:value="${law.id}" th:name="lawId[]">-->
+<!--            <label th:for="'law-' + ${law.id}" th:text="${law.title}" id="checkbox"></label>-->
+<!--        </div>-->
+<!--    </div>-->
 
-    <div class="form-group">
-        <label for="type">입찰대상</label>
-        <select id="type" name="type" required>
-            <option value="" disabled selected>선택하세요</option>
-            <option th:each="type : ${types}" th:value="${type}" th:text="${type.value}">선택해주세요</option>
-        </select>
-    </div>
+<!--    <div class="form-group">-->
+<!--        <label for="type">입찰대상</label>-->
+<!--        <select id="type" name="type" required>-->
+<!--            <option value="" disabled selected>선택하세요</option>-->
+<!--            <option th:each="type : ${types}" th:value="${type}" th:text="${type.value}">선택해주세요</option>-->
+<!--        </select>-->
+<!--    </div>-->
 
-    <div class="filebox clearfix">
-        <label for="inputFile">사진 첨부</label>
-        <div class="inputFile" id="inputFile">
-            <label for="AddImgs" class="addImgBtn">+</label>
-            <ul id="Preview" class="sortable"></ul>
-            <input type="file" id="AddImgs" name="files" class="upload-hidden" accept="image/*" multiple>
-        </div>
-    </div>
+<!--    <div class="filebox clearfix">-->
+<!--        <label for="inputFile">사진 첨부</label>-->
+<!--        <div class="inputFile" id="inputFile">-->
+<!--            <label for="AddImgs" class="addImgBtn">+</label>-->
+<!--            <ul id="Preview" class="sortable"></ul>-->
+<!--            <input type="file" id="AddImgs" name="files" class="upload-hidden" accept="image/*" multiple>-->
+<!--        </div>-->
+<!--    </div>-->
 
-    <button type="submit">경매 등록하기</button>
-</form>
+<!--    <button type="submit">경매 등록하기</button>-->
+<!--</form>-->
 
 <script src="/js/item/item.js"></script>
 </body>
