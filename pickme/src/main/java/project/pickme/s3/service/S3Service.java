@@ -18,13 +18,16 @@ import com.amazonaws.services.s3.model.PutObjectRequest;
 import lombok.RequiredArgsConstructor;
 import project.pickme.common.exception.BusinessException;
 import project.pickme.image.dto.ImageDto;
-import project.pickme.item.dto.ItemDto;
 import project.pickme.image.repository.ImageMapper;
+import project.pickme.item.dto.ItemDto;
+
+import project.pickme.s3.config.S3Config;
 
 @Service
 @RequiredArgsConstructor
 public class S3Service {
 	private final AmazonS3 amazonS3;
+	private final S3Config s3Config;
 
 	@Value("${cloud.aws.s3.bucket}")
 	private String bucket;
@@ -50,7 +53,7 @@ public class S3Service {
 
 	// 파일 이름 생성
 	private String createFileName(String fileName) {
-		return UUID.randomUUID().toString().concat(fileName);
+		return UUID.randomUUID().toString();
 	}
 
 	public void uploadImages(ItemDto itemDto, MultipartFile[] files) {
@@ -63,5 +66,14 @@ public class S3Service {
 			imageMapper.insertImage(new ImageDto(itemId, name, url, seq));
 			sequence++;
 		}
+	}
+
+	public void deleteFile(String fileUrl) {
+		String fileName = extractKeyFromUrl(fileUrl);
+		amazonS3.deleteObject(s3Config.getBucket(), fileName);
+	}
+
+	private String extractKeyFromUrl(String url) {
+		return url.substring(url.lastIndexOf("/") + 1);
 	}
 }

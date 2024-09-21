@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>공지사항</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/notice/noticeContent.css}">
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+<div class="container">
+    <h1>공지사항</h1>
+
+    <div class="notice-content" th:object="${notice}">
+        <h2 th:text="*{title}"></h2>
+        <p class="date" th:text="${#temporals.format(notice.createTime, 'yyyy.MM.dd')}"></p>
+        <div class="notice-body" th:utext="${#strings.replace(#strings.escapeXml(notice.content), '&#10;', '&lt;br&gt;')}">
+        </div>
+    </div>
+    <div class="nav-content">
+        <div class="navigation-buttons">
+            <div class="nav-arrows">
+                <a th:href="@{/customs/notices/{id}(id=${previousNoticeId})}" class="nav-content-btn" title="이전글"><i class="fas fa-chevron-left"></i></a>
+                <a th:href="@{/customs/notices/{id}(id=${nextNoticeId})}" class="nav-content-btn" title="다음글"><i class="fas fa-chevron-right"></i></a>
+            </div>
+            <div class="action-buttons">
+                <a th:href="@{/customs/notices/edit/{id}(id=${notice.id})}" class="content-btn"
+                   th:if="${notice.customsId==customsId}">수 정</a>
+                <a th:href="@{/customs/notices/delete/{id}(id=${notice.id})}" class="content-btn"
+                   th:if="${notice.customsId==customsId}">삭 제</a>
+                <a href="/customs/notices" class="content-btn">목록보기</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="~{fragments/footer :: footer}">footer content</div>
+<script src="/js/notice.js"></script>
+</body>
+</html>
