@@ -7,7 +7,7 @@
 
     <link rel="stylesheet" th:href="@{/css/customs/customsHeader.css}">
     <link rel="stylesheet" th:href="@{/css/common/footer.css}">
-    <link rel="stylesheet" th:href="@{/item/css/list.css}">
+    <link rel="stylesheet" th:href="@{/css/item/list.css}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -45,6 +45,7 @@
                     <input type="button" value="배송현황"
                            th:if="${item.invoiceNumber}"
                            th:data-item-id="${item.itemId}"
+                           th:data-user-id="${item.userId}"
                            onclick="viewDeliveryStatus(this)">
                     <p th:if="${item.invoiceNumber}">송장번호: <span th:text="${item.invoiceNumber}"></span></p>
                 </div>
@@ -64,7 +65,8 @@
 
     function viewDeliveryStatus(buttonElement) {
         const itemId = encodeURIComponent(buttonElement.getAttribute('data-item-id'));
-        window.location.href = `/customs/delivery/status?itemId=${itemId}`;
+        const userId = encodeURIComponent(buttonElement.getAttribute('data-user-id'));
+        window.location.href = `/customs/delivery/status?itemId=${itemId}&userId=${userId}`;
     }
 </script>
 </body>
