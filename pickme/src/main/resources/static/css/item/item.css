@@ -146,3 +146,50 @@ select {
 .bid-button:hover {
     background-color: #333;
 }
+
+.flatpickr-input {
+    color: black;
+    background-color: #FFFFFF;
+    border: 1px solid black;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.flatpickr-calendar {
+    background-color: #F6FFF8;
+    border: 1px solid black;
+    color: black;
+}
+
+.flatpickr-day {
+    color: #000;
+}
+
+.flatpickr-day.today {
+    background-color: black;
+    color: #ffffff;
+}
+
+.flatpickr-day:hover {
+    background-color: #2EC44F;
+    color: white;
+}
+
+.flatpickr-day.selected {
+    background-color: #2EC44F;
+    border: 1px solid black;
+    color: #ffffff;
+}
+
+.flatpickr-time,
+.flatpickr-time:hover {
+    background-color: #F6FFF8;
+    color: black;
+    border: none;
+}
+
+.flatpickr-hour,
+.flatpickr-minute {
+    font-size: 16px;
+    color: black;
+}

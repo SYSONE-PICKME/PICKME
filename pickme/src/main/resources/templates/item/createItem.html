@@ -9,6 +9,8 @@
     <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
     <link rel="stylesheet" th:href="@{/css/customs/customsSidebar.css}">
     <link rel="stylesheet" th:href="@{/css/customs/customsHeader.css}">
     <link rel="stylesheet" th:href="@{/css/common/footer.css}">
@@ -16,7 +18,6 @@
 </head>
 <body>
 <div th:replace="~{customs/customsHeader :: header}">header content</div>
-
 
 <main>
     <div class="container">
@@ -52,12 +53,12 @@
 
                 <div class="form-row">
                     <div class="form-col">
-                        <label for="auctionStartTime">경매 시작 시간</label>
-                        <input type="datetime-local" id="auctionStartTime" name="startTime" required>
+                        <label for="auctionStart">경매 시작 날짜 및 시간</label>
+                        <input type="text" id="auctionStart" class="flatpickr-input" name="auctionStart" required>
                     </div>
                     <div class="form-col">
-                        <label for="auctionEndTime">경매 마감 시간</label>
-                        <input type="datetime-local" id="auctionEndTime" name="endTime" required>
+                        <label for="auctionEnd">경매 마감 날짜 및 시간</label>
+                        <input type="text" id="auctionEnd" class="flatpickr-input" name="auctionEnd" required>
                     </div>
                 </div>
 
@@ -96,5 +97,23 @@
 
 <div th:replace="~{fragments/footer :: footer}">footer content</div>
 <script src="/js/item/item.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script>
+    flatpickr("#auctionStart", {
+        enableTime: true,
+        noCalendar: false,
+        dateFormat: "Y-m-d H:i",
+        time_24hr: true,
+        minuteIncrement: 60 // 분 단위를 60으로 설정해 분을 보이지 않게 함
+    });
+
+    flatpickr("#auctionEnd", {
+        enableTime: true,
+        noCalendar: false,
+        dateFormat: "Y-m-d H:i",
+        time_24hr: true,
+        minuteIncrement: 60 // 분 단위를 60으로 설정해 분을 보이지 않게 함
+    });
+</script>
 </body>
 </html>
