@@ -34,4 +34,19 @@
                      when 'CLOSED' then 3
                      end;
     </select>
+
+    <update id="updateStatus" parameterType="java.time.LocalDateTime">
+        <![CDATA[
+        update Item
+
+        set status =
+        case
+            when start_time > #{now} then 'NOT_OPEN'
+            when start_time <= #{now} and end_time >= #{now} then 'OPEN'
+            when end_time < #{now} then 'CLOSED'
+        end
+
+        where status != 'CLOSED'
+    ]]>
+    </update>
 </mapper>
