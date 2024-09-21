@@ -33,6 +33,7 @@
     <script th:src="@{/js/item/image.js}"></script>
     <script th:src="@{/js/item/like.js}"></script>
     <script th:src="@{/js/item/countdown.js}"></script>
+    <script th:src="@{/js/item/unit.js}"></script>
 </head>
 <body>
 <!-- 헤더 -->
@@ -125,6 +126,14 @@
                     <span th:text="${item.customsTel}"></span>
                 </div>
                 <img id="contact-img" src="/images/department.png">
+            </div>
+        </div>
+
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <span class="close-button">&times;</span>
+                <h2>경매 호가표 안내</h2>
+                <p>모달 내용이 여기에 들어갑니다.</p>
             </div>
         </div>
     </div>
