@@ -9,7 +9,7 @@
     <link rel="stylesheet" th:href="@{/css/common/index.css}">
     <link rel="stylesheet" th:href="@{/css/common/header.css}">
     <link rel="stylesheet" th:href="@{/css/common/footer.css}">
-    <link rel="stylesheet" th:href="@{/item/css/list.css}">
+    <link rel="stylesheet" th:href="@{/css/item/list.css}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -42,7 +42,9 @@
                     <!-- 배송현황 버튼: 송장번호가 등록된 경우 표시 -->
                     <input type="button" id="deliveryStatus" value="배송현황"
                            th:if="${item.invoiceNumber}"
-                           th:onclick="'window.location.href=\'/user/delivery/status?itemId=' + ${item.itemId} + '\''">
+                           th:data-item-id="${item.itemId}"
+                           th:data-user-id="${user}"
+                           onclick="viewDeliveryStatus(this)">
                     <p th:if="${item.invoiceNumber}">송장번호:<span th:text="${item.invoiceNumber}"></span></p>
                 </div>
             </div>
@@ -51,6 +53,12 @@
 </main>
 <!-- 푸터 -->
 <div th:replace="~{fragments/footer :: footer}">footer content</div>
-
+<script>
+    function viewDeliveryStatus(buttonElement) {
+        const itemId = encodeURIComponent(buttonElement.getAttribute('data-item-id'));
+        const userId = encodeURIComponent(buttonElement.getAttribute('data-user-id'));
+        window.location.href = `/user/delivery/status?itemId=${itemId}&userId=${userId}`;
+    }
+</script>
 </body>
 </html>

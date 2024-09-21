@@ -23,9 +23,44 @@
           and c.id = #{id};
     </select>
 
+    <select id="getDeliveryInfo">
+        select addr as address,
+               name as userName,
+               id   as userId
+        from User
+        where id = #{id}
+    </select>
+
+    <select id="getItemInfo">
+        select i.name           as itemName,
+               img.url          as imgUrl,
+               d.invoice_number as invoiceNumber,
+               b.price          as price,
+               d.courier        as courier,
+               c.name           as customsName
+        from Item i
+                 left join Customs c on i.customs_id = c.id
+                 left join Delivery d on i.item_id = d.item_id
+                 left join (select item_id, url
+                            from Image
+                            where seq = 0) img on i.item_id = img.item_id
+                 left join Bid b on i.item_id = b.item_id
+        where b.is_success = 1
+          and i.item_id = #{id}
+    </select>
+
     <insert id="saveDeliveryInfo">
-        insert into Delivery(user_id, item_id, invoice_number, code, status)
-        values (#{userId}, #{itemId}, #{invoiceNumber}, #{code}, #{status})
+        insert into Delivery(user_id, item_id, invoice_number, code, status, courier)
+        values (#{userId}, #{itemId}, #{invoiceNumber}, #{code}, #{status}, #{courier})
     </insert>
+
+    <select id="getTrackingInfo">
+        select invoice_number as invoiceNumber,
+               code           as code,
+               courier        as courier
+        from Delivery
+        where item_id = #{id}
+
+    </select>
 
 </mapper>

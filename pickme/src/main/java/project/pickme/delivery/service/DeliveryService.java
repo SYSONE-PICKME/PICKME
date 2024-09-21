@@ -6,8 +6,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
+import project.pickme.delivery.dto.CarrierDto;
 import project.pickme.delivery.dto.DeliveryFormDto;
+import project.pickme.delivery.dto.DeliveryInfoDto;
 import project.pickme.delivery.dto.DeliveryManageDto;
+import project.pickme.delivery.dto.ItemInfoDto;
 import project.pickme.delivery.repository.DeliveryMapper;
 import project.pickme.user.domain.Customs;
 
@@ -31,9 +34,20 @@ public class DeliveryService {
 		return deliveryMapper.findCustomsSuccessfulItems(customs.getId());
 	}
 
-	// TODO: 송장 등록
 	public void saveDelivery(DeliveryFormDto deliveryFormDto) {
 		deliveryMapper.saveDeliveryInfo(deliveryFormDto.getItemId(), deliveryFormDto.getUserId(),
-			deliveryFormDto.getInvoiceNumber(), deliveryFormDto.getCode(), "배송 준비 중");
+			deliveryFormDto.getInvoiceNumber(), deliveryFormDto.getCode(), "배송 준비 중", deliveryFormDto.getCourier());
+	}
+
+	public ItemInfoDto getItemInfo(long itemId) {
+		return deliveryMapper.getItemInfo(itemId);
+	}
+
+	public DeliveryInfoDto getDeliveryInfo(String userId) {
+		return deliveryMapper.getDeliveryInfo(userId);
+	}
+
+	public CarrierDto getCarrier(long itemId) {
+		return deliveryMapper.getTrackingInfo(itemId);
 	}
 }

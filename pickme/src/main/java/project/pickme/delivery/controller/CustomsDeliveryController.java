@@ -17,7 +17,7 @@ import project.pickme.user.domain.Customs;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/customs/delivery")
-public class DeliveryController {
+public class CustomsDeliveryController {
 
 	private final DeliveryService deliveryService;
 
@@ -38,17 +38,19 @@ public class DeliveryController {
 		return "/delivery/register";
 	}
 
-	// TODO: 송장 등록 하는거 다시 해야함.
 	@PostMapping
 	public String saveInvoiceNumber(@RequestBody DeliveryFormDto deliveryFormDto) {
 		deliveryService.saveDelivery(deliveryFormDto);
 		return "redirect:/customs/delivery";
 	}
 
-	// TODO: 배송 상황 아직 미구현
 	@GetMapping("/status")
-	public String showStatusPage(@RequestParam("itemId") Long itemId, Model model) {
-		model.addAttribute("itemId", itemId);
+	public String showStatusPage(@RequestParam("itemId") long itemId, @RequestParam("userId") String userId,
+		Model model, @CurrentUser Customs customs) {
+		model.addAttribute("item", deliveryService.getItemInfo(itemId));
+		model.addAttribute("user", deliveryService.getDeliveryInfo(userId));
+		model.addAttribute("userId", customs.getId());
+		model.addAttribute("carrier", deliveryService.getCarrier(itemId));
 
 		return "/delivery/status";
 	}

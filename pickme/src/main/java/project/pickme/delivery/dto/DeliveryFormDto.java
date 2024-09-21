@@ -14,4 +14,5 @@ public class DeliveryFormDto {
 	private String userId;
 	private String code;
 	private String invoiceNumber;
+	private String courier;
 }
