@@ -97,7 +97,7 @@ h1 {
 }
 
 .bid-button {
-    margin-top: 20px;
+    margin-top: 40px;
     width: 100%;
     padding: 10px;
     background-color: #333;
@@ -216,8 +216,10 @@ select {
 
 .flatpickr-calendar {
     background-color: #F6FFF8;
-    border: 1px solid black;
+    border: none;
     color: black;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
 .flatpickr-day {
