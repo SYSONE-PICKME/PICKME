@@ -50,3 +50,7 @@ body {
 .sidebar-menu li a:hover {
     background-color: #f9f9f9;
 }
+
+.sidebar-menu li a.active {
+    color: #2EC44F;
+}
