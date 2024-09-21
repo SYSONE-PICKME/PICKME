@@ -2,9 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="project.pickme.item.repository.ItemLawMapper">
 
-    <insert id="insertLaw">
+    <insert id="insertLaw" parameterType="ItemLawDto">
         insert into Item_law(law_id2, item_id)
         values (#{lawId}, #{itemId})
     </insert>
+
+    <delete id="deleteLaw">
+        delete
+        from Item_law
+        where Item_id = #{id}
+    </delete>
+
+    <select id="findLawsByItemId">
+        select law_id2 as lawId
+        from Item_law
+        where item_id = #{id}
+
+    </select>
 
 </mapper>

@@ -40,13 +40,39 @@
         update Item
 
         set status =
-        case
-            when start_time > #{now} then 'NOT_OPEN'
-            when start_time <= #{now} and end_time >= #{now} then 'OPEN'
-            when end_time < #{now} then 'CLOSED'
-        end
+                case
+                    when start_time > #{now} then 'NOT_OPEN'
+                    when start_time <= #{now} and end_time >= #{now} then 'OPEN'
+                    when end_time < #{now} then 'CLOSED'
+                    end
 
         where status != 'CLOSED'
-    ]]>
+        ]]>
     </update>
+
+    <update id="updateItem">
+        update Item
+        set end_time   = #{endTime},
+            start_time = #{startTime}
+        where item_id = #{itemId}
+    </update>
+
+    <select id="findImagesByItemId">
+        select url
+        from Image
+        where item_id = #{id}
+    </select>
+
+    <select id="findItemByItemId">
+        select name       as name,
+               code       as code,
+               target     as type,
+               price      as price,
+               start_time as startTime,
+               end_time   as endTime,
+               status     as status,
+               customs_id as customsId
+        from Item
+        where item_id = #{id};
+    </select>
 </mapper>
