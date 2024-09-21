@@ -26,16 +26,13 @@ public class NoticeService {
 	private final CustomsMapper customsMapper;
 
 	public List<NoticeDto> getAllNotices() {
-		return noticeMapper.selectByType("NOTICE").stream()
+		return noticeMapper.selectAllNotices().stream()
 			.map(NoticeDto::fromEntity)
 			.collect(Collectors.toList());
 	}
 
 	public NoticeDto getNoticeById(Long id) {
 		Notice notice = noticeMapper.selectById(id);
-		if (notice == null || !"NOTICE".equals(notice.getType())) {
-			return null;
-		}
 		return NoticeDto.fromEntity(notice);
 	}
 
@@ -45,14 +42,6 @@ public class NoticeService {
 		noticeMapper.insert(notice);
 		return notice.getId();
 	}
-
-	// @Transactional
-	// public Long createNotice(NoticeDto noticeDto) {
-	// 	Customs customs = getCustomsById(noticeDto.getCustomsId());
-	// 	Notice notice = noticeDto.toEntity(customs);
-	// 	noticeMapper.insert(notice);
-	// 	return notice.getId();
-	// }
 
 	@Transactional
 	public void updateNotice(NoticeDto noticeDto, @CurrentUser Customs customs) {

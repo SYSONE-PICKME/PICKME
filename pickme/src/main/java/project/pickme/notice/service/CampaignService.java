@@ -24,16 +24,13 @@ public class CampaignService {
 	private final S3Service s3Service;
 
 	public List<CampaignDto> getAllCampaigns() {
-		return noticeMapper.selectByType("CAMPAIGN").stream()
+		return noticeMapper.selectAllCampaigns().stream()
 			.map(CampaignDto::fromEntity)
 			.toList();
 	}
 
 	public CampaignDto getCampaignById(Long id) {
 		Notice notice = noticeMapper.selectById(id);
-		if (notice == null || !"CAMPAIGN".equals(notice.getType())) {
-			return null;
-		}
 		return CampaignDto.fromEntity(notice);
 	}
 

@@ -73,9 +73,10 @@ public class NoticeController {
 	}
 
 	@GetMapping("/{id}")
-	public String showNotice(@PathVariable Long id, Model model) {
+	public String showNotice(@PathVariable Long id, Model model, @CurrentUser Customs customs) {
 		NoticeDto notice = noticeService.getNoticeById(id);
 		model.addAttribute("notice", notice);
+		model.addAttribute("customsId", customs.getId());
 		return "notice/noticeContent";
 	}
 }

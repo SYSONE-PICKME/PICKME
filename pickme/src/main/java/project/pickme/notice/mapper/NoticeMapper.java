@@ -10,7 +10,8 @@ import project.pickme.notice.domain.Notice;
 @Mapper
 public interface NoticeMapper {
 
-	List<Notice> selectAll();
+	List<Notice> selectAllNotices();
+	List<Notice> selectAllCampaigns();
 	List<Notice> selectByType(@Param("type") String type);
 	Notice selectById(Long id);
 	void insert(Notice notice);
