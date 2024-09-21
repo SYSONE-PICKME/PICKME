@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PICKME</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" th:href="@{/css/user/myPage.css}">
+</head>
+<body>
+<div th:fragment="sidebar" class="sidebar" th:object="${user}">
+    <div class="profile-section">
+        <div class="welcome-text">
+            <span class="name" th:text="|${user.name}님|"></span>
+        </div>
+        <div class="points">
+            <span class="points-label">보유 포인트</span>
+            <div class="points-info">
+                <span class="points-amount" id="points-amount" th:text="*{point}">720,000 P</span>
+                <button class="recharge-button">충전</button>
+            </div>
+        </div>
+    </div>
+    <ul class="menu">
+        <li><img src="/images/myInfo.png"> 개인정보 수정</li>
+        <li><img src="/images/like.png"> 관심 상품</li>
+        <li><img src="/images/payment.png"> 내 결제 목록</li>
+        <li><img src="/images/point.png"> 포인트 내역</li>
+    </ul>
+</div>
+</body>
+</html>
