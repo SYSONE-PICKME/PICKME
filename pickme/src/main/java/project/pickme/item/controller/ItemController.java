@@ -36,8 +36,7 @@ public class ItemController {
 	}
 
 	@PostMapping
-	public String insertItem(@ModelAttribute ItemFormDto itemFormDto, @CurrentUser
-	Customs customs) throws IOException {
+	public String insertItem(@ModelAttribute ItemFormDto itemFormDto, @CurrentUser Customs customs) throws IOException {
 		itemService.save(itemFormDto, customs);
 
 		return "redirect:/customs/items";

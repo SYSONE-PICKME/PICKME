@@ -55,6 +55,6 @@ public class UserController {
 		model.addAttribute("user", user);
 		model.addAttribute("pointHistory", userService.showHistory(user));
 
-		return "/user/pointHistory";
+		return "user/pointHistory";
 	}
 }
