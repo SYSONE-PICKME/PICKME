@@ -6,19 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PICKME</title>
 
+    <!-- css -->
     <link rel="stylesheet" th:href="@{/css/common/index.css}">
     <link rel="stylesheet" th:href="@{/css/common/header.css}">
     <link rel="stylesheet" th:href="@{/css/common/footer.css}">
+    <link rel="stylesheet" th:href="@{/css/item/detail.css}">
 
-    <link rel="stylesheet" th:href="@{/css/item/style.css}">
-
+    <!-- font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
 
+    <!-- icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
+    <!-- jquery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- js -->
     <script th:inline="javascript">
         /*<![CDATA[*/
         const startTime = /*[[${item.startTime}]]*/ {};
@@ -26,7 +31,8 @@
         /*]]>*/
     </script>
     <script th:src="@{/js/item/image.js}"></script>
-    <script th:src="@{/item/js/like.js}"></script>
+    <script th:src="@{/js/item/like.js}"></script>
+    <script th:src="@{/js/item/countdown.js}"></script>
 </head>
 <body>
 <!-- 헤더 -->
@@ -38,43 +44,87 @@
         <div style="display: flex;">
         <div class="image-container">
             <div class="main-image">
-                <img id="largeImage" th:src="${item.imageUrls[0]}" alt="메인 이미지" style="width:650px; height:400px">
+                <img id="largeImage" th:src="${item.imageUrls[0]}">
             </div>
 
             <div class="thumbnail-images">
-                <img th:src="${item.imageUrls[1]}" class="thumbnail" alt="섬네일1" onclick="changeImage(this)">
-                <img th:src="${item.imageUrls[2]}" class="thumbnail" alt="섬네일2" onclick="changeImage(this)">
-                <img th:src="${item.imageUrls[3]}" class="thumbnail" alt="섬네일3" onclick="changeImage(this)">
-                <img th:src="${item.imageUrls[4]}" class="thumbnail" alt="섬네일4" onclick="changeImage(this)">
+                <!-- 첫 번째 이미지 -->
+                <img th:if="${item.imageUrls.size() > 1}" th:src="${item.imageUrls[1]}" class="thumbnail" onclick="changeImage(this)">
+                <img th:if="${item.imageUrls.size() <= 1}" th:src="@{/images/default_img.png}" class="thumbnail">
+
+                <!-- 두 번째 이미지 -->
+                <img th:if="${item.imageUrls.size() > 2}" th:src="${item.imageUrls[2]}" class="thumbnail" onclick="changeImage(this)">
+                <img th:if="${item.imageUrls.size() <= 2}" th:src="@{/images/default_img.png}" class="thumbnail">
+
+                <!-- 세 번째 이미지 -->
+                <img th:if="${item.imageUrls.size() > 3}" th:src="${item.imageUrls[3]}" class="thumbnail" onclick="changeImage(this)">
+                <img th:if="${item.imageUrls.size() <= 3}" th:src="@{/images/default_img.png}" class="thumbnail">
+
+                <!-- 네 번째 이미지 -->
+                <img th:if="${item.imageUrls.size() > 4}" th:src="${item.imageUrls[4]}" class="thumbnail" onclick="changeImage(this)">
+                <img th:if="${item.imageUrls.size() <= 4}" th:src="@{/images/default_img.png}" class="thumbnail">
             </div>
         </div>
 
-        <div class="auction-details" style="width:800px; height:560px">
+        <div class="auction-details">
             <h2><span th:text="${item.name}"></span></h2>
             <button id="likeButton" class="heart" type="button" th:data-liked="${item.isLiked}" th:data-item-id="${item.id}" th:data-action-url="@{/user/item/{id}/like(id=${item.id})}">
                 <i class="far fa-heart"></i>
             </button>
-            <div class="action-sub-details" style="width:670px; height:320px">
-                <p>공매 번호: <span th:text="${item.id}"></span></p>
-                <p>세관명: <span th:text="${item.customsName}"></span></p>
-                <p>입찰 대상: <span th:text="${item.target}"></span></p>
-                <p>공매시작일시: <span th:text="${item.startTime}"></span></p>
-                <p>공매마감일시: <span th:text="${item.endTime}"></span></p>
+            <div class="action-sub-details">
+                <div id="title">
+                    <p>공매 번호</p>
+                    <p>세관명</p>
+                    <p>입찰 대상</p>
+                    <p>공매시작일시</p>
+                    <p>공매마감일시</p>
+                </div>
+                <div id="content">
+                    <p id="item-id" th:text="${item.id}" th:data-item-id="${item.id}"></p>
+                    <p th:text="${item.customsName}"></p>
+                    <p th:text="${item.target}"></p>
+                    <p th:text="${item.startTime}"></p>
+                    <p th:text="${item.endTime}"></p>
+                </div>
+
             </div>
-            <p class="price">공매예정가격: <span th:text="${item.price}"></span>원</p>
+
+            <div id="price-container">
+                <div id="price-title">
+                    <p>공매예정가격</p>
+                </div>
+                <div id="price-content">
+                    <p th:text="${#numbers.formatInteger(item.price ,3, 'COMMA')} + '원'"></p>
+                </div>
+            </div>
         </div>
         </div>
 
-        <div>
-            <button class="bid-button" id="bid-button" style="width:1430px; height:65px;"></button>
+        <div id="bid-container">
+            <button class="bid-button" id="bid-button"></button>
         </div>
 
         <div class="action-buttons" style="display: flex;">
-            <button>경매 호가표</button>
-            <button>관련 법규</button>
-            <div class="contact-info" style="width:800px; height: 200px;">
-                <p>담당 부서: <span th:text="${item.customsName}"></span></p>
-                <p>문의 전화: <span th:text="${item.customsTel}"></span></p>
+            <button id="unit-button">
+                <img src="/images/won.png" style="width:20%; height:auto;">
+                <p>경매 호가표</p>
+            </button>
+            <button id="law-button">
+                <img src="/images/law.png" style="width:20%; height:auto">
+                <p>관련 법규</p>
+            </button>
+            <div class="contact-info">
+                <div id="dept-container">
+                    <span id="dept">담당 부서</span>
+                    <p th:text="${item.customsName}"></p>
+                </div>
+
+                <div id="contact-container">
+                    <img src="/images/phone.png" style="width: 5%; height:auto">
+                    <span>문의 전화</span>
+                    <span th:text="${item.customsTel}"></span>
+                </div>
+                <img id="contact-img" src="/images/department.png">
             </div>
         </div>
     </div>
@@ -83,6 +133,5 @@
 <!-- 푸터 -->
 <!--<div th:replace="fragments/footer :: footer"></div>-->
 <div th:replace="~{fragments/footer :: footer}">footer content</div>
-<script th:src="@{/js/item/countdown.js}"></script>
 </body>
 </html>

@@ -1,20 +1,18 @@
 package project.pickme.item.repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
-
 import org.apache.ibatis.annotations.Mapper;
-
-import project.pickme.item.domain.Item;
 import project.pickme.item.dto.ItemDto;
+import project.pickme.item.dto.SuccessfullCustomsItemDto;
 
 @Mapper
 public interface ItemMapper {
-	Optional<Item> findItemById(Long itemId);
-
 	void insertItem(ItemDto itemDto);
 
 	void deleteAll();
 
-	List<ItemDto> findItemsByCustomsId(String customsId);
+	List<SuccessfullCustomsItemDto> findItemsByCustomsId(String customsId);
+
+	void updateStatus(LocalDateTime now);
 }

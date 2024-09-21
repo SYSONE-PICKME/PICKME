@@ -53,3 +53,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
     goToPage(1);
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    const greenBackground = document.querySelector('.green-background');
+    const productsGrid = document.querySelector('.products-grid');
+
+    function updateBackgroundPosition() {
+        const gridRect = productsGrid.getBoundingClientRect();
+        const centerY = window.innerHeight / 2;
+        const offset = gridRect.top + gridRect.height -100;
+        greenBackground.style.transform = `translateY(calc(-50% + ${offset}px))`;
+    }
+
+    window.addEventListener('scroll', updateBackgroundPosition);
+    window.addEventListener('resize', updateBackgroundPosition);
+    updateBackgroundPosition();
+});

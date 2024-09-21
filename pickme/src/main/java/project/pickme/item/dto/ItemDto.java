@@ -13,9 +13,8 @@ import project.pickme.user.constant.Type;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ItemDto {    //db저장용
+public class ItemDto {
 	private long itemId;
-	private String url;
 	private String name;
 	private int code;
 	private Type type;

@@ -1,78 +1,84 @@
 import Modal from './modal.js';
-import {addData} from "./chart.js";
+import {initChartData, addData} from './chart.js';
+import {validBid, formatCurrency, updateMaxPrice } from './price.js';
 
 let myPoint;
+let selectedBid = null;
+let selectedUserId = null;
+let modal;
 
-const bidUnits = [
-    {min: 0, max: 100000, unit: 1000},
-    {min: 100000, max: 1000000, unit: 10000},
-    {min: 1000000, max: 10000000, unit: 30000},
-    {min: 10000000, max: 20000000, unit: 50000},
-    {min: 20000000, max: 30000000, unit: 100000},
-    {min: 30000000, max: 50000000, unit: 200000},
-    {min: 50000000, max: 100000000, unit: 300000},
-    {min: 100000000, max: 200000000, unit: 500000},
-    {min: 200000000, max: 500000000, unit: 700000},
-    {min: 500000000, max: 1000000000, unit: 1000000},
-    {min: 1000000000, max: 2000000000, unit: 1200000}
-];
+function fetchBidDetails() {
+    $.ajax({
+        url: `/user/bid/details/${itemId}`,
+        method: 'GET',
+        success: function (response) {
+            if (response.success) {
+                const bidDetails = response.data;
+                let startPrice;
 
-function findBidUnit(currentPrice){
-    for(let i = 0; i < bidUnits.length; i++) {
-        const { min, max, unit } = bidUnits[i];
-        if (currentPrice >= min && currentPrice < max) {
-            return unit;
+                if (bidDetails.maxPrice === 0) {
+                    const startPriceElement = document.querySelector('.starting-price .price');
+                    startPrice = parseInt(startPriceElement.textContent.replace(/,/g, ''));
+
+                    document.querySelector('.max-price').textContent = formatCurrency(startPrice);
+                } else {
+                    document.querySelector('.max-price').textContent = formatCurrency(bidDetails.maxPrice);
+                }
+
+                myPoint = parseInt(bidDetails.myPoint);
+                document.querySelector('.my-point').textContent = formatCurrency(myPoint);
+
+                selectedUserId = bidDetails.userId;
+                selectedBid = bidDetails.bidId;
+
+                initChartData(bidDetails.allPrice, startPrice); //입찰 추이 차트 초기화
+            }
         }
-    }
-    return bidUnits[bidUnits.length - 1].unit;
+    })
 }
 
-function validBid(price, currentMaxPrice, myPoint) {
-    const bidUnit = findBidUnit(currentMaxPrice);
+function endBid() {
+    const itemName = document.querySelector('.item-name').textContent;
+    const itemImage = document.querySelector('.item-image').src;
 
-    if (!price) return "금액을 입력해주세요.";
-    if (price <= currentMaxPrice) return "최고 금액보다 높은 가격을 제시해주세요.";
-    if (parseInt(price) > myPoint) return "보유 포인트가 부족합니다.";
-    if (!((price - currentMaxPrice) % bidUnit === 0)) return `현재 호가 단위가 맞지 않습니다. \n호가 단위: ${bidUnit}원`;
+    const selectedBidDto = {
+        itemId: itemId,
+        bidId: selectedBid,
+        itemName: itemName,
+        itemImage: itemImage
+    };
 
-    return null;
-}
-
-function formatCurrency(value) {
-    return value.toLocaleString('ko-KR');
-}
-
-function updateMaxPrice(maxPrice){
-    const maxPriceElement = document.querySelector('.max-price');
-    console.log("최고가 업데이트: ", maxPrice);
-    maxPriceElement.textContent = formatCurrency(maxPrice);
-
-    maxPriceElement.classList.add('updated');
-
-    setTimeout(() => {
-        maxPriceElement.classList.remove('updated');
-    }, 500);
+    $.ajax({
+        url: "/user/bid/end",
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(selectedBidDto),
+        success: function (response) {
+            console.log("공매 종료 요청 성공: ", response);
+        },
+        error: function (error) {
+            console.error("공매 종료 요청 실패: ", error);
+        }
+    })
 }
 
 document.addEventListener("DOMContentLoaded", function () {
+    modal = new Modal("modal", "modal-message", "modal-confirm");
+
     // 시작 가격
     const startPriceElement = document.querySelector('.price');
     const startPrice = parseInt(startPriceElement.textContent);
     startPriceElement.textContent = formatCurrency(startPrice);
 
-    // 현재 최고가
-    const maxPriceElement = document.querySelector('.max-price');
-    const maxPrice = parseInt(maxPriceElement.textContent);
-    maxPriceElement.textContent = formatCurrency(maxPrice);
+    fetchBidDetails();  //입찰 정보 가져오기
 
-    // 보유 포인트
-    const myPointElement = document.querySelector('.my-point');
-    myPoint = parseInt(myPointElement.textContent);
-    myPointElement.textContent = formatCurrency(myPoint);
+    document.querySelector('.recharge-btn').addEventListener('click', function() {
+        window.location.href = '/user/charge';
+    });
 });
 
 //웹소켓 부분
-function sendBidToServer(socket, price, itemId, userId){
+function sendBidToServer(socket, price, itemId, userId){    //입찰 전송
     const message = {
         type: 'BID',
         itemId : itemId,
@@ -84,16 +90,33 @@ function sendBidToServer(socket, price, itemId, userId){
     console.log("입찰 금액 전송: ", message);
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-    const modal = new Modal("modal", "modal-message", "modal-confirm");
-    const itemName = document.querySelector('.item-name').textContent;
-    const itemImage = document.querySelector('.item-image').textContent;
+function sendEndToServer(socket) {  //종료 메세지 전송
+    const message = {
+        type: 'BID_END',
+        itemId: itemId,
+        userId: selectedUserId,
+    };
+    socket.send(JSON.stringify(message));
+    console.log("경매 종료 메세지 전송", message);
+}
 
-    let socket = new WebSocket(`ws://localhost:8099/connect/${itemId}/${userId}`);
+function sendExitToServer(socket) {
+    const message = {
+        type: 'EXIT',
+        itemId: itemId,
+        userId: userId
+    };
+    socket.send(JSON.stringify(message));
+    socket.close();
+    console.log("화면 나감 메시지 전송", message);
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    let socket = new WebSocket(`ws://192.168.0.157:8099/connect/${itemId}/${userId}`);
     socket.onopen = () => console.log("웹 소켓 open");
 
     const createSocketConnection = () => {
-        socket = new WebSocket(`ws://localhost:8099/connect/${itemId}/${userId}`);
+        socket = new WebSocket(`ws://192.168.0.157:8099/connect/${itemId}/${userId}`);
         socket.onopen = () => console.log("웹 소켓 open");
         socket.onmessage = handleSocketMessage;
         socket.onerror = (error) => console.log("에러 발생:", error);
@@ -102,34 +125,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const closeSocketConnection = () => {
         if (socket && socket.readyState === WebSocket.OPEN) {
-            const message = {
-                type: 'EXIT',
-                itemId: itemId,
-                userId: userId
-            };
-            socket.send(JSON.stringify(message));
-            socket.close();
-            console.log("화면 나감 메시지 전송", message);
+            sendExitToServer(socket);
         }
     };
 
-    //변수 선언
-    let selectedPrice = null;
-    let selectedBid = null;
-
     const handlers = {
         priceUpdate: function(data){
-            if(data.maxPrice != undefined){
-                updateMaxPrice(data.maxPrice);
-                addData(data.maxPrice);
-                selectedPrice = data.maxPrice;
+            if(data.price != undefined){
+                updateMaxPrice(data.price);
+                addData(data.price);    //입찰 추이 차트 업데이트
+
                 selectedBid = data.bidId;
+                selectedUserId = data.userId;
             }
         },
         bidResult: function(data){
             if (data.result === 'success') {
                 displayConfetti();
-                modal.open("입찰에 성공하셨습니다~");
+                modal.bidSuccessModalOpen("입찰에 성공하셨습니다~");
             }
             if (data.result === 'fail'){
                 modal.open("입찰에 실패했습니다.");
@@ -137,7 +150,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     };
 
-    const handleSocketMessage = (event) => {
+    function handleSocketMessage(event) {
         const data = JSON.parse(event.data);
         console.log("서버로부터 받음: ", data);
 
@@ -147,40 +160,30 @@ document.addEventListener("DOMContentLoaded", function () {
         } else {
             console.warn("알 수 없는 메세지 타입", data.type);
         }
-    };
+    }
 
     socket.onmessage = handleSocketMessage;
 
     document.addEventListener('visibilitychange', function () {
         if (document.visibilityState === 'visible') {
             createSocketConnection();
+            fetchBidDetails();
         } else if (document.visibilityState === 'hidden') {
             closeSocketConnection();
         }
     });
 
     window.addEventListener('bidEnded', (event) => {
-        const message = {
-            type: 'BID_END',
-            itemId: itemId,
-            bidId: selectedBid,
-            userId: userId,
-            price: selectedPrice,
-            itemName: itemName,
-            itemImage: itemImage
-        };
-        socket.send(JSON.stringify(message));
-        console.log("경매 종료 메세지 전송", message);
+        sendEndToServer(socket);
+        endBid();
     });
 
     document.querySelector('.bid-btn').addEventListener('click', function () {
         const price = document.getElementById('price').value;
-        console.log("myPoint", myPoint);
-
         const maxPriceElement = document.querySelector('.max-price');
         const currentMaxPrice = parseInt(maxPriceElement.textContent.replace(/,/g, ''));
-
         const validationError = validBid(price, currentMaxPrice, myPoint);
+
         if (validationError) {
             modal.open(validationError);
         } else {

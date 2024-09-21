@@ -1,0 +1,166 @@
+body {
+    font-family: "IBM Plex Sans KR", sans-serif;
+    background-color: #f9f9f9;
+}
+
+.container {
+    display: flex;
+    min-height: 100vh;
+    max-width: 1200px;
+    width: 60%;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+.welcome-text {
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+.welcome-text::before {
+    content: "어서오세요!";
+    background: linear-gradient(to right, #84FAB0, #8FD3F4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.name {
+    margin-left: 10px;
+    color: black;
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    margin-right: 20px;
+}
+
+.profile-section {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.menu {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    list-style-type: none;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    height: 300px;
+}
+
+.menu li {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    font-size: 0.9rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.menu li img {
+    width: 40px;
+    margin-right: 20px;
+}
+
+.menu li:hover {
+    background-color: #f9f9f9;
+}
+
+.menu li:active {
+    color: #2EC44F;
+}
+
+.profile-section h2 {
+    font-size: 1.5rem;
+    color: #6fcf97;
+    margin-bottom: 10px;
+}
+
+.profile-section h2 span {
+    font-weight: bold;
+}
+
+.points {
+    background-color: #fff;
+    border: solid 1px #F1F1F1;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 5px;
+}
+
+.points-label {
+    text-align: left;
+    display: block;
+    font-size: 1rem;
+    color: black;
+    margin-bottom: 5px;
+}
+
+.points-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.points-amount {
+    font-weight: 600;
+    font-size: 1.3vw;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.recharge-button {
+    background-color: #F1F1F1;
+    color: black;
+    border: none;
+    border-radius: 20px;
+    padding: 5px 15px;
+    cursor: pointer;
+    font-size: 0.9vw;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.recharge-button:hover {
+    background-color: #ddd;
+}
+
+.welcome-text {
+    font-size: 1vw !important;
+}
+
+.menu li {
+    font-size: 0.9vw !important;
+}
+
+.points-amount {
+    font-size: 1.2vw !important;
+}
+
+.recharge-button {
+    font-size: 0.9vw !important;
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    min-width: 250px;
+    margin-right: 20px;
+}
+
+@media screen and (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+}

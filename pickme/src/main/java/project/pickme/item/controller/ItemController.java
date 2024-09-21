@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import lombok.RequiredArgsConstructor;
 import project.pickme.common.annotation.CurrentUser;
@@ -19,33 +20,39 @@ import project.pickme.user.domain.Customs;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/customs/item")
+@RequestMapping("/customs/items")
 public class ItemController {
 
 	private final ItemService itemService;
 
-	@GetMapping("/create")
-	public String getItem(Model model) {
+	@GetMapping("/new")
+	public String newItemForm(Model model) {
 		model.addAttribute("item", new ItemFormDto());
 		model.addAttribute("laws", itemService.findAllLaws());
-		model.addAttribute("type", Type.values());
+		model.addAttribute("types", Type.values());
 		model.addAttribute("categories", Category.values());
 
-		return "item/createItem";
+		return "/item/createItem";
 	}
 
-	@PostMapping("/create")
+	@PostMapping
 	public String insertItem(@ModelAttribute ItemFormDto itemFormDto, @CurrentUser
 	Customs customs) throws IOException {
 		itemService.save(itemFormDto, customs);
 
-		return "redirect:/customs/item/create";
+		return "redirect:/customs/items";
 	}
 
-	@GetMapping("/list")
-	public String getItemList(@CurrentUser Customs customs, Model model) {
-		model.addAttribute("itemList", itemService.findItemsByCustomsId(customs.getId()));
+	@GetMapping
+	public String getItems(@CurrentUser Customs customs, Model model) {
+		model.addAttribute("items", itemService.findItemsByCustomsId(customs.getId()));
 
-		return "item/customsItemList";
+		return "/item/customsItems";
+	}
+
+	@GetMapping("/update")
+	public String showStatusPage(@RequestParam("itemId") Long itemId, Model model) {
+		model.addAttribute("itemId", itemId);
+		return "/item/updateItem";
 	}
 }

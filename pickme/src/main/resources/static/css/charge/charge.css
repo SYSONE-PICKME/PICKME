@@ -1,0 +1,177 @@
+body {
+    font-family: "IBM Plex Sans KR", sans-serif;
+    background-color: #f9f9f9;
+    margin: 0px;
+    padding: 0px;
+}
+
+.content {
+    flex-grow: 1;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    max-height: 850px;
+}
+
+h2 {
+    text-align: left;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    font-weight: 500;
+    margin-left: 40px;
+}
+
+hr {
+    margin: 15px 0;
+    border: none;
+    border-top: 1px solid #ddd;
+}
+
+.points-display {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.current-points, .updated-points {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 40%;
+    text-align: center;
+    background-color: #F1F1F1;
+    border-radius: 20px;
+    padding: 15px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.current-points {
+    margin-left: 30px;
+}
+
+.updated-points {
+    margin-right: 30px;
+}
+
+.current-points div, .updated-points div {
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.current-points p, .updated-points p {
+    margin-top: 0px;
+    margin-bottom: 10px;
+}
+
+.chargeAmount {
+    font-size: 1.4rem;
+    font-weight: 500;
+    margin-top: 40px;
+    margin-left: 40px;
+    margin-bottom: 20px;
+}
+
+.amount-select {
+    margin-bottom: 20px;
+}
+
+.amount-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+
+}
+
+.radio-button {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+.custom-radio {
+    width: 65%;
+    display: flex;
+    padding: 10px 40px;
+    border: 3px solid #ddd;
+    border-radius: 35px;
+    font-size: clamp(8px, 1.2vw, 24px);
+    font-weight: 300;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 20px;
+    align-items: center;
+    justify-content: flex-start;
+    white-space: nowrap;
+}
+
+.custom-radio::before {
+    content: "";
+    display: inline-block;
+    width: 1.4vw;
+    height: 1.4vw;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+    margin-right: 10px;
+    align-self: center;
+    transition: all 0.3s ease;
+
+}
+
+.radio-button input[type="radio"]:checked + .custom-radio {
+    background-color: #e0f7e0;
+    border-color: #2EC44F;
+    color: #333;
+}
+
+.radio-button input[type="radio"]:checked + .custom-radio::before {
+    background-color: #2EC44F;
+    border-color: #66bb6a;
+    background-image: url('/images/accept.png');
+    background-size: 12px;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.radio-button input[type="radio"] + .custom-radio:hover {
+    border-color: #2EC44F;
+}
+
+.radio-button input[type="radio"]:not(:checked) + .custom-radio::before {
+    background-color: transparent;
+}
+
+.charge-btn {
+    font-family: "IBM Plex Sans KR", sans-serif;
+    display: block;
+    width: 35%;
+    height: 60px;
+    padding: 10px;
+    background-color: #2EC44F;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-size: 1.4rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.charge-btn:hover {
+    background-color: #4ab069;
+}
+
+.next-arrow {
+    width: clamp(15px, 3vw, 30px);
+    height: clamp(15px, 3vw, 30px);
+}

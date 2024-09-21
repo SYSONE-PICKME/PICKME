@@ -1,0 +1,244 @@
+body {
+    font-family: "IBM Plex Sans KR", sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+}
+
+.category {
+    padding: 10px;
+    margin-top: 60px;
+    margin-left: 480px;
+    margin-right: 480px;
+    margin-bottom: 30px;
+}
+
+.category ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-around; /* 항목을 수평으로 나열 */
+}
+
+.category ul li {
+    text-align: center; /* 이미지를 가운데로 배치 */
+}
+
+.category ul li a {
+    text-decoration: none;
+    color: black;
+    display: flex;
+    font-weight: 600;
+    flex-direction: column; /* 이미지 위, 글씨 아래로 배치 */
+    align-items: center; /* 가로로 가운데 정렬 */
+    justify-content: center;
+}
+
+.category ul li a img {
+    width: 40px; /* 이미지 크기 설정 */
+    height: 40px;
+    margin-bottom: 8px; /* 이미지와 텍스트 사이 간격 */
+}
+
+.category ul li a:hover {
+    color: #ffcc00; /* 호버 시 색상 변경 */
+}
+
+.auction-list {
+    padding-top: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.header-section {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.product-card.closed {
+    display: none; /* '마감' 상태인 아이템을 숨김 */
+}
+
+h2 {
+    font-size: 24px;
+    margin-right: 0;
+    margin-bottom: 20px;
+}
+
+.toggle-switch {
+    display: inline-block;
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+.toggle-switch input[type="checkbox"] {
+    display: none;
+}
+
+.toggle-switch label {
+    width: 40px;
+    height: 20px;
+    background-color: #ddd;
+    border-radius: 10px;
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.toggle-switch label::before {
+    content: '';
+    width: 18px;
+    height: 18px;
+    background-color: white;
+    border-radius: 50%;
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    transition: 0.3s;
+}
+
+.toggle-switch input[type="checkbox"]:checked + label::before {
+    left: 21px;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.product-card {
+    position: relative;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s;
+    margin-bottom: 30px;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+}
+
+.product-image {
+    width: 100%;
+    height: 300px;
+}
+
+.product-info {
+    padding: 15px;
+}
+
+.product-info h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.product-info p {
+    font-size: 14px;
+    color: #555;
+    margin: 5px 0;
+}
+
+.status-label {
+    background-color: #ff4d4f;
+    color: white;
+    font-size: 12px;
+    padding: 5px 10px;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    border-radius: 5px;
+}
+/*
+.status-label.th[text="'마감'"] {
+    background-color: #999;
+}
+*/
+
+.status-open {
+    background-color: #FF0000;
+    color: #FFF;
+}
+
+.status-closed {
+    background-color: black;
+    color: #FFF;
+}
+
+.status-not-open {
+    background-color: #B6D4FD;
+    color: #FFF;
+}
+
+
+@media (max-width: 768px) {
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr); /* 작은 화면에서는 2개씩 표시 */
+    }
+}
+
+@media (max-width: 480px) {
+    .product-grid {
+        grid-template-columns: 1fr; /* 모바일 화면에서는 1개씩 표시 */
+    }
+}
+
+.heart {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.heart .fa-heart {
+  color: #ccc; /* 빈 하트 색상 */
+  transition: color 0.3s;
+}
+
+.heart.active .fa-heart {
+  color: red; /* 꽉 찬 하트 색상 */
+}
+
+.item-name {
+    cursor: pointer;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box ;
+    -webkit-line-clamp: 2 ;
+    -webkit-box-orient: vertical;
+    line-height: 1.5em;
+    height: 3em; /* 2줄의 높이 */
+    max-height: 3em;
+}
+
+.item-name:hover {
+    color: #666666;
+    text-decoration: underline;
+}
+
+.item-info {
+    color: #666;
+    font-weight: 700;
+}
+
+#auction-date {
+    font-weight: 700;
+    color: #4CAF50;
+}
+
+#auction-end_date {
+    font-weight: 700;
+    color: #FF0000;
+}
+
+#auction-price {
+    color: #4CAF50;
+    font-weight: 700;
+}

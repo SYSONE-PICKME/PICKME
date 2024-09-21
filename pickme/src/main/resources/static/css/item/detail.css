@@ -1,0 +1,270 @@
+body {
+    font-family: "IBM Plex Sans KR", sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 75%;
+    margin: auto;
+    text-align: center;
+}
+
+.image-container {
+    width: 50%;
+    height: 45%;
+}
+
+.main-image img {
+    margin-top: 20px;
+    margin-bottom: 5px;
+    width: 600px;
+    height: 350px;
+}
+
+.thumbnail-images {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.thumbnail {
+    width: 145px;
+    height: 135px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border 0.3s;
+}
+
+.thumbnail:hover {
+    border: 2px solid #000;
+}
+
+.auction-details {
+    position: relative;
+    width: 50%;
+    height: 45%;
+    margin-top: 20px;
+    margin-left: 50px;
+    border: solid;
+    border-color: #B2B2B2;
+    border-radius: 20px;
+}
+
+.auction-details h2 {
+    margin-top: 30px;
+    margin-bottom: 25px;
+    padding-left: 35px;
+    font-size: 1.5rem;
+    font-weight: 500;
+    text-align: left;
+}
+
+.auction-details p {
+    font-family: "IBM Plex Sans KR", sans-serif;
+    font-size: 18px;
+    margin: 5px 0;
+}
+
+.action-sub-details {
+    font-family: "IBM Plex Sans KR", sans-serif;
+    font-weight: 400;
+    color: #49454F;
+    text-align: left;
+    width: 90%;
+    height: 75%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 25px;
+    padding-left: 30px;
+    border-radius: 20px;
+    background-color: #F1F1F1;
+    display: flex;
+    align-items: flex-start;
+    gap: 30px;
+}
+
+#title {
+    width: 30%;
+}
+
+#content {
+    width: 50%;
+}
+
+#title p, #content p {
+    margin-bottom: 35px;
+}
+
+#price-container {
+    display: flex;
+    align-items: flex-start;
+}
+
+#price-container div {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 50%;
+}
+
+#price-title {
+    padding-left: 40px;
+    text-align: left;
+}
+
+#price-content {
+    color: red;
+    padding-right: 40px;
+    text-align: right;
+}
+
+#price-container div p {
+    font-weight: 500;
+    font-size: 1.3rem;
+}
+
+#bid-container {
+    width: 100%;
+}
+
+.bid-button {
+    font-family: "IBM Plex Sans KR", sans-serif;
+    font-size: 1.4rem;
+    font-weight: 500;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    color: #2EC44F;
+    border-radius: 20px;
+    background-color: black;
+    cursor: not-allowed;
+    width: 100%;
+    height: 6vh;
+}
+
+#bid-button.active {
+    cursor: pointer;
+}
+
+#bid-button.disabled {
+    background-color: #F1F1F1;
+    color: #666666;
+    cursor: not-allowed;
+}
+
+.action-buttons {
+    margin-top: 30px;
+    margin-bottom: 40px;
+}
+
+.action-buttons button {
+    font-family: "IBM Plex Sans KR", sans-serif;
+    width: 20%;
+    height: 18vh;
+    margin-right: 30px;
+    border-radius: 40px;
+    cursor: pointer;
+}
+
+#unit-button {
+    padding-top: 15px;
+    background-color: #FFFFFF;
+    border: 2px solid #2EC44F;
+    margin-left: 2%;
+}
+
+#unit-button p {
+    margin-top: 15px;
+    color: #5AA76B;
+    font-size: 1.7rem;
+    font-weight: 600;
+}
+
+#law-button {
+    padding-top: 15px;
+    background-color: #5AA76B;
+    border: 2px solid #5AA76B;
+}
+
+#law-button p {
+    margin-top: 15px;
+    color: white;
+    font-size: 1.7rem;
+    font-weight: 600;
+}
+
+.contact-info {
+    width: 50%;
+    height: 18vh;
+    margin-left: 50px;
+    font-size: 18px;
+    border: solid;
+    border-color: #B2B2B2;
+    border-radius: 20px;
+    position: relative;
+}
+
+#dept-container {
+    padding-top: 20px;
+    padding-left: 35px;
+    padding-bottom: 10px;
+    text-align: left;
+    background-color: #F1F1F1;
+    border-top-left-radius : 20px;
+    border-top-right-radius : 20px;
+}
+
+#dept {
+    background-color: #B6D4FD;
+    color: #0351C0;
+    border-radius: 20px;
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 3px 15px;
+}
+
+#dept-container p {
+    text-align: left;
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-top: 15px;
+}
+
+#contact-container {
+    padding: 30px;
+    display: flex;
+    flex-direction: row;
+}
+
+#contact-container span {
+    font-size: 1.3rem;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+#contact-img {
+    position: absolute;
+    top: 20%;
+    right: 40px;
+    width: 13%;
+    border-radius: 50px;
+}
+
+.heart {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  position: absolute;
+  top: 30px;
+  right: 30px;
+}
+
+.heart .fa-heart {
+  color: #ccc; /* 빈 하트 색상 */
+  transition: color 0.3s;
+}
+
+.heart.active .fa-heart {
+  color: red; /* 꽉 찬 하트 색상 */
+}
