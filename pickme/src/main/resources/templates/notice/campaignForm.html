@@ -7,9 +7,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/notice/campaignForm.css}">
+    <link rel="stylesheet" th:href="@{/css/customs/customsHeader.css}">
+    <link rel="stylesheet" th:href="@{/css/common/footer.css}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
+<div th:replace="~{customs/customsHeader :: header}">header content</div>
 <div class="container">
     <h1 th:text="${isEditing != null && isEditing ? '캠페인 수정' : '새 캠페인 등록'}">새 캠페인 등록</h1>
     <div class="card">
@@ -39,7 +42,7 @@
         </form>
     </div>
 </div>
-
+<div th:replace="~{fragments/footer :: footer}">footer content</div>
 <script th:src="@{/js/notice/campaignForm.js}"></script>
 </body>
 </html>
