@@ -17,9 +17,10 @@ import com.amazonaws.services.s3.model.PutObjectRequest;
 
 import lombok.RequiredArgsConstructor;
 import project.pickme.common.exception.BusinessException;
-import project.pickme.item.dto.ImageDto;
+import project.pickme.image.dto.ImageDto;
+import project.pickme.image.repository.ImageMapper;
 import project.pickme.item.dto.ItemDto;
-import project.pickme.item.repository.ImageMapper;
+
 import project.pickme.s3.config.S3Config;
 
 @Service
