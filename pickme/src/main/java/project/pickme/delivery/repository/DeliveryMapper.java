@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import project.pickme.delivery.dto.CarrierDto;
 import project.pickme.delivery.dto.DeliveryInfoDto;
 import project.pickme.delivery.dto.DeliveryManageDto;
 import project.pickme.delivery.dto.ItemInfoDto;
@@ -17,7 +16,5 @@ public interface DeliveryMapper {
 
 	DeliveryInfoDto getDeliveryInfo(String userId);
 
-	ItemInfoDto getItemInfo(long itemId);
-
-	CarrierDto getTrackingInfo(long itemId);
+	ItemInfoDto getDeliveryItemInfo(long itemId);
 }

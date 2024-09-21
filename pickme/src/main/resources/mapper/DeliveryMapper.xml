@@ -31,13 +31,14 @@
         where id = #{id}
     </select>
 
-    <select id="getItemInfo">
+    <select id="getDeliveryItemInfo">
         select i.name           as itemName,
                img.url          as imgUrl,
                d.invoice_number as invoiceNumber,
                b.price          as price,
                d.courier        as courier,
-               c.name           as customsName
+               c.name           as customsName,
+               d.code           as code
         from Item i
                  left join Customs c on i.customs_id = c.id
                  left join Delivery d on i.item_id = d.item_id
@@ -53,14 +54,5 @@
         insert into Delivery(user_id, item_id, invoice_number, code, status, courier)
         values (#{userId}, #{itemId}, #{invoiceNumber}, #{code}, #{status}, #{courier})
     </insert>
-
-    <select id="getTrackingInfo">
-        select invoice_number as invoiceNumber,
-               code           as code,
-               courier        as courier
-        from Delivery
-        where item_id = #{id}
-
-    </select>
 
 </mapper>

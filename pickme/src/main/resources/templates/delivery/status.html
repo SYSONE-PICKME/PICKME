@@ -16,7 +16,7 @@
         <h3 th:text="${item.itemName}"></h3>
         <p>결제금액: <span th:text="${#numbers.formatDecimal(item.price, 0, 'COMMA', 0, 'POINT')}"></span>원</p>
         <p><span th:text="${item.customsName}"></span></p>
-        <p><span th:text="${carrier.courier}"></span><span th:text="${carrier.invoiceNumber}"></span></p>
+        <p><span th:text="${item.courier}"></span><span th:text="${item.invoiceNumber}"></span></p>
     </div>
 </div>
 
@@ -25,8 +25,7 @@
     <div class="product-info">
         <h3>배송지 정보</h3>
         <input type="button" id="updateItem" value="배송지 수정"
-               th:if="${user.userId == userId}"
-               th:data-item-id="${user.userId}"/>
+               th:if="${user.userId == userId}"/>
         <p>주소: <span th:text="${user.address}"></span></p>
         <p>받는사람: <span th:text="${user.userName}"></span></p>
     </div>
@@ -132,8 +131,8 @@
     }
 
     document.addEventListener("DOMContentLoaded", function () {
-        let code = '[[${carrier.code}]]';
-        let invoiceNumber = '[[${carrier.invoiceNumber}]]';
+        let code = '[[${item.code}]]';
+        let invoiceNumber = '[[${item.invoiceNumber}]]';
 
         console.log("택배사 code:", code);
         console.log("송장번호:", invoiceNumber);
