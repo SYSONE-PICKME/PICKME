@@ -53,12 +53,12 @@
 
                 <div class="form-row">
                     <div class="form-col">
-                        <label for="auctionStart">경매 시작 날짜 및 시간</label>
-                        <input type="text" id="auctionStart" class="flatpickr-input" name="auctionStart" required>
+                        <label for="startTime">경매 시작 시간</label>
+                        <input type="text" id="startTime" class="flatpickr-input" name="startTime" required>
                     </div>
                     <div class="form-col">
-                        <label for="auctionEnd">경매 마감 날짜 및 시간</label>
-                        <input type="text" id="auctionEnd" class="flatpickr-input" name="auctionEnd" required>
+                        <label for="endTime">경매 마감 시간</label>
+                        <input type="text" id="endTime" class="flatpickr-input" name="endTime" required>
                     </div>
                 </div>
 
@@ -82,10 +82,18 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="category">관련 법규</label>
-                    <div th:each="law : ${laws}">
-                        <input type="checkbox" th:id="'law-' + ${law.id}" th:value="${law.id}" th:name="lawId[]">
-                        <label th:for="'law-' + ${law.id}" th:text="${law.title}" id="checkbox"></label>
+                    <label>관련 법규</label>
+                    <div class="custom-select" id="lawsDropdown">
+                        <div class="select-box" onclick="toggleDropdown()">
+                            <span id="selectedOptions">선택된 법규 없음</span>
+                            <i class="fas fa-chevron-down"></i> <!-- 화살표 아이콘 -->
+                        </div>
+                        <div class="dropdown-content" id="dropdownContent">
+                            <div th:each="law : ${laws}" style="display: flex; align-items: center;">
+                                <input type="checkbox" th:id="'law-' + ${law.id}" th:value="${law.id}" th:name="lawId[]">
+                                <label th:for="'law-' + ${law.id}" th:text="${law.title}"></label>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -99,7 +107,7 @@
 <script src="/js/item/item.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script>
-    flatpickr("#auctionStart", {
+    flatpickr("#startTime", {
         enableTime: true,
         noCalendar: false,
         dateFormat: "Y-m-d H:i",
@@ -107,7 +115,7 @@
         minuteIncrement: 60 // 분 단위를 60으로 설정해 분을 보이지 않게 함
     });
 
-    flatpickr("#auctionEnd", {
+    flatpickr("#endTime", {
         enableTime: true,
         noCalendar: false,
         dateFormat: "Y-m-d H:i",
