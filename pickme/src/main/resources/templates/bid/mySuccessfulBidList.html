@@ -37,7 +37,7 @@
                     <h3 th:text="${item.name}"></h3>
                     <p>공매번호: <span th:text="${item.itemId}"></span></p>
                     <p><span th:text="${item.customsName}"></span></p>
-                    <p>결제금액: <span th:text="${item.price}"></span>원</p>
+                    <p>결제금액: <span th:text="${#numbers.formatDecimal(item.price, 0, 'COMMA', 0, 'POINT')}"></span>원</p>
 
                     <!-- 배송현황 버튼: 송장번호가 등록된 경우 표시 -->
                     <input type="button" id="deliveryStatus" value="배송현황"
