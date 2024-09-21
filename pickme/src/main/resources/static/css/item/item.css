@@ -1,17 +1,22 @@
 body {
-    font-family: Arial, sans-serif;
     margin: 0;
-    padding: 20px;
-    background-color: #f0f0f0;
+    background-color: #f9f9f9;
 }
 
 .container {
-    max-width: 600px;
-    margin: 0 auto;
-    background-color: white;
+    width: 50%;
+    margin-right: auto;
+    margin-left: auto;
+    min-height: 100vh;
+}
+
+.content {
+    background-color: #ffffff;
+    border-radius: 10px;
     padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    max-height: 850px;
+    max-width: 100%;
 }
 
 h1 {
@@ -26,11 +31,21 @@ h1 {
 .form-row {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 15px;
 }
 
 .form-col {
     width: 48%;
+}
+
+.bid-button {
+    margin-top: 20px;
+    width: 100%;
+    padding: 10px;
+    background-color: #333;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
 }
 
 #categoryLabel {
@@ -74,7 +89,7 @@ select {
     margin-right: 5px;
     line-height: 100px;
     text-align: center;
-    background-color: #999999;
+    background-color: #F1F1F1;
     color: #333;
     font-size: 24px;
     cursor: pointer;
@@ -128,16 +143,6 @@ select {
     color: black;
 }
 
-button {
-    background-color: #000;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
-    cursor: pointer;
-    width: 100%;
-}
-
-button:hover {
+.bid-button:hover {
     background-color: #333;
 }
