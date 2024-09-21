@@ -107,6 +107,13 @@
             on i.code = c.code
             and c.name = #{category}
         </if>
+
+        order by
+        case
+        when i.status in ('NOT_OPEN', 'OPEN') then 0
+        else 1
+        end,
+        i.end_time asc;
     </select>
 
     <select id="findItemByIdWithImage" parameterType="long" resultType="project.pickme.item.dto.OneBidItemDto">

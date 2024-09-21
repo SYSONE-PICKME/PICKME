@@ -1,5 +1,6 @@
 package project.pickme.item.repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import project.pickme.item.dto.ItemDto;
@@ -12,4 +13,6 @@ public interface ItemMapper {
 	void deleteAll();
 
 	List<SuccessfullCustomsItemDto> findItemsByCustomsId(String customsId);
+
+	void updateStatus(LocalDateTime now);
 }
