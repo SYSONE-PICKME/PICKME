@@ -41,7 +41,7 @@ body {
 }
 
 .category ul li a:hover {
-    color: #ffcc00; /* 호버 시 색상 변경 */
+    color: #2EC44F; /* 호버 시 색상 변경 */
 }
 
 .auction-list {
