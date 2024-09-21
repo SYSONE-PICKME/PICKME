@@ -41,7 +41,7 @@ public class NoticeDto {
 			.title(title)
 			.content(content)
 			.createTime(createTime != null ? createTime : LocalDateTime.now())
-			.type("NOTICE")
+			.type(Notice.NoticeType.NOTICE)
 			.customs(customs)
 			.build();
 	}

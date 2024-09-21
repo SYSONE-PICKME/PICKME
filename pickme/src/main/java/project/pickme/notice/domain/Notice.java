@@ -18,6 +18,10 @@ public class Notice {
 	private String title;
 	private String content;
 	private LocalDateTime createTime;
-	private String type;
+	private NoticeType type;
 	private Customs customs;
+
+	public enum NoticeType {
+		NOTICE, CAMPAIGN
+	}
 }

@@ -62,7 +62,7 @@ public class CampaignService {
 	}
 
 	private void deleteExistingImage(Notice existingCampaign) {
-		if (existingCampaign != null && "CAMPAIGN".equals(existingCampaign.getType()) && existingCampaign.getContent() != null) {
+		if (existingCampaign != null && Notice.NoticeType.CAMPAIGN.equals(existingCampaign.getType()) && existingCampaign.getContent() != null) {
 			s3Service.deleteFile(existingCampaign.getContent());
 		}
 	}
@@ -74,7 +74,7 @@ public class CampaignService {
 			}
 			return s3Service.uploadImage(campaignDto.getImageFile());
 		}
-		if (existingCampaign != null && "CAMPAIGN".equals(existingCampaign.getType())) {
+		if (existingCampaign != null && Notice.NoticeType.CAMPAIGN.equals(existingCampaign.getType())) {
 			return existingCampaign.getContent();
 		}
 		return null;
