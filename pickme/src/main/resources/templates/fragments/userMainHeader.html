@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>유저 메인 전용 헤더</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/customs/css/customsMain.css}">
+</head>
+<body>
+<header>
+    <div class="top-green-bar">
+        <a th:href="@{/user/main}" class="header-logo">PICK-ME</a>
+        <div class="header-buttons">
+            <a th:href="@{/user/loginForm}" class="header-login">로그인</a>
+            <button class="logout-btn" th:onclick="|location.href='@{/user/signUpForm}'|">회원가입</button>
+        </div>
+    </div>
+    <div class="header-content">
+    </div>
+</header>
+</body>
+</html>

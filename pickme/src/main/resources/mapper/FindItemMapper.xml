@@ -1,6 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="project.pickme.item.repository.FindItemMapper">
+
+    <resultMap id="oneItemResultMap" type="project.pickme.item.domain.Item">
+        <id property="id" column="item_id"/>
+        <result property="name" column="name"/>
+        <result property="target" column="target"/>
+        <result property="price" column="price"/>
+        <result property="startTime" column="start_time"/>
+        <result property="endTime" column="end_time"/>
+        <result property="status" column="status"/>
+        <association property="customs" column="customs_id" javaType="project.pickme.user.domain.Customs"/>
+    </resultMap>
+
+    <select id="findItemById" parameterType="long" resultMap="oneItemResultMap">
+        select i.item_id,
+               i.name,
+               i.target,
+               i.price,
+               i.start_time,
+               i.end_time,
+               i.status,
+               c.id as customs_id
+        from Item i
+        left join Customs c on i.customs_id = c.id
+        where i.item_id = ${itemId}
+    </select>
+
     <select id = "findById" parameterType="map" resultType="project.pickme.item.dto.FindItemDto$GetOne">
         select
         i.item_id as itemId,
@@ -46,7 +72,7 @@
         c.id, c.name, c.tel, m.like_id, m.status
     </select>
 
-    <select id = "findAll" resultType="project.pickme.item.dto.FindItemDto$GetAll">
+    <select id = "findAll" parameterType="string" resultType="project.pickme.item.dto.FindItemDto$GetAll">
         select
         i.item_id as id,
         i.name,
@@ -54,13 +80,39 @@
         i.start_time as startTime,
         i.end_time as endTime,
         i.status,
-        img.url as imgUrl
+        img.url as imgUrl,
+
+        -- Mine table
+        case
+        when m.like_id is not null and m.status = 1 then 1
+        else 0
+        end as isLiked
 
         from
         Item i
 
         join Image img
         on i.item_id = img.item_id
-        and img.seq = 1
+        and img.seq = 0
+
+        -- Join Mine table
+        left join Mine m
+        on i.item_id = m.item_id
+        and m.user_id = #{userId}
     </select>
+
+    <select id="findItemByIdWithImage" parameterType="long" resultType="project.pickme.item.dto.OneBidItemDto">
+        select it.item_id    as itemId,
+               im.url        as imageUrl,
+               it.name,
+               it.price      as startPrice,
+               it.start_time as startTime,
+               it.end_time   as endTime,
+               null as userId
+        from Item it
+        left join Image im
+        on it.item_id = im.item_id and im.seq = 0
+        where it.item_id = #{itemId}
+    </select>
+
 </mapper>

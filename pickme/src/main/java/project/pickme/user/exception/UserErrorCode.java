@@ -13,7 +13,8 @@ import project.pickme.common.exception.ErrorCode;
 public enum UserErrorCode implements ErrorCode {
 	NOT_FOUND_CUSTOMS(NOT_FOUND, "존재하지 않는 세관"),
 	NOT_FOUND_USER(NOT_FOUND, "존재하지 않는 회원"),
-	DUPLICATE_ID(BAD_REQUEST, "이미 존재하는 아이디");
+	DUPLICATE_ID(BAD_REQUEST, "이미 존재하는 아이디"),
+	INVALID_PASSWORD(BAD_REQUEST, "일치하지 않는 비밀번호");
 
 	private final HttpStatus httpStatus;
 	private final String message;

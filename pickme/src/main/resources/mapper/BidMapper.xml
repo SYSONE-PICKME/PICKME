@@ -23,7 +23,8 @@
                  left join Item i on b.item_id = i.item_id
     </select>
 
-    <insert id="save" parameterType="project.pickme.bid.dto.response.BidCreateDto" useGeneratedKeys="true" keyProperty="bidId">
+
+    <insert id="save" parameterType="project.pickme.bid.dto.response.BidDto" useGeneratedKeys="true" keyProperty="bidId">
         insert into Bid(item_id, user_id, price, bid_time, is_success)
         values (#{itemId}, #{userId}, #{price}, #{bidTime}, #{isSuccess})
     </insert>
@@ -59,28 +60,33 @@
         where bid_id = #{bidId}
     </update>
 
-    <select id="findAllPriceByItemId" parameterType="long" resultType="long">
-        select price
-        from Bid
-        where item_id = #{itemId}
-        order by price
+    <select id="findAllPriceByItemId" parameterType="long" resultType="project.pickme.bid.dto.response.PriceDto">
+        select b.price, u.id as userId, b.bid_id as bidId
+        from Bid b
+        left join User u on b.user_id = u.id
+        where b.item_id = #{itemId}
+        order by b.price
     </select>
 
+    <!--내 낙찰 정보 조회-->
     <select id="findMySuccessfulBid">
-        select i.item_id as itemNum,
-               i.name as itemName,
-               c.name as customsName,
-               b.price as price,
-               img.url as imgUrl
+        select i.item_id        as itemId,
+               i.name           as name,
+               img.url          as imgUrl,
+               d.invoice_number as invoiceNumber,
+               d.code           as deliveryCode,
+               b.price          as price,
+               b.bid_time       as bidTime,
+               c.name           as customsName
         from Item i
-                 join Bid b
-                      on i.item_id = b.item_id
-                 join Customs c
-                      on c.id = i.customs_id
-                 join Image img
-                      on img.item_id = i.item_id
+                 left join Customs c on i.customs_id = c.id
+                 left join Bid b on i.item_id = b.item_id
+                 left join Delivery d on i.item_id = d.item_id
+                 left join (select item_id, url
+                            from Image
+                            where seq = 0) img on i.item_id = img.item_id
         where b.is_success = 1
-          and b.user_id = #{id}
-          and img.seq = 0;
+          and b.user_id = #{id};
     </select>
+
 </mapper>

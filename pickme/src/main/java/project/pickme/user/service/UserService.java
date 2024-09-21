@@ -11,7 +11,9 @@ import project.pickme.common.exception.BusinessException;
 import project.pickme.user.constant.Role;
 import project.pickme.user.constant.Type;
 import project.pickme.user.domain.User;
+import project.pickme.user.dto.UpdatePasswordDto;
 import project.pickme.user.dto.SignUpDto;
+import project.pickme.user.dto.UpdateInfoDto;
 import project.pickme.user.repository.UserMapper;
 
 @Service
@@ -31,6 +33,20 @@ public class UserService {
 		userMapper.findUserById(id).ifPresent(user -> {
 			throw new BusinessException(DUPLICATE_ID);
 		});
+	}
+
+	@Transactional
+	public void updatePassword(UpdatePasswordDto password, User user) {
+		if(!passwordEncoder.matches(password.getOriginPassword(), user.getPassword())){
+			throw new BusinessException(INVALID_PASSWORD);
+		}
+
+		userMapper.updatePassword(passwordEncoder.encode(password.getNewPassword()), user.getId());
+	}
+
+	@Transactional
+	public void updateInfo(UpdateInfoDto updateInfoDto, User user) {
+		userMapper.updateMyInfo(updateInfoDto, user.getId());
 	}
 
 	private User createUser(SignUpDto signUpDto) {

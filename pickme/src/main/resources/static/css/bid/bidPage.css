@@ -97,9 +97,15 @@ h2 {
 }
 
 @keyframes growShrink {
-    0% { transform: scale(1); }
-    50% { transform: scale(2.5); }
-    100% { transform: scale(1); }
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(2.5);
+    }
+    100% {
+        transform: scale(1);
+    }
 }
 
 .bid-details {
@@ -111,7 +117,7 @@ h2 {
     font-weight: bold;
 }
 
-.chart-info{
+.chart-info {
     width: 50%;
     padding: 30px;
     margin-right: 20px;
@@ -225,11 +231,22 @@ h2 {
         margin-right: 20px;
     }
 
-    .item-details{
+    .item-details {
         flex-direction: column;
     }
 
-    .bid-info{
-        width: 100%;
+    .bid-info {
+        width: 92%;
+        max-width: 800px;
+    }
+
+    .chart-info {
+        width: 92%;
+        max-width: 800px;
+        margin-bottom: 20px;
+    }
+
+    .bid-details {
+        flex-direction: column;
     }
 }

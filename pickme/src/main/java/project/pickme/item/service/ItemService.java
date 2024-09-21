@@ -6,16 +6,21 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
+
 import project.pickme.item.constant.Status;
+import project.pickme.item.dto.SuccessfullCustomsItemDto;
+import project.pickme.user.domain.Customs;
+
+import project.pickme.s3.service.S3Service;
+
+import project.pickme.item.repository.ItemMapper;
+import project.pickme.item.repository.LawMapper;
+import project.pickme.item.repository.ItemLawMapper;
+
 import project.pickme.item.dto.ItemDto;
 import project.pickme.item.dto.ItemFormDto;
 import project.pickme.item.dto.LawDto;
 import project.pickme.item.dto.ItemLawDto;
-import project.pickme.item.repository.ItemMapper;
-import project.pickme.item.repository.LawMapper;
-import project.pickme.item.repository.ItemLawMapper;
-import project.pickme.s3.service.S3Service;
-import project.pickme.user.domain.Customs;
 
 @Service
 @RequiredArgsConstructor
@@ -45,7 +50,8 @@ public class ItemService {
 		return lawMapper.findAllLaws();
 	}
 
-	public List<ItemDto> findItemsByCustomsId(String customsId) {
+	// 등록한 경매 전체 조회 및 낙찰된 물품은 마감처리
+	public List<SuccessfullCustomsItemDto> findItemsByCustomsId(String customsId) {
 		return itemMapper.findItemsByCustomsId(customsId);
 	}
 }
