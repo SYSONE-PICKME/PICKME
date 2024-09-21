@@ -44,7 +44,7 @@ public class CampaignDto {
 			.title(title)
 			.content(imageUrl)
 			.createTime(createTime != null ? createTime : LocalDateTime.now())
-			.type(Notice.NoticeType.NOTICE)
+			.type(Notice.NoticeType.CAMPAIGN)
 			.customs(customs)
 			.build();
 	}
