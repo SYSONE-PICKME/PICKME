@@ -99,6 +99,13 @@
         left join Mine m
         on i.item_id = m.item_id
         and m.user_id = #{userId}
+
+        order by
+        case
+        when i.status in ('NOT_OPEN', 'OPEN') then 0
+        else 1
+        end,
+        i.end_time asc;
     </select>
 
     <select id="findItemByIdWithImage" parameterType="long" resultType="project.pickme.item.dto.OneBidItemDto">
