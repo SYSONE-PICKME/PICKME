@@ -1,7 +1,21 @@
 body {
-    font-family: "IBM Plex Sans KR", sans-serif;
-    background-color: #f9f9f9;
     margin: 0;
+}
+
+.content {
+    flex-grow: 1;
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    max-height: 850px;
+}
+
+.page-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
 }
 
 .category {
@@ -41,19 +55,12 @@ body {
 }
 
 .category ul li a:hover {
-    color: #ffcc00; /* 호버 시 색상 변경 */
+    color: #2EC44F; /* 호버 시 색상 변경 */
 }
 
 .auction-list {
-    padding-top: 40px;
     max-width: 1200px;
     margin: 0 auto;
-}
-
-.header-section {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
 }
 
 .product-card.closed {
@@ -112,7 +119,6 @@ h2 {
     position: relative;
     background-color: white;
     border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     transition: transform 0.3s;
     margin-bottom: 30px;
@@ -152,11 +158,6 @@ h2 {
     left: 10px;
     border-radius: 5px;
 }
-/*
-.status-label.th[text="'마감'"] {
-    background-color: #999;
-}
-*/
 
 .status-open {
     background-color: #FF0000;
@@ -173,7 +174,6 @@ h2 {
     color: #FFF;
 }
 
-
 @media (max-width: 768px) {
     .product-grid {
         grid-template-columns: repeat(2, 1fr); /* 작은 화면에서는 2개씩 표시 */
@@ -187,22 +187,22 @@ h2 {
 }
 
 .heart {
-  background: none;
-  border: none;
-  font-size: 2rem;
-  cursor: pointer;
-  position: absolute;
-  top: 10px;
-  right: 10px;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
 }
 
 .heart .fa-heart {
-  color: #ccc; /* 빈 하트 색상 */
-  transition: color 0.3s;
+    color: #ccc; /* 빈 하트 색상 */
+    transition: color 0.3s;
 }
 
 .heart.active .fa-heart {
-  color: red; /* 꽉 찬 하트 색상 */
+    color: red; /* 꽉 찬 하트 색상 */
 }
 
 .item-name {
@@ -210,8 +210,8 @@ h2 {
     transition: color 0.3s ease, text-decoration 0.3s ease;
     overflow: hidden;
     text-overflow: ellipsis;
-    display: -webkit-box ;
-    -webkit-line-clamp: 2 ;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     line-height: 1.5em;
     height: 3em; /* 2줄의 높이 */

@@ -14,11 +14,9 @@ import project.pickme.item.dto.OneBidItemDto;
 public interface FindItemMapper {
 	Optional<FindItemDto.GetOne> findById(@Param("id") Long id, @Param("userId") String currentUserId);
 
-	List<FindItemDto.GetAll> findAll();
-
 	Optional<Item> findItemById(Long itemId);
 
 	OneBidItemDto findItemByIdWithImage(Long itemId);
 
-	List<FindItemDto.GetAll> findAll(String userId);
+	List<FindItemDto.GetAll> findAll(@Param("userId") String userId, @Param("category") String category);
 }

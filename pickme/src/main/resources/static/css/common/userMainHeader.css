@@ -48,7 +48,7 @@ header {
 .header-logo {
     text-decoration: none;
     color: inherit;
-    font-size: calc(10px + 0.9vw);
+    font-size: calc(10px + 0.8vw);
     font-weight: bold;
     margin-right: 60px;
     margin-left: 20px;
