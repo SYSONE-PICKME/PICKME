@@ -1,5 +1,7 @@
 package project.pickme.user.controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -50,10 +52,9 @@ public class UserController {
 		return "user/userInfoEditForm";
 	}
 
-	@GetMapping("/point/history")
+	@GetMapping("/point/historyForm")
 	public String showPointHistory(@CurrentUser User user, Model model) {
 		model.addAttribute("user", user);
-		model.addAttribute("pointHistory", userService.showHistory(user));
 
 		return "user/pointHistory";
 	}

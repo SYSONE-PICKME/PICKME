@@ -1,5 +1,8 @@
 package project.pickme.user.controller;
 
+import java.util.List;
+
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import project.pickme.common.annotation.CurrentUser;
 import project.pickme.common.response.BaseResponse;
 import project.pickme.user.domain.User;
+import project.pickme.user.dto.PointHistoryDto;
 import project.pickme.user.dto.UpdatePasswordDto;
 import project.pickme.user.dto.UpdateInfoDto;
 import project.pickme.user.service.UserService;
@@ -39,5 +43,11 @@ public class UserRestController {
 		userService.updatePassword(updatePasswordDto, user);
 
 		return BaseResponse.ok();
+	}
+
+	@GetMapping("/point/history")
+	public BaseResponse<?> showPointHistory(@CurrentUser User user) {
+		List<PointHistoryDto> pointHistoryDtos = userService.showHistory(user);
+		return BaseResponse.ok(pointHistoryDtos);
 	}
 }
