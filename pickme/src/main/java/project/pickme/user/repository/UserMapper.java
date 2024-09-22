@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.data.domain.Pageable;
 
 import project.pickme.user.domain.User;
 import project.pickme.user.dto.PointHistoryDto;
@@ -27,5 +28,7 @@ public interface UserMapper {
 
 	void updateMyInfo(@Param("updateInfoDto") UpdateInfoDto updateInfoDto, @Param("userId") String userId);
 
-	List<PointHistoryDto> findPointHistory(String userId);
+	List<PointHistoryDto> findPointHistory(@Param("userId") String userId, @Param("pageable") Pageable pageable);
+
+	long totalPointHistoryCount(String userId);
 }
