@@ -31,12 +31,12 @@
             Notice n
         left join
             Customs c
-        ON
+        on
             n.customs_id = c.id
         where
             n.type = 'NOTICE'
         order by
-            n.notice_id desc;
+            n.notice_id desc
     </select>
 
     <select id="selectAllCampaigns" resultMap="noticeResultMap">
@@ -54,12 +54,12 @@
             Notice n
         left join
             Customs c
-        ON
+        on
             n.customs_id = c.id
         where
             n.type = 'CAMPAIGN'
         order by
-            n.notice_id desc;
+            n.notice_id desc
     </select>
 
     <select id="selectById" parameterType="long" resultMap="noticeResultMap">
@@ -77,10 +77,10 @@
             Notice n
         left join
             Customs c
-            on
+        on
             n.customs_id = c.id
         where
-            n.notice_id = #{id};
+            n.notice_id = #{id}
     </select>
 
     <insert id="insert" parameterType="project.pickme.notice.domain.Notice"
@@ -97,12 +97,12 @@
             content = #{content},
             type = #{type}
         where
-            notice_id = #{id};
+            notice_id = #{id}
     </update>
 
     <delete id="delete" parameterType="long">
         delete from Notice
-        where notice_id = #{id};
+        where notice_id = #{id}
     </delete>
 
 </mapper>

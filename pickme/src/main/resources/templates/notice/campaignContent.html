@@ -5,7 +5,8 @@
     <title>캠페인</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap"
+          rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/notice/campaignContent.css}">
     <link rel="stylesheet" th:href="@{/css/customs/customsHeader.css}">
     <link rel="stylesheet" th:href="@{/css/common/footer.css}">
@@ -28,8 +29,10 @@
     <div class="nav-content">
         <div class="navigation-buttons">
             <div class="nav-arrows">
-                <a th:href="@{/customs/campaigns/{id}(id=${previousCampaignId})}" class="nav-content-btn" title="이전글"><i class="fas fa-chevron-left"></i></a>
-                <a th:href="@{/customs/campaigns/{id}(id=${nextCampaignId})}" class="nav-content-btn" title="다음글"><i class="fas fa-chevron-right"></i></a>
+                <a th:href="@{/customs/campaigns/{id}(id=${previousCampaignId})}" class="nav-content-btn" title="이전글"><i
+                        class="fas fa-chevron-left"></i></a>
+                <a th:href="@{/customs/campaigns/{id}(id=${nextCampaignId})}" class="nav-content-btn" title="다음글"><i
+                        class="fas fa-chevron-right"></i></a>
             </div>
             <div class="action-buttons">
                 <a th:href="@{/customs/campaigns/edit/{id}(id=${campaign.id})}" class="content-btn"

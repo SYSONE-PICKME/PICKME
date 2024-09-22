@@ -5,7 +5,8 @@
     <title>공지사항</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap"
+          rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/notice/noticeForm.css}">
     <link rel="stylesheet" th:href="@{/css/customs/customsHeader.css}">
     <link rel="stylesheet" th:href="@{/css/common/footer.css}">
@@ -22,7 +23,8 @@
         <input type="hidden" name="id" th:if="${isEditing && notice != null}" th:value="${notice.id}">
         <div class="form-group">
             <label for="title">제목</label>
-            <input type="text" id="title" name="title" th:value="${notice != null ? notice.title : ''}" placeholder="제목을 입력하세요" required>
+            <input type="text" id="title" name="title" th:value="${notice != null ? notice.title : ''}"
+                   placeholder="제목을 입력하세요" required>
         </div>
         <div class="form-group">
             <label for="customs_notice">공지 기관</label>
@@ -31,7 +33,8 @@
         </div>
         <div id="noticeContent" class="form-group">
             <label for="content">내용</label>
-            <textarea id="content" name="content" th:text="${notice != null ? notice.content : ''}" placeholder="내용을 작성해주세요"></textarea>
+            <textarea id="content" name="content" th:text="${notice != null ? notice.content : ''}"
+                      placeholder="내용을 작성해주세요"></textarea>
         </div>
         <div class="button-group">
             <a href="/customs/notices" class="cancel-btn">작성 취소</a>

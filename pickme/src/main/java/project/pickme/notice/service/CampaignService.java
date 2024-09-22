@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 import project.pickme.common.annotation.CurrentUser;
+import project.pickme.notice.constant.NoticeType;
 import project.pickme.notice.domain.Notice;
 import project.pickme.notice.dto.CampaignDto;
 import project.pickme.notice.repository.NoticeMapper;
@@ -36,7 +37,7 @@ public class CampaignService {
 	}
 
 	@Transactional
-	public Long createCampaign(CampaignDto campaignDto, @CurrentUser Customs customs) throws IOException {
+	public Long createCampaign(CampaignDto campaignDto, Customs customs) throws IOException {
 		String imageUrl = processImageUpload(campaignDto, null);
 		Notice notice = campaignDto.toEntity(customs, imageUrl);
 		noticeMapper.insert(notice);
@@ -44,17 +45,17 @@ public class CampaignService {
 	}
 
 	@Transactional
-	public void updateCampaign(CampaignDto campaignDto, @CurrentUser Customs customs) throws IOException {
-		Notice existingCampaign = noticeMapper.selectById(campaignDto.getId());
-		String imageUrl = processImageUpload(campaignDto, existingCampaign);
+	public void updateCampaign(CampaignDto campaignDto, Customs customs) throws IOException {
+		Notice campaign = noticeMapper.selectById(campaignDto.getId());
+		String imageUrl = processImageUpload(campaignDto, campaign);
 		Notice notice = campaignDto.toEntity(customs, imageUrl);
 		noticeMapper.update(notice);
 	}
 
 	@Transactional
 	public void deleteCampaign(Long id) {
-		Notice existingCampaign = noticeMapper.selectById(id);
-		deleteExistingImage(existingCampaign);
+		Notice campaign = noticeMapper.selectById(id);
+		s3Service.deleteFile(campaign.getContent());
 		noticeMapper.delete(id);
 	}
 
@@ -62,22 +63,15 @@ public class CampaignService {
 		return customsMapper.findByCustomsId(customsId).get();        // todo: Optional은 예외처리 해야한다고 함
 	}
 
-	private void deleteExistingImage(Notice existingCampaign) {
-		if (existingCampaign != null && Notice.NoticeType.CAMPAIGN.equals(existingCampaign.getType())
-			&& existingCampaign.getContent() != null) {
-			s3Service.deleteFile(existingCampaign.getContent());
-		}
-	}
-
-	private String processImageUpload(CampaignDto campaignDto, Notice existingCampaign) {
+	private String processImageUpload(CampaignDto campaignDto, Notice campaign) {
 		if (campaignDto.getImageFile() != null && !campaignDto.getImageFile().isEmpty()) {
-			if (existingCampaign != null) {
-				deleteExistingImage(existingCampaign);
+			if (campaign != null && campaign.getContent() != null) {
+				s3Service.deleteFile(campaign.getContent());
 			}
 			return s3Service.uploadImage(campaignDto.getImageFile());
 		}
-		if (existingCampaign != null && Notice.NoticeType.CAMPAIGN.equals(existingCampaign.getType())) {
-			return existingCampaign.getContent();
+		if (campaign != null && NoticeType.CAMPAIGN.equals(campaign.getType())) {
+			return campaign.getContent();
 		}
 		return null;
 	}

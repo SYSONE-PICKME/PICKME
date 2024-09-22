@@ -14,8 +14,8 @@ import project.pickme.notice.domain.Notice;
 import project.pickme.user.constant.Role;
 import project.pickme.user.domain.Customs;
 
-@Getter
 @Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder

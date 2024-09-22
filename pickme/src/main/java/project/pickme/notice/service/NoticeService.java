@@ -30,7 +30,7 @@ public class NoticeService {
 	public List<NoticeDto> getAllNotices() {
 		return noticeMapper.selectAllNotices().stream()
 			.map(NoticeDto::fromEntity)
-			.collect(Collectors.toList());
+			.toList();
 	}
 
 	public NoticeDto getNoticeById(Long id) {
@@ -46,7 +46,7 @@ public class NoticeService {
 	}
 
 	@Transactional
-	public void updateNotice(NoticeDto noticeDto, @CurrentUser Customs customs) {
+	public void updateNotice(NoticeDto noticeDto, Customs customs) {
 		Notice notice = noticeDto.toEntity(customs);
 		noticeMapper.update(notice);
 	}

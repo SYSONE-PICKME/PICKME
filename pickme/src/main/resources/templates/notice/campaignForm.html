@@ -5,7 +5,8 @@
     <title>캠페인</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap"
+          rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/notice/campaignForm.css}">
     <link rel="stylesheet" th:href="@{/css/customs/customsHeader.css}">
     <link rel="stylesheet" th:href="@{/css/common/footer.css}">
@@ -21,7 +22,8 @@
             <input type="hidden" name="id" th:if="${isEditing}" th:value="${campaign.id}">
             <div class="form-group">
                 <label for="title">제목</label>
-                <input type="text" id="title" name="title" th:value="${campaign?.title}" placeholder="제목을 입력하세요" required>
+                <input type="text" id="title" name="title" th:value="${campaign?.title}" placeholder="제목을 입력하세요"
+                       required>
             </div>
             <div class="form-group">
                 <label for="customs_campaign">공지 기관</label>
@@ -31,7 +33,9 @@
             <div class="form-group image-upload-area">
                 <input type="file" id="campaignImage" name="imageFile" accept="image/*" th:required="${!isEditing}">
                 <div class="image-preview">
-                    <img id="previewImage" th:src="${campaign != null and campaign.imageUrl != null ? campaign.imageUrl : '/images/camera.png'}" alt="미리보기 이미지">
+                    <img id="previewImage"
+                         th:src="${campaign != null and campaign.imageUrl != null ? campaign.imageUrl : '/images/camera.png'}"
+                         alt="미리보기 이미지">
                     <p>클릭하여 이미지 업로드</p>
                 </div>
             </div>
