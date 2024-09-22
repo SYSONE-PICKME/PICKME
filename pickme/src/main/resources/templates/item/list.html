@@ -36,11 +36,11 @@
 <main>
     <nav class="category">
         <ul>
-            <li><a th:href="@{/}"><img th:src="@{/images/clothes.png}">#의류</a></li>
-            <li><a th:href="@{/}"><img th:src="@{/images/tableware.png}">#생활용품</a></li>
-            <li><a th:href="@{/}"><img th:src="@{/images/fridge.png}">#디지털</a></li>
-            <li><a th:href="@{/}"><img th:src="@{/images/furniture.png}">#가구</a></li>
-            <li><a th:href="@{/}"><img th:src="@{/images/battery.png}">#소모품</a></li>
+            <li><a th:href="@{/user/item/list(category='의류')}"><img th:src="@{/images/clothes.png}">#의류</a></li>
+            <li><a th:href="@{/user/item/list(category='생활용품')}"><img th:src="@{/images/tableware.png}">#생활용품</a></li>
+            <li><a th:href="@{/user/item/list(category='디지털')}"><img th:src="@{/images/fridge.png}">#디지털</a></li>
+            <li><a th:href="@{/user/item/list(category='가구')}"><img th:src="@{/images/furniture.png}">#가구</a></li>
+            <li><a th:href="@{/user/item/list(category='기타')}"><img th:src="@{/images/battery.png}">#소모품</a></li>
         </ul>
     </nav>
 
@@ -54,7 +54,6 @@
         </div>
         <div class="product-grid">
             <div class="product-card" th:each="item : ${items}" th:data-status="${item.status}">
-<!--                <div class="status-label" th:text="${item.status == 'OPEN' ? '진행중' : '마감'}"></div>-->
                 <span class="status-label" th:classappend="${item.status == 'OPEN' ? 'status-open' : (item.status == 'NOT_OPEN' ? 'status-not-open' : 'status-closed')}"
                       th:text="${item.status == 'OPEN' ? '진행중' : (item.status == 'NOT_OPEN' ? '진행 예정' : '마감')}">진행중</span>
                 <button id="likeButton" class="heart" type="button" th:data-liked="${item.isLiked}" th:data-item-id="${item.id}" th:data-action-url="@{/user/item/{id}/like(id=${item.id})}">
