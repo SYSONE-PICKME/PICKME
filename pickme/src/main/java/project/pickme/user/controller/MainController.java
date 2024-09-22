@@ -21,8 +21,8 @@ public class MainController {
 
 	@GetMapping("/user/main")
 	public String showMain(@CurrentUser User user, Model model) {
-		List<FindItemDto.GetAll> items = itemService.findAll(user.getId());
-		model.addAttribute("items", items);
+		// List<FindItemDto.GetAll> items = itemService.findAll(user.getId());
+		// model.addAttribute("items", items);
 		return "index";
 	}
 
