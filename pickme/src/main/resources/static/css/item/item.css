@@ -1,17 +1,80 @@
 body {
-    font-family: Arial, sans-serif;
     margin: 0;
-    padding: 20px;
-    background-color: #f0f0f0;
+    background-color: #f9f9f9;
 }
 
 .container {
-    max-width: 600px;
-    margin: 0 auto;
-    background-color: white;
+    width: 50%;
+    margin-right: auto;
+    margin-left: auto;
+    min-height: 100vh;
+}
+
+.content {
+    background-color: #ffffff;
+    border-radius: 10px;
     padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    max-height: 850px;
+    max-width: 100%;
+}
+
+.custom-select {
+    position: relative;
+    width: 100%;
+}
+
+.select-box {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    z-index: 1;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.dropdown-content div {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.dropdown-content div:last-child {
+    border-bottom: none;
+}
+
+.dropdown-content input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.dropdown-content label {
+    cursor: pointer;
+    display: inline-block;
+}
+
+.custom-select.open .dropdown-content {
+    display: block;
+}
+
+.dropdown-content input[type="checkbox"] {
+    accent-color: #2EC44F;
+    margin-right: 10px;
+    width: 20px;
+    height: 20px;
 }
 
 h1 {
@@ -26,11 +89,22 @@ h1 {
 .form-row {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 15px;
 }
 
 .form-col {
     width: 48%;
+    margin-bottom: 15px;
+}
+
+.bid-button {
+    margin-top: 40px;
+    width: 100%;
+    padding: 10px;
+    background-color: #333;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
 }
 
 #categoryLabel {
@@ -74,7 +148,7 @@ select {
     margin-right: 5px;
     line-height: 100px;
     text-align: center;
-    background-color: #999999;
+    background-color: #F1F1F1;
     color: #333;
     font-size: 24px;
     cursor: pointer;
@@ -128,16 +202,64 @@ select {
     color: black;
 }
 
-button {
-    background-color: #000;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
-    cursor: pointer;
-    width: 100%;
+.bid-button:hover {
+    background-color: #333;
 }
 
-button:hover {
-    background-color: #333;
+.flatpickr-input {
+    color: black;
+    background-color: #FFFFFF;
+    border: 1px solid black;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.flatpickr-calendar {
+    background-color: #F6FFF8;
+    border: none;
+    color: black;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.flatpickr-day {
+    color: #000;
+}
+
+.flatpickr-day.today {
+    background-color: black;
+    color: #ffffff;
+}
+
+.flatpickr-day:hover {
+    background-color: #2EC44F;
+    color: white;
+}
+
+.flatpickr-day.selected {
+    background-color: #2EC44F;
+    border: 1px solid black;
+    color: #ffffff;
+}
+
+.flatpickr-time,
+.flatpickr-time:hover {
+    background-color: #F6FFF8;
+    color: black;
+    border: none;
+}
+
+.flatpickr-hour,
+.flatpickr-minute {
+    font-size: 16px;
+    color: black;
+}
+
+select[multiple] {
+    width: 100%;
+    height: 150px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    overflow-y: scroll;
 }
