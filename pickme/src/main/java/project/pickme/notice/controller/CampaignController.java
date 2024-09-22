@@ -9,8 +9,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
 import lombok.RequiredArgsConstructor;
 import project.pickme.common.annotation.CurrentUser;
+import project.pickme.common.response.BaseResponse;
 import project.pickme.notice.dto.CampaignDto;
 import project.pickme.notice.service.CampaignService;
 import project.pickme.user.domain.Customs;
@@ -26,7 +28,7 @@ public class CampaignController {
 	public String showCampaigns(Model model, @CurrentUser Customs customs) {
 		List<CampaignDto> campaigns = campaignService.getAllCampaigns();
 		model.addAttribute("campaigns", campaigns);
-		model.addAttribute("customsId",customs.getId());
+		model.addAttribute("customsId", customs.getId());
 		return "notice/campaignList";
 	}
 
@@ -40,7 +42,8 @@ public class CampaignController {
 	}
 
 	@PostMapping("/create")
-	public String createCampaign(@ModelAttribute CampaignDto campaignDto, @CurrentUser Customs customs) throws IOException {
+	public String createCampaign(@ModelAttribute CampaignDto campaignDto, @CurrentUser Customs customs) throws
+		IOException {
 		Long campaignId = campaignService.createCampaign(campaignDto, customs);
 		return "redirect:/customs/campaigns/" + campaignId;
 	}
@@ -56,7 +59,8 @@ public class CampaignController {
 	}
 
 	@PostMapping("/edit/{id}")
-	public String updateCampaign(@PathVariable("id") Long id, @ModelAttribute CampaignDto campaignDto, @CurrentUser Customs customs) throws IOException {
+	public String updateCampaign(@PathVariable("id") Long id, @ModelAttribute CampaignDto campaignDto,
+		@CurrentUser Customs customs) throws IOException {
 		campaignDto = campaignDto.withId(id);
 		campaignService.updateCampaign(campaignDto, customs);
 		return "redirect:/customs/campaigns/" + id;
@@ -64,12 +68,12 @@ public class CampaignController {
 
 	@DeleteMapping("/delete/{id}")
 	@ResponseBody
-	public ResponseEntity<String> deleteCampaign(@PathVariable("id") Long id) {
-		try{
+	public ResponseEntity<BaseResponse<Void>> deleteCampaign(@PathVariable("id") Long id) {
+		try {
 			campaignService.deleteCampaign(id);
-			return ResponseEntity.ok("삭제 성공");
-		}catch (Exception e){
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("삭제 실패");
+			return ResponseEntity.ok(BaseResponse.ok());
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new BaseResponse<>(false, null));
 		}
 	}
 

@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import project.pickme.notice.constant.NoticeType;
 import project.pickme.user.domain.Customs;
 
 @Getter
@@ -21,7 +22,4 @@ public class Notice {
 	private NoticeType type;
 	private Customs customs;
 
-	public enum NoticeType {
-		NOTICE, CAMPAIGN
-	}
 }

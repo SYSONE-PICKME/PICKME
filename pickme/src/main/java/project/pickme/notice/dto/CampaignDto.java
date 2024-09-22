@@ -1,6 +1,7 @@
 package project.pickme.notice.dto;
 
 import java.time.LocalDateTime;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.AllArgsConstructor;
@@ -8,6 +9,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import project.pickme.notice.constant.NoticeType;
 import project.pickme.notice.domain.Notice;
 import project.pickme.user.constant.Role;
 import project.pickme.user.domain.Customs;
@@ -44,7 +46,7 @@ public class CampaignDto {
 			.title(title)
 			.content(imageUrl)
 			.createTime(createTime != null ? createTime : LocalDateTime.now())
-			.type(Notice.NoticeType.CAMPAIGN)
+			.type(NoticeType.CAMPAIGN)
 			.customs(customs)
 			.build();
 	}

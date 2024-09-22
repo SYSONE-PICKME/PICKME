@@ -11,9 +11,14 @@ import project.pickme.notice.domain.Notice;
 public interface NoticeMapper {
 
 	List<Notice> selectAllNotices();
+
 	List<Notice> selectAllCampaigns();
+
 	Notice selectById(Long id);
+
 	void insert(Notice notice);
+
 	void update(Notice notice);
+
 	void delete(Long id);
 }

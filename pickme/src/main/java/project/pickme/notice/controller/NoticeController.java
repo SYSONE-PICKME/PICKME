@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import lombok.RequiredArgsConstructor;
 import project.pickme.common.annotation.CurrentUser;
+import project.pickme.common.response.BaseResponse;
 import project.pickme.notice.dto.NoticeDto;
 import project.pickme.notice.service.NoticeService;
 import project.pickme.user.domain.Customs;
@@ -31,7 +32,7 @@ public class NoticeController {
 	public String showNotices(Model model, @CurrentUser Customs customs) {
 		List<NoticeDto> notices = noticeService.getAllNotices();
 		model.addAttribute("notices", notices);
-		model.addAttribute("customsId",customs.getId());
+		model.addAttribute("customsId", customs.getId());
 		return "notice/noticeList";
 	}
 
@@ -61,20 +62,21 @@ public class NoticeController {
 	}
 
 	@PostMapping("/edit/{id}")
-	public String updateNotice(@PathVariable("id") Long id, @ModelAttribute NoticeDto noticeDto, @CurrentUser Customs customs) {
+	public String updateNotice(@PathVariable("id") Long id, @ModelAttribute NoticeDto noticeDto,
+		@CurrentUser Customs customs) {
 		noticeDto = noticeDto.withId(id);
 		noticeService.updateNotice(noticeDto, customs);
 		return "redirect:/customs/notices/" + id;
 	}
 
-	@DeleteMapping("/delete/{id}")
 	@ResponseBody
-	public ResponseEntity<String> deleteNotice(@PathVariable("id") Long id) {
+	@DeleteMapping("/delete/{id}")
+	public ResponseEntity<BaseResponse<Void>> deleteNotice(@PathVariable("id") Long id) {
 		try {
 			noticeService.deleteNotice(id);
-			return ResponseEntity.ok("삭제 성공");
+			return ResponseEntity.ok(BaseResponse.ok());
 		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("삭제 실패");
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new BaseResponse<>(false, null));
 		}
 	}
 

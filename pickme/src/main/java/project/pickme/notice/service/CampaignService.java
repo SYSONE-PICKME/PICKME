@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import lombok.RequiredArgsConstructor;
 import project.pickme.common.annotation.CurrentUser;
 import project.pickme.notice.domain.Notice;
@@ -58,11 +59,12 @@ public class CampaignService {
 	}
 
 	private Customs getCustomsById(String customsId) {
-		return customsMapper.findByCustomsId(customsId).get();		// todo: Optional은 예외처리 해야한다고 함
+		return customsMapper.findByCustomsId(customsId).get();        // todo: Optional은 예외처리 해야한다고 함
 	}
 
 	private void deleteExistingImage(Notice existingCampaign) {
-		if (existingCampaign != null && Notice.NoticeType.CAMPAIGN.equals(existingCampaign.getType()) && existingCampaign.getContent() != null) {
+		if (existingCampaign != null && Notice.NoticeType.CAMPAIGN.equals(existingCampaign.getType())
+			&& existingCampaign.getContent() != null) {
 			s3Service.deleteFile(existingCampaign.getContent());
 		}
 	}
