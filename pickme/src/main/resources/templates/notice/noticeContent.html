@@ -36,10 +36,9 @@
             <div class="action-buttons">
                 <a th:href="@{/customs/notices/edit/{id}(id=${notice.id})}" class="content-btn"
                    th:if="${notice.customsId==customsId}">수 정</a>
-<!--                <a th:href="@{/customs/notices/delete/{id}(id=${notice.id})}" class="content-btn"-->
-<!--                   th:if="${notice.customsId==customsId}">삭 제</a>-->
                 <button class="content-btn delete-btn" th:onclick="'confirmDelete(' + ${notice.id} + ')'"
-                        th:if="${notice.customsId==customsId}">삭 제</button>
+                        th:if="${notice.customsId==customsId}">삭 제
+                </button>
                 <a href="/customs/notices" class="content-btn">목록보기</a>
             </div>
         </div>
