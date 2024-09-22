@@ -11,6 +11,7 @@
     <link rel="stylesheet" th:href="@{/css/customs/customsHeader.css}">
     <link rel="stylesheet" th:href="@{/css/common/footer.css}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
 </head>
 <body>
 <div th:replace="~{customs/customsHeader :: header}">header content</div>
@@ -35,13 +36,30 @@
             <div class="action-buttons">
                 <a th:href="@{/customs/notices/edit/{id}(id=${notice.id})}" class="content-btn"
                    th:if="${notice.customsId==customsId}">수 정</a>
-                <a th:href="@{/customs/notices/delete/{id}(id=${notice.id})}" class="content-btn"
-                   th:if="${notice.customsId==customsId}">삭 제</a>
+<!--                <a th:href="@{/customs/notices/delete/{id}(id=${notice.id})}" class="content-btn"-->
+<!--                   th:if="${notice.customsId==customsId}">삭 제</a>-->
+                <button class="content-btn delete-btn" th:onclick="'confirmDelete(' + ${notice.id} + ')'"
+                        th:if="${notice.customsId==customsId}">삭 제</button>
                 <a href="/customs/notices" class="content-btn">목록보기</a>
             </div>
         </div>
     </div>
 </div>
+
+<div id="deleteModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-icon">
+            <img th:src="@{/images/warning.png}" alt="경고 아이콘" src="">
+        </div>
+        <h2>공지사항을 삭제하시겠습니까?</h2>
+        <p>삭제된 공지사항은 영구 삭제되어 복구할 수 없습니다.</p>
+        <div class="modal-footer">
+            <button id="confirm-btn" class="btn btn-confirm">확인</button>
+            <button id="cancel-btn" class="btn btn-cancel">취소</button>
+        </div>
+    </div>
+</div>
 <div th:replace="~{fragments/footer :: footer}">footer content</div>
+<script th:src="@{/js/notice/noticeContent.js}"></script>
 </body>
 </html>

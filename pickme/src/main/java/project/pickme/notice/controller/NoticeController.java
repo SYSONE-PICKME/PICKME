@@ -69,17 +69,6 @@ public class NoticeController {
 		return "redirect:/customs/notices/" + id;
 	}
 
-	@ResponseBody
-	@DeleteMapping("/delete/{id}")
-	public ResponseEntity<BaseResponse<Void>> deleteNotice(@PathVariable("id") Long id) {
-		try {
-			noticeService.deleteNotice(id);
-			return ResponseEntity.ok(BaseResponse.ok());
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new BaseResponse<>(false, null));
-		}
-	}
-
 	@GetMapping("/{id}")
 	public String showNotice(@PathVariable Long id, Model model, @CurrentUser Customs customs) {
 		NoticeDto notice = noticeService.getNoticeById(id);

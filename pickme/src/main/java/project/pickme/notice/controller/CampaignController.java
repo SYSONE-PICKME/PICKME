@@ -41,13 +41,6 @@ public class CampaignController {
 		return "notice/campaignForm";
 	}
 
-	@PostMapping("/create")
-	public String createCampaign(@ModelAttribute CampaignDto campaignDto, @CurrentUser Customs customs) throws
-		IOException {
-		Long campaignId = campaignService.createCampaign(campaignDto, customs);
-		return "redirect:/customs/campaigns/" + campaignId;
-	}
-
 	@GetMapping("/edit/{id}")
 	public String showEditCampaignForm(@PathVariable("id") Long id, Model model, @CurrentUser Customs customs) {
 		CampaignDto campaign = campaignService.getCampaignById(id);
@@ -56,25 +49,6 @@ public class CampaignController {
 		model.addAttribute("customsId", customs.getId());
 		model.addAttribute("isEditing", true);
 		return "notice/campaignForm";
-	}
-
-	@PostMapping("/edit/{id}")
-	public String updateCampaign(@PathVariable("id") Long id, @ModelAttribute CampaignDto campaignDto,
-		@CurrentUser Customs customs) throws IOException {
-		campaignDto = campaignDto.withId(id);
-		campaignService.updateCampaign(campaignDto, customs);
-		return "redirect:/customs/campaigns/" + id;
-	}
-
-	@DeleteMapping("/delete/{id}")
-	@ResponseBody
-	public ResponseEntity<BaseResponse<Void>> deleteCampaign(@PathVariable("id") Long id) {
-		try {
-			campaignService.deleteCampaign(id);
-			return ResponseEntity.ok(BaseResponse.ok());
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new BaseResponse<>(false, null));
-		}
 	}
 
 	@GetMapping("/{id}")
