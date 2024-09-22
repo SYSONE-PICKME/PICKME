@@ -6,7 +6,8 @@
     <title>PICKME</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap"
+          rel="stylesheet">
 
     <link rel="stylesheet" th:href="@{/css/user/myPage.css}">
 </head>
@@ -19,16 +20,16 @@
         <div class="points">
             <span class="points-label">보유 포인트</span>
             <div class="points-info">
-                <span class="points-amount" id="points-amount" th:text="*{point}">720,000 P</span>
+                <span class="points-amount" id="points-amount" th:text="*{point}"></span>
                 <button class="recharge-button">충전</button>
             </div>
         </div>
     </div>
     <ul class="menu">
-        <li><img src="/images/myInfo.png"> 개인정보 수정</li>
+        <li th:onclick="|location.href='@{/user/myPage}'|"><img src="/images/myInfo.png"> 개인정보 수정</li>
         <li><img src="/images/like.png"> 관심 상품</li>
-        <li><img src="/images/payment.png"> 내 결제 목록</li>
-        <li><img src="/images/point.png"> 포인트 내역</li>
+        <li th:onclick="|location.href='@{/user/successful-bid-list}'|"><img src="/images/payment.png" alt="결제 목록"> 내 결제 목록</li>
+        <li th:onclick="|location.href='@{/user/point/history}'|"><img src="/images/point.png" alt="포인트 내역"> 포인트 내역</li>
     </ul>
 </div>
 </body>

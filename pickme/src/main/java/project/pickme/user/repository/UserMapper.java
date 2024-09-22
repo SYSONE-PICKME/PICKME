@@ -1,11 +1,13 @@
 package project.pickme.user.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import project.pickme.user.domain.User;
+import project.pickme.user.dto.PointHistoryDto;
 import project.pickme.user.dto.UpdateInfoDto;
 import project.pickme.user.dto.UserDto;
 
@@ -24,4 +26,6 @@ public interface UserMapper {
 	void updatePassword(@Param("password") String password, @Param("userId") String userId);
 
 	void updateMyInfo(@Param("updateInfoDto") UpdateInfoDto updateInfoDto, @Param("userId") String userId);
+
+	List<PointHistoryDto> findPointHistory(String userId);
 }
