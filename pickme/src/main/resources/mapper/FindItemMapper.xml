@@ -72,7 +72,7 @@
         c.id, c.name, c.tel, m.like_id, m.status
     </select>
 
-    <select id = "findAll" parameterType="string" resultType="project.pickme.item.dto.FindItemDto$GetAll">
+    <select id = "findAll" parameterType="map" resultType="project.pickme.item.dto.FindItemDto$GetAll">
         select
         i.item_id as id,
         i.name,
@@ -91,6 +91,7 @@
         from
         Item i
 
+        -- Join Image table
         join Image img
         on i.item_id = img.item_id
         and img.seq = 0
@@ -99,6 +100,13 @@
         left join Mine m
         on i.item_id = m.item_id
         and m.user_id = #{userId}
+
+        <if test="category != 'all'">
+            -- Join Category table
+            join Category c
+            on i.code = c.code
+            and c.name = #{category}
+        </if>
 
         order by
         case
