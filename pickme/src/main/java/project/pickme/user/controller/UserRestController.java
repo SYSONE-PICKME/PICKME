@@ -3,7 +3,6 @@ package project.pickme.user.controller;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -24,6 +23,7 @@ import project.pickme.user.service.UserService;
 @RequestMapping("/user")
 @RequiredArgsConstructor
 public class UserRestController {
+	private static final int DEFAULT_PAGE_SIZE = 6;
 	private final UserService userService;
 
 	@PostMapping("/check-id")
@@ -48,7 +48,7 @@ public class UserRestController {
 	}
 
 	@GetMapping("/point/history")
-	public BaseResponse<?> showPointHistory(@CurrentUser User user, @PageableDefault(size = 6, page = 0) Pageable pageable) {
+	public BaseResponse<?> showPointHistory(@CurrentUser User user, @PageableDefault(size = DEFAULT_PAGE_SIZE, page = 0) Pageable pageable) {
 		Page<PointHistoryDto> pointHistories = userService.showHistory(user, pageable);
 		return BaseResponse.ok(pointHistories);
 	}
