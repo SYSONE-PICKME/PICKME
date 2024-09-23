@@ -18,8 +18,9 @@
 <div class="container">
     <h1 th:text="${isEditing != null && isEditing ? '캠페인 수정' : '새 캠페인 등록'}">새 캠페인 등록</h1>
     <div class="card">
-        <form th:action="${isEditing ? '/customs/campaigns/edit/' + (campaign != null ? campaign.id : '') : '/customs/campaigns/create'}"
+        <form th:action="${isEditing ? '/customs/campaigns/' + (campaign != null ? campaign.id : '') : '/customs/campaigns/create'}"
               method="post" enctype="multipart/form-data" id="campaignForm">
+            <input type="hidden" name="_method" value="PUT" th:if="${isEditing}">
             <input type="hidden" name="id" th:if="${isEditing}" th:value="${campaign.id}">
             <div class="form-group">
                 <label for="title">제목</label>

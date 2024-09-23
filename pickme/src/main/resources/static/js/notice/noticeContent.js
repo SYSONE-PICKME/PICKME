@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
     confirmBtn.addEventListener('click', function() {
         if (noticeIdToDelete) {
             $.ajax({
-                url: `/customs/notices/delete/${noticeIdToDelete}`,
+                url: `/customs/notices/${noticeIdToDelete}`,
                 type: 'DELETE',
                 success: function(response) {
                     modal.style.display = "none";

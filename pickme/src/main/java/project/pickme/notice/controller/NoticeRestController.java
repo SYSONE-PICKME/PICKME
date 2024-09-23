@@ -3,7 +3,9 @@ package project.pickme.notice.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,19 +26,24 @@ public class NoticeRestController {
 
 	private final NoticeService noticeService;
 
+	@PutMapping("/create")
+	public BaseResponse<?> createNotice(@ModelAttribute NoticeDto noticeDto, @CurrentUser Customs customs) {
+		Long id = noticeService.createNotice(noticeDto, customs);
+		return BaseResponse.ok(id);
+	}
+
 	@PutMapping("/{id}")
-	public ResponseEntity<BaseResponse<Void>> updateNotice(@PathVariable("id") Long id,
+	public BaseResponse<Void> updateNotice(@PathVariable("id") Long id,
 		@RequestBody NoticeDto noticeDto,
 		@CurrentUser Customs customs) {
 		noticeService.updateNotice(noticeDto, customs);
-		return ResponseEntity.ok(BaseResponse.ok());
-
+		return BaseResponse.ok();
 	}
 
-	@DeleteMapping("/delete/{id}")
-	public ResponseEntity<BaseResponse<Void>> deleteNotice(@PathVariable("id") Long id) {
+	@DeleteMapping("/{id}")
+	public BaseResponse<Void> deleteNotice(@PathVariable("id") Long id) {
 		noticeService.deleteNotice(id);
-		return ResponseEntity.ok(BaseResponse.ok());
+		return BaseResponse.ok();
 	}
 
 }

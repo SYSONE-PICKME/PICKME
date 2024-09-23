@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const formData = new FormData(form);
         const url = form.getAttribute('action');
-        const isEditing = url.includes('edit');
+        const isEditing = form.getAttribute('action').match(/\/customs\/campaigns\/\d+$/);
 
         $.ajax({
             url: url,

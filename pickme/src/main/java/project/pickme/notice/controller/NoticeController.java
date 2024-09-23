@@ -45,12 +45,6 @@ public class NoticeController {
 		return "notice/noticeForm";
 	}
 
-	@PostMapping("/create")
-	public String createNotice(@ModelAttribute NoticeDto noticeDto, @CurrentUser Customs customs) {
-		Long id = noticeService.createNotice(noticeDto, customs);
-		return "redirect:/customs/notices/" + id;
-	}
-
 	@GetMapping("/edit/{id}")
 	public String showEditNoticeForm(@PathVariable("id") Long id, Model model, @CurrentUser Customs customs) {
 		NoticeDto notice = noticeService.getNoticeById(id);
@@ -59,13 +53,6 @@ public class NoticeController {
 		model.addAttribute("customsId", customs.getId());
 		model.addAttribute("isEditing", true);
 		return "notice/noticeForm";
-	}
-
-	@PostMapping("/edit/{id}")
-	public String updateNotice(@PathVariable("id") Long id, @ModelAttribute NoticeDto noticeDto,
-		@CurrentUser Customs customs) {
-		noticeService.updateNotice(noticeDto, customs);
-		return "redirect:/customs/notices/" + id;
 	}
 
 	@GetMapping("/{id}")

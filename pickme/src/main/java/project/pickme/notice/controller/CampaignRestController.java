@@ -27,23 +27,23 @@ public class CampaignRestController {
 	private final CampaignService campaignService;
 
 	@PostMapping("/create")
-	public ResponseEntity<BaseResponse<Long>> createCampaign(@ModelAttribute CampaignDto campaignDto,
+	public BaseResponse<?> createCampaign(@ModelAttribute CampaignDto campaignDto,
 		@CurrentUser Customs customs) throws IOException {
 		Long campaignId = campaignService.createCampaign(campaignDto, customs);
-		return ResponseEntity.ok(BaseResponse.ok(campaignId));
+		return BaseResponse.ok(campaignId);
 	}
 
-	@PutMapping("/edit/{id}")
-	public ResponseEntity<BaseResponse<Void>> updateCampaign(@PathVariable("id") Long id,
+	@PutMapping("/{id}")
+	public BaseResponse<?> updateCampaign(@PathVariable("id") Long id,
 		@ModelAttribute CampaignDto campaignDto,
 		@CurrentUser Customs customs) throws IOException {
 		campaignService.updateCampaign(campaignDto, customs);
-		return ResponseEntity.ok(BaseResponse.ok());
+		return BaseResponse.ok();
 	}
 
-	@DeleteMapping("/delete/{id}")
-	public ResponseEntity<BaseResponse<Void>> deleteCampaign(@PathVariable("id") Long id) {
+	@DeleteMapping("/{id}")
+	public BaseResponse<Void> deleteCampaign(@PathVariable("id") Long id) {
 		campaignService.deleteCampaign(id);
-		return ResponseEntity.ok(BaseResponse.ok());
+		return BaseResponse.ok();
 	}
 }
