@@ -13,7 +13,7 @@ $(document).ready(function() {
 
         // 클릭 이벤트 처리
         likeButton.on('click', function(event) {
-            console.log('??')
+            event.stopPropagation();
             event.preventDefault();
 
             const actionUrl = likeButton.data('action-url');
