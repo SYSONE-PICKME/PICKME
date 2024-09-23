@@ -52,19 +52,19 @@
             <div class="thumbnail-images">
                 <!-- 첫 번째 이미지 -->
                 <img th:if="${item.imageUrls.size() > 1}" th:src="${item.imageUrls[1]}" class="thumbnail" onclick="changeImage(this)">
-                <img th:if="${item.imageUrls.size() <= 1}" th:src="@{/images/default_img.png}" class="thumbnail">
+                <img th:if="${item.imageUrls.size() <= 1}" th:src="@{/images/default_img.png}" class="default-thumbnail">
 
                 <!-- 두 번째 이미지 -->
                 <img th:if="${item.imageUrls.size() > 2}" th:src="${item.imageUrls[2]}" class="thumbnail" onclick="changeImage(this)">
-                <img th:if="${item.imageUrls.size() <= 2}" th:src="@{/images/default_img.png}" class="thumbnail">
+                <img th:if="${item.imageUrls.size() <= 2}" th:src="@{/images/default_img.png}" class="default-thumbnail">
 
                 <!-- 세 번째 이미지 -->
                 <img th:if="${item.imageUrls.size() > 3}" th:src="${item.imageUrls[3]}" class="thumbnail" onclick="changeImage(this)">
-                <img th:if="${item.imageUrls.size() <= 3}" th:src="@{/images/default_img.png}" class="thumbnail">
+                <img th:if="${item.imageUrls.size() <= 3}" th:src="@{/images/default_img.png}" class="default-thumbnail">
 
                 <!-- 네 번째 이미지 -->
                 <img th:if="${item.imageUrls.size() > 4}" th:src="${item.imageUrls[4]}" class="thumbnail" onclick="changeImage(this)">
-                <img th:if="${item.imageUrls.size() <= 4}" th:src="@{/images/default_img.png}" class="thumbnail">
+                <img th:if="${item.imageUrls.size() <= 4}" th:src="@{/images/default_img.png}" class="default-thumbnail">
             </div>
         </div>
 

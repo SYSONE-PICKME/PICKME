@@ -40,6 +40,11 @@ body {
     border: 2px solid #000;
 }
 
+.default-thumbnail {
+    width: 145px;
+    height: 135px;
+}
+
 .auction-details {
     position: relative;
     width: 50%;
