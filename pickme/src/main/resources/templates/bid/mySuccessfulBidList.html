@@ -8,9 +8,7 @@
 
     <link rel="stylesheet" th:href="@{/css/common/header.css}">
     <link rel="stylesheet" th:href="@{/css/common/footer.css}">
-
     <link rel="stylesheet" th:href="@{/css/common/myPageSidebar.css}">
-
     <link rel="stylesheet" th:href="@{/css/item/list.css}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,29 +25,28 @@
 <main>
     <div class="container">
         <div th:replace="~{fragments/myPageSidebar :: sidebar}">sidebar content</div>
-
         <div class="content">
             <div class="page-title">내 결제 목록</div>
-            <div class="auction-list">
-                <div class="product-grid">
-                    <div class="product-card" th:each="item : ${successfulBidList}">
-                        <img th:src="@{${item.imgUrl}}" alt="product image" class="product-image">
-                        <div class="product-info">
-                            <h3 th:text="${item.name}"></h3>
-                            <p>공매번호: <span th:text="${item.itemId}"></span></p>
-                            <p><span th:text="${item.customsName}"></span></p>
-                            <p>결제금액: <span th:text="${item.price}"></span>원</p>
+                <div class="auction-list">
+                    <div class="product-grid">
+                        <div class="product-card" th:each="item : ${successfulBidList}">
+                            <img th:src="@{${item.imgUrl}}" alt="product image" class="product-image">
+                                <div class="product-info">
+                                    <h3 th:text="${item.name}"></h3>
+                                    <p>공매번호: <span th:text="${item.itemId}"></span></p>
+                                    <p><span th:text="${item.customsName}"></span></p>
+                                    <p>결제금액: <span th:text="${item.price}"></span>원</p>
 
-
-                    <!-- 배송현황 버튼: 송장번호가 등록된 경우 표시 -->
-                    <input type="button" id="deliveryStatus" value="배송현황"
-                           th:if="${item.invoiceNumber}"
-                           th:data-item-id="${item.itemId}"
-                           th:data-user-id="${user}"
-                           onclick="viewDeliveryStatus(this)">
-                    <p th:if="${item.invoiceNumber}">송장번호:<span th:text="${item.invoiceNumber}"></span></p>
-
-                </div>
+                                    <!-- 배송현황 버튼: 송장번호가 등록된 경우 표시 -->
+                                    <input type="button" id="deliveryStatus" value="배송현황"
+                                           th:if="${item.invoiceNumber}"
+                                           th:data-item-id="${item.itemId}"
+                                           th:data-user-id="${userId}"
+                                           onclick="viewDeliveryStatus(this)">
+                                    <p th:if="${item.invoiceNumber}">송장번호:<span th:text="${item.invoiceNumber}"></span></p>
+                                </div>
+                        </div>
+                    </div>
             </div>
         </div>
     </div>
