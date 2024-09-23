@@ -13,7 +13,7 @@
 }
 
 .footer-logo h2 {
-    font-size: 36px;
+    font-size: 2.5vw;
     margin-bottom: 10px;
     font-weight: 800;
 }
@@ -60,7 +60,6 @@
 
 .footer-bottom {
     background-color: #ffffff;
-    /* padding: 10px 20px; */
     padding-top : 10px;
     padding-left : 10%;
     padding-right : 20%;
