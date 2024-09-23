@@ -91,6 +91,7 @@
         from
         Item i
 
+        -- Join Image img
         join Image img
         on i.item_id = img.item_id
         and img.seq = 0
@@ -99,6 +100,20 @@
         left join Mine m
         on i.item_id = m.item_id
         and m.user_id = #{userId}
+
+        <if test="category != 'all'">
+            -- Join Category table
+            join Category c
+            on i.code = c.code
+            and c.name = #{category}
+        </if>
+
+        order by
+        case
+        when i.status in ('NOT_OPEN', 'OPEN') then 0
+        else 1
+        end,
+        i.end_time asc;
     </select>
 
     <select id = "findTop20" parameterType="string" resultType="project.pickme.item.dto.FindItemDto$GetAll">
