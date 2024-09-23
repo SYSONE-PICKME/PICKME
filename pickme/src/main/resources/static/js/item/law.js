@@ -8,7 +8,6 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     closeButton.addEventListener("click", function() {
-        console.log("???")
         modal.style.display = "none";
     });
 
