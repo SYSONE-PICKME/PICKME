@@ -1,11 +1,14 @@
-package project.pickme.user.controller;
+package project.pickme.bid.controller;
 
+import static org.hamcrest.Matchers.contains;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static project.pickme.user.constant.Type.*;
+
+import java.util.List;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,28 +20,30 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.TestExecutionEvent;
-import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import project.pickme.bid.dto.reqeust.SelectedBidDto;
+import project.pickme.bid.dto.response.BidDetailsDto;
+import project.pickme.bid.dto.response.PriceDto;
+import project.pickme.bid.service.BidService;
 import project.pickme.user.constant.Role;
 import project.pickme.user.domain.User;
-import project.pickme.user.dto.UpdateInfoDto;
 import project.pickme.user.repository.UserMapper;
-import project.pickme.user.service.UserService;
 
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
-class UserRestControllerTest {
+class BidRestControllerTest {
 	@Autowired private MockMvc mockMvc;
 	@Autowired private ObjectMapper objectMapper;
 	@Autowired private UserMapper userMapper;
 
-	@MockBean private UserService userService;
+	@MockBean private BidService bidService;
+
 
 	@BeforeEach
 	void initUser(){
@@ -51,34 +56,40 @@ class UserRestControllerTest {
 	}
 
 	@Test
-	@DisplayName("아이디 중복 확인")
-	@WithMockUser
-	void checkDuplicateUserId() throws Exception {
+	@DisplayName("입찰 페이지에서 아이템 정보를 내려주는 컨트롤러")
+	@WithUserDetails(value = "testUser", userDetailsServiceBeanName = "userDetailServiceImpl", setupBefore = TestExecutionEvent.TEST_EXECUTION)
+	void showBidDetails() throws Exception {
 	    // given
-		String userId = "test";
+		Long itemId = 1l;
+		List<PriceDto> priceDtos = List.of(new PriceDto(1L, 1000, "testUser"));
+		BidDetailsDto bidDetailsDto = BidDetailsDto.createOf(priceDtos, 10000l);
+
+		when(bidService.showBidDetails(anyLong(), any(User.class))).thenReturn(bidDetailsDto);
 
 	    // when // then
-		mockMvc.perform(post("/user/check-id")
-				.with(csrf())
-				.content(userId)
-				.contentType("application/json"))
+		mockMvc.perform(get("/user/bid/details/{itemId}", itemId))
+			.andDo(print())
 			.andExpect(status().isOk())
-			.andExpect(jsonPath("$.data").value("사용 가능한 아이디"));
-
-		verify(userService, times(1)).checkDuplicateId(userId);
+			.andExpect(jsonPath("$.success").value(true))
+			.andExpect(jsonPath("$.data.allPrice", contains(1000)))
+			.andExpect(jsonPath("$.data.maxPrice").value(1000))
+			.andExpect(jsonPath("$.data.userId").value("testUser"))
+			.andExpect(jsonPath("$.data.bidId").value(1))
+			.andExpect(jsonPath("$.data.myPoint").value(10000));
 	}
 
 	@Test
-	@DisplayName("사용자 정보를 업데이트(이름, 주소, 메일, 전화번호, 사업자 번호)")
+	@DisplayName("낙찰하는 컨트톨러")
 	@WithUserDetails(value = "testUser", userDetailsServiceBeanName = "userDetailServiceImpl", setupBefore = TestExecutionEvent.TEST_EXECUTION)
-	void updateInfo() throws Exception {
+	void endBid() throws Exception {
 	    // given
-		UpdateInfoDto updateInfoDto = new UpdateInfoDto("testUser", "testaddr", "test@test.com", "010-1111-1111", null);
+		SelectedBidDto selectedBidDto = new SelectedBidDto(1l, 1l, "테스트 아이템", "test.png");
+		doNothing().when(bidService).selectBid(any(SelectedBidDto.class));
 
 	    // when // then
-		mockMvc.perform(put("/user/info")
-			.contentType(MediaType.APPLICATION_JSON)
-			.content(objectMapper.writeValueAsString(updateInfoDto)))
+		mockMvc.perform(post("/user/bid/end")
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(objectMapper.writeValueAsString(selectedBidDto)))
 			.andDo(print())
 			.andExpect(status().isOk())
 			.andExpect(jsonPath("$.success").value(true));
