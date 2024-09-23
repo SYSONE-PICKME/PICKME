@@ -56,9 +56,4 @@ public class UserController {
 
 		return "user/pointHistory";
 	}
-
-	@GetMapping("test")
-	public String test(){
-		return "error/errorPage";
-	}
 }
