@@ -24,7 +24,7 @@
                 <li><a th:href="@{/user/myPage}">마이페이지</a></li>
                 <li><a href="/statistics">통계</a></li>
             </ul>
-            <button class="login-button">로그아웃</button>
+            <button class="login-button" th:onclick="|location.href='@{/user/logout}'|">로그아웃</button>
         </nav>
     </header>
 </body>
