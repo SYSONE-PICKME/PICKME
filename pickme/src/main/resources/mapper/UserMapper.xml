@@ -74,7 +74,7 @@
         limit #{pageable.pageSize} offset #{pageable.offset}
     </select>
 
-    <select id="totalPointHistoryCount" resultType="long">
+    <select id="countTotalPointHistory" resultType="long">
         select count(*)
         from (
                  select p.payment_time as time, price, 0 as type
