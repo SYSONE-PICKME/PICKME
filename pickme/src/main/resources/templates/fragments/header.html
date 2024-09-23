@@ -15,7 +15,7 @@
             <span class="header_text">합법적인 경매가 이루어지는 곳</span>
         </div>
         <nav class="main-nav">
-            <a th:href="@{/user/main}" class="logo">PICKME</a>
+            <a th:href="@{/user/main}" class="logo">PICK-ME</a>
             <ul class="nav-links">
                 <li><a href="/notice_link">공지사항</a></li>
                 <li><a th:href="@{/user/item/list}">공매물품조회</a></li>
@@ -24,7 +24,14 @@
                 <li><a th:href="@{/user/myPage}">마이페이지</a></li>
                 <li><a href="/statistics">통계</a></li>
             </ul>
-            <button class="login-button">로그아웃</button>
+            <th:block sec:authorize="isAnonymous()">
+                <button class="signup-btn" th:onclick="|location.href='@{/user/signUpForm}'|">회원가입</button>
+            </th:block>
+            <th:block sec:authorize="isAuthenticated()">
+                <button class="logout-btn" th:onclick="|location.href='@{/user/loginForm}'|">로그아웃</button>
+            </th:block>
+
+<!--            <button class="login-button">로그아웃</button>-->
         </nav>
     </header>
 </body>
