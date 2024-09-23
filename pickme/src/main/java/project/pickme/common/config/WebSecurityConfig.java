@@ -14,6 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
 import lombok.RequiredArgsConstructor;
 import project.pickme.common.auth.CustomAuthenticationSuccessHandler;
@@ -45,7 +46,7 @@ public class WebSecurityConfig {
 		AuthenticationManagerBuilder managerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
 		configureAuthenticationManager(managerBuilder, userDetailService);
 
-		return commonSecurityFilter(http, "/user/**", "/user/loginForm", "/user/login", "/user/loginForm?error=true");
+		return commonSecurityFilter(http, "/user/**", "/user/loginForm", "/user/login", "/user/loginForm?error=true", "/user/logout");
 	}
 
 	@Bean
@@ -53,15 +54,18 @@ public class WebSecurityConfig {
 		AuthenticationManagerBuilder managerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
 		configureAuthenticationManager(managerBuilder, customsDetailService);
 
-		return commonSecurityFilter(http, "/customs/**", "/customs/loginForm", "/customs/login", "/customs/loginForm?error=true");
+		return commonSecurityFilter(http, "/customs/**", "/customs/loginForm", "/customs/login",
+			"/customs/loginForm?error=true", "/customs/logout");
 	}
 
-	private void configureAuthenticationManager(AuthenticationManagerBuilder managerBuilder, UserDetailsService userDetailsService) throws Exception {
+	private void configureAuthenticationManager(AuthenticationManagerBuilder managerBuilder,
+		UserDetailsService userDetailsService) throws Exception {
 		managerBuilder.userDetailsService(userDetailsService)
 			.passwordEncoder(bCryptPasswordEncoder());
 	}
 
-	private SecurityFilterChain commonSecurityFilter(HttpSecurity http, String securityMatcher, String loginPage, String loginProcessingUrl, String failureRedirectUrl) throws Exception {
+	private SecurityFilterChain commonSecurityFilter(HttpSecurity http, String securityMatcher, String loginPage,
+		String loginProcessingUrl, String failureRedirectUrl, String logoutUrl) throws Exception {
 		http
 			.securityMatcher(securityMatcher)
 			.formLogin(AbstractHttpConfigurer::disable)
@@ -80,6 +84,12 @@ public class WebSecurityConfig {
 				.failureHandler((request, response, exception) -> {
 					response.sendRedirect(failureRedirectUrl);
 				}).permitAll()
+			).logout(logout -> logout
+				.logoutUrl(logoutUrl)
+				.logoutSuccessHandler(logoutSuccessHandler())
+				.invalidateHttpSession(true)
+				.deleteCookies("JSESSIONID")
+				.permitAll()
 			)
 			.sessionManagement(sessionManagementConfigurer ->
 				sessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
@@ -94,5 +104,22 @@ public class WebSecurityConfig {
 	@Bean
 	public AuthenticationSuccessHandler authenticationSuccessHandler() {
 		return new CustomAuthenticationSuccessHandler();
+	}
+
+	@Bean
+	public LogoutSuccessHandler logoutSuccessHandler() {
+		return (request, response, authentication) -> {
+			String redirectUrl = "/user/loginForm?logout=true";
+
+			if (authentication.getAuthorities().stream()
+				.anyMatch(auth -> auth.getAuthority().equals("ROLE_ADMIN"))) {
+				redirectUrl = "/customs/loginForm?logout=true"; // Admin은 customs 페이지로 리디렉션
+			} else if (authentication.getAuthorities().stream()
+				.anyMatch(auth -> auth.getAuthority().equals("ROLE_USER"))) {
+				redirectUrl = "/user/loginForm?logout=true"; // 일반 사용자는 user 페이지로 리디렉션
+			}
+
+			response.sendRedirect(redirectUrl);
+		};
 	}
 }
