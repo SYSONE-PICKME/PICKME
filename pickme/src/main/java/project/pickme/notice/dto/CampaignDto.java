@@ -28,38 +28,4 @@ public class CampaignDto {
 	private MultipartFile imageFile;
 	private String imageUrl;
 
-	public CampaignDto withId(Long id) {
-		return CampaignDto.builder()
-			.id(id)
-			.title(title)
-			.createTime(createTime)
-			.customsId(customsId)
-			.customsName(customsName)
-			.imageFile(imageFile)
-			.imageUrl(imageUrl)
-			.build();
-	}
-
-	public Notice toEntity(Customs customs, String imageUrl) {
-		return Notice.builder()
-			.id(id)
-			.title(title)
-			.content(imageUrl)
-			.createTime(createTime != null ? createTime : LocalDateTime.now())
-			.type(NoticeType.CAMPAIGN)
-			.customs(customs)
-			.build();
-	}
-
-	public static CampaignDto fromEntity(Notice notice) {
-		Customs customs = notice.getCustoms();
-		return CampaignDto.builder()
-			.id(notice.getId())
-			.title(notice.getTitle())
-			.createTime(notice.getCreateTime())
-			.customsId(customs.getId())
-			.customsName(customs.getName())
-			.imageUrl(notice.getContent())
-			.build();
-	}
 }

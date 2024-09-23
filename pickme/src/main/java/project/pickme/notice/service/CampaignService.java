@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import project.pickme.common.annotation.CurrentUser;
 import project.pickme.notice.constant.NoticeType;
+import project.pickme.notice.converter.CampaignConverter;
 import project.pickme.notice.domain.Notice;
 import project.pickme.notice.dto.CampaignDto;
 import project.pickme.notice.repository.NoticeMapper;
@@ -27,19 +28,18 @@ public class CampaignService {
 
 	public List<CampaignDto> getAllCampaigns() {
 		return noticeMapper.selectAllCampaigns().stream()
-			.map(CampaignDto::fromEntity)
+			.map(CampaignConverter::fromEntity)
 			.toList();
 	}
 
 	public CampaignDto getCampaignById(Long id) {
-		Notice notice = noticeMapper.selectById(id);
-		return CampaignDto.fromEntity(notice);
+		return CampaignConverter.fromEntity(noticeMapper.selectById(id));
 	}
 
 	@Transactional
 	public Long createCampaign(CampaignDto campaignDto, Customs customs) throws IOException {
 		String imageUrl = updateImage(campaignDto, null);
-		Notice notice = campaignDto.toEntity(customs, imageUrl);
+		Notice notice = CampaignConverter.toEntity(customs, imageUrl, campaignDto);
 		noticeMapper.insert(notice);
 		return notice.getId();
 	}
@@ -48,8 +48,7 @@ public class CampaignService {
 	public void updateCampaign(CampaignDto campaignDto, Customs customs) throws IOException {
 		Notice campaign = noticeMapper.selectById(campaignDto.getId());
 		String imageUrl = updateImage(campaignDto, campaign);
-		Notice notice = campaignDto.toEntity(customs, imageUrl);
-		noticeMapper.update(notice);
+		noticeMapper.update(CampaignConverter.toEntity(customs, imageUrl, campaignDto));
 	}
 
 	@Transactional

@@ -11,6 +11,7 @@ import com.amazonaws.services.s3.AmazonS3Client;
 
 import lombok.RequiredArgsConstructor;
 import project.pickme.common.annotation.CurrentUser;
+import project.pickme.notice.converter.NoticeConverter;
 import project.pickme.notice.domain.Notice;
 import project.pickme.notice.dto.CampaignDto;
 import project.pickme.notice.dto.NoticeDto;
@@ -29,26 +30,24 @@ public class NoticeService {
 
 	public List<NoticeDto> getAllNotices() {
 		return noticeMapper.selectAllNotices().stream()
-			.map(NoticeDto::fromEntity)
+			.map(NoticeConverter::fromEntity)
 			.toList();
 	}
 
 	public NoticeDto getNoticeById(Long id) {
-		Notice notice = noticeMapper.selectById(id);
-		return NoticeDto.fromEntity(notice);
+		return NoticeConverter.fromEntity(noticeMapper.selectById(id));
 	}
 
 	@Transactional
 	public Long createNotice(NoticeDto noticeDto, Customs customs) {
-		Notice notice = noticeDto.toEntity(customs);
+		Notice notice = NoticeConverter.toEntity(customs, noticeDto);
 		noticeMapper.insert(notice);
 		return notice.getId();
 	}
 
 	@Transactional
 	public void updateNotice(NoticeDto noticeDto, Customs customs) {
-		Notice notice = noticeDto.toEntity(customs);
-		noticeMapper.update(notice);
+		noticeMapper.update(NoticeConverter.toEntity(customs, noticeDto));
 	}
 
 	@Transactional

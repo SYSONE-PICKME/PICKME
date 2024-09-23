@@ -64,7 +64,6 @@ public class NoticeController {
 	@PostMapping("/edit/{id}")
 	public String updateNotice(@PathVariable("id") Long id, @ModelAttribute NoticeDto noticeDto,
 		@CurrentUser Customs customs) {
-		noticeDto = noticeDto.withId(id);
 		noticeService.updateNotice(noticeDto, customs);
 		return "redirect:/customs/notices/" + id;
 	}

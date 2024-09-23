@@ -28,23 +28,15 @@ public class NoticeRestController {
 	public ResponseEntity<BaseResponse<Void>> updateNotice(@PathVariable("id") Long id,
 		@RequestBody NoticeDto noticeDto,
 		@CurrentUser Customs customs) {
-		try {
-			noticeDto = noticeDto.withId(id);
-			noticeService.updateNotice(noticeDto, customs);
-			return ResponseEntity.ok(BaseResponse.ok());
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new BaseResponse<>(false, null));
-		}
+		noticeService.updateNotice(noticeDto, customs);
+		return ResponseEntity.ok(BaseResponse.ok());
+
 	}
 
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<BaseResponse<Void>> deleteNotice(@PathVariable("id") Long id) {
-		try {
-			noticeService.deleteNotice(id);
-			return ResponseEntity.ok(BaseResponse.ok());
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new BaseResponse<>(false, null));
-		}
+		noticeService.deleteNotice(id);
+		return ResponseEntity.ok(BaseResponse.ok());
 	}
 
 }

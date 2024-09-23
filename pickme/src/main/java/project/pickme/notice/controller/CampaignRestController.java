@@ -40,23 +40,14 @@ public class CampaignRestController {
 	@PutMapping("/edit/{id}")
 	public ResponseEntity<BaseResponse<Void>> updateCampaign(@PathVariable("id") Long id,
 		@ModelAttribute CampaignDto campaignDto,
-		@CurrentUser Customs customs) {
-		try {
-			campaignDto = campaignDto.withId(id);
+		@CurrentUser Customs customs) throws IOException{
 			campaignService.updateCampaign(campaignDto, customs);
 			return ResponseEntity.ok(BaseResponse.ok());
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new BaseResponse<>(false, null));
-		}
 	}
 
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<BaseResponse<Void>> deleteCampaign(@PathVariable("id") Long id) {
-		try {
 			campaignService.deleteCampaign(id);
 			return ResponseEntity.ok(BaseResponse.ok());
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new BaseResponse<>(false, null));
-		}
 	}
 }
