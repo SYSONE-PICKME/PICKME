@@ -129,6 +129,7 @@ h2 {
 }
 
 .product-card {
+    cursor: pointer;
     position: relative;
     background-color: white;
     border-radius: 10px;
@@ -220,7 +221,6 @@ h2 {
 }
 
 .item-name {
-    cursor: pointer;
     transition: color 0.3s ease, text-decoration 0.3s ease;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -230,11 +230,6 @@ h2 {
     line-height: 1.5em;
     height: 3em; /* 2줄의 높이 */
     max-height: 3em;
-}
-
-.item-name:hover {
-    color: #666666;
-    text-decoration: underline;
 }
 
 .item-info {
