@@ -45,7 +45,9 @@ public class FindItemDto {
 		private final List<String> imageUrls;
 		private final boolean isLiked;
 
-		public Info(GetOne dto) {
+		private final List<LawDto> laws;
+
+		public Info(GetOne dto, List<LawDto> laws) {
 			this.id = dto.getItemId();
 			this.name = dto.getItemName();
 			this.target = Type.valueOf(dto.getTarget()).getValue();
@@ -58,6 +60,7 @@ public class FindItemDto {
 			this.customsTel = dto.getCustomsTel();
 			this.imageUrls = Arrays.asList(dto.getImages().split(","));
 			this.isLiked = dto.isLiked();
+			this.laws = laws;
 		}
 	}
 

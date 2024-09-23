@@ -347,3 +347,17 @@ th {
     font-weight: 500;
     margin: 0;
 }
+
+.law-close-button {
+    color: #aaa;
+    float: right;
+    font-size: 4rem;
+    font-weight: 300;
+}
+
+.law-close-button:hover,
+.law-close-button:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}

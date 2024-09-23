@@ -34,6 +34,7 @@
     <script th:src="@{/js/item/like.js}"></script>
     <script th:src="@{/js/item/countdown.js}"></script>
     <script th:src="@{/js/item/unit.js}"></script>
+    <script th:src="@{/js/item/law.js}"></script>
 </head>
 <body>
 <!-- 헤더 -->
@@ -183,6 +184,30 @@
                 </table>
             </div>
         </div>
+
+        <div id="law-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="unit-title">관련 법규 안내</h2>
+                    <span class="law-close-button">&times;</span>
+                </div>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>관련 법</th>
+                        <th>내용</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="law : ${item.laws}">
+                        <td th:text="${law.title}">현재가 구간</td>
+                        <td th:text="${law.content}">호가 단위</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
     </div>
 </main>
 
