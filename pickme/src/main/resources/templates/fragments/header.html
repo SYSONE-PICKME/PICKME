@@ -26,6 +26,7 @@
             <li><a href="/statistics">통계</a></li>
         </ul>
         <th:block sec:authorize="isAnonymous()">
+            <a th:href="@{/user/loginForm}" class="header-login">로그인</a>
             <button class="signup-btn" th:onclick="|location.href='@{/user/signUpForm}'|">회원가입</button>
         </th:block>
         <th:block sec:authorize="isAuthenticated()">
