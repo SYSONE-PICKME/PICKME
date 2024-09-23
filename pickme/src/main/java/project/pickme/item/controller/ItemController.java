@@ -26,15 +26,23 @@ public class ItemController {
 
 	private final ItemService itemService;
 
-	@GetMapping("/new")
-	public String newItemForm(Model model) {
-		model.addAttribute("item", new ItemFormDto());
+	@GetMapping({"/new", "/edit/{id}"})
+	public String itemForm(@PathVariable(required = false) Long id, Model model) {
+		if (id != null) {
+			// 수정할 경우
+			// ItemFormDto item = itemService.findItemById(id);
+			// model.addAttribute("item", item);
+		} else {
+			// 새로 등록할 경우
+			model.addAttribute("item", new ItemFormDto());
+		}
 		model.addAttribute("laws", itemService.findAllLaws());
 		model.addAttribute("types", Type.values());
 		model.addAttribute("categories", Category.values());
 
-		return "/item/createItem";
+		return "/item/createItem"; // 같은 뷰 리턴
 	}
+
 
 	@PostMapping
 	public String insertItem(@ModelAttribute ItemFormDto itemFormDto, @CurrentUser Customs customs) throws IOException {

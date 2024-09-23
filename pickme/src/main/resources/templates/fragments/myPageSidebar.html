@@ -21,7 +21,7 @@
             <span class="points-label">보유 포인트</span>
             <div class="points-info">
                 <span class="points-amount" id="points-amount" th:text="*{point}"></span>
-                <button class="recharge-button">충전</button>
+                <button class="recharge-button" th:onclick="|location.href='@{/user/charge}'|">충전</button>
             </div>
         </div>
     </div>
@@ -29,7 +29,7 @@
         <li th:onclick="|location.href='@{/user/myPage}'|"><img src="/images/myInfo.png"> 개인정보 수정</li>
         <li><img src="/images/like.png"> 관심 상품</li>
         <li th:onclick="|location.href='@{/user/successful-bid-list}'|"><img src="/images/payment.png" alt="결제 목록"> 내 결제 목록</li>
-        <li th:onclick="|location.href='@{/user/point/history}'|"><img src="/images/point.png" alt="포인트 내역"> 포인트 내역</li>
+        <li th:onclick="|location.href='@{/user/point/historyForm}'|"><img src="/images/point.png" alt="포인트 내역"> 포인트 내역</li>
     </ul>
 </div>
 </body>

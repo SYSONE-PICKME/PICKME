@@ -14,9 +14,9 @@
     <img th:src="@{${item.imgUrl}}" alt="product image" class="product-image">
     <div class="product-info">
         <h3 th:text="${item.itemName}"></h3>
-        <p>결제금액: <span th:text="${item.price} + ' 원'"></span></p>
-        <p>구매자: <span th:text="${item.customsName}"></span></p>
-        <p>택배사: <span th:text="${carrier.courier}"></span> 송장번호: <span th:text="${carrier.invoiceNumber}"></span></p>
+        <p>결제금액: <span th:text="${#numbers.formatDecimal(item.price, 0, 'COMMA', 0, 'POINT')}"></span>원</p>
+        <p><span th:text="${item.customsName}"></span></p>
+        <p><span th:text="${item.courier}"></span><span th:text="${item.invoiceNumber}"></span></p>
     </div>
 </div>
 
@@ -132,8 +132,8 @@
     }
 
     document.addEventListener("DOMContentLoaded", function () {
-        let code = '[[${carrier.code}]]';
-        let invoiceNumber = '[[${carrier.invoiceNumber}]]';
+        let code = '[[${item.code}]]';
+        let invoiceNumber = '[[${item.invoiceNumber}]]';
 
         console.log("택배사 code:", code);
         console.log("송장번호:", invoiceNumber);
@@ -145,6 +145,5 @@
         }
     });
 </script>
-
 </body>
 </html>

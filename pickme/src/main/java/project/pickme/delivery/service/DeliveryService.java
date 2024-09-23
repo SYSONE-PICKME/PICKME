@@ -39,15 +39,12 @@ public class DeliveryService {
 			deliveryFormDto.getInvoiceNumber(), deliveryFormDto.getCode(), "배송 준비 중", deliveryFormDto.getCourier());
 	}
 
-	public ItemInfoDto getItemInfo(long itemId) {
-		return deliveryMapper.getItemInfo(itemId);
+
+	public ItemInfoDto getDeliveryItemInfo(long itemId) {
+		return deliveryMapper.getDeliveryItemInfo(itemId);
 	}
 
 	public DeliveryInfoDto getDeliveryInfo(String userId) {
 		return deliveryMapper.getDeliveryInfo(userId);
-	}
-
-	public CarrierDto getCarrier(long itemId) {
-		return deliveryMapper.getTrackingInfo(itemId);
 	}
 }

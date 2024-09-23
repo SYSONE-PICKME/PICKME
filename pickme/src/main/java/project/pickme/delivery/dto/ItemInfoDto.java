@@ -10,4 +10,6 @@ public class ItemInfoDto {
 	private long price;
 	private String courier;
 	private String invoiceNumber;
+	private String code;
+
 }

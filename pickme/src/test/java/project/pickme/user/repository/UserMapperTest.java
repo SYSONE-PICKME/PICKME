@@ -14,6 +14,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.ActiveProfiles;
 
 import project.pickme.bid.dto.response.BidDto;
@@ -156,7 +158,8 @@ class UserMapperTest {
 		paymentMapper.save(SavePaymentDto.createOf(user.getId(), bidDto.getBidId()));	//포인트 차감
 
 	    // when
-		List<PointHistoryDto> pointHistory = userMapper.findPointHistory(user.getId());
+		Pageable pageable = PageRequest.of(0, 6);
+		List<PointHistoryDto> pointHistory = userMapper.findPointHistory(user.getId(), pageable);
 
 		// then
 		assertThat(pointHistory).hasSize(2)

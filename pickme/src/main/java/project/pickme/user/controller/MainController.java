@@ -11,7 +11,6 @@ import project.pickme.common.annotation.CurrentUser;
 import project.pickme.item.dto.FindItemDto;
 import project.pickme.item.service.FindItemService;
 import project.pickme.user.domain.Customs;
-import project.pickme.user.domain.User;
 
 @Controller
 @RequiredArgsConstructor
