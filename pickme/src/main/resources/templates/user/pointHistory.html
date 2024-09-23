@@ -8,41 +8,47 @@
     <link rel="stylesheet" th:href="@{/css/common/footer.css}">
     <link rel="stylesheet" th:href="@{/css/common/myPageSidebar.css}">
     <link rel="stylesheet" href="/css/user/pointHistory.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
 </head>
 <body>
 <div th:replace="~{fragments/header :: header}">header content</div>
-
 <main>
     <div class="container">
         <div th:replace="~{fragments/myPageSidebar :: sidebar}">sidebar content</div>
 
         <div class="content">
             <div class="page-title">포인트 사용 내역</div>
-            <div class="point-history">
-                <div class="history-item" th:each="pointHistory : ${pointHistory}" th:data-type="${pointHistory.type}">
-                    <div class="item-icon">
-                        <img th:src="${pointHistory.type == 1 ? '/images/chargeCoin.png' : '/images/paymentCoin.png'}"
-                             alt="icon"/>
-                    </div>
-                    <div class="details">
-                        <p class="price">
-                            <span class="price-type" th:text="${pointHistory.type == 1 ? '충전 금액: ' : '결제 금액: '}"></span>
-                            <span class="price-amount" th:text="${pointHistory.price}"></span> 원
-                        </p>
-                        <p>
-                            보유 포인트: <span class="current-point-amount" th:text="${pointHistory.currentPoint}"></span> 원
-                        </p>
-                    </div>
-                    <div class="date-box">
-                        <span class="date" th:text="${pointHistory.time}"></span>
-                    </div>
-                </div>
+            <div class="point-history" id="point-history-content">
+                <!-- 포인트 사용내역 -->
+            </div>
+            <div id="pagination" class="pagination">
+                <!-- 페이지네이션 -->
             </div>
         </div>
     </div>
 </main>
+
 <div th:replace="~{fragments/footer :: footer}">footer content</div>
-</body>
+
+<script id="history-template" type="text/x-handlebars-template">
+    <div class="history-item" data-type="{{type}}">
+        <div class="item-icon">
+            <img src="{{iconSrc}}" alt="icon"/>
+        </div>
+        <div class="details">
+            <p class="price {{priceClass}}">
+                <span class="price-type">{{typeText}}</span>
+                <span class="price-amount" style="{{priceStyle}}">{{price}}</span> 원
+            </p>
+            <p>보유 포인트: <span class="current-point-amount" style="color: #2EC44F">{{currentPoint}}</span> 원</p>
+        </div>
+        <div class="date-box">
+            <span class="date">{{time}}</span>
+        </div>
+    </div>
+</script>
 <script src="/js/user/myPage.js"></script>
 <script src="/js/user/pointHistory.js"></script>
+</body>
 </html>

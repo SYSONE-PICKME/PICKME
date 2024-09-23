@@ -57,6 +57,9 @@ dependencies {
 
 	//mail
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
+
+	//pageable
+	implementation 'org.springframework.data:spring-data-commons'
 }
 
 tasks.named('test') {

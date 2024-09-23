@@ -53,7 +53,7 @@
         where id = #{userId}
     </update>
 
-    <select id="findPointHistory" parameterType="String" resultType="project.pickme.user.dto.PointHistoryDto">
+    <select id="findPointHistory" parameterType="Map" resultType="project.pickme.user.dto.PointHistoryDto">
         select time,
                price,
                type,
@@ -70,6 +70,23 @@
               select charge_time as time, price, 1 as type
               from Charge
               where user_id = #{userId}) as history
-        order by time, type desc
+        order by time desc, type desc
+        limit #{pageable.pageSize} offset #{pageable.offset}
+    </select>
+
+    <select id="countTotalPointHistory" resultType="long">
+        select count(*)
+        from (
+                 select p.payment_time as time, price, 0 as type
+                 from Payment p
+                          left join Bid b on p.bid_id = b.bid_id and b.is_success = 1
+                 where p.user_id = #{userId}
+
+                 union
+
+                 select charge_time as time, price, 1 as type
+                 from Charge
+                 where user_id = #{userId}
+             ) as history
     </select>
 </mapper>

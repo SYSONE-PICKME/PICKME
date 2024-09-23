@@ -4,6 +4,9 @@ import static project.pickme.user.exception.UserErrorCode.*;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -52,8 +55,12 @@ public class UserService {
 		userMapper.updateMyInfo(updateInfoDto, user.getId());
 	}
 
-	public List<PointHistoryDto> showHistory(User user) {
-		return userMapper.findPointHistory(user.getId());
+	public Page<PointHistoryDto> showHistory(User user, Pageable pageable) {
+		List<PointHistoryDto> pointHistories = userMapper.findPointHistory(user.getId(), pageable);
+
+		long totalCount = userMapper.countTotalPointHistory(user.getId());
+
+		return new PageImpl<>(pointHistories, pageable, totalCount);
 	}
 
 	private User createUser(SignUpDto signUpDto) {

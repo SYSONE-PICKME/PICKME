@@ -50,10 +50,9 @@ public class UserController {
 		return "user/userInfoEditForm";
 	}
 
-	@GetMapping("/point/history")
+	@GetMapping("/point/historyForm")
 	public String showPointHistory(@CurrentUser User user, Model model) {
 		model.addAttribute("user", user);
-		model.addAttribute("pointHistory", userService.showHistory(user));
 
 		return "user/pointHistory";
 	}
