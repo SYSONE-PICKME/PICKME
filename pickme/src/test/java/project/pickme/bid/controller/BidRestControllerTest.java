@@ -30,7 +30,6 @@ import project.pickme.bid.dto.reqeust.SelectedBidDto;
 import project.pickme.bid.dto.response.BidDetailsDto;
 import project.pickme.bid.dto.response.PriceDto;
 import project.pickme.bid.service.BidService;
-import project.pickme.bid.service.MailService;
 import project.pickme.user.constant.Role;
 import project.pickme.user.domain.User;
 import project.pickme.user.repository.UserMapper;
