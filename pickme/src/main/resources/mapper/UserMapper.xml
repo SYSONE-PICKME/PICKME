@@ -70,8 +70,8 @@
               select charge_time as time, price, 1 as type
               from Charge
               where user_id = #{userId}) as history
-        order by time, type desc
-        LIMIT #{pageable.pageSize} OFFSET #{pageable.offset}
+        order by time desc, type desc
+        limit #{pageable.pageSize} offset #{pageable.offset}
     </select>
 
     <select id="totalPointHistoryCount" resultType="long">
