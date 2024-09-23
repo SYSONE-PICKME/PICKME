@@ -1,0 +1,70 @@
+/* 테이블 스타일 */
+#trackingTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+#trackingTable th, #trackingTable td {
+    padding: 12px 15px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+#trackingTable th {
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+#trackingTable tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+#trackingTable tr:nth-child(odd) {
+    background-color: #fff;
+}
+
+#trackingTable tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* 반응형 테이블 */
+@media screen and (max-width: 768px) {
+    #trackingTable th, #trackingTable td {
+        font-size: 14px;
+        padding: 10px;
+    }
+}
+
+/* 카드 스타일 */
+.product-card {
+    display: flex;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    padding: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.product-card img {
+    max-width: 150px;
+    margin-right: 15px;
+    border-radius: 8px;
+}
+
+.product-info h3 {
+    margin-top: 0;
+    color: #333;
+}
+
+.product-info p {
+    color: #666;
+    font-size: 14px;
+}
+
+/* 제목 스타일 */
+h1 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 30px;
+}
