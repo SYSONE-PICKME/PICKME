@@ -2,6 +2,7 @@ package project.pickme.bid.controller;
 
 import static org.hamcrest.Matchers.contains;
 import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -13,19 +14,23 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.BDDMockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.TestExecutionEvent;
 import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import project.pickme.bid.dto.reqeust.SelectedBidDto;
 import project.pickme.bid.dto.response.BidDetailsDto;
 import project.pickme.bid.dto.response.PriceDto;
 import project.pickme.bid.service.BidService;
+import project.pickme.bid.service.MailService;
 import project.pickme.user.constant.Role;
 import project.pickme.user.domain.User;
 import project.pickme.user.repository.UserMapper;
@@ -34,9 +39,12 @@ import project.pickme.user.repository.UserMapper;
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
 class BidRestControllerTest {
-	@Autowired MockMvc mockMvc;
-	@MockBean BidService bidService;
-	@Autowired UserMapper userMapper;
+	@Autowired private MockMvc mockMvc;
+	@Autowired private ObjectMapper objectMapper;
+	@Autowired private UserMapper userMapper;
+
+	@MockBean private BidService bidService;
+
 
 	@BeforeEach
 	void initUser(){
@@ -57,7 +65,7 @@ class BidRestControllerTest {
 		List<PriceDto> priceDtos = List.of(new PriceDto(1L, 1000, "testUser"));
 		BidDetailsDto bidDetailsDto = BidDetailsDto.createOf(priceDtos, 10000l);
 
-		BDDMockito.when(bidService.showBidDetails(anyLong(), any(User.class))).thenReturn(bidDetailsDto);
+		when(bidService.showBidDetails(anyLong(), any(User.class))).thenReturn(bidDetailsDto);
 
 	    // when // then
 		mockMvc.perform(get("/user/bid/details/{itemId}", itemId))
@@ -69,6 +77,23 @@ class BidRestControllerTest {
 			.andExpect(jsonPath("$.data.userId").value("testUser"))
 			.andExpect(jsonPath("$.data.bidId").value(1))
 			.andExpect(jsonPath("$.data.myPoint").value(10000));
+	}
+
+	@Test
+	@DisplayName("낙찰하는 컨트톨러")
+	@WithUserDetails(value = "testUser", userDetailsServiceBeanName = "userDetailServiceImpl", setupBefore = TestExecutionEvent.TEST_EXECUTION)
+	void endBid() throws Exception {
+	    // given
+		SelectedBidDto selectedBidDto = new SelectedBidDto(1l, 1l, "테스트 아이템", "test.png");
+		doNothing().when(bidService).selectBid(any(SelectedBidDto.class));
+
+	    // when // then
+		mockMvc.perform(post("/user/bid/end")
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(objectMapper.writeValueAsString(selectedBidDto)))
+			.andDo(print())
+			.andExpect(status().isOk())
+			.andExpect(jsonPath("$.success").value(true));
 	}
 
 	private static User createUser(String id) {
