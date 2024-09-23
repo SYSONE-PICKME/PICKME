@@ -64,16 +64,11 @@ public class CampaignService {
 	}
 
 	private String updateImage(CampaignDto campaignDto, Notice campaign) {
-		if (campaignDto.getImageFile() != null && !campaignDto.getImageFile().isEmpty()) {
-			if (campaign != null && campaign.getContent() != null) {
-				s3Service.deleteFile(campaign.getContent());
-			}
+		if (campaign != null && campaign.getContent() != null) {
+			s3Service.deleteFile(campaign.getContent());
 			return s3Service.uploadImage(campaignDto.getImageFile());
 		}
-		if (campaign != null && NoticeType.CAMPAIGN.equals(campaign.getType())) {
-			return campaign.getContent();
-		}
-		return null;
+		return s3Service.uploadImage(campaignDto.getImageFile());
 	}
 
 }
