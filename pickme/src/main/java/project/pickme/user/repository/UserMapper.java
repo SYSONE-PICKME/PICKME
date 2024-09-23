@@ -30,5 +30,5 @@ public interface UserMapper {
 
 	List<PointHistoryDto> findPointHistory(@Param("userId") String userId, @Param("pageable") Pageable pageable);
 
-	long totalPointHistoryCount(String userId);
+	long countTotalPointHistory(String userId);
 }

@@ -5,4 +5,17 @@
         select *
         from Law;
     </select>
+
+    <select id="findByItemId" parameterType="Long">
+        select
+        l.law_id as id,
+        l.title,
+        l.content
+
+        from Law l
+
+        join Item_law il
+        on l.law_id = il.law_id2
+        and il.item_id = #{itemId}
+    </select>
 </mapper>

@@ -9,4 +9,6 @@ import project.pickme.item.dto.LawDto;
 @Mapper
 public interface LawMapper {
 	List<LawDto> findAllLaws();
+
+	List<LawDto> findByItemId(Long itemId);
 }
