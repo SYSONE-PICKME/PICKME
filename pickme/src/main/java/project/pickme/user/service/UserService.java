@@ -2,6 +2,11 @@ package project.pickme.user.service;
 
 import static project.pickme.user.exception.UserErrorCode.*;
 
+import java.util.List;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,6 +16,7 @@ import project.pickme.common.exception.BusinessException;
 import project.pickme.user.constant.Role;
 import project.pickme.user.constant.Type;
 import project.pickme.user.domain.User;
+import project.pickme.user.dto.PointHistoryDto;
 import project.pickme.user.dto.UpdatePasswordDto;
 import project.pickme.user.dto.SignUpDto;
 import project.pickme.user.dto.UpdateInfoDto;
@@ -47,6 +53,14 @@ public class UserService {
 	@Transactional
 	public void updateInfo(UpdateInfoDto updateInfoDto, User user) {
 		userMapper.updateMyInfo(updateInfoDto, user.getId());
+	}
+
+	public Page<PointHistoryDto> showHistory(User user, Pageable pageable) {
+		List<PointHistoryDto> pointHistories = userMapper.findPointHistory(user.getId(), pageable);
+
+		long totalCount = userMapper.countTotalPointHistory(user.getId());
+
+		return new PageImpl<>(pointHistories, pageable, totalCount);
 	}
 
 	private User createUser(SignUpDto signUpDto) {

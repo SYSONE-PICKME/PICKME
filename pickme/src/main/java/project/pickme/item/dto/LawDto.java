@@ -8,4 +8,5 @@ import lombok.Getter;
 public class LawDto {
 	private long id;
 	private String title;
+	private String content;
 }

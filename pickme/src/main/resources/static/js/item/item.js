@@ -85,3 +85,30 @@ document.addEventListener('DOMContentLoaded', function () {
         ghostClass: 'blue-background-class'
     });
 });
+
+function toggleDropdown() {
+    document.getElementById('lawsDropdown').classList.toggle('open');
+}
+
+document.addEventListener('click', function(e) {
+    const dropdown = document.getElementById('lawsDropdown');
+    if (!dropdown.contains(e.target)) {
+        dropdown.classList.remove('open');
+    }
+});
+
+document.querySelectorAll('#dropdownContent input[type="checkbox"]').forEach(function(checkbox) {
+    checkbox.addEventListener('change', function() {
+        updateSelectedOptions();
+    });
+});
+
+function updateSelectedOptions() {
+    const selected = Array.from(document.querySelectorAll('#dropdownContent input[type="checkbox"]:checked'))
+        .map(function(checkbox) {
+            return checkbox.nextElementSibling.textContent;
+        });
+
+    const selectedText = selected.length > 0 ? selected.join(', ') : '선택된 법규 없음';
+    document.getElementById('selectedOptions').textContent = selectedText;
+}

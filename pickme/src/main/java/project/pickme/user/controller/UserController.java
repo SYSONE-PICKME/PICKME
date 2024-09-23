@@ -49,4 +49,11 @@ public class UserController {
 
 		return "user/userInfoEditForm";
 	}
+
+	@GetMapping("/point/historyForm")
+	public String showPointHistory(@CurrentUser User user, Model model) {
+		model.addAttribute("user", user);
+
+		return "user/pointHistory";
+	}
 }

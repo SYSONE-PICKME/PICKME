@@ -60,7 +60,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function updateBackgroundPosition() {
         const gridRect = productsGrid.getBoundingClientRect();
-        const centerY = window.innerHeight / 2;
         const offset = gridRect.top + gridRect.height -100;
         greenBackground.style.transform = `translateY(calc(-50% + ${offset}px))`;
     }

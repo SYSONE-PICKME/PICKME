@@ -112,11 +112,11 @@ function sendExitToServer(socket) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-    let socket = new WebSocket(`ws://192.168.0.157:8099/connect/${itemId}/${userId}`);
+    let socket = new WebSocket(`ws://localhost:8099/connect/${itemId}/${userId}`);
     socket.onopen = () => console.log("웹 소켓 open");
 
     const createSocketConnection = () => {
-        socket = new WebSocket(`ws://192.168.0.157:8099/connect/${itemId}/${userId}`);
+        socket = new WebSocket(`ws://localhost:8099/connect/${itemId}/${userId}`);
         socket.onopen = () => console.log("웹 소켓 open");
         socket.onmessage = handleSocketMessage;
         socket.onerror = (error) => console.log("에러 발생:", error);
