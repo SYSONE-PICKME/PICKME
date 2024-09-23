@@ -10,14 +10,13 @@
     <delete id="deleteLaw">
         delete
         from Item_law
-        where Item_id = #{id}
+        where item_id = #{id}
     </delete>
 
     <select id="findLawsByItemId">
         select law_id2 as lawId
         from Item_law
         where item_id = #{id}
-
     </select>
 
 </mapper>
