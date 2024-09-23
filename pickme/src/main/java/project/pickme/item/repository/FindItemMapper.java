@@ -14,8 +14,6 @@ import project.pickme.item.dto.OneBidItemDto;
 public interface FindItemMapper {
 	Optional<FindItemDto.GetOne> findById(@Param("id") Long id, @Param("userId") String currentUserId);
 
-	List<FindItemDto.GetAll> findAll();
-
 	List<FindItemDto.GetAll> findTop20();
 
 	Optional<Item> findItemById(Long itemId);
