@@ -22,11 +22,7 @@ public class ItemRestController {
 	@PatchMapping("/edit/{id}")
 	public ResponseEntity<?> updateItem(@PathVariable("id") long id,
 		@RequestBody UpdateItemFormDto form, @CurrentUser Customs customs) {
-		try {
-			itemService.updateItemByItemId(customs, form, id);
-			return ResponseEntity.ok().body("경매가 성공적으로 수정되었습니다.");
-		} catch (Exception e) {
-			return ResponseEntity.status(500).body("경매 수정에 실패했습니다: " + e.getMessage());
-		}
+		itemService.updateItemByItemId(customs, form, id);
+		return ResponseEntity.ok().body("경매가 성공적으로 수정되었습니다.");
 	}
 }
