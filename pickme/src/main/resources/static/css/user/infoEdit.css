@@ -72,7 +72,7 @@ form {
     margin-bottom: 20px;
 }
 
-button {
+.cancel-btn, .submit-btn {
     padding: 10px 20px;
     font-size: 1rem;
     border: none;
