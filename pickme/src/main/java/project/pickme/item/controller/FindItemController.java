@@ -34,8 +34,7 @@ public class FindItemController {
 	public String getAllItems(
 		@CurrentUser User user,
 		@RequestParam(name = "category", required = false, defaultValue = "all") String category,
-		Model model
-	) {
+		Model model) {
 		List<FindItemDto.GetAll> items = itemService.findAll(user.getId(), category);
 		model.addAttribute("items", items);
 

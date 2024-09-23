@@ -53,7 +53,7 @@
             </div>
         </div>
         <div class="product-grid">
-            <div class="product-card" th:each="item : ${items}" th:data-status="${item.status}">
+            <div class="product-card" th:each="item : ${items}" th:data-status="${item.status}" th:data-item-id="${item.id}">
                 <span class="status-label" th:classappend="${item.status == 'OPEN' ? 'status-open' : (item.status == 'NOT_OPEN' ? 'status-not-open' : 'status-closed')}"
                       th:text="${item.status == 'OPEN' ? '진행중' : (item.status == 'NOT_OPEN' ? '진행 예정' : '마감')}">진행중</span>
                 <button id="likeButton" class="heart" type="button" th:data-liked="${item.isLiked}" th:data-item-id="${item.id}" th:data-action-url="@{/user/item/{id}/like(id=${item.id})}">
