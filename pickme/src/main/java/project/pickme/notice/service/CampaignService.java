@@ -38,7 +38,7 @@ public class CampaignService {
 
 	@Transactional
 	public Long createCampaign(CampaignDto campaignDto, Customs customs) throws IOException {
-		String imageUrl = processImageUpload(campaignDto, null);
+		String imageUrl = updateImage(campaignDto, null);
 		Notice notice = campaignDto.toEntity(customs, imageUrl);
 		noticeMapper.insert(notice);
 		return notice.getId();
@@ -47,7 +47,7 @@ public class CampaignService {
 	@Transactional
 	public void updateCampaign(CampaignDto campaignDto, Customs customs) throws IOException {
 		Notice campaign = noticeMapper.selectById(campaignDto.getId());
-		String imageUrl = processImageUpload(campaignDto, campaign);
+		String imageUrl = updateImage(campaignDto, campaign);
 		Notice notice = campaignDto.toEntity(customs, imageUrl);
 		noticeMapper.update(notice);
 	}
@@ -63,7 +63,7 @@ public class CampaignService {
 		return customsMapper.findByCustomsId(customsId).get();        // todo: Optional은 예외처리 해야한다고 함
 	}
 
-	private String processImageUpload(CampaignDto campaignDto, Notice campaign) {
+	private String updateImage(CampaignDto campaignDto, Notice campaign) {
 		if (campaignDto.getImageFile() != null && !campaignDto.getImageFile().isEmpty()) {
 			if (campaign != null && campaign.getContent() != null) {
 				s3Service.deleteFile(campaign.getContent());
