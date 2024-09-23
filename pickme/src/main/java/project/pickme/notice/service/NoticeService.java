@@ -1,5 +1,7 @@
 package project.pickme.notice.service;
 
+import static project.pickme.user.exception.UserErrorCode.*;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,6 +13,7 @@ import com.amazonaws.services.s3.AmazonS3Client;
 
 import lombok.RequiredArgsConstructor;
 import project.pickme.common.annotation.CurrentUser;
+import project.pickme.common.exception.BusinessException;
 import project.pickme.notice.converter.NoticeConverter;
 import project.pickme.notice.domain.Notice;
 import project.pickme.notice.dto.CampaignDto;
@@ -56,6 +59,6 @@ public class NoticeService {
 	}
 
 	private Customs getCustomsById(String customsId) {
-		return customsMapper.findByCustomsId(customsId).get();            //todo: 예외처리 해야함
+		return customsMapper.findByCustomsId(customsId).orElseThrow(() -> new BusinessException(NOT_FOUND_CUSTOMS));
 	}
 }

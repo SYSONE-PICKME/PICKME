@@ -1,5 +1,7 @@
 package project.pickme.notice.service;
 
+import static project.pickme.user.exception.UserErrorCode.*;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -8,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 import project.pickme.common.annotation.CurrentUser;
+import project.pickme.common.exception.BusinessException;
 import project.pickme.notice.constant.NoticeType;
 import project.pickme.notice.converter.CampaignConverter;
 import project.pickme.notice.domain.Notice;
@@ -59,7 +62,7 @@ public class CampaignService {
 	}
 
 	private Customs getCustomsById(String customsId) {
-		return customsMapper.findByCustomsId(customsId).get();        // todo: Optional은 예외처리 해야한다고 함
+		return customsMapper.findByCustomsId(customsId).orElseThrow(() -> new BusinessException(NOT_FOUND_CUSTOMS));	//todo: notice에서도 똑같이 사용되니 추후 수정
 	}
 
 	private String updateImage(CampaignDto campaignDto, Notice campaign) {
