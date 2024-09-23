@@ -58,7 +58,7 @@ public class UserService {
 	public Page<PointHistoryDto> showHistory(User user, Pageable pageable) {
 		List<PointHistoryDto> pointHistories = userMapper.findPointHistory(user.getId(), pageable);
 
-		long totalCount = userMapper.totalPointHistoryCount(user.getId());
+		long totalCount = userMapper.countTotalPointHistory(user.getId());
 
 		return new PageImpl<>(pointHistories, pageable, totalCount);
 	}

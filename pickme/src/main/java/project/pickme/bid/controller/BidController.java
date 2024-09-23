@@ -20,6 +20,7 @@ public class BidController {
 	public String successfulBidList(@CurrentUser User user, Model model) {
 		model.addAttribute("user", user);
 		model.addAttribute("successfulBidList", bidService.findMySuccessfulBid(user));
+		model.addAttribute("user", user.getId());
 
 		return "bid/mySuccessfulBidList";
 	}

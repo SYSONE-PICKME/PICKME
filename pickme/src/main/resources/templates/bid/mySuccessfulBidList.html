@@ -9,6 +9,7 @@
     <link rel="stylesheet" th:href="@{/css/common/header.css}">
     <link rel="stylesheet" th:href="@{/css/common/footer.css}">
     <link rel="stylesheet" th:href="@{/css/common/myPageSidebar.css}">
+
     <link rel="stylesheet" th:href="@{/css/item/list.css}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -53,5 +54,12 @@
 
 <div th:replace="~{fragments/footer :: footer}">footer content</div>
 <script src="/js/user/myPage.js"></script>
+<script>
+    function viewDeliveryStatus(buttonElement) {
+        const itemId = encodeURIComponent(buttonElement.getAttribute('data-item-id'));
+        const userId = encodeURIComponent(buttonElement.getAttribute('data-user-id'));
+        window.location.href = `/user/delivery/status?itemId=${itemId}&userId=${userId}`;
+    }
+</script>
 </body>
 </html>

@@ -23,6 +23,7 @@ import project.pickme.user.service.UserService;
 @RequestMapping("/user")
 @RequiredArgsConstructor
 public class UserRestController {
+	private static final int DEFAULT_PAGE_SIZE = 6;
 	private final UserService userService;
 
 	/**
@@ -74,7 +75,7 @@ public class UserRestController {
 	 * @return 포인트 사용내역, 누적합계 정보
 	 */
 	@GetMapping("/point/history")
-	public BaseResponse<?> showPointHistory(@CurrentUser User user, @PageableDefault(size = 6, page = 0) Pageable pageable) {
+	public BaseResponse<?> showPointHistory(@CurrentUser User user, @PageableDefault(size = DEFAULT_PAGE_SIZE, page = 0) Pageable pageable) {
 		Page<PointHistoryDto> pointHistories = userService.showHistory(user, pageable);
 		return BaseResponse.ok(pointHistories);
 	}
