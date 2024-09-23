@@ -1,7 +1,9 @@
 package project.pickme.item.dto;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.AllArgsConstructor;
@@ -20,7 +22,9 @@ public class ItemFormDto {
 	private int code;
 	private Type type;
 	private long price;
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
 	private LocalDateTime startTime;
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
 	private LocalDateTime endTime;
 	private long[] lawId;
 }
