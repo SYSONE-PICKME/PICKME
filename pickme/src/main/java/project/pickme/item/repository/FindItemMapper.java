@@ -16,9 +16,11 @@ public interface FindItemMapper {
 
 	List<FindItemDto.GetAll> findAll();
 
+	List<FindItemDto.GetAll> findTop20();
+
 	Optional<Item> findItemById(Long itemId);
 
 	OneBidItemDto findItemByIdWithImage(Long itemId);
 
-	List<FindItemDto.GetAll> findAll(String userId);
+	List<FindItemDto.GetAll> findAll(@Param("userId") String userId, @Param("category") String category);
 }

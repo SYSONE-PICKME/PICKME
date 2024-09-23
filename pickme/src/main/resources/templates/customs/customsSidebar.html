@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>사이드바</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/customs/customsSidebar.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+<div th:fragment="sidebar">
+    <div class="sidebar-container">
+        <div class="sidebar-header" onclick="toggleMenu()">
+            <i class="fas fa-compress-alt"></i>목록 바로가기
+        </div>
+        <ul class="sidebar-menu" id="sidebarMenu">
+            <li th:onclick="|location.href='@{/customs/items}'|"><a href="#" class="menu-list">경매 목록 조회</a></li>
+            <li th:onclick="|location.href='@{/customs/items/new}'|"><a class="menu-list">새 경매 등록</a></li>
+            <li><a href="#" class="menu-list">유찰 경매 조회</a></li>
+            <div class="sidebar-blank"></div>
+        </ul>
+    </div>
+    <script src="/js/customs/customsSidebar.js"></script>
+</div>
+</body>
+</html>

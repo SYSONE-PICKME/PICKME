@@ -20,8 +20,8 @@ public class MainController {
 	private final FindItemService itemService;
 
 	@GetMapping("/user/main")
-	public String showMain(@CurrentUser User user, Model model) {
-		List<FindItemDto.GetAll> items = itemService.findAll(user.getId());
+	public String showMain(Model model) {
+		List<FindItemDto.GetAll> items = itemService.findTop20();
 		model.addAttribute("items", items);
 		return "index";
 	}

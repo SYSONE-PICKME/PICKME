@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import lombok.RequiredArgsConstructor;
 import project.pickme.item.dto.OneBidItemDto;
@@ -30,8 +31,12 @@ public class FindItemController {
 	}
 
 	@GetMapping("/list")
-	public String getAllItems(@CurrentUser User user, Model model) {
-		List<FindItemDto.GetAll> items = itemService.findAll(user.getId());
+	public String getAllItems(
+		@CurrentUser User user,
+		@RequestParam(name = "category", required = false, defaultValue = "all") String category,
+		Model model
+	) {
+		List<FindItemDto.GetAll> items = itemService.findAll(user.getId(), category);
 		model.addAttribute("items", items);
 
 		return "item/list";

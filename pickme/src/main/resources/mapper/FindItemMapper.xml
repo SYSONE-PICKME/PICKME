@@ -101,6 +101,29 @@
         and m.user_id = #{userId}
     </select>
 
+    <select id = "findTop20" parameterType="string" resultType="project.pickme.item.dto.FindItemDto$GetAll">
+        select
+            i.item_id as id,
+            i.name,
+            i.price,
+            i.start_time as startTime,
+            i.end_time as endTime,
+            i.status,
+            img.url as imgUrl
+        from
+            Item i
+        join
+            Image img
+        on
+            i.item_id = img.item_id
+            and img.seq = 0
+        where
+            status != 'CLOSED'
+        order by
+            endTime asc
+        limit 20
+    </select>
+
     <select id="findItemByIdWithImage" parameterType="long" resultType="project.pickme.item.dto.OneBidItemDto">
         select it.item_id    as itemId,
                im.url        as imageUrl,

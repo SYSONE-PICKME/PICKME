@@ -5,4 +5,8 @@
         insert into Charge(user_id, price, charge_time)
         values(#{userId}, #{price}, #{chargeTime})
     </insert>
+
+    <delete id="deleteAll">
+        delete from Charge
+    </delete>
 </mapper>
