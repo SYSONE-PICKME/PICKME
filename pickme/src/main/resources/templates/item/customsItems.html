@@ -4,20 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PICKME</title>
+    <link rel="stylesheet" th:href="@{/css/customs/customsSidebar.css}">
     <link rel="stylesheet" th:href="@{/css/customs/customsHeader.css}">
     <link rel="stylesheet" th:href="@{/css/common/footer.css}">
     <link rel="stylesheet" th:href="@{/css/item/list.css}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap"
-          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="/css/bid/success.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
 <!-- 헤더 -->
 <div th:replace="~{customs/customsHeader :: header}">header content</div>
+<div th:replace="~{customs/customsSidebar :: sidebar}"></div>
 
 <!-- 메인 -->
 <main th:style="'margin-bottom: 20px;'">

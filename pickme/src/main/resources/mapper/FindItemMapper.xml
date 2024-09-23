@@ -72,7 +72,7 @@
         c.id, c.name, c.tel, m.like_id, m.status
     </select>
 
-    <select id = "findAll" parameterType="map" resultType="project.pickme.item.dto.FindItemDto$GetAll">
+    <select id = "findAll" parameterType="string" resultType="project.pickme.item.dto.FindItemDto$GetAll">
         select
         i.item_id as id,
         i.name,
@@ -91,7 +91,6 @@
         from
         Item i
 
-        -- Join Image table
         join Image img
         on i.item_id = img.item_id
         and img.seq = 0
@@ -100,20 +99,29 @@
         left join Mine m
         on i.item_id = m.item_id
         and m.user_id = #{userId}
+    </select>
 
-        <if test="category != 'all'">
-            -- Join Category table
-            join Category c
-            on i.code = c.code
-            and c.name = #{category}
-        </if>
-
+    <select id = "findTop20" parameterType="string" resultType="project.pickme.item.dto.FindItemDto$GetAll">
+        select
+            i.item_id as id,
+            i.name,
+            i.price,
+            i.start_time as startTime,
+            i.end_time as endTime,
+            i.status,
+            img.url as imgUrl
+        from
+            Item i
+        join
+            Image img
+        on
+            i.item_id = img.item_id
+            and img.seq = 0
+        where
+            status != 'CLOSED'
         order by
-        case
-        when i.status in ('NOT_OPEN', 'OPEN') then 0
-        else 1
-        end,
-        i.end_time asc;
+            endTime asc
+        limit 20
     </select>
 
     <select id="findItemByIdWithImage" parameterType="long" resultType="project.pickme.item.dto.OneBidItemDto">

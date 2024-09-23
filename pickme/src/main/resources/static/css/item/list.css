@@ -59,8 +59,14 @@ body {
 }
 
 .auction-list {
-    max-width: 1200px;
+    max-width: 1000px;
     margin: 0 auto;
+}
+
+.header-section {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
 .product-card.closed {
@@ -68,13 +74,15 @@ body {
 }
 
 h2 {
+    width: 150px;
     font-size: 24px;
     margin-right: 0;
     margin-bottom: 20px;
 }
 
 .toggle-switch {
-    display: inline-block;
+    display: flex;
+    align-items: center;
     margin-left: 20px;
     margin-bottom: 20px;
 }
@@ -91,6 +99,7 @@ h2 {
     position: relative;
     display: inline-block;
     cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 .toggle-switch label::before {
@@ -103,6 +112,10 @@ h2 {
     top: 1px;
     left: 1px;
     transition: 0.3s;
+}
+
+.toggle-switch input[type="checkbox"]:checked + label {
+    background-color: #2EC44F; /* 체크된 상태의 배경색 */
 }
 
 .toggle-switch input[type="checkbox"]:checked + label::before {
@@ -121,6 +134,7 @@ h2 {
     border-radius: 10px;
     overflow: hidden;
     transition: transform 0.3s;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
     margin-bottom: 30px;
 }
 

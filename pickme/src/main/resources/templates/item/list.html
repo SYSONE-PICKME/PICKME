@@ -36,6 +36,7 @@
 <main>
     <nav class="category">
         <ul>
+            <li><a th:href="@{/user/item/list}"><img th:src="@{/images/all.png}">#전체</a></li>
             <li><a th:href="@{/user/item/list(category='의류')}"><img th:src="@{/images/clothes.png}">#의류</a></li>
             <li><a th:href="@{/user/item/list(category='생활용품')}"><img th:src="@{/images/tableware.png}">#생활용품</a></li>
             <li><a th:href="@{/user/item/list(category='디지털')}"><img th:src="@{/images/fridge.png}">#디지털</a></li>
@@ -46,7 +47,7 @@
 
     <div class="auction-list">
         <div class="header-section">
-            <h2>모든 경매 물품</h2>
+            <h2 id="title">모든 경매 물품</h2>
             <div class="toggle-switch">
                 <input type="checkbox" id="toggle" onchange="filterItems()">
                 <label for="toggle"></label>
