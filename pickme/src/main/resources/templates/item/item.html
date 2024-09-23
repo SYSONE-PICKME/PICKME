@@ -33,6 +33,7 @@
     <script th:src="@{/js/item/image.js}"></script>
     <script th:src="@{/js/item/like.js}"></script>
     <script th:src="@{/js/item/countdown.js}"></script>
+    <script th:src="@{/js/item/unit.js}"></script>
 </head>
 <body>
 <!-- 헤더 -->
@@ -125,6 +126,61 @@
                     <span th:text="${item.customsTel}"></span>
                 </div>
                 <img id="contact-img" src="/images/department.png">
+            </div>
+        </div>
+
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="unit-title">경매 호가표 안내</h2>
+                    <span class="close-button">&times;</span>
+                </div>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>현재가 구간(원)</th>
+                        <th>호가 단위(원)</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>~ 100만 미만</td>
+                        <td>50,000</td>
+                    </tr>
+                    <tr>
+                        <td>100만 이상 ~ 200만 미만</td>
+                        <td>100,000</td>
+                    </tr>
+                    <tr>
+                        <td>200만 이상 ~ 400만 미만</td>
+                        <td>200,000</td>
+                    </tr>
+                    <tr>
+                        <td>400만 이상 ~ 1,000만 미만</td>
+                        <td>300,000</td>
+                    </tr>
+                    <tr>
+                        <td>1,000만 이상 ~ 2,000만 미만</td>
+                        <td>500,000</td>
+                    </tr>
+                    <tr>
+                        <td>2,000만 이상 ~ 3,000만 미만</td>
+                        <td>1,000,000</td>
+                    </tr>
+                    <tr>
+                        <td>3,000만 이상 ~ 5,000만 미만</td>
+                        <td>2,000,000</td>
+                    </tr>
+                    <tr>
+                        <td>5,000만 이상 ~ 1억 미만</td>
+                        <td>3,000,000</td>
+                    </tr>
+                    <tr>
+                        <td>1억 이상 ~ 2억 미만</td>
+                        <td>5,000,000</td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
