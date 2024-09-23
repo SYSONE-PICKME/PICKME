@@ -117,7 +117,11 @@
         on
             i.item_id = img.item_id
             and img.seq = 0
-        limit 20;
+        where
+            status != 'CLOSED'
+        order by
+            endTime asc
+        limit 20
     </select>
 
     <select id="findItemByIdWithImage" parameterType="long" resultType="project.pickme.item.dto.OneBidItemDto">
