@@ -14,11 +14,12 @@
 
     <!-- iamport -->
     <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 
     <!-- font -->
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap"
+          rel="stylesheet">
 
     <!-- icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
@@ -36,64 +37,65 @@
     <div class="container" th:object="${user}">
         <div th:replace="~{fragments/myPageSidebar :: sidebar}">sidebar content</div>
         <div class="content">
-                <input type="hidden" id="userId" th:value="${user.id}">
-                <h2>포인트 충전</h2>
-                <hr>
+            <input type="hidden" id="userId" th:value="${user.id}">
+            <div class="page-title">포인트 충전</div>
 
-                <!-- 충전 전/후 포인트 표시 -->
-                <div class="points-display">
-                    <div class="current-points">
-                        <p>충전할 포인트</p>
-                        <div id="chargeAmount"></div>
-                    </div>
-                    <div class="icon">
-                        <img class="next-arrow" th:src="@{/images/next.png}" alt="포인트" src=""/>
-                    </div>
-                    <div class="updated-points">
-                        <p>충전 후 포인트</p>
-                        <div id="updatedPoints" th:data-point="${user.point}" th:text="${user.point}"></div> <!-- 충전 후 포인트 -->
-                    </div>
+            <!-- 충전 전/후 포인트 표시 -->
+            <div class="points-display">
+                <div class="current-points">
+                    <p>충전할 포인트</p>
+                    <div id="chargeAmount"></div>
                 </div>
-
-                <!-- 충전 금액 선택 -->
-                <div class="amount-select">
-                    <p class="chargeAmount">충전할 금액</p>
-                    <div class="amount-options">
-                        <label class="radio-button">
-                            <input type="radio" name="chargeAmount" value="10000" checked>
-                            <span class="custom-radio">10,000 P</span>
-                        </label>
-
-                        <label class="radio-button">
-                            <input type="radio" name="chargeAmount" value="50000">
-                            <span class="custom-radio">50,000 P</span>
-                        </label>
-
-                        <label class="radio-button">
-                            <input type="radio" name="chargeAmount" value="100000">
-                            <span class="custom-radio">100,000 P</span>
-                        </label>
-
-                        <label class="radio-button">
-                            <input type="radio" name="chargeAmount" value="200000">
-                            <span class="custom-radio">200,000 P</span>
-                        </label>
-
-                        <label class="radio-button">
-                            <input type="radio" name="chargeAmount" value="500000">
-                            <span class="custom-radio">500,000 P</span>
-                        </label>
-
-                        <label class="radio-button">
-                            <input type="radio" name="chargeAmount" value="1000000">
-                            <span class="custom-radio">1,000,000 P</span>
-                        </label>
-                    </div>
+                <div class="icon">
+                    <img class="next-arrow" th:src="@{/images/next.png}" alt="포인트" src=""/>
                 </div>
-
-                <!-- 충전하기 버튼 -->
-                <button id="chargeButton" class="charge-btn">충전하기</button>
+                <div class="updated-points">
+                    <p>충전 후 포인트</p>
+                    <div id="updatedPoints" th:data-point="${user.point}" th:text="${user.point}"></div>
+                    <!-- 충전 후 포인트 -->
+                </div>
             </div>
+
+            <!-- 충전 금액 선택 -->
+            <div class="amount-select">
+                <p class="chargeAmount">충전 포인트 선택</p>
+                <hr>
+                <div class="amount-options">
+                    <label class="radio-button">
+                        <input type="radio" name="chargeAmount" value="10000" checked>
+                        <span class="custom-radio">10,000 P</span>
+                    </label>
+
+                    <label class="radio-button">
+                        <input type="radio" name="chargeAmount" value="50000">
+                        <span class="custom-radio">50,000 P</span>
+                    </label>
+
+                    <label class="radio-button">
+                        <input type="radio" name="chargeAmount" value="100000">
+                        <span class="custom-radio">100,000 P</span>
+                    </label>
+
+                    <label class="radio-button">
+                        <input type="radio" name="chargeAmount" value="200000">
+                        <span class="custom-radio">200,000 P</span>
+                    </label>
+
+                    <label class="radio-button">
+                        <input type="radio" name="chargeAmount" value="500000">
+                        <span class="custom-radio">500,000 P</span>
+                    </label>
+
+                    <label class="radio-button">
+                        <input type="radio" name="chargeAmount" value="1000000">
+                        <span class="custom-radio">1,000,000 P</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- 충전하기 버튼 -->
+            <button id="chargeButton" class="charge-btn">충전</button>
+        </div>
     </div>
 </main>
 <div th:replace="~{fragments/footer :: footer}">footer content</div>

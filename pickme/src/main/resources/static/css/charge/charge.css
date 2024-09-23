@@ -14,12 +14,11 @@ body {
     max-height: 850px;
 }
 
-h2 {
-    text-align: left;
-    margin-top: 10px;
-    margin-bottom: 15px;
-    font-weight: 500;
-    margin-left: 40px;
+.page-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
 }
 
 hr {
@@ -33,6 +32,8 @@ hr {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
 }
 
 .current-points, .updated-points {
@@ -41,7 +42,7 @@ hr {
     text-overflow: ellipsis;
     width: 40%;
     text-align: center;
-    background-color: #F1F1F1;
+    background-color: #f9f9f9;
     border-radius: 20px;
     padding: 15px;
     margin-top: 20px;
@@ -81,8 +82,6 @@ hr {
 .amount-options {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 10px;
-
 }
 
 .radio-button {
@@ -100,8 +99,8 @@ input[type="radio"] {
     width: 65%;
     display: flex;
     padding: 10px 40px;
-    border: 3px solid #ddd;
-    border-radius: 35px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
     font-size: clamp(8px, 1.2vw, 24px);
     font-weight: 300;
     color: #333;
@@ -116,10 +115,10 @@ input[type="radio"] {
 .custom-radio::before {
     content: "";
     display: inline-block;
-    width: 1.4vw;
-    height: 1.4vw;
+    width: 1vw;
+    height: 1vw;
     border-radius: 50%;
-    border: 2px solid #ccc;
+    border: 3px solid #ccc;
     margin-right: 10px;
     align-self: center;
     transition: all 0.3s ease;
@@ -127,15 +126,13 @@ input[type="radio"] {
 }
 
 .radio-button input[type="radio"]:checked + .custom-radio {
-    background-color: #e0f7e0;
+    background-color: #F6FFF8;
     border-color: #2EC44F;
     color: #333;
 }
 
 .radio-button input[type="radio"]:checked + .custom-radio::before {
     background-color: #2EC44F;
-    border-color: #66bb6a;
-    background-image: url('/images/accept.png');
     background-size: 12px;
     background-position: center;
     background-repeat: no-repeat;
@@ -152,13 +149,13 @@ input[type="radio"] {
 .charge-btn {
     font-family: "IBM Plex Sans KR", sans-serif;
     display: block;
-    width: 35%;
-    height: 60px;
+    width: 94%;
+    height: 50px;
     padding: 10px;
     background-color: #2EC44F;
     color: white;
     border: none;
-    border-radius: 30px;
+    border-radius: 10px;
     font-size: 1.4rem;
     cursor: pointer;
     transition: background-color 0.3s ease;
