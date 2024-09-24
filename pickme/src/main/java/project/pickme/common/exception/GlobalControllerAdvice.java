@@ -14,7 +14,7 @@ public class GlobalControllerAdvice {
 	@ExceptionHandler(NoHandlerFoundException.class)
 	@ResponseStatus(HttpStatus.NOT_FOUND)
 	public String handle404() {
-		return "/error/404";
+		return "error/404";
 	}
 
 	@ExceptionHandler(NoSuchElementException.class)
