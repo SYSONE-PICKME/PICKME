@@ -42,10 +42,9 @@
                 <button class="signup-btn" th:onclick="|location.href='@{/user/signUpForm}'|">회원가입</button>
             </th:block>
             <th:block sec:authorize="isAuthenticated()">
-                <button class="logout-btn" th:onclick="|location.href='@{/logout}'|">로그아웃</button>
+                <button class="logout-btn" th:onclick="|location.href='@{/user/loginForm}'|">로그아웃</button>
             </th:block>
         </div>
-
     </nav>
 </header>
 </body>
