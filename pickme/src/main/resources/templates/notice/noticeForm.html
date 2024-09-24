@@ -19,9 +19,8 @@
     <h1 th:text="${isEditing != null && isEditing ? '공지 수정' : '새 공지 등록'}">새 공지 등록</h1>
 </div>
 <div class="card">
-    <form id="noticeForm"
-          th:action="${isEditing != null && isEditing && notice != null ? '/customs/notices/' + notice.id : '/customs/notices/create'}"
-          method="post" enctype="multipart/form-data">
+    <form th:action="${isEditing ? '/customs/notices/' + (notice != null ? notice.id : '') : '/customs/notices/create'}"
+          method="post" enctype="multipart/form-data" id="noticeForm">
         <input type="hidden" name="_method" value="PUT" th:if="${isEditing}">
         <input type="hidden" name="id" th:if="${isEditing && notice != null}" th:value="${notice.id}">
         <div class="form-group">

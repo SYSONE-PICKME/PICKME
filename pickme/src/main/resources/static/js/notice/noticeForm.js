@@ -5,16 +5,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const formData = new FormData(form);
         const url = form.getAttribute('action');
-        const isEditing = url.includes('/customs/notices/') && !url.endsWith('/create');
-
-        const requestData = isEditing ? JSON.stringify(Object.fromEntries(formData)) : formData;
+        const isEditing = form.getAttribute('action').match(/\/customs\/notices\/\d+$/);
 
         $.ajax({
             url: url,
-            type: 'PUT',
-            data: requestData,
+            type: isEditing ? 'PUT' : 'POST',
+            data: formData,
             processData: false,
-            contentType: isEditing ? 'application/json' : false,
+            contentType: false,
             success: function(response) {
                 if (response.success) {
                     const noticeId = isEditing ? url.split('/').pop() : response.data;
