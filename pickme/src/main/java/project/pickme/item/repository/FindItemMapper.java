@@ -21,4 +21,6 @@ public interface FindItemMapper {
 	OneBidItemDto findItemByIdWithImage(Long itemId);
 
 	List<FindItemDto.GetAll> findAll(@Param("userId") String userId, @Param("category") String category);
+
+	List<FindItemDto.WishList> findWishList(String userId);
 }
