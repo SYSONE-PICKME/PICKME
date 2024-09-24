@@ -11,7 +11,7 @@ function loadPointHistory(page, size) {
         success: function(data) {
             if (data.success) {
                 updatePointHistoryContent(data.data.content);
-                updatePagination(data.data);
+                updatePagination(data.data, 'loadPointHistory', size);
             } else {
                 console.error('포인트 내역을 불러오는데 실패했습니다.');
             }

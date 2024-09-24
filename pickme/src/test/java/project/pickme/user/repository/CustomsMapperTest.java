@@ -14,6 +14,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.ActiveProfiles;
 
 import project.pickme.bid.dto.response.BidDto;
@@ -86,7 +88,8 @@ class CustomsMapperTest {
 		createIncome();
 
 		// when
-		List<IncomeDto> incomeDtos = customsMapper.findIncomeItemById(customsId);
+		Pageable pageable = PageRequest.of(0, 6);
+		List<IncomeDto> incomeDtos = customsMapper.findIncomeItemById(customsId, pageable);
 
 		// then
 		assertThat(incomeDtos).hasSize(2)

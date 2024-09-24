@@ -1,15 +1,17 @@
 document.addEventListener("DOMContentLoaded", function() {
-    loadIncomeHistory();
+    loadIncomeHistory(0, 7);
 });
 
-function loadIncomeHistory() {
+function loadIncomeHistory(page, size) {
     $.ajax({
         url: '/customs/income',
         method: 'GET',
+        data: { page: page, size: size },
         contentType: 'application/json',
         success: function(data) {
             if (data.success) {
-                updateIncomeContent(data.data);
+                updateIncomeContent(data.data.content);
+                updatePagination(data.data, 'loadIncomeHistory', size);
             } else {
                 console.error('수입을 불러오는데 실패했습니다.');
             }

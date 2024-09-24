@@ -1,7 +1,6 @@
 package project.pickme.user.controller;
 
-import java.util.List;
-
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,13 +18,13 @@ import project.pickme.user.service.CustomsService;
 @RequestMapping("/customs")
 @RequiredArgsConstructor
 public class CustomsRestController {
-	private final static int DEFAULT_PAGE_SIZE = 6;
+	private final static int DEFAULT_PAGE_SIZE = 7;
 	private final CustomsService customsService;
 
 	@GetMapping("/income")
-	public BaseResponse<?> findIncome(@CurrentUser Customs customs){
-		List<IncomeDto> incomeDtos = customsService.findIncome(customs.getId());
+	public BaseResponse<?> findIncome(@CurrentUser Customs customs, @PageableDefault(size = DEFAULT_PAGE_SIZE) Pageable pageable) {
+		Page<IncomeDto> incomes = customsService.findIncome(customs.getId(), pageable);
 
-		return BaseResponse.ok(incomeDtos);
+		return BaseResponse.ok(incomes);
 	}
 }

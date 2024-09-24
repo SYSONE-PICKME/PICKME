@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.context.annotation.Profile;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -34,8 +36,10 @@ public class CustomsService {
 		}
 	}
 
-	public List<IncomeDto> findIncome(String customsId) {
-		List<IncomeDto> incomeDtos = customsMapper.findIncomeItemById(customsId);
-		return incomeDtos;
+	public Page<IncomeDto> findIncome(String customsId, Pageable pageable) {
+		List<IncomeDto> incomes = customsMapper.findIncomeItemById(customsId, pageable);
+		long totalCount = customsMapper.countTotalIncome(customsId);
+
+		return new PageImpl<>(incomes, pageable, totalCount);
 	}
 }

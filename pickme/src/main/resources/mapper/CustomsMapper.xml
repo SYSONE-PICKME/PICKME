@@ -30,7 +30,7 @@
         from Customs
     </delete>
 
-    <select id="findIncomeItemById" parameterType="String" resultType="project.pickme.user.dto.customs.IncomeDto">
+    <select id="findIncomeItemById" parameterType="Map" resultType="project.pickme.user.dto.customs.IncomeDto">
         select url                                                                                  as itemImage,
                name                                                                                 as itemName,
                price                                                                                as income,
@@ -54,5 +54,16 @@
                             on m.item_id = item.item_id
                                 and m.seq = 0) as income
         order by end_time desc
+        limit #{pageable.pageSize} offset #{pageable.offset}
+    </select>
+
+    <select id="countTotalIncome" resultType="long">
+        select count(*)
+        from Bid b
+        where b.item_id in (select item_id
+                            from Item
+                            where customs_id = #{id}
+                            and status = 'CLOSED')
+        and b.is_success = 1;
     </select>
 </mapper>
