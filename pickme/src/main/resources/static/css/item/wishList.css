@@ -1,0 +1,114 @@
+.wishlist-item {
+    display: flex;
+    align-items: flex-start; /* 아이템을 수직 정렬 */
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin: 15px 0; /* 아이템 간의 간격 */
+    padding: 15px; /* 내부 여백 */
+    position: relative; /* countdown 요소의 위치 고정에 필요 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+    height: 110px;
+}
+
+/* 이미지 컨테이너 */
+.wishlist-image {
+    flex: 0 0 120px; /* 고정된 너비로 설정 */
+    margin-right: 20px; /* 이미지와 텍스트 간의 간격 */
+}
+
+.wishlist-image img {
+    width: 110px;
+    height: 110px;
+    object-fit: cover; /* 이미지 비율 유지 */
+    border-radius: 10px; /* 둥근 모서리 */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+}
+
+#title {
+    font-size: 1.4rem;
+    font-weight: 500;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding-left: 30px;
+}
+
+#item-name {
+    font-weight: 500;
+}
+
+/* 상세 정보 컨테이너 */
+.wishlist-details {
+    flex: 1; /* 남은 공간 채우기 */
+    height: 110px;
+    position: relative;
+}
+
+.wishlist-details p {
+    margin: 0; /* 기본 여백 제거 */
+    margin-bottom: 5px;
+    font-size: 16px;
+    color: #333;
+}
+
+/* 상품 제목 및 기타 정보 */
+.wishlist-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* 좋아요 버튼과 수직 정렬 */
+    height: 24px;
+    margin-bottom: 5px;
+}
+
+.wishlist-header p {
+    margin: 0; /* 기본 여백 제거 */
+    font-size: 16px;
+    color: #333;
+}
+
+.wishlist-info {
+    color: #777; /* 회색 글씨 */
+    font-size: 14px; /* 약간 작은 글씨 */
+}
+
+/* 가격 정보 */
+.wishlist-price {
+    font-size: 1rem; /* 가격 글씨 키우기 */
+    font-weight: bold; /* 굵게 */
+    color: #28a745; /* 녹색 */
+    margin-left: 5px;
+}
+
+/* 좋아요 버튼 */
+.like-button {
+    cursor: pointer; /* 클릭 시 커서 모양 변경 */
+    font-size: 1.6rem; /* 큰 글씨 */
+    color: #ddd; /* 기본 색상 */
+    margin-right: 10px;
+}
+
+.like-button.liked {
+    color: red; /* 좋아요가 눌렸을 때 빨간색 */
+}
+
+/* 타이머와 텍스트 */
+.countdown {
+    font-size: 1rem; /* 타이머 글씨 크기 */
+    color: red; /* 기본적으로 빨간색 */
+    margin-right: 5px; /* '이후 마감'과 간격 */
+    position: absolute;
+    right: 0px; /* 오른쪽으로부터 간격 */
+    bottom: 0px; /* 아래쪽으로부터 간격 */
+}
+
+.countdown-text {
+    font-size: 1rem; /* '이후 마감' 글씨 크기 */
+    color: #333; /* 검정색 */
+}
+
+/* 가격 정보와 카운트다운 컨테이너 */
+#price-container {
+    display: flex;
+    justify-content: space-between; /* 가격과 카운트다운 사이 간격 */
+    align-items: center;
+    position: relative; /* 부모 컨테이너로 설정 */
+}

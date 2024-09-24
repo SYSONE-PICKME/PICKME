@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PICKME</title>
+
+    <!-- css -->
+    <link rel="stylesheet" th:href="@{/css/common/header.css}">
+    <link rel="stylesheet" th:href="@{/css/common/footer.css}">
+    <link rel="stylesheet" th:href="@{/css/common/myPageSidebar.css}">
+    <link rel="stylesheet" href="/css/user/infoEdit.css">
+    <link rel="stylesheet" th:href="@{/css/item/wishList.css}">
+
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<div th:replace="~{fragments/header :: header}">header content</div>
+
+<main>
+    <div class="container" th:object="${user}">
+        <div th:replace="~{fragments/myPageSidebar :: sidebar}">sidebar content</div>
+
+        <div class="content">
+            <h2 id="title">관심 상품</h2>
+            <hr>
+            <div th:each="item, iterStat : ${wishList}">
+                <div class="wishlist-item">
+                    <div class="wishlist-image">
+                        <img th:src="${item.imgUrl}" alt="상품 이미지"/>
+                    </div>
+                    <div class="wishlist-details">
+                        <div class="wishlist-header">
+                            <div>
+                                <p id="item-name" th:text="${item.name}"></p>
+                            </div>
+                            <div class="like-button"
+                                 th:classappend="${item.isLiked} ? 'liked' : ''"
+                                 th:onclick="'toggleLike(this, ' + ${item.id} + ')'">
+                                <span th:utext="${item.isLiked} ? '&#9829;' : '&#9825;'">&#9825;</span>
+                            </div>
+                        </div>
+                        <p class="wishlist-info">공매번호: <span th:text="${item.id}"></span></p>
+                        <p th:text="${item.customsName}"></p>
+                        <div id="price-container">
+                            <span>시작가: <span class="wishlist-price" th:text="${#numbers.formatDecimal(item.price, 0, 'COMMA', 0, 'POINT')}"></span> 원</span>
+                            <span class="wishlist-info countdown" th:id="'countdown_' + ${iterStat.index}" th:data-end-time="${item.endTime}"></span>
+                            <span class="countdown-text">이후 마감</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<div th:replace="~{fragments/footer :: footer}">footer content</div>
+</body>
+<script src="/js/user/myPage.js"></script>
+<script src="/js/user/infoEdit.js"></script>
+<script src="/js/item/wishList.js"></script>
+</html>
