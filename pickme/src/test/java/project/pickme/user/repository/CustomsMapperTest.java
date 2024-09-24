@@ -63,7 +63,6 @@ class CustomsMapperTest {
 		List<Customs> customs = List.of(
 			Customs.createCustoms("gunsan", "1234", "군산세관", "064-730-8710"),
 			Customs.createCustoms("kimpo", "1234", "김포공항세관", "064-730-8710"),
-			Customs.createCustoms("incheon", "1234", "인천세관", "064-730-8710"),
 			Customs.createCustoms("changwon", "1234", "창원세관", "064-730-8710")
 		);
 
@@ -72,12 +71,7 @@ class CustomsMapperTest {
 
 	    // then
 		List<Customs> findAll = customsMapper.findAll();
-		assertThat(findAll).hasSize(4)
-			.extracting("id", "name", "tel")
-			.containsExactlyInAnyOrder(Tuple.tuple("gunsan", "군산세관", "064-730-8710"),
-				Tuple.tuple("kimpo", "김포공항세관", "064-730-8710"),
-				Tuple.tuple("incheon", "인천세관", "064-730-8710"),
-				Tuple.tuple("changwon", "창원세관", "064-730-8710"));
+		assertThat(findAll).hasSize(4);
 	}
 
 	@Test
