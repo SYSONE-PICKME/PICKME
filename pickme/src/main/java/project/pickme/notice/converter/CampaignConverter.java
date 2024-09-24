@@ -15,7 +15,7 @@ public class CampaignConverter {
 			.title(campaignDto.getTitle())
 			.content(imageUrl)
 			.createTime(campaignDto.getCreateTime() != null ? campaignDto.getCreateTime() : LocalDateTime.now())
-			.noticeType(NoticeType.CAMPAIGN)
+			.type(NoticeType.CAMPAIGN)
 			.customs(customs)
 			.build();
 	}

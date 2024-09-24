@@ -19,7 +19,7 @@ public class Notice {
 	private String title;
 	private String content;
 	private LocalDateTime createTime;
-	private NoticeType noticeType;
+	private NoticeType type;
 	private Customs customs;
 
 }

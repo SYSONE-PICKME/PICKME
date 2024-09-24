@@ -15,7 +15,7 @@ public class NoticeConverter {
 			.title(noticeDto.getTitle())
 			.content(noticeDto.getContent())
 			.createTime(noticeDto.getCreateTime() != null ? noticeDto.getCreateTime() : LocalDateTime.now())
-			.noticeType(NoticeType.NOTICE)
+			.type(NoticeType.NOTICE)
 			.customs(customs)
 			.build();
 	}
