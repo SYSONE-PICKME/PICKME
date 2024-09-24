@@ -78,16 +78,23 @@
     margin-left: 5px;
 }
 
-/* 좋아요 버튼 */
-.like-button {
-    cursor: pointer; /* 클릭 시 커서 모양 변경 */
-    font-size: 1.6rem; /* 큰 글씨 */
+.heart {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
     color: #ddd; /* 기본 색상 */
-    margin-right: 10px;
+    margin-right: 0px;
+    padding-top: 15px; /* 아이콘 위치를 미세하게 아래로 조정 */
 }
 
-.like-button.liked {
-    color: red; /* 좋아요가 눌렸을 때 빨간색 */
+.heart .fa-heart {
+    color: #ccc; /* 빈 하트 색상 */
+    transition: color 0.3s;
+}
+
+.heart.active .fa-heart {
+    color: red; /* 꽉 찬 하트 색상 */
 }
 
 /* 타이머와 텍스트 */

@@ -16,6 +16,9 @@
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
 <div th:replace="~{fragments/header :: header}">header content</div>
@@ -37,11 +40,9 @@
                             <div>
                                 <p id="item-name" th:text="${item.name}"></p>
                             </div>
-                            <div class="like-button"
-                                 th:classappend="${item.isLiked} ? 'liked' : ''"
-                                 th:onclick="'toggleLike(this, ' + ${item.id} + ')'">
-                                <span th:utext="${item.isLiked} ? '&#9829;' : '&#9825;'">&#9825;</span>
-                            </div>
+                            <button id="likeButton" class="heart" type="button" th:data-liked="${item.isLiked}" th:data-item-id="${item.id}" th:data-action-url="@{/user/item/{id}/like(id=${item.id})}">
+                                <i class="far fa-heart"></i>
+                            </button>
                         </div>
                         <p class="wishlist-info">공매번호: <span th:text="${item.id}"></span></p>
                         <p th:text="${item.customsName}"></p>
@@ -62,4 +63,5 @@
 <script src="/js/user/myPage.js"></script>
 <script src="/js/user/infoEdit.js"></script>
 <script src="/js/item/wishList.js"></script>
+<script src="/js/item/like.js"></script>
 </html>
