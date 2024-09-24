@@ -76,4 +76,16 @@ public class FindItemDto {
 		private String imgUrl;
 		private boolean isLiked;
 	}
+
+	@Getter
+	@NoArgsConstructor
+	public static class WishList {
+		private Long id;
+		private String name;
+		private long price;
+		private LocalDateTime endTime;
+		private String imgUrl;
+		private String customsName;
+		private boolean isLiked;
+	}
 }

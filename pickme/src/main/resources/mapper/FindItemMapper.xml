@@ -153,4 +153,41 @@
         where it.item_id = #{itemId}
     </select>
 
+    <select id="findWishList" parameterType="string" resultType="project.pickme.item.dto.FindItemDto$WishList">
+        select
+        i.item_id as id,
+        i.name,
+        i.price,
+        i.end_time as endTime,
+
+        -- Image table
+        img.url as imgUrl,
+
+        -- Customs table
+        c.name as customsName,
+
+        -- Mine table
+        case
+        when m.like_id is not null and m.status = 1 then 1
+        else 0
+        end as isLiked
+
+        from Item i
+
+        -- Join Image img
+        join Image img
+        on i.item_id = img.item_id
+        and img.seq = 0
+
+        -- Join Customs c
+        join Customs c
+        on i.customs_id = c.id
+
+        -- Join Mine table
+        left join Mine m
+        on i.item_id = m.item_id
+        and m.user_id = #{userId}
+
+        where m.status = 1
+    </select>
 </mapper>
