@@ -9,6 +9,7 @@
           rel="stylesheet">
 
     <link rel="stylesheet" th:href="@{/css/common/header.css}">
+    <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 </head>
 <body>
 <header th:fragment="header">
@@ -25,13 +26,15 @@
             <li><a th:href="@{/user/myPage}">마이페이지</a></li>
             <li><a href="/statistics">통계</a></li>
         </ul>
-        <th:block sec:authorize="isAnonymous()">
-            <a th:href="@{/user/loginForm}" class="header-login">로그인</a>
-            <button class="signup-btn" th:onclick="|location.href='@{/user/signUpForm}'|">회원가입</button>
-        </th:block>
-        <th:block sec:authorize="isAuthenticated()">
-            <button class="logout-btn" th:onclick="|location.href='@{/user/loginForm}'|">로그아웃</button>
-        </th:block>
+        <div class="auth-buttons">
+            <th:block sec:authorize="isAnonymous()">
+                <button class="login-btn" th:onclick="|location.href='@{/user/loginForm}'|">로그인</button>
+                <button class="signup-btn" th:onclick="|location.href='@{/user/signUpForm}'|">회원가입</button>
+            </th:block>
+            <th:block sec:authorize="isAuthenticated()">
+                <button class="logout-btn" th:onclick="|location.href='@{/logout}'|">로그아웃</button>
+            </th:block>
+        </div>
 
     </nav>
 </header>

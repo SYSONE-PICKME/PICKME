@@ -49,17 +49,45 @@ body {
     color: black;
 }
 
+.auth-buttons {
+    margin-left: auto;
+    display: flex;
+    gap: 10px;
+}
+
+.login-btn,
+.signup-btn,
 .logout-btn {
     font-family: "IBM Plex Sans KR", sans-serif;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.login-btn {
+    background-color: white;
+    color: #000;
+    border: none;
+}
+
+.signup-btn {
     background-color: #000;
     color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 8px;
-    cursor: pointer;
-    margin-left: auto;
+    border: 1px solid #000;
+}
+
+.signup-btn:hover {
+    background-color: #333;
+}
+
+.logout-btn {
+    background-color: #000;
+    color: #fff;
+    border: 1px solid #c0c0c0;
 }
 
 .logout-btn:hover {
-    background-color: #e0e0e0;
+    background-color: #d0d0d0;
 }
