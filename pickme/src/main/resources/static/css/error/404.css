@@ -1,0 +1,26 @@
+body {
+    margin: 0;
+}
+
+.header-top {
+    background-color: black;
+    color: #FFFFFF;
+    text-align: left;
+    padding: 5px 0;
+    font-weight: 600;
+    height: 1.5em;
+    border: none;
+}
+
+.header_text {
+    margin-left: 10%;
+}
+
+.image {
+    background-image: url('../../images/404.svg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 424px;
+}
