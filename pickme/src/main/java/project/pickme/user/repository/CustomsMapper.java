@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.apache.ibatis.annotations.Mapper;
 
 import project.pickme.user.domain.Customs;
+import project.pickme.user.dto.customs.IncomeDto;
 
 @Mapper
 public interface CustomsMapper {
@@ -18,4 +19,6 @@ public interface CustomsMapper {
 	void deleteAll();
 
 	void save(Customs customs);
+
+	List<IncomeDto> findIncomeItemById(String id);
 }

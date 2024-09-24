@@ -29,4 +29,30 @@
         delete
         from Customs
     </delete>
+
+    <select id="findIncomeItemById" parameterType="String" resultType="project.pickme.user.dto.customs.IncomeDto">
+        select url                                                                                  as itemImage,
+               name                                                                                 as itemName,
+               price                                                                                as income,
+               end_time                                                                             as endTime,
+               sum(price) over (order by end_time rows between unbounded preceding and current row) as totalIncome
+        from (select m.url,
+                     item.name,
+                     item.price,
+                     item.end_time
+              from Image m
+                       join (select i.item_id,
+                                    i.name,
+                                    b.price,
+                                    i.end_time
+                             from Item i
+                                      join Bid b
+                                           on i.item_id = b.item_id
+                                               and i.status = 'CLOSED'
+                                               and i.customs_id = #{id}
+                                               and b.is_success = 1) as item
+                            on m.item_id = item.item_id
+                                and m.seq = 0) as income
+        order by end_time desc
+    </select>
 </mapper>
