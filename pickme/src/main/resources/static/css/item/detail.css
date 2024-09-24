@@ -5,34 +5,37 @@ body {
 }
 
 .container {
-    width: 75%;
+    width: 65%;
     margin: auto;
     text-align: center;
 }
 
 .image-container {
-    width: 50%;
+    margin-top: 20px;
+    width: 48%;
     height: 45%;
 }
 
+.main-image {
+    width: 100%;
+    height: 360px;
+}
+
 .main-image img {
-    margin-top: 20px;
-    margin-bottom: 5px;
-    width: 600px;
-    height: 350px;
+    width: 100%;
+    height: 360px;
 }
 
 .thumbnail-images {
     display: flex;
     justify-content: center;
-    gap: 10px;
+    margin-top: 10px;
 }
 
 .thumbnail {
-    width: 145px;
-    height: 135px;
+    width: 24%;
+    height: 125px;
     cursor: pointer;
-    border: 2px solid transparent;
     transition: border 0.3s;
 }
 
@@ -40,12 +43,34 @@ body {
     border: 2px solid #000;
 }
 
+.default-thumbnail {
+    width: 24%;
+    height: 120px;
+}
+
+.thumbnail:first-child,
+.default-thumbnail:first-child {
+    margin-left: 0;
+    margin-right: 0.6%;
+}
+
+.thumbnail:last-child,
+.default-thumbnail:last-child {
+    margin-left: 0.6%;
+    margin-right: 0;
+}
+
+.thumbnail:not(:first-child):not(:last-child),
+.default-thumbnail:not(:first-child):not(:last-child) {
+    margin: 0 0.6%;
+}
+
 .auction-details {
-    position: relative;
-    width: 50%;
-    height: 45%;
     margin-top: 20px;
-    margin-left: 50px;
+    position: relative;
+    width: 48%;
+    height: 490px;
+    margin-left: 4%;
     border: solid;
     border-color: #B2B2B2;
     border-radius: 20px;
@@ -72,7 +97,7 @@ body {
     color: #49454F;
     text-align: left;
     width: 90%;
-    height: 75%;
+    height: 65%;
     margin-left: auto;
     margin-right: auto;
     padding-top: 25px;
@@ -93,7 +118,7 @@ body {
 }
 
 #title p, #content p {
-    margin-bottom: 35px;
+    margin-bottom: 30px;
 }
 
 #price-container {
@@ -108,11 +133,13 @@ body {
 }
 
 #price-title {
+    margin-top: 10px;
     padding-left: 40px;
     text-align: left;
 }
 
 #price-content {
+    margin-top: 10px;
     color: red;
     padding-right: 40px;
     text-align: right;
@@ -133,13 +160,13 @@ body {
     font-weight: 500;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 30px;
+    margin-top: 20px;
     color: #2EC44F;
-    border-radius: 20px;
+    border-radius: 15px;
     background-color: black;
     cursor: not-allowed;
     width: 100%;
-    height: 6vh;
+    height: 60px;
 }
 
 #bid-button.active {
@@ -159,10 +186,9 @@ body {
 
 .action-buttons button {
     font-family: "IBM Plex Sans KR", sans-serif;
-    width: 20%;
-    height: 18vh;
-    margin-right: 30px;
-    border-radius: 40px;
+    width: 23%;
+    height: 170px;
+    border-radius: 20px;
     cursor: pointer;
 }
 
@@ -170,7 +196,7 @@ body {
     padding-top: 15px;
     background-color: #FFFFFF;
     border: 2px solid #2EC44F;
-    margin-left: 2%;
+    margin-right: 2%;
 }
 
 #unit-button p {
@@ -194,10 +220,10 @@ body {
 }
 
 .contact-info {
-    width: 50%;
-    height: 18vh;
-    margin-left: 50px;
+    width: 48%;
+    height: 170px;
     font-size: 18px;
+    margin-left: 4%;
     border: solid;
     border-color: #B2B2B2;
     border-radius: 20px;
@@ -205,7 +231,8 @@ body {
 }
 
 #dept-container {
-    padding-top: 20px;
+    height: 50%;
+    padding-top: 10px;
     padding-left: 35px;
     padding-bottom: 10px;
     text-align: left;
@@ -218,21 +245,23 @@ body {
     background-color: #B6D4FD;
     color: #0351C0;
     border-radius: 20px;
-    font-size: 1rem;
+    font-size: 0.8rem;
     font-weight: 500;
-    padding: 3px 15px;
+    padding: 2px 15px;
 }
 
 #dept-container p {
     text-align: left;
     font-size: 1.3rem;
     font-weight: 600;
-    margin-top: 15px;
+    margin-top: 10px;
 }
 
 #contact-container {
-    padding: 30px;
+    height: 50%;
+    padding: 20px 35px;
     display: flex;
+    align-items: center;
     flex-direction: row;
 }
 
@@ -244,9 +273,9 @@ body {
 
 #contact-img {
     position: absolute;
-    top: 20%;
+    top: 40px;
     right: 40px;
-    width: 13%;
+    width: 15%;
     border-radius: 50px;
 }
 
@@ -361,4 +390,3 @@ th {
     text-decoration: none;
     cursor: pointer;
 }
-

@@ -1,0 +1,130 @@
+.wishlist-item {
+    display: flex;
+    align-items: flex-start; /* 아이템을 수직 정렬 */
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin: 15px 0; /* 아이템 간의 간격 */
+    padding: 15px; /* 내부 여백 */
+    position: relative; /* countdown 요소의 위치 고정에 필요 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+    height: 110px;
+    cursor: pointer;
+}
+
+/* 이미지 컨테이너 */
+.wishlist-image {
+    flex: 0 0 120px; /* 고정된 너비로 설정 */
+    margin-right: 20px; /* 이미지와 텍스트 간의 간격 */
+}
+
+.wishlist-image img {
+    width: 110px;
+    height: 110px;
+    object-fit: cover; /* 이미지 비율 유지 */
+    border-radius: 10px; /* 둥근 모서리 */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+}
+
+#title {
+    font-size: 1.4rem;
+    font-weight: 500;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding-left: 30px;
+}
+
+#item-name {
+    font-weight: 500;
+}
+
+/* 상세 정보 컨테이너 */
+.wishlist-details {
+    flex: 1; /* 남은 공간 채우기 */
+    height: 110px;
+    position: relative;
+}
+
+.wishlist-details p {
+    margin: 0; /* 기본 여백 제거 */
+    margin-bottom: 5px;
+    font-size: 16px;
+    color: #333;
+}
+
+/* 상품 제목 및 기타 정보 */
+.wishlist-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* 좋아요 버튼과 수직 정렬 */
+    height: 24px;
+    margin-bottom: 5px;
+}
+
+.wishlist-header p {
+    margin: 0; /* 기본 여백 제거 */
+    font-size: 16px;
+    color: #333;
+}
+
+.wishlist-info {
+    color: #777; /* 회색 글씨 */
+    font-size: 14px; /* 약간 작은 글씨 */
+}
+
+/* 가격 정보 */
+.wishlist-price {
+    font-size: 1rem; /* 가격 글씨 키우기 */
+    font-weight: bold; /* 굵게 */
+    color: #28a745; /* 녹색 */
+    margin-left: 5px;
+}
+
+.heart {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: #ddd; /* 기본 색상 */
+    margin-right: 0px;
+    padding-top: 15px; /* 아이콘 위치를 미세하게 아래로 조정 */
+}
+
+.heart .fa-heart {
+    color: #ccc; /* 빈 하트 색상 */
+    transition: color 0.3s;
+}
+
+.heart.active .fa-heart {
+    color: red; /* 꽉 찬 하트 색상 */
+}
+
+#price-container {
+    display: flex;
+    justify-content: space-between; /* 가격과 카운트다운 사이 간격 */
+    align-items: center;
+    position: relative;
+}
+
+.countdown-container {
+    display: flex; /* 내부 요소를 수평으로 배치 */
+    align-items: center; /* 요소들을 같은 높이에 정렬 */
+    gap: 5px; /* 카운트다운과 '이후 마감' 텍스트 사이의 간격 */
+}
+
+/* 타이머와 텍스트 */
+.countdown {
+    font-size: 1rem; /* 타이머 글씨 크기 */
+    color: red; /* 기본적으로 빨간색 */
+    display: inline-block; /* 요소를 인라인 블록으로 설정하여 수평 배치 */
+}
+
+.countdown-text {
+    font-size: 1rem; /* '이후 마감' 글씨 크기 */
+    color: #333; /* 검정색 */
+    display: inline-block; /* 요소를 인라인 블록으로 설정하여 수평 배치 */
+}
+
+/* 두 요소를 한 줄에 정렬 */
+.countdown-container {
+    justify-content: flex-end; /* 컨테이너의 내용물들을 오른쪽 정렬 */
+}

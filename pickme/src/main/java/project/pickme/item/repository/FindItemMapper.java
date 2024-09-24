@@ -27,4 +27,6 @@ public interface FindItemMapper {
 	List<SuccessfullCustomsItemDto> findItemsByCustomsId(String customsId);
 
 	OriginalItemDto findByItemId(long itemId);
+
+	List<FindItemDto.WishList> findWishList(String userId);
 }

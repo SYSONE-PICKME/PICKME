@@ -1,22 +1,25 @@
-
+body {
+    margin: 0px;
+    padding: 0px;
+}
 
 .header-top {
-    background-color: #2EC44F;
-    color: black;
+    background-color: #000;
+    color: #2EC44F;
     text-align: left;
     padding: 5px 0;
     font-weight: 600;
     height: 2em;
     border: none;
+    line-height: 2em;
 }
 
 .header_text {
-    margin-left: 10%;
+    margin-left: 5%;
 }
 
 .main-nav {
     display: flex;
-    /* justify-content: space-between; */
     justify-content: flex-start;
     align-items: center;
     padding: 1% 10%;
@@ -34,7 +37,7 @@
 .nav-links {
     display: flex;
     list-style-type: none;
-    font-weight: 400;
+    font-weight: 600;
 }
 
 .nav-links li {
@@ -46,12 +49,17 @@
     color: black;
 }
 
-.login-button {
-    background-color: #2EC44F;
+.logout-btn {
+    font-family: "IBM Plex Sans KR", sans-serif;
+    background-color: #000;
     color: white;
     border: none;
     padding: 10px 20px;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
-    margin-left: auto; /* 버튼을 오른쪽 끝으로 밀기 */
+    margin-left: auto;
+}
+
+.logout-btn:hover {
+    background-color: #e0e0e0;
 }

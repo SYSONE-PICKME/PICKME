@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
-public class ControllerAdvice {
+public class GlobalRestControllerAdvice {
 	@ExceptionHandler(BusinessException.class)
 	public ResponseEntity<?> handlerBizException(BusinessException e){
 		return ResponseEntity.status(e.getErrorCode().getHttpStatus()).body(e.getErrorCode().getMessage());
