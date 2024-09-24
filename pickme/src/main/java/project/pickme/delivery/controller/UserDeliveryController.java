@@ -21,10 +21,10 @@ public class UserDeliveryController {
 	@GetMapping("/status")
 	public String showStatusPage(@RequestParam("itemId") long itemId, @RequestParam("userId") String userId,
 		Model model, @CurrentUser User user) {
+		model.addAttribute("user", user);
 		model.addAttribute("item", deliveryService.getDeliveryItemInfo(itemId));
-		model.addAttribute("user", deliveryService.getDeliveryInfo(userId));
-		model.addAttribute("userId", user.getId());
+		model.addAttribute("itemUser", deliveryService.getDeliveryInfo(userId));
 
-		return "/delivery/status";
+		return "/delivery/userStatus";
 	}
 }

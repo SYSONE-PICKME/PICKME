@@ -38,10 +38,9 @@ public class CustomsDeliveryController {
 
 	@GetMapping("/status")
 	public String showStatusPage(@RequestParam("itemId") long itemId, @RequestParam("userId") String userId,
-		Model model, @CurrentUser Customs customs) {
+		Model model) {
 		model.addAttribute("item", deliveryService.getDeliveryItemInfo(itemId));
 		model.addAttribute("user", deliveryService.getDeliveryInfo(userId));
-		model.addAttribute("userId", customs.getId());
 
 		return "/delivery/status";
 	}
