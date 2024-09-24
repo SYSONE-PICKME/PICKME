@@ -14,7 +14,9 @@
     <link rel="stylesheet" th:href="@{/css/customs/customsSidebar.css}">
     <link rel="stylesheet" th:href="@{/css/customs/customsHeader.css}">
     <link rel="stylesheet" th:href="@{/css/common/footer.css}">
+    <link rel="stylesheet" th:href="@{/css/item/list.css}">
     <link rel="stylesheet" href="/css/item/item.css">
+    <link rel="stylesheet" href="/css/bid/success.css">
 </head>
 <body>
 <div th:replace="~{customs/customsHeader :: header}">header content</div>
@@ -22,11 +24,8 @@
 <main>
     <div class="container">
         <div th:replace="~{customs/customsSidebar :: sidebar}"></div>
-        <div class="header-section">
-            <h2>새 경매 등록</h2>
-            <hr>
-        </div>
         <div class="content">
+            <div class="page-title">새 경매 등록</div>
             <form action="/customs/items" method="post" enctype="multipart/form-data">
                 <div>
                     <label for="inputFile">사진 첨부</label>

@@ -12,8 +12,8 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap"
-          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/item/item.css">
     <link rel="stylesheet" href="/css/bid/success.css">
 </head>
 <body>
@@ -24,34 +24,33 @@
 <main>
     <div class="container">
         <div th:replace="~{customs/customsSidebar :: sidebar}"></div>
-        <div class="auction-list">
-            <div class="header-section">
-                <h2>베송 관리</h2>
-                <hr>
-            </div>
-            <div class="product-grid">
-                <div class="product-card" th:each="item : ${items}">
-                    <img th:src="@{${item.imgUrl}}" alt="product image" class="product-image">
-                    <div class="product-info">
-                        <h3 th:text="${item.name}"></h3>
-                        <p>공매번호: <span th:text="${item.itemId}"></span></p>
-                        <p>낙찰가격: <span th:text="${item.price}"></span>원</p>
-                        <p><span th:text="${item.customsName}"></span></p>
+        <div class="content">
+            <div class="page-title">배송 관리</div>
+            <div class="auction-list">
+                <div class="product-grid">
+                    <div class="product-card" th:each="item : ${items}">
+                        <img th:src="@{${item.imgUrl}}" alt="product image" class="product-image">
+                        <div class="product-info">
+                            <h3 th:text="${item.name}"></h3>
+                            <p>공매번호: <span th:text="${item.itemId}"></span></p>
+                            <p>낙찰가격: <span th:text="${item.price}"></span>원</p>
+                            <p><span th:text="${item.customsName}"></span></p>
 
-                        <input type="button" value="송장등록"
-                               th:if="!${item.invoiceNumber}"
-                               th:data-item-id="${item.itemId}"
-                               th:data-user-id="${item.userId}"
-                               onclick="registerDelivery(this)">
+                            <input type="button" value="송장등록"
+                                   th:if="!${item.invoiceNumber}"
+                                   th:data-item-id="${item.itemId}"
+                                   th:data-user-id="${item.userId}"
+                                   onclick="registerDelivery(this)">
 
-                    <!-- 배송현황 버튼: 송장번호가 등록된 경우 표시 -->
-                    <input type="button" value="배송현황"
-                           th:if="${item.invoiceNumber}"
-                           th:data-item-id="${item.itemId}"
-                           th:data-user-id="${item.userId}"
-                           onclick="viewDeliveryStatus(this)">
-                    <p th:if="${item.invoiceNumber}">송장번호: <span th:text="${item.invoiceNumber}"></span></p>
-
+                            <!-- 배송현황 버튼: 송장번호가 등록된 경우 표시 -->
+                            <input type="button" value="배송현황"
+                                   th:if="${item.invoiceNumber}"
+                                   th:data-item-id="${item.itemId}"
+                                   th:data-user-id="${item.userId}"
+                                   onclick="viewDeliveryStatus(this)">
+                            <p th:if="${item.invoiceNumber}">송장번호: <span th:text="${item.invoiceNumber}"></span></p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
