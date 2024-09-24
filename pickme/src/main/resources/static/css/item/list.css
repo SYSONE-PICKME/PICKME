@@ -73,11 +73,12 @@ body {
     display: none; /* '마감' 상태인 아이템을 숨김 */
 }
 
-h2 {
+#title {
     width: 150px;
     font-size: 24px;
     margin-right: 0;
     margin-bottom: 20px;
+    margin-top: 0px;
 }
 
 .toggle-switch {
