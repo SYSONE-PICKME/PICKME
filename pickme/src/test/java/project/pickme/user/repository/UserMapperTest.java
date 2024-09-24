@@ -29,8 +29,8 @@ import project.pickme.payment.repository.PaymentMapper;
 import project.pickme.user.constant.Role;
 import project.pickme.user.domain.Customs;
 import project.pickme.user.domain.User;
-import project.pickme.user.dto.PointHistoryDto;
-import project.pickme.user.dto.UpdateInfoDto;
+import project.pickme.user.dto.user.PointHistoryDto;
+import project.pickme.user.dto.user.UpdateInfoDto;
 
 @SpringBootTest
 @ActiveProfiles("test")

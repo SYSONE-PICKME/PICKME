@@ -1,4 +1,4 @@
-package project.pickme.user.dto;
+package project.pickme.user.dto.user;
 
 import java.time.LocalDateTime;
 

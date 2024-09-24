@@ -14,9 +14,9 @@ import lombok.RequiredArgsConstructor;
 import project.pickme.common.annotation.CurrentUser;
 import project.pickme.common.response.BaseResponse;
 import project.pickme.user.domain.User;
-import project.pickme.user.dto.PointHistoryDto;
-import project.pickme.user.dto.UpdatePasswordDto;
-import project.pickme.user.dto.UpdateInfoDto;
+import project.pickme.user.dto.user.PointHistoryDto;
+import project.pickme.user.dto.user.UpdatePasswordDto;
+import project.pickme.user.dto.user.UpdateInfoDto;
 import project.pickme.user.service.UserService;
 
 @RestController
