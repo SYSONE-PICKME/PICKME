@@ -49,17 +49,86 @@ body {
     color: black;
 }
 
+.auth-buttons {
+    margin-left: auto;
+    display: flex;
+    gap: 10px;
+}
+
+.login-btn,
+.signup-btn,
 .logout-btn {
     font-family: "IBM Plex Sans KR", sans-serif;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.login-btn {
+    background-color: white;
+    color: #000;
+    border: none;
+}
+
+.signup-btn {
     background-color: #000;
     color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 8px;
-    cursor: pointer;
-    margin-left: auto;
+    border: 1px solid #000;
+}
+
+.signup-btn:hover {
+    background-color: #333;
+}
+
+.logout-btn {
+    background-color: #000;
+    color: #fff;
+    border: 1px solid #c0c0c0;
 }
 
 .logout-btn:hover {
-    background-color: #e0e0e0;
+    background-color: #d0d0d0;
+}
+
+.slider-wrapper {
+    margin-left: 5%;
+    font-size: 1vw;
+    color: #aaa;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    height: 35px; /* 안맞으면 이거 수정. 최종 전 삭제 */
+    overflow: hidden;
+}
+
+.slider {
+  height: 50px;
+  padding-left: 15px;
+  overflow: hidden;
+  color: #2EC44F;
+}
+
+.slider div {
+    color: #2EC44F;
+    height: 50px;
+    line-height: 50px;
+    padding: 0 15px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.slider-text1 {
+    animation: slide 14s cubic-bezier(0.645, 0.045, 0.355, 1.000) infinite;
+}
+
+@keyframes slide {
+    0%, 14% {margin-top: 0;}
+    16%, 30% {margin-top: -50px;}
+    32%, 46% {margin-top: -100px;}
+    48%, 62% {margin-top: -150px;}
+    64%, 78% {margin-top: -200px;}
+    80%, 94% {margin-top: -250px;}
+    96%, 100% {margin-top: -300px;}
 }
