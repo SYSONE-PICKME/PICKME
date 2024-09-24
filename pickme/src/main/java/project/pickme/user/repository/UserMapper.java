@@ -8,8 +8,8 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.data.domain.Pageable;
 
 import project.pickme.user.domain.User;
-import project.pickme.user.dto.PointHistoryDto;
-import project.pickme.user.dto.UpdateInfoDto;
+import project.pickme.user.dto.user.PointHistoryDto;
+import project.pickme.user.dto.user.UpdateInfoDto;
 import project.pickme.user.dto.UserDto;
 
 @Mapper

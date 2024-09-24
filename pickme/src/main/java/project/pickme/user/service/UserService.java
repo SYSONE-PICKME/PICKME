@@ -16,10 +16,10 @@ import project.pickme.common.exception.BusinessException;
 import project.pickme.user.constant.Role;
 import project.pickme.user.constant.Type;
 import project.pickme.user.domain.User;
-import project.pickme.user.dto.PointHistoryDto;
-import project.pickme.user.dto.UpdatePasswordDto;
+import project.pickme.user.dto.user.PointHistoryDto;
+import project.pickme.user.dto.user.UpdatePasswordDto;
 import project.pickme.user.dto.SignUpDto;
-import project.pickme.user.dto.UpdateInfoDto;
+import project.pickme.user.dto.user.UpdateInfoDto;
 import project.pickme.user.repository.UserMapper;
 
 @Service
