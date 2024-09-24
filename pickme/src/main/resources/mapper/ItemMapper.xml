@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="project.pickme.item.repository.ItemMapper">
-    <insert id="insertItem" parameterType="ItemDto" useGeneratedKeys="true" keyProperty="itemId">
+
+    <insert id="insert" parameterType="ItemDto" useGeneratedKeys="true" keyProperty="itemId">
         insert into Item (name, code, target, price, start_time, end_time, status, customs_id)
         values (#{name}, #{code}, #{type}, #{price}, #{startTime}, #{endTime}, #{status}, #{customsId})
     </insert>
@@ -10,30 +11,6 @@
         delete
         from Item
     </delete>
-
-    <!--마감처리,status가 NOT_OPEN,OPEN,CLOSED순으로 정렬-->
-    <select id="findItemsByCustomsId">
-        select i.item_id    as itemId,
-               i.name       as name,
-               i.start_time as startTime,
-               i.end_time   as endTime,
-               img.url      as imgUrl,
-               i.price      as price,
-               c.name       as customsName,
-               i.status     as status
-        from Item i
-                 left join Customs c on i.customs_id = c.id
-                 left join Category ct on i.code = ct.code
-                 left join (select item_id, url
-                            from Image
-                            where seq = 0) img on i.item_id = img.item_id
-        where c.id = #{id}
-        order by case i.status
-                     when 'NOT_OPEN' then 1
-                     when 'OPEN' then 2
-                     when 'CLOSED' then 3
-                     end;
-    </select>
 
     <update id="updateStatus" parameterType="java.time.LocalDateTime">
         <![CDATA[
@@ -50,29 +27,11 @@
         ]]>
     </update>
 
-    <update id="updateItem">
+    <update id="update">
         update Item
         set end_time   = #{endTime},
             start_time = #{startTime}
         where item_id = #{itemId}
     </update>
 
-    <select id="findImagesByItemId">
-        select url
-        from Image
-        where item_id = #{id}
-    </select>
-
-    <select id="findItemByItemId">
-        select name       as name,
-               code       as code,
-               target     as type,
-               price      as price,
-               start_time as startTime,
-               end_time   as endTime,
-               status     as status,
-               customs_id as customsId
-        from Item
-        where item_id = #{id};
-    </select>
 </mapper>

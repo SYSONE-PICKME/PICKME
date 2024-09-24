@@ -9,6 +9,8 @@ import org.apache.ibatis.annotations.Param;
 import project.pickme.item.domain.Item;
 import project.pickme.item.dto.FindItemDto;
 import project.pickme.item.dto.OneBidItemDto;
+import project.pickme.item.dto.OriginalItemDto;
+import project.pickme.item.dto.SuccessfullCustomsItemDto;
 
 @Mapper
 public interface FindItemMapper {
@@ -21,4 +23,8 @@ public interface FindItemMapper {
 	OneBidItemDto findItemByIdWithImage(Long itemId);
 
 	List<FindItemDto.GetAll> findAll(@Param("userId") String userId, @Param("category") String category);
+
+	List<SuccessfullCustomsItemDto> findItemsByCustomsId(String customsId);
+
+	OriginalItemDto findByItemId(long itemId);
 }

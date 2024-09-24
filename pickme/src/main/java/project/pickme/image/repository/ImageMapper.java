@@ -9,4 +9,6 @@ public interface ImageMapper {
 	void insertImage(ImageDto imageDto);
 
 	void deleteAll();
+
+	String[] findImagesByItemId(long itemId);
 }
