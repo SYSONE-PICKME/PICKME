@@ -31,7 +31,7 @@
             <h2 id="title">관심 상품</h2>
             <hr>
             <div th:each="item, iterStat : ${wishList}">
-                <div class="wishlist-item">
+                <div class="wishlist-item" th:data-item-id="${item.id}">
                     <div class="wishlist-image">
                         <img th:src="${item.imgUrl}" alt="상품 이미지"/>
                     </div>
@@ -66,4 +66,5 @@
 <script src="/js/user/infoEdit.js"></script>
 <script src="/js/item/wishList.js"></script>
 <script src="/js/item/like.js"></script>
+<script src="/js/item/request.js"></script>
 </html>

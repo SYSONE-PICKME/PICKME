@@ -8,6 +8,7 @@
     position: relative; /* countdown 요소의 위치 고정에 필요 */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
     height: 110px;
+    cursor: pointer;
 }
 
 /* 이미지 컨테이너 */
