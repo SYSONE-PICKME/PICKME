@@ -10,9 +10,8 @@
         <result property="createTime" column="create_at"/>
         <result property="type" column="type"/>
         <association property="customs" javaType="project.pickme.user.domain.Customs">
-            <id property="id" column="customs_customs_id"/>
+            <id property="id" column="c_id"/>
             <result property="name" column="name"/>
-            <result property="role" column="role"/>
         </association>
     </resultMap>
 
@@ -24,8 +23,7 @@
             coalesce(n.content, '') as content,
             n.create_at,
             n.type,
-            c.id AS customs_customs_id,
-            c.role,
+            c.id AS c_id,
             c.name
         from
             Notice n
@@ -47,8 +45,7 @@
             coalesce(n.content, '') as content,
             n.create_at,
             n.type,
-            c.id AS customs_customs_id,
-            c.role,
+            c.id AS c_id,
             c.name
         from
             Notice n
@@ -70,8 +67,7 @@
             coalesce(n.content, '') as content,
             n.create_at,
             n.type,
-            c.id as customs_customs_id,
-            c.role,
+            c.id as c_id,
             c.name
         from
             Notice n
@@ -85,8 +81,10 @@
 
     <insert id="insert" parameterType="project.pickme.notice.domain.Notice"
             useGeneratedKeys="true" keyProperty="id" keyColumn="notice_id">
-        insert into Notice (customs_id, title, content, type)
-        values (#{customs.id}, #{title}, #{content}, #{type});
+        insert into
+            Notice (customs_id, title, content, type)
+        values
+            (#{customs.id}, #{title}, #{content}, #{type});
     </insert>
 
     <update id="update" parameterType="project.pickme.notice.domain.Notice">

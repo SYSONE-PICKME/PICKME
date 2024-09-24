@@ -54,9 +54,6 @@ public class CampaignController {
 	@GetMapping("/{id}")
 	public String showCampaign(@PathVariable Long id, Model model, @CurrentUser Customs customs) {
 		CampaignDto campaign = campaignService.getCampaignById(id);
-		if (campaign == null) {
-			return "redirect:/customs/campaigns";
-		}
 		model.addAttribute("campaign", campaign);
 		model.addAttribute("customsId", customs.getId());
 		return "notice/campaignContent";

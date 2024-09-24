@@ -62,7 +62,7 @@ public class CampaignService {
 	}
 
 	private Customs getCustomsById(String customsId) {
-		return customsMapper.findByCustomsId(customsId).orElseThrow(() -> new BusinessException(NOT_FOUND_CUSTOMS));	//todo: notice에서도 똑같이 사용되니 추후 수정
+		return customsMapper.findByCustomsId(customsId).orElseThrow(() -> new BusinessException(NOT_FOUND_CUSTOMS));
 	}
 
 	private String updateImage(CampaignDto campaignDto, Notice campaign) {

@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     goToPage(1);
 });
-//axios에 대해 알아본 결과 RESTful하게 구현하려면 controller에 @Delete로 매핑한 뒤 .get이 아닌 .delete로 구현하는게 더 좋다고 기재되어 있음.
+
 const modal = document.getElementById("deleteModal");
 modal.style.display = "none";
 const confirmBtn = document.getElementById("confirm-btn");
