@@ -1,5 +1,5 @@
 package project.pickme.notice.constant;
 
-public enum Type {
+public enum NoticeType {
 	NOTICE, CAMPAIGN
 }
