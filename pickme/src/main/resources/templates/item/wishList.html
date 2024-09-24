@@ -48,8 +48,10 @@
                         <p th:text="${item.customsName}"></p>
                         <div id="price-container">
                             <span>시작가: <span class="wishlist-price" th:text="${#numbers.formatDecimal(item.price, 0, 'COMMA', 0, 'POINT')}"></span> 원</span>
-                            <span class="wishlist-info countdown" th:id="'countdown_' + ${iterStat.index}" th:data-end-time="${item.endTime}"></span>
-                            <span class="countdown-text">이후 마감</span>
+                            <div class="countdown-container">
+                                <span class="wishlist-info countdown" th:id="'countdown_' + ${iterStat.index}" th:data-end-time="${item.endTime}"></span>
+                                <span class="countdown-text">이후 마감</span>
+                            </div>
                         </div>
                     </div>
                 </div>

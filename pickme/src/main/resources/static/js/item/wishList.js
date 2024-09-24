@@ -21,8 +21,8 @@ function updateCountdown() {
             countdownTextElement.show();
         } else {
             // 마감 시, 타이머 요소에 '마감되었습니다' 문구 설정하고 '이후 마감' 텍스트 숨기기
-            countdownElement.text("마감되었습니다");
             countdownTextElement.hide();
+            countdownElement.html('<span style="color: #333;">마감되었습니다</span>');
         }
     });
 }
@@ -31,14 +31,4 @@ $(document).ready(function() {
     // 페이지 로드 시 카운트다운 초기화 및 1초마다 업데이트
     updateCountdown();
     setInterval(updateCountdown, 1000);
-
-    // 좋아요 버튼 클릭 시 상태 토글
-    $('.like-button').click(function() {
-        const isLiked = $(this).hasClass('liked');
-        if (isLiked) {
-            $(this).removeClass('liked').html('&#9825;'); // 빈 하트
-        } else {
-            $(this).addClass('liked').html('&#9829;'); // 채워진 하트
-        }
-    });
 });

@@ -97,25 +97,33 @@
     color: red; /* 꽉 찬 하트 색상 */
 }
 
+#price-container {
+    display: flex;
+    justify-content: space-between; /* 가격과 카운트다운 사이 간격 */
+    align-items: center;
+    position: relative;
+}
+
+.countdown-container {
+    display: flex; /* 내부 요소를 수평으로 배치 */
+    align-items: center; /* 요소들을 같은 높이에 정렬 */
+    gap: 5px; /* 카운트다운과 '이후 마감' 텍스트 사이의 간격 */
+}
+
 /* 타이머와 텍스트 */
 .countdown {
     font-size: 1rem; /* 타이머 글씨 크기 */
     color: red; /* 기본적으로 빨간색 */
-    margin-right: 5px; /* '이후 마감'과 간격 */
-    position: absolute;
-    right: 0px; /* 오른쪽으로부터 간격 */
-    bottom: 0px; /* 아래쪽으로부터 간격 */
+    display: inline-block; /* 요소를 인라인 블록으로 설정하여 수평 배치 */
 }
 
 .countdown-text {
     font-size: 1rem; /* '이후 마감' 글씨 크기 */
     color: #333; /* 검정색 */
+    display: inline-block; /* 요소를 인라인 블록으로 설정하여 수평 배치 */
 }
 
-/* 가격 정보와 카운트다운 컨테이너 */
-#price-container {
-    display: flex;
-    justify-content: space-between; /* 가격과 카운트다운 사이 간격 */
-    align-items: center;
-    position: relative; /* 부모 컨테이너로 설정 */
+/* 두 요소를 한 줄에 정렬 */
+.countdown-container {
+    justify-content: flex-end; /* 컨테이너의 내용물들을 오른쪽 정렬 */
 }
