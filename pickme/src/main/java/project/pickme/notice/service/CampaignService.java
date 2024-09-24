@@ -9,9 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
-import project.pickme.common.annotation.CurrentUser;
 import project.pickme.common.exception.BusinessException;
-import project.pickme.notice.constant.NoticeType;
 import project.pickme.notice.converter.CampaignConverter;
 import project.pickme.notice.domain.Notice;
 import project.pickme.notice.dto.CampaignDto;
@@ -72,5 +70,4 @@ public class CampaignService {
 		}
 		return s3Service.uploadImage(campaignDto.getImageFile());
 	}
-
 }

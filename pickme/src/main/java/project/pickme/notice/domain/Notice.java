@@ -7,7 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import project.pickme.notice.constant.NoticeType;
+import project.pickme.notice.constant.Type;
 import project.pickme.user.domain.Customs;
 
 @Getter
@@ -19,7 +19,7 @@ public class Notice {
 	private String title;
 	private String content;
 	private LocalDateTime createTime;
-	private NoticeType type;
+	private Type type;
 	private Customs customs;
 
 }

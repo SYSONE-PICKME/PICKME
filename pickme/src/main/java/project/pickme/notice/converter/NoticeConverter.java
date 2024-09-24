@@ -2,7 +2,7 @@ package project.pickme.notice.converter;
 
 import java.time.LocalDateTime;
 
-import project.pickme.notice.constant.NoticeType;
+import project.pickme.notice.constant.Type;
 import project.pickme.notice.domain.Notice;
 import project.pickme.notice.dto.NoticeDto;
 import project.pickme.user.domain.Customs;
@@ -15,7 +15,7 @@ public class NoticeConverter {
 			.title(noticeDto.getTitle())
 			.content(noticeDto.getContent())
 			.createTime(noticeDto.getCreateTime() != null ? noticeDto.getCreateTime() : LocalDateTime.now())
-			.type(NoticeType.NOTICE)
+			.type(Type.NOTICE)
 			.customs(customs)
 			.build();
 	}

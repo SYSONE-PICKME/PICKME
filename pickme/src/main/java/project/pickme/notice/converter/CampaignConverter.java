@@ -2,7 +2,7 @@ package project.pickme.notice.converter;
 
 import java.time.LocalDateTime;
 
-import project.pickme.notice.constant.NoticeType;
+import project.pickme.notice.constant.Type;
 import project.pickme.notice.domain.Notice;
 import project.pickme.notice.dto.CampaignDto;
 import project.pickme.user.domain.Customs;
@@ -15,7 +15,7 @@ public class CampaignConverter {
 			.title(campaignDto.getTitle())
 			.content(imageUrl)
 			.createTime(campaignDto.getCreateTime() != null ? campaignDto.getCreateTime() : LocalDateTime.now())
-			.type(NoticeType.CAMPAIGN)
+			.type(Type.CAMPAIGN)
 			.customs(customs)
 			.build();
 	}

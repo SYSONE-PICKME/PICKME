@@ -1,18 +1,13 @@
 package project.pickme.notice.controller;
 
-import java.io.IOException;
 import java.util.List;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import lombok.RequiredArgsConstructor;
 import project.pickme.common.annotation.CurrentUser;
-import project.pickme.common.response.BaseResponse;
 import project.pickme.notice.dto.CampaignDto;
 import project.pickme.notice.service.CampaignService;
 import project.pickme.user.domain.Customs;

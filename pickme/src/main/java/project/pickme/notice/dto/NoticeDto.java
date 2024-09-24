@@ -7,10 +7,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import project.pickme.notice.constant.NoticeType;
-import project.pickme.notice.domain.Notice;
-import project.pickme.user.constant.Role;
-import project.pickme.user.domain.Customs;
 
 @Getter
 @Setter
@@ -24,5 +20,4 @@ public class NoticeDto {
 	private LocalDateTime createTime;
 	private String customsId;
 	private String customsName;
-
 }
