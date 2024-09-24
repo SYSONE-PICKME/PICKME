@@ -53,7 +53,7 @@
         where id = #{userId}
     </update>
 
-    <select id="findPointHistory" parameterType="Map" resultType="project.pickme.user.dto.PointHistoryDto">
+    <select id="findPointHistory" parameterType="Map" resultType="project.pickme.user.dto.user.PointHistoryDto">
         select time,
                price,
                type,

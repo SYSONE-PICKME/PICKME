@@ -26,7 +26,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import project.pickme.user.constant.Role;
 import project.pickme.user.domain.User;
-import project.pickme.user.dto.UpdateInfoDto;
+import project.pickme.user.dto.user.UpdateInfoDto;
 import project.pickme.user.repository.UserMapper;
 import project.pickme.user.service.UserService;
 
