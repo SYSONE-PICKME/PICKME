@@ -84,7 +84,7 @@
         insert into
             Notice (customs_id, title, content, type)
         values
-            (#{customs.id}, #{title}, #{content}, #{type});
+            (#{customs.id}, #{title}, #{content}, #{type})
     </insert>
 
     <update id="update" parameterType="project.pickme.notice.domain.Notice">
