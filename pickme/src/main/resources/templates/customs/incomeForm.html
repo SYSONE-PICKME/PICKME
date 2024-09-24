@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PICKME</title>
+
+    <link rel="stylesheet" th:href="@{/css/customs/customsHeader.css}">
+    <link rel="stylesheet" th:href="@{/css/common/footer.css}">
+    <link rel="stylesheet" href="/css/customs/income.css">
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+</head>
+<body>
+<div th:replace="~{customs/customsHeader :: header}">header content</div>
+
+<main>
+    <div class="container">
+        <div class="profile-section">
+            <div class="welcome-text">
+                <span class="name" th:text="|${name}|"></span>
+            </div>
+            <div class="points">
+                <span class="points-label">수입 포인트</span>
+                <div class="points-info">
+                    <span class="points-amount" id="points-amount"></span>
+                    <button class="recharge-button">환전</button>
+                </div>
+            </div>
+        </div>
+        <div class="income-section">
+            <div class="content">
+                <div class="page-title">수입 내역</div>
+                <div class="income-history" id="income-content">
+                    <!-- 수입 내역 -->
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<div th:replace="~{fragments/footer :: footer}">footer content</div>
+<script id="income-template" type="text/x-handlebars-template">
+<div class="income-list">
+    <div class="item-image">
+        <img src="{{itemImage}}" alt="image"/>
+    </div>
+    <div class="details">
+        <p class="price {{priceClass}}">
+            <span>낙찰가: </span>
+            <span class="price-amount" style="color: #007BFF">{{income}}</span> 원
+        </p>
+        <p>총 수입 포인트: <span class="total-income" style="color: #2EC44F">{{totalIncome}}</span> 원</p>
+    </div>
+    <div class="date-box">
+        <span class="date">{{time}}</span>
+    </div>
+</div>
+</script>
+<script src="/js/customs/income.js"></script>
+</body>
+</html>
