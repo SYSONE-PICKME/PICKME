@@ -23,7 +23,7 @@
             coalesce(n.content, '') as content,
             n.create_at,
             n.type,
-            c.id AS c_id,
+            c.id as c_id,
             c.name
         from
             Notice n
@@ -45,7 +45,7 @@
             coalesce(n.content, '') as content,
             n.create_at,
             n.type,
-            c.id AS c_id,
+            c.id as c_id,
             c.name
         from
             Notice n
