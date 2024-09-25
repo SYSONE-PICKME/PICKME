@@ -113,7 +113,7 @@
         when i.status in ('NOT_OPEN', 'OPEN') then 0
         else 1
         end,
-        i.end_time asc;
+        i.end_time asc
     </select>
 
     <select id = "findTop20" parameterType="string" resultType="project.pickme.item.dto.FindItemDto$GetAll">
@@ -174,7 +174,7 @@
                      when 'NOT_OPEN' then 1
                      when 'OPEN' then 2
                      when 'CLOSED' then 3
-                     end;
+                     end
     </select>
 
     <select id="findByItemId">
@@ -187,7 +187,7 @@
                status     as status,
                customs_id as customsId
         from Item
-        where item_id = #{id};
+        where item_id = #{id}
     </select>
 
     <select id="findWishList" parameterType="Map" resultType="project.pickme.item.dto.FindItemDto$WishList">
