@@ -190,7 +190,7 @@
         where item_id = #{id};
     </select>
 
-    <select id="findWishList" parameterType="string" resultType="project.pickme.item.dto.FindItemDto$WishList">
+    <select id="findWishList" parameterType="Map" resultType="project.pickme.item.dto.FindItemDto$WishList">
         select
         i.item_id as id,
         i.name,
@@ -226,6 +226,7 @@
         and m.user_id = #{userId}
 
         where m.status = 1
+        limit #{pageable.pageSize} offset #{pageable.offset}
     </select>
 
     <select id = "findBidList" parameterType="map" resultType="project.pickme.item.dto.FindItemDto$MyBid">
@@ -274,5 +275,11 @@
         </if>
 
         order by b.latest_bid_time desc
+    </select>
+
+    <select id="countTotalMyWish" parameterType="String">
+        select count(*)
+        from Mine
+        where user_id = #{userId} and status = 1
     </select>
 </mapper>
