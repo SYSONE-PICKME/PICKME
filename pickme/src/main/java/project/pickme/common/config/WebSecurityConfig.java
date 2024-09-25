@@ -95,7 +95,7 @@ public class WebSecurityConfig {
 				sessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
 					.sessionFixation(SessionManagementConfigurer.SessionFixationConfigurer::changeSessionId)
 					.maximumSessions(1)
-					.maxSessionsPreventsLogin(true)
+					.maxSessionsPreventsLogin(false)
 					.expiredUrl(loginPage));
 
 		return http.build();
