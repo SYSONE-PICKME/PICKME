@@ -20,6 +20,7 @@ public class UserNoticeRestController {
 	private final NoticeService noticeService;
 
 	/**
+	 * 유저들이 보는 공지사항을 페이징하여 조회
 	 *
 	 * @param page 조회할 페이지 번호 (0부터 시작)
 	 * @param size 한 페이지당 조회할 공지사항 개수 (기본값 10)
