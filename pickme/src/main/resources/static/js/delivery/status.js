@@ -136,8 +136,11 @@ function displayTrackingData(data) {
 
     events.forEach(event => {
         let row = document.createElement("tr");
+
         row.innerHTML = `
-            <td>${event.node.time}</td>
+            <td>${event.node.time.replace('T', ' ')
+            .split('.')[0]
+            .split('+')[0]}</td>
             <td>${event.node.status.name}</td>
             <td>${event.node.description}</td>`;
         table.appendChild(row);
