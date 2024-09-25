@@ -99,5 +99,6 @@ public class FindItemDto {
 		private LocalDateTime endTime;
 		private String status;
 		private String imgUrl;
+		private boolean isLiked;
 	}
 }
