@@ -1,3 +1,6 @@
+#invoiceLabel{
+    margin-top: 20px;
+}
 .modal {
     display: none;
     position: fixed;
