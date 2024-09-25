@@ -17,7 +17,6 @@ public class ItemRequest {
 
 		@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
 		private LocalDateTime endTime;
-
 		private String category;
 	}
 }
