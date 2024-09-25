@@ -24,9 +24,13 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <!-- js -->
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.10.4/dayjs.min.js"></script>
+
+    <script th:src="@{/js/item/list.js}"></script>
     <script th:src="@{/js/item/filtering.js}"></script>
-    <script th:src="@{/js/item/like.js}"></script>
-    <script th:src="@{/js/item/request.js}"></script>
+    <script th:src="@{/js/item/infiniteScroll.js}"></script>
+    <script th:src="@{/js/item/itemNavigation.js}"></script>
+    <script th:src="@{/js/item/likeHandler.js}"></script>
 </head>
 <body>
 <!-- 헤더 -->
@@ -36,12 +40,12 @@
 <main>
     <nav class="category">
         <ul>
-            <li><a th:href="@{/user/item/list}"><img th:src="@{/images/all.png}">#전체</a></li>
-            <li><a th:href="@{/user/item/list(category='의류')}"><img th:src="@{/images/clothes.png}">#의류</a></li>
-            <li><a th:href="@{/user/item/list(category='생활용품')}"><img th:src="@{/images/tableware.png}">#생활용품</a></li>
-            <li><a th:href="@{/user/item/list(category='디지털')}"><img th:src="@{/images/fridge.png}">#디지털</a></li>
-            <li><a th:href="@{/user/item/list(category='가구')}"><img th:src="@{/images/furniture.png}">#가구</a></li>
-            <li><a th:href="@{/user/item/list(category='기타')}"><img th:src="@{/images/battery.png}">#소모품</a></li>
+            <li><a href="#" class="category-link" data-category=""><img th:src="@{/images/all.png}">#전체</a></li>
+            <li><a href="#" class="category-link" data-category="의류"><img th:src="@{/images/clothes.png}">#의류</a></li>
+            <li><a href="#" class="category-link" data-category="생활용품"><img th:src="@{/images/tableware.png}">#생활용품</a></li>
+            <li><a href="#" class="category-link" data-category="디지털"><img th:src="@{/images/fridge.png}">#디지털</a></li>
+            <li><a href="#" class="category-link" data-category="가구"><img th:src="@{/images/furniture.png}">#가구</a></li>
+            <li><a href="#" class="category-link" data-category="기타"><img th:src="@{/images/battery.png}">#소모품</a></li>
         </ul>
     </nav>
 
@@ -53,31 +57,8 @@
                 <label for="toggle"></label>
             </div>
         </div>
-        <div class="product-grid">
-            <div class="product-card" th:each="item : ${items}" th:data-status="${item.status}"
-                 th:data-item-id="${item.id}">
-                <span class="status-label"
-                      th:classappend="${item.status == 'OPEN' ? 'status-open' : (item.status == 'NOT_OPEN' ? 'status-not-open' : 'status-closed')}"
-                      th:text="${item.status == 'OPEN' ? '진행중' : (item.status == 'NOT_OPEN' ? '진행 예정' : '마감')}">진행중</span>
-                <button id="likeButton" class="heart" type="button" th:data-liked="${item.isLiked}"
-                        th:data-item-id="${item.id}" th:data-action-url="@{/user/item/{id}/like(id=${item.id})}">
-                    <i class="far fa-heart"></i>
-                </button>
-                <img th:src="@{${item.imgUrl}}" alt="product image" class="product-image">
-                <div class="product-info">
-                    <h3 class="item-name" th:data-item-id="${item.id}" th:text="${item.name}"></h3>
-                    <p class="item-info">공매예정가격: <span id="auction-price"
-                                                       th:text="${#numbers.formatDecimal(item.price, 0, 'COMMA', 0, 'POINT')}"></span>
-                        원</p>
-                    <p class="item-info">공매시작일시: <span id="auction-date"
-                                                       th:text="' '+ ${#temporals.format(item.startTime, 'yyyy-MM-dd HH:mm')}"></span>
-                    </p>
-                    <p class="item-info">공매마감일시: <span id="auction-end_date"
-                                                       th:text="'  '+ ${#temporals.format(item.endTime, 'yyyy-MM-dd HH:mm')}"></span>
-                    </p>
-                </div>
-            </div>
-        </div>
+
+        <div class="product-grid"></div>
     </div>
 </main>
 
