@@ -12,22 +12,12 @@ let cursor = {
     category: null
 };
 
-function applyFilter(category) {
-    cursor.itemId = null; // 커서 정보 초기화
-    cursor.status = null;
-    cursor.endTime = null;
-    cursor.category = category; // 카테고리 필터 적용
-
-    $('.product-grid').empty(); // 기존 아이템 목록 초기화
-    noMoreData = false; // 데이터 없음 플래그 초기화
-    loadItems(); // 필터 적용된 아이템 로드
-}
-
 // AJAX 요청으로 데이터를 가져오고 HTML에 표시하는 함수
 function loadItems() {
     if (isLoading || noMoreData) return; // 로딩 중이거나 더 이상 데이터가 없으면 요청하지 않음
 
     isLoading = true; // 로딩 상태로 설정
+    $('#loader').show(); // 로딩 스피너 표시
 
     $.ajax({
         url: '/user/api/item/list',
@@ -36,7 +26,6 @@ function loadItems() {
         success: function(response) {
             const items = response.data; // API가 반환한 items 데이터
 
-            console.log(items);
             // 데이터가 있는 경우 화면에 추가
             if (items.length > 0) {
                 items.forEach(item => {
@@ -68,15 +57,21 @@ function loadItems() {
                 cursor.status = lastItem.status;
                 cursor.endTime = lastItem.endTime; // ISO 8601 형식으로 변환
 
+                setTimeout(() => {
+                    $('#loader').hide(); // 로딩 스피너 숨김
+                }, 1000);
                 isLoading = false; // 로딩 상태 해제
             } else {
                 // 더 이상 데이터가 없으면 noMoreData를 true로 설정
                 noMoreData = true;
+                isLoading = false;
+                $('#loader').text('').show(); // 데이터 없음
             }
         },
         error: function(xhr, status, error) {
             console.error('AJAX 호출 실패:', status, error);
             isLoading = false; // 오류 발생 시 로딩 상태 해제
+            $('#loader').hide(); // 로딩 스피너 숨김
         }
     });
 }
