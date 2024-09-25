@@ -36,7 +36,7 @@ class FindItemMapperTest {
 		customsMapper.save(Customs.createCustoms("incheon", "1234", "incheon", "02-123-1234"));
 
 		ItemDto itemDto = new ItemDto("테스트", 1, USER,10000l, now(), now(), CLOSED, "incheon");
-		itemMapper.insertItem(itemDto);
+		itemMapper.insert(itemDto);
 		itemId = itemDto.getItemId();
 
 		imageMapper.insertImage(new ImageDto(itemId, "이미지1", "url1", 0));
