@@ -6,13 +6,16 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- <link rel="stylesheet" th:href="@{/css/notice/userNoticeList.css}"> -->
-    <link rel="stylesheet" href="/userNoticeList.css">
+    <link rel="stylesheet" th:href="@{/css/notice/userNoticeList.css}">
+    <link rel="stylesheet" th:href="@{/css/common/header.css}">
+    <link rel="stylesheet" th:href="@{/css/common/footer.css}">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
 
 </head>
 <body>
+<div th:replace="~{fragments/header :: header}">header content</div>
 <div class="main-container">
     <div class="container">
         <h1>공지사항</h1>
@@ -20,11 +23,7 @@
 
         <table id="noticeTable">
             <tbody>
-            <tr th:each="notice : ${notices}">
-                <td th:text="${notice.title}">공지 제목</td>
-                <td th:text="${#temporals.format(notice.date, 'yyyy-MM-dd')}">2024-08-31</td>
-                <td th:text="${notice.views}">318</td>
-            </tr>
+
             </tbody>
         </table>
 
@@ -41,7 +40,7 @@
         </ul>
     </div>
 </div>
-
-<script src="userNoticeList.js"></script>
+<div th:replace="~{fragments/footer :: footer}">footer content</div>
+<script th:src="@{/js/notice/userNoticeList.js}"></script>
 </body>
 </html>

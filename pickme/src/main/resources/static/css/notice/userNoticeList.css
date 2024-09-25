@@ -57,11 +57,11 @@ table {
     border-collapse: collapse;
     margin-bottom: 20px;
 }
-
+/*
 table tr {
     border-bottom: 1px solid #e0e0e0;
 }
-
+*/
 table td {
     padding: 15px 20px;
     font-size: 16px;
@@ -83,20 +83,20 @@ table td:nth-child(2), table td:nth-child(3) {
 }
 
 .load-more a {
-    color: #28a745; /* 초록색 텍스트 */
+    color: #28a745;
     font-weight: bold;
     font-size: 16px;
-    text-decoration: none; /* 기본 상태에서 밑줄 제거 */
+    text-decoration: none;
     display: inline-flex;
     align-items: center;
 }
 
 .load-more a:hover {
-    text-decoration: none; /* hover 상태에서도 밑줄 제거 */
+    text-decoration: none;
 }
 
 .load-more a::after {
-    margin-left: 5px; /* 화살표와 텍스트 사이 간격 */
+    margin-left: 5px;
     font-size: 16px;
 }
 
