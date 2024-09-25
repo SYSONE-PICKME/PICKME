@@ -19,7 +19,7 @@ import project.pickme.user.domain.User;
 @Controller
 @RequestMapping("/user/item")
 @RequiredArgsConstructor
-public class FindItemController {
+public class FindUserItemController {
 	private final FindItemService itemService;
 
 	@GetMapping("/{id}")
