@@ -16,7 +16,6 @@ import project.pickme.statistics.service.StatisticsService;
 public class RestStatisticsController {
 	private final StatisticsService statisticsService;
 
-
 	@GetMapping("/auctionStatistics")
 	public BaseResponse<Map<String, Object>> getStatisticsData() {
 		Map<String, Object> statisticsData = statisticsService.getAllStatistics();
