@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="project.pickme.statistics.repository.StatisticsMapper">
+
+    <!-- 총 경매건(전체) -->
+    <select id="getTotalAuctions" resultType="int">
+        SELECT COUNT(DISTINCT item_id) FROM Bid
+    </select>
+
+    <!-- 총 경매(월별) -->
+    <select id="getMonthlyBids" resultType="project.pickme.statistics.dto.MonthlyBidStatisticsDto">
+        SELECT DATE_FORMAT(i.start_time, '%Y-%m') AS bid_month,
+        COUNT(b.bid_id) AS total_bids,
+        COUNT(DISTINCT b.user_id) AS total_users,
+        (COUNT(b.bid_id) / COUNT(DISTINCT b.user_id)) AS competition_rate
+        FROM Bid b
+        LEFT JOIN Item i ON b.item_id = i.item_id
+        GROUP BY DATE_FORMAT(i.start_time, '%Y-%m')
+        ORDER BY bid_month ASC
+    </select>
+
+    <!-- 전체 경쟁률 -->
+    <select id="getTotalCompetitionRate" resultType="double">
+        SELECT ROUND((SELECT COUNT(item_id) FROM Bid) /
+        (SELECT COUNT(DISTINCT user_id) FROM Bid WHERE item_id = 9), 2)
+        AS competition_rate FROM dual
+    </select>
+
+    <!-- 월별 경쟁률 -->
+    <select id="getMonthlyCompetitionRate" resultType="project.pickme.statistics.dto.MonthlyBidStatisticsDto">
+        SELECT DATE_FORMAT(b.bid_time, '%Y-%m') AS bid_month,
+        COUNT(b.bid_id) AS total_bids,
+        COUNT(DISTINCT b.user_id) AS total_users,
+        (COUNT(b.bid_id) / COUNT(DISTINCT b.user_id)) AS competition_rate
+        FROM Bid b
+        GROUP BY DATE_FORMAT(b.bid_time, '%Y-%m')
+        ORDER BY bid_month ASC
+    </select>
+
+    <!-- 카테고리별 경쟁률 -->
+    <select id="getCategoryCompetition" resultType="project.pickme.statistics.dto.CategoryCompetitionDto">
+        SELECT i.code AS category_code,
+        COUNT(b.bid_id) AS total_bids,
+        COUNT(DISTINCT b.user_id) AS total_users,
+        ROUND((COUNT(b.bid_id) / COUNT(DISTINCT b.user_id)), 2) AS competition_rate
+        FROM Item i
+        LEFT JOIN Bid b ON i.item_id = b.item_id
+        GROUP BY i.code
+        ORDER BY competition_rate DESC
+    </select>
+
+
+</mapper>
