@@ -11,8 +11,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class StatisticsController {
 
-	@GetMapping("/auctionStatistics")
+	@GetMapping("/auction")
 	public String showStatisticsPage() {
-		return "statistics/auctionStatistics";
+		return "statistics/auction";
 	}
 }

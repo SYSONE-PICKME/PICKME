@@ -22,7 +22,7 @@ public class StatisticsService {
 		data.put("monthlyBids", statisticsMapper.getMonthlyBids());
 		data.put("totalCompetitionRate", statisticsMapper.getTotalCompetitionRate());
 		data.put("monthlyCompetitionRate", statisticsMapper.getMonthlyCompetitionRate());
-		data.put("categoryCompetition", statisticsMapper.getCategoryCompetition());
+		data.put("categoryCompetitionRate", statisticsMapper.getCategoryCompetitionRate());
 
 		return data;
 	}

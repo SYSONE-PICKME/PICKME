@@ -22,5 +22,5 @@ public interface StatisticsMapper {
 	List<MonthlyBidStatisticsDto> getMonthlyCompetitionRate();
 
 	// 카테고리별 경쟁률
-	List<CategoryCompetitionDto> getCategoryCompetition();
+	List<CategoryCompetitionDto> getCategoryCompetitionRate();
 }

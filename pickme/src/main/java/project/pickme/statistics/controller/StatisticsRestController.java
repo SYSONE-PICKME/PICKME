@@ -11,12 +11,12 @@ import project.pickme.common.response.BaseResponse;
 import project.pickme.statistics.service.StatisticsService;
 
 @RestController
-@RequestMapping("/api/statistics")
+@RequestMapping("/user/statistics")
 @RequiredArgsConstructor
-public class RestStatisticsController {
+public class StatisticsRestController {
 	private final StatisticsService statisticsService;
 
-	@GetMapping("/auctionStatistics")
+	@GetMapping("/toAuction")
 	public BaseResponse<Map<String, Object>> getStatisticsData() {
 		Map<String, Object> statisticsData = statisticsService.getAllStatistics();
 		return BaseResponse.ok(statisticsData);

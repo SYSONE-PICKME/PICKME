@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap"
           rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/css/statistics/auctionStatistics.css}">
+    <link rel="stylesheet" th:href="@{/css/statistics/auction.css}">
     <link rel="stylesheet" th:href="@{/css/common/header.css}">
     <link rel="stylesheet" th:href="@{/css/common/footer.css}">
 
@@ -33,7 +33,7 @@
                 <div class="chart-middle">
                     <h2 class="section-title">카테고리별 경쟁률</h2>
                     <div class="chart-container">
-                        <div id="categoryCompetitionChart"></div>
+                        <div id="categoryCompetitionRateChart"></div>
                     </div>
                 </div>
             </div>
@@ -46,6 +46,6 @@
     </div>
 </div>
 
-<script th:src="@{/js/statistics/auctionStatistics.js}"></script>
+<script th:src="@{/js/statistics/auction.js}"></script>
 </body>
 </html>

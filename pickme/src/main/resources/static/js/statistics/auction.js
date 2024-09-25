@@ -1,6 +1,6 @@
 $(document).ready(function() {
     $.ajax({
-        url: '/api/statistics/auctionStatistics',
+        url: '/user/statistics/toAuction',
         method: 'GET',
         dataType: 'json',
         success: function(response) {
@@ -8,16 +8,13 @@ $(document).ready(function() {
                 let data = response.data;
                 let totalAuctions = data.totalAuctions;
                 let totalCompetitionRate = data.totalCompetitionRate;
-                let categoryCompetition = data.categoryCompetition;
+                let categoryCompetitionRate = data.categoryCompetitionRate;
                 let monthlyBids = data.monthlyBids;
 
                 createTotalAuctionsChart(totalAuctions, totalCompetitionRate);
                 createMonthlyAuctionsChart(monthlyBids);
-                createCategoryCompetitionRate(categoryCompetition);
+                createCategoryCompetitionRateChart(categoryCompetitionRate);
 
-                console.log('categoryCompetition:', totalAuctions);
-                console.log('categoryCompetition:', totalCompetitionRate);
-                console.log('monthlyBids:', monthlyBids);
             } else {
                 console.error('Failed to fetch data');
             }
@@ -81,8 +78,8 @@ function createTotalAuctionsChart(totalAuctions, totalCompetitionRate){
     });
 }
 
-function createCategoryCompetitionRate(categoryCompetition) {
-    Highcharts.chart('categoryCompetitionChart', {
+function createCategoryCompetitionRateChart(categoryCompetitionRate) {
+    Highcharts.chart('categoryCompetitionRateChart', {
         chart: {
             type: 'column'
         },
