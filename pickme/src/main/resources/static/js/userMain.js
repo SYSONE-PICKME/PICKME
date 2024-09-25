@@ -69,3 +69,54 @@ document.addEventListener('DOMContentLoaded', function() {
     updateBackgroundPosition();
 });
 
+document.addEventListener('DOMContentLoaded', function() {
+    const slider = document.querySelector('#slider');
+    const move = document.querySelector('#move');
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    const forword = document.querySelector('#forword');
+    const back = document.querySelector('#back');
+    const dotsContainer = document.querySelector('#dots');
+
+    let currentIndex = 0;
+    const totalSlides = slides.length;
+
+    slides.forEach((_, index) => {
+        const dot = document.createElement('li');
+        dot.addEventListener('click', () => goToSlide(index));
+        dotsContainer.appendChild(dot);
+    });
+
+    const dots = Array.from(dotsContainer.children);
+
+    function updateDots() {
+        dots.forEach((dot, index) => {
+            dot.classList.toggle('active', index === currentIndex);
+        });
+    }
+
+    function goToSlide(index) {
+        currentIndex = index;
+        move.style.transform = `translateX(${-100 * currentIndex}%)`;
+        updateDots();
+    }
+
+    function nextSlide() {
+        currentIndex = (currentIndex + 1) % totalSlides;
+        goToSlide(currentIndex);
+    }
+
+    function prevSlide() {
+        currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+        goToSlide(currentIndex);
+    }
+
+    forword.addEventListener('click', nextSlide);
+    back.addEventListener('click', prevSlide);
+
+    let interval = setInterval(nextSlide, 5000);
+
+    slider.addEventListener('mouseenter', () => clearInterval(interval));
+    slider.addEventListener('mouseleave', () => interval = setInterval(nextSlide, 5000));
+
+    updateDots();
+});

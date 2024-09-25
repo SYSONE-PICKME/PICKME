@@ -22,9 +22,21 @@
         <div class="top-container">
             <div class="campaign-container">
                 <section class="campaign">
-                    <img th:src="@{/images/imsi2.png}" alt="캠페인" src="">
+                    <div class="slider-container">
+                        <div id="slider">
+                            <div id="move">
+                                <div class="slide" th:each="campaign : ${campaigns}">
+                                    <img th:src="${campaign}" alt="캠페인 이미지">
+                                </div>
+                            </div>
+                            <button id="back">&lt;</button>
+                            <button id="forword">&gt;</button>
+                        </div>
+                        <ul id="dots"></ul>
+                    </div>
                 </section>
             </div>
+
             <div class="top-buttons">
                 <button class="custom-admin">
                     <img th:src="@{/images/administrative-fine.png}" alt="관세 행정" src="">
