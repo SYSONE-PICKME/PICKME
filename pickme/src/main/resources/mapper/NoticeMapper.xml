@@ -103,4 +103,16 @@
         where notice_id = #{id}
     </delete>
 
+    <select id="select4Campaigns" resultType="String">
+        select
+            content
+        from
+            Notice
+        where
+            type = 'CAMPAIGN'
+        order by
+            create_at desc
+        limit 4
+    </select>
+
 </mapper>
