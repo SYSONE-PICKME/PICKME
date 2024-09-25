@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.*;
 import static project.pickme.item.constant.Status.*;
 import static project.pickme.user.constant.Type.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.assertj.core.groups.Tuple;
@@ -95,14 +96,17 @@ class CustomsMapperTest {
 
 	private void createIncome() {
 		ItemDto itemDto1 = new ItemDto("아이템1", 1, USER,10000l, now(), now(), CLOSED, "incheon");
-		itemMapper.insertItem(itemDto1);
+		itemMapper.insert(itemDto1);
 
 		ItemDto itemDto2 = new ItemDto("아이템2", 1, USER,10000l, now(), now().plusDays(1), CLOSED, "incheon");
-		itemMapper.insertItem(itemDto2);
+		itemMapper.insert(itemDto2);
 
-		imageMapper.insertImage(new ImageDto(itemDto1.getItemId(), "이미지1", "test1.png", 0));
-		imageMapper.insertImage(new ImageDto(itemDto2.getItemId(), "이미지2", "test2.png", 0));
+		List<ImageDto> images=new ArrayList<>();
 
+		images.add(new ImageDto(itemDto1.getItemId(), "이미지1", "test1.png", 0));
+		images.add(new ImageDto(itemDto2.getItemId(), "이미지2", "test2.png", 0));
+
+		imageMapper.insertImages(images);
 		User user = userMapper.findUserById("testUser").get();
 		BidDto bid1 = BidDto.create(10000, user.getId(), itemDto1.getItemId());
 		BidDto bid2 = BidDto.create(100000, user.getId(), itemDto1.getItemId());
