@@ -46,7 +46,7 @@ function fetchCarriers() {
                     after: after
                 }
             }),
-            success: function(response) {
+            success: function (response) {
                 console.log('응답 데이터:', response);
                 let carriers = response.data.carriers.edges;
                 let pageInfo = response.data.carriers.pageInfo;
@@ -63,10 +63,10 @@ function fetchCarriers() {
                 }
 
             },
-            error: function(xhr) {
+            error: function (xhr) {
                 console.error('데이터 가져오기 오류:', xhr);
             },
-            complete: function() {
+            complete: function () {
                 isLoading = false;
             }
         });
@@ -93,6 +93,49 @@ function populateDropdown(carriers) {
 }
 
 // 페이지 로드 시 데이터 로드
-$(document).ready(function() {
+$(document).ready(function () {
     fetchCarriers();
+});
+
+$('#submitButton').on('click', function () {
+    const itemId = $('#itemIdInput').val();
+    const userId = $('#userIdInput').val();
+    const invoiceNumber = $('#invoiceNumber').val();
+    const selectedOption = $('#carrierDropdown option:selected');
+    const code = selectedOption.val();
+    const courier = selectedOption.text();
+
+    if (!code || !invoiceNumber) {
+        alert("모든 필드를 입력하세요.");
+        return;
+    }
+
+    console.log({
+        itemId: itemId,
+        userId: userId,
+        code: code,
+        invoiceNumber: invoiceNumber,
+        courier: courier
+    });
+
+    $.ajax({
+        type: 'POST',
+        url: '/customs/delivery',
+        data: JSON.stringify({
+            itemId: itemId,
+            userId: userId,
+            code: code,
+            invoiceNumber: invoiceNumber,
+            courier: courier
+        }),
+        contentType: 'application/json; charset=utf-8',
+        success: function (response) {
+            alert('송장이 성공적으로 등록되었습니다.');
+            window.location.href = '/customs/delivery';
+        },
+        error: function (error) {
+            alert('송장 등록 중 오류가 발생했습니다.');
+            console.log(error);
+        }
+    });
 });

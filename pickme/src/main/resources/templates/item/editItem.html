@@ -25,59 +25,56 @@
     <div class="container">
         <div th:replace="~{customs/customsSidebar :: sidebar}"></div>
         <div class="content">
-            <div class="page-title">새 경매 등록</div>
-            <form action="/customs/items" method="post" enctype="multipart/form-data">
+            <div class="page-title">경매 수정</div>
+            <form>
                 <div>
                     <label for="inputFile">사진 첨부</label>
                     <div class="inputFile" id="inputFile">
                         <label for="AddImgs" class="addImgBtn">
                             <i class="fas fa-camera"></i>
                         </label>
-                        <ul id="Preview" class="sortable"></ul>
-                        <input type="file" id="AddImgs" name="files" class="upload-hidden" accept="image/*" multiple>
+                        <ul id="Preview" class="sortable">
+                            <li th:each="image : ${selectedImages}">
+                                <img th:src="${image}" alt="이미지"/>
+                            </li>
+                        </ul>
+                        <input type="file" id="AddImgs" name="files" class="upload-hidden" accept="image/*" multiple
+                               disabled>
                     </div>
+                </div>
+
+                <input type="hidden" id="itemId" th:value="${id}"/>
+                <div class="form-group">
+                    <label for="title">상품명</label>
+                    <input type="text" id="title" name="name" th:value="${selectedItem.name}" required disabled>
+                </div>
+
+                <div class="form-group">
+                    <label for="startPrice">시작가</label>
+                    <input type="number" id="startPrice" name="price" th:value="${selectedItem.price}" required
+                           disabled>
                 </div>
 
                 <div class="form-row">
                     <div class="form-col">
-                        <label for="title">상품명</label>
-                        <input type="text" id="title" name="name" required>
+                        <label for="auctionStartTime">경매 시작 시간</label>
+                        <input type="datetime-local" id="auctionStartTime" name="startTime"
+                               th:value="${selectedItem.startTime}" required>
                     </div>
-
                     <div class="form-col">
-                        <label for="startPrice">시작가</label>
-                        <input type="number" id="startPrice" name="price" required>
+                        <label for="auctionEndTime">경매 마감 시간</label>
+                        <input type="datetime-local" id="auctionEndTime" name="endTime"
+                               th:value="${selectedItem.endTime}" required disabled>
                     </div>
                 </div>
 
-                <div class="form-row">
-                    <div class="form-col">
-                        <label for="startTime">경매 시작 시간</label>
-                        <input type="text" id="startTime" class="flatpickr-input" name="startTime" required>
-                    </div>
-                    <div class="form-col">
-                        <label for="endTime">경매 마감 시간</label>
-                        <input type="text" id="endTime" class="flatpickr-input" name="endTime" required>
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-col">
-                        <label for="category">카테고리</label>
-                        <select id="category" name="code" required>
-                            <option value="" disabled selected>분류</option>
-                            <option th:each="category : ${categories}" th:value="${category.code}"
-                                    th:text="${category.name}"></option>
-                        </select>
-                    </div>
-
-                    <div class="form-col">
-                        <label for="type">입찰대상</label>
-                        <select id="type" name="type" required>
-                            <option value="" disabled selected>선택하세요</option>
-                            <option th:each="type : ${types}" th:value="${type}" th:text="${type.value}">선택해주세요</option>
-                        </select>
-                    </div>
+                <div class="form-group">
+                    <label for="category">카테고리</label>
+                    <select id="category" name="code" required disabled>
+                        <option value="" disabled>분류</option>
+                        <option th:each="category : ${categories}" th:value="${category.code}"
+                                th:text="${category.name}" th:selected="${category.code == selectedItem.code}"></option>
+                    </select>
                 </div>
 
                 <div class="form-group">
@@ -89,21 +86,29 @@
                         </div>
                         <div class="dropdown-content" id="dropdownContent">
                             <div th:each="law : ${laws}" style="display: flex; align-items: center;">
-                                <input type="checkbox" th:id="'law-' + ${law.id}" th:value="${law.id}" th:name="lawId[]">
+                                <input type="checkbox" th:id="'law-' + ${law.id}" th:value="${law.id}" th:name="lawId[]"
+                                       th:checked="${selectedLaws.contains(law.id)}">
                                 <label th:for="'law-' + ${law.id}" th:text="${law.title}"></label>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <button class="bid-button" type="submit">경매 등록하기</button>
+                <div class="form-group">
+                    <label for="type">입찰대상</label>
+                    <select id="type" name="type" required disabled>
+                        <option value="" disabled>선택하세요</option>
+                        <option th:each="type : ${types}" th:value="${type}" th:text="${type.value}"
+                                th:selected="${type == selectedItem.type}"></option>
+                    </select>
+                </div>
+                <button type="button" class="bid-button" onclick="submitUpdate()">경매 수정하기</button>
             </form>
         </div>
     </div>
 </main>
 
 <div th:replace="~{fragments/footer :: footer}">footer content</div>
-<script src="/js/item/item.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script>
     flatpickr("#startTime", {
@@ -122,5 +127,7 @@
         minuteIncrement: 60 // 분 단위를 60으로 설정해 분을 보이지 않게 함
     });
 </script>
+<script src="/js/item/edit.js"></script>
+<script src="/js/item/item.js"></script>
 </body>
 </html>

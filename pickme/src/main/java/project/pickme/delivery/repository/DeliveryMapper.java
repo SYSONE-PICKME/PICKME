@@ -15,6 +15,7 @@ public interface DeliveryMapper {
 	void saveDeliveryInfo(long itemId, String userId, String invoiceNumber, String code, String status, String courier);
 
 	DeliveryInfoDto getDeliveryInfo(String userId);
-
+  
 	ItemInfoDto getDeliveryItemInfo(long itemId);
+
 }

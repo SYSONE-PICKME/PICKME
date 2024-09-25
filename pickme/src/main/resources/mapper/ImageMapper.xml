@@ -10,4 +10,11 @@
     <delete id="deleteAll">
         delete from Image
     </delete>
+
+    <select id="findImagesByItemId">
+        select url
+        from Image
+        where item_id = #{id}
+    </select>
+
 </mapper>

@@ -5,6 +5,7 @@ body {
 }
 
 .content {
+    display: inline-table;
     flex-grow: 1;
     background-color: #ffffff;
     border-radius: 10px;
