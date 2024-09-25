@@ -11,57 +11,59 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap"
+          rel="stylesheet">
 
+    <link rel="stylesheet" href="/css/item/item.css">
     <link rel="stylesheet" href="/css/bid/success.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
 <!-- 헤더 -->
 <div th:replace="~{customs/customsHeader :: header}">header content</div>
-<div th:replace="~{customs/customsSidebar :: sidebar}"></div>
 
 <!-- 메인 -->
-<main th:style="'margin-bottom: 20px;'">
-    <div class="auction-list">
-        <div class="header-section">
-            <h2>등록한 공매 목록</h2>
-            <hr>
-        </div>
-        <div class="product-grid">
-            <div class="product-card" th:each="item : ${items}" style="position: relative;">
-                <!-- 조건에 따라 반투명 배경을 추가 -->
-                <div class="overlay-background" th:if="${item.status == 'CLOSED'}"></div>
-                <img th:src="@{${item.imgUrl}}" alt="product image" class="product-image">
-                <div class="product-info" style="position: relative; z-index: 2;">
-                    <span class="status-label" th:if="${item.status == 'CLOSED'}">마감</span>
-                    <h3 th:text="${item.name}"></h3>
-                    <p>공매번호: <span th:text="${item.itemId}"></span></p>
-                    <p>공매예정가격:
-                        <span th:text="${item.formatPrice(item.price)}"
-                              th:style="${item.status != 'CLOSED'} ? 'color: #4CAF50;' : ''"></span>
-                    </p>
-                    <p>공매시작일시:
-                        <span th:text="${#temporals.format(item.startTime, 'yyyy-MM-dd HH:mm:ss')}"
-                              th:style="${item.status != 'CLOSED'} ? 'color: #4CAF50;' : ''"></span>
-                    </p>
-                    <p>공매마감일시:
-                        <span th:text="${#temporals.format(item.endTime, 'yyyy-MM-dd HH:mm:ss')}"
-                              th:style="${item.status != 'CLOSED'} ? 'color: #FF0000;' : ''"></span>
-                    </p>
-                    <p>상태: <span th:text="${item.status}"></span></p>
-                    <!-- 물품 정보 수정 버튼: 입찰이 진행 전일때만 보임 -->
-                    <input type="button" id="updateItem" value="물품 정보 수정" th:if="${item.status == 'NOT_OPEN'}"
-                           th:onclick="'window.location.href=\'/customs/items/update?itemId=' + ${item.itemId} + '\''">
+<main>
+    <div class="container">
+        <div th:replace="~{customs/customsSidebar :: sidebar}"></div>
+        <div class="content">
+            <div class="page-title">등록한 공매 목록</div>
+            <div class="auction-list">
+                <div class="product-grid">
+                    <div class="product-card" th:each="item : ${items}" style="position: relative;">
+                        <!-- 조건에 따라 반투명 배경을 추가 -->
+                        <div class="overlay-background" th:if="${item.status == 'CLOSED'}"></div>
+                        <img th:src="@{${item.imgUrl}}" alt="product image" class="product-image">
+                        <div class="product-info" style="position: relative; z-index: 2;">
+                            <span class="status-label" th:if="${item.status == 'CLOSED'}">마감</span>
+                            <h3 th:text="${item.name}"></h3>
+                            <p>공매번호: <span th:text="${item.itemId}"></span></p>
+                            <p>공매예정가격:
+                                <span th:text="${item.formatPrice(item.price)}"
+                                      th:style="${item.status != 'CLOSED'} ? 'color: #4CAF50;' : ''"></span>
+                            </p>
+                            <p>공매시작일시:
+                                <span th:text="${#temporals.format(item.startTime, 'yyyy-MM-dd HH:mm:ss')}"
+                                      th:style="${item.status != 'CLOSED'} ? 'color: #4CAF50;' : ''"></span>
+                            </p>
+                            <p>공매마감일시:
+                                <span th:text="${#temporals.format(item.endTime, 'yyyy-MM-dd HH:mm:ss')}"
+                                      th:style="${item.status != 'CLOSED'} ? 'color: #FF0000;' : ''"></span>
+                            </p>
+                            <p>상태: <span th:text="${item.status}"></span></p>
+                            <!-- 물품 정보 수정 버튼: 입찰이 진행 전일때만 보임 -->
+                            <input type="button" id="updateItem" value="물품 정보 수정" th:if="${item.status == 'NOT_OPEN'}"
+                                   th:onclick="|window.location.href='/customs/items/edit/${item.itemId}'|"/>
+                        </div>
+                    </div>
                 </div>
             </div>
-
         </div>
     </div>
 </main>
 
 <!-- 푸터 -->
 <div th:replace="~{fragments/footer :: footer}">footer content</div>
-
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 </body>
 </html>

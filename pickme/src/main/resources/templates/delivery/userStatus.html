@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PICKME</title>
+
+    <link rel="stylesheet" th:href="@{/css/common/header.css}">
+    <link rel="stylesheet" th:href="@{/css/common/footer.css}">
+    <link rel="stylesheet" th:href="@{/css/common/myPageSidebar.css}">
+    <link rel="stylesheet" th:href="@{/css/item/list.css}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/bid/success.css">
+    <link rel="stylesheet" href="/css/delivery/status.css">
+</head>
+<body>
+<div th:replace="~{fragments/header :: header}">header content</div>
+<main>
+    <div class="container">
+        <div th:replace="~{fragments/myPageSidebar :: sidebar}">sidebar content</div>
+        <div class="content">
+            <div class="page-title">배송 정보 확인</div>
+            <!-- 상품 정보 카드 -->
+            <input type="hidden" name="itemId" id="data-code" th:value="${item.code}">
+            <div class="product-grid">
+
+                <div style="display: inline-grid">
+                    <div class="progress-bar">
+                        <div class="step-container">
+                            <div class="step-col">
+                                <span class="step-label">물품 준비중</span>
+                                <div class="step">1</div>
+                            </div>
+                        </div>
+
+                        <div class="step-container">
+                            <div class="step-col">
+                                <span class="step-label">배송 준비</span>
+                                <div class="step-line"></div>
+                                <div class="step">2</div>
+                            </div>
+                        </div>
+
+                        <div class="step-container">
+                            <div class="step-col">
+                                <span class="step-label">배송 중</span>
+                                <div class="step-line"></div>
+                                <div class="step">3</div>
+                            </div>
+                        </div>
+
+                        <div class="step-container">
+                            <div class="step-col">
+                                <span class="step-label">배송 완료</span>
+                                <div class="step-line"></div>
+                                <div class="step">4</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <img th:src="@{${item.imgUrl}}" alt="product image" class="product-image">
+                    <div class="product-info">
+                        <h3 th:text="${item.itemName}"></h3>
+                        <p>결제금액: <span th:text="${#numbers.formatDecimal(item.price, 0, 'COMMA', 0, 'POINT')}"></span>원
+                        </p>
+                        <p><span th:text="${item.customsName}"></span></p>
+                        <p><span th:text="${item.courier}"></span><span id="data-invoiceNumber"
+                                                                        th:text="${item.invoiceNumber}"></span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 배송지 정보 카드 -->
+                <div class="product-card">
+                    <div class="product-info">
+                        <h3>배송지 정보</h3>
+                        <input type="button" id="updateItem" value="배송지 수정"
+                               th:data-user-id="${itemUser.userId}"/>
+                        <p>주소: <span th:text="${itemUser.address}"></span></p>
+                        <p>받는사람: <span th:text="${itemUser.userName}"></span></p>
+                    </div>
+                </div>
+
+                <!-- 배송 추적 테이블 -->
+                <table id="trackingTable"></table>
+
+                <!-- JavaScript 및 jQuery 로드 -->
+                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            </div>
+        </div>
+    </div>
+</main>
+<div th:replace="~{fragments/footer :: footer}">footer content</div>
+<script th:src="@{/js/delivery/status.js}"></script>
+</body>
+</html>

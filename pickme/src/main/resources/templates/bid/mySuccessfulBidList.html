@@ -2,31 +2,25 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PICKME</title>
 
     <link rel="stylesheet" th:href="@{/css/common/header.css}">
     <link rel="stylesheet" th:href="@{/css/common/footer.css}">
     <link rel="stylesheet" th:href="@{/css/common/myPageSidebar.css}">
-
     <link rel="stylesheet" th:href="@{/css/item/list.css}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap"
           rel="stylesheet">
-
     <link rel="stylesheet" href="/css/bid/success.css">
-    <title>Title</title>
 </head>
 <body>
 <div th:replace="~{fragments/header :: header}">header content</div>
-
 <main>
     <div class="container">
         <div th:replace="~{fragments/myPageSidebar :: sidebar}">sidebar content</div>
-
         <div class="content">
             <div class="page-title">내 결제 목록</div>
             <div class="auction-list">
@@ -42,7 +36,9 @@
                             <!-- 배송현황 버튼: 송장번호가 등록된 경우 표시 -->
                             <input type="button" id="deliveryStatus" value="배송현황"
                                    th:if="${item.invoiceNumber}"
-                                   th:onclick="'window.location.href=\'/user/delivery/status?itemId=' + ${item.itemId} + '\''">
+                                   th:data-item-id="${item.itemId}"
+                                   th:data-user-id="${userId}"
+                                   onclick="viewDeliveryStatus(this)">
                             <p th:if="${item.invoiceNumber}">송장번호:<span th:text="${item.invoiceNumber}"></span></p>
                         </div>
                     </div>

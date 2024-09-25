@@ -2,70 +2,45 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Carrier Dropdown Example</title>
-    <link rel="stylesheet" href="/css/delivery/register.css">
+    <title>PICKME</title>
+    <link rel="stylesheet" th:href="@{/css/customs/customsSidebar.css}">
+    <link rel="stylesheet" th:href="@{/css/customs/customsHeader.css}">
+    <link rel="stylesheet" th:href="@{/css/common/footer.css}">
+    <link rel="stylesheet" th:href="@{/css/item/list.css}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="/css/item/item.css">
+    <link rel="stylesheet" href="/css/bid/success.css">
 </head>
 <body>
-<form id="deliveryForm">
-    <input type="hidden" name="itemId" id="itemIdInput" th:value="${itemId}">
-    <input type="hidden" name="userId" id="userIdInput" th:value="${userId}">
+<div th:replace="~{customs/customsHeader :: header}">header content</div>
+<main>
+    <div class="container">
+        <div th:replace="~{customs/customsSidebar :: sidebar}"></div>
+        <div class="content">
+            <div class="page-title">송장 등록</div>
+            <form id="deliveryForm">
+                <input type="hidden" name="itemId" id="itemIdInput" th:value="${itemId}">
+                <input type="hidden" name="userId" id="userIdInput" th:value="${userId}">
 
-    <label for="carrierDropdown">택배사 선택</label>
-    <select id="carrierDropdown" name="code">
-        <option value="" class="loading">Loading...</option>
-    </select>
+                <label for="carrierDropdown">택배사 선택</label>
+                <select id="carrierDropdown" name="code">
+                    <option value="" class="loading">Loading...</option>
+                </select>
 
-    <label for="invoiceNumber">송장번호</label>
-    <input type="text" name="invoiceNumber" id="invoiceNumber">
+                <label for="invoiceNumber">송장번호</label>
+                <input type="text" name="invoiceNumber" id="invoiceNumber">
 
-    <button type="button" id="submitButton">등록하기</button>
-</form>
-
+                <button type="button" id="submitButton" class="bid-button">등록하기</button>
+            </form>
+        </div>
+    </div>
+</main>
+<div th:replace="~{fragments/footer :: footer}">footer content</div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="/js/delivery/register.js"></script>
-<script>
-    $('#submitButton').on('click', function () {
-        const itemId = $('#itemIdInput').val();
-        const userId = $('#userIdInput').val();
-        const invoiceNumber = $('#invoiceNumber').val();
-        const selectedOption = $('#carrierDropdown option:selected');
-        const code = selectedOption.val();
-        const courier = selectedOption.text();
-
-        if (!code || !invoiceNumber) {
-            alert("모든 필드를 입력하세요.");
-            return;
-        }
-
-        console.log({
-            itemId: itemId,
-            userId: userId,
-            code: code,
-            invoiceNumber: invoiceNumber,
-            courier: courier
-        });
-
-        $.ajax({
-            type: 'POST',
-            url: '/customs/delivery',
-            data: JSON.stringify({
-                itemId: itemId,
-                userId: userId,
-                code: code,
-                invoiceNumber: invoiceNumber,
-                courier: courier
-            }),
-            contentType: 'application/json; charset=utf-8',
-            success: function (response) {
-                alert('송장이 성공적으로 등록되었습니다.');
-                window.location.href = '/customs/delivery';
-            },
-            error: function (error) {
-                alert('송장 등록 중 오류가 발생했습니다.');
-                console.log(error);
-            }
-        });
-    });
-</script>
 </body>
 </html>

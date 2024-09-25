@@ -40,8 +40,6 @@ class CustomsMapperTest {
 
 	@BeforeEach
 	void setUp(){
-		customsMapper.save(Customs.createCustoms("incheon", "1234", "incheon", "02-123-1234"));
-
 		User user = createUser("testUser");
 		userMapper.save(user);
 	}
@@ -71,12 +69,18 @@ class CustomsMapperTest {
 
 	    // then
 		List<Customs> findAll = customsMapper.findAll();
-		assertThat(findAll).hasSize(4);
+		assertThat(findAll).hasSize(3)
+			.extracting("id", "name", "tel")
+			.containsExactlyInAnyOrder(Tuple.tuple("gunsan", "군산세관", "064-730-8710"),
+				Tuple.tuple("kimpo", "김포공항세관", "064-730-8710"),
+				Tuple.tuple("changwon", "창원세관", "064-730-8710"));
 	}
 
 	@Test
 	@DisplayName("수입이 난 아이템과 누적 수입 총 수입을 확인할 수 있다.")
 	void findIncomeItemById() {
+		customsMapper.save(Customs.createCustoms("incheon", "1234", "incheon", "02-123-1234"));
+
 	    // given
 		String customsId = customsMapper.findByCustomsId("incheon").get().getId();
 		createIncome();
@@ -95,10 +99,10 @@ class CustomsMapperTest {
 
 	private void createIncome() {
 		ItemDto itemDto1 = new ItemDto("아이템1", 1, USER,10000l, now(), now(), CLOSED, "incheon");
-		itemMapper.insertItem(itemDto1);
+		itemMapper.insert(itemDto1);
 
 		ItemDto itemDto2 = new ItemDto("아이템2", 1, USER,10000l, now(), now().plusDays(1), CLOSED, "incheon");
-		itemMapper.insertItem(itemDto2);
+		itemMapper.insert(itemDto2);
 
 		imageMapper.insertImage(new ImageDto(itemDto1.getItemId(), "이미지1", "test1.png", 0));
 		imageMapper.insertImage(new ImageDto(itemDto2.getItemId(), "이미지2", "test2.png", 0));

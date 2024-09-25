@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
+import project.pickme.delivery.dto.CarrierDto;
 import project.pickme.delivery.dto.DeliveryFormDto;
 import project.pickme.delivery.dto.DeliveryInfoDto;
 import project.pickme.delivery.dto.DeliveryManageDto;
@@ -37,6 +38,7 @@ public class DeliveryService {
 		deliveryMapper.saveDeliveryInfo(deliveryFormDto.getItemId(), deliveryFormDto.getUserId(),
 			deliveryFormDto.getInvoiceNumber(), deliveryFormDto.getCode(), "배송 준비 중", deliveryFormDto.getCourier());
 	}
+
 
 	public ItemInfoDto getDeliveryItemInfo(long itemId) {
 		return deliveryMapper.getDeliveryItemInfo(itemId);

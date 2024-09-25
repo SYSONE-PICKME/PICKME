@@ -3,8 +3,6 @@ package project.pickme.delivery.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -38,18 +36,11 @@ public class CustomsDeliveryController {
 		return "/delivery/register";
 	}
 
-	@PostMapping
-	public String saveInvoiceNumber(@RequestBody DeliveryFormDto deliveryFormDto) {
-		deliveryService.saveDelivery(deliveryFormDto);
-		return "redirect:/customs/delivery";
-	}
-
 	@GetMapping("/status")
 	public String showStatusPage(@RequestParam("itemId") long itemId, @RequestParam("userId") String userId,
-		Model model, @CurrentUser Customs customs) {
+		Model model) {
 		model.addAttribute("item", deliveryService.getDeliveryItemInfo(itemId));
 		model.addAttribute("user", deliveryService.getDeliveryInfo(userId));
-		model.addAttribute("userId", customs.getId());
 
 		return "/delivery/status";
 	}

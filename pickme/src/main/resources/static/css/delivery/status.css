@@ -68,3 +68,72 @@ h1 {
     text-align: center;
     margin-bottom: 30px;
 }
+
+.progress-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 600px;
+    margin: auto;
+    margin-bottom: 30px;
+}
+
+.step-container {
+    flex: 1;
+    position: relative;
+    text-align: center;
+}
+
+.step-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 중앙 정렬 */
+    position: relative; /* relative로 설정하여 선을 정확히 배치 */
+}
+
+.step-label {
+    margin-bottom: 10%;
+    font-weight: 500;
+}
+
+.step {
+    background-color: #e0e0e0;
+    color: #888;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    z-index: 2; /* 선보다 위에 위치하도록 설정 */
+    margin-top: -15px; /* 선 위로 올리기 */
+}
+
+.step-line {
+    width: 100%; /* 선의 길이 설정 */
+    height: 5px;
+    background-color: #e0e0e0;
+    position: absolute;
+    top: 40px; /* 중앙 정렬 */
+    bottom: auto;
+    right: 0%;
+    transform: translate(-50%, -50%); /* 세로 및 가로 중앙 정렬 */
+    z-index: 1; /* 선이 원 뒤에 위치하도록 설정 */
+}
+
+.step-container.active .step {
+    background-color: #4caf50; /* 활성화 상태의 색상 */
+    color: white;
+}
+
+.step-container.active .step-line {
+    background-color: #4caf50; /* 활성화된 선 색상 */
+}
+
+.step-container.inactive .step {
+    background-color: #e0e0e0; /* 비활성화 상태의 색상 */
+    color: #888;
+}
