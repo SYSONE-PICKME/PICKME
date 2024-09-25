@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>공지사항</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/notice/noticeForm.css}">
+    <link rel="stylesheet" th:href="@{/css/customs/customsHeader.css}">
+    <link rel="stylesheet" th:href="@{/css/common/footer.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+</head>
+<body>
+<div th:replace="~{customs/customsHeader :: header}">header content</div>
+<div class="container">
+    <h1 th:text="${isEditing != null && isEditing ? '공지 수정' : '새 공지 등록'}">새 공지 등록</h1>
+</div>
+<div class="card">
+    <form th:action="${isEditing ? '/customs/notices/' + (notice != null ? notice.id : '') : '/customs/notices/create'}"
+          method="post" enctype="multipart/form-data" id="noticeForm">
+        <input type="hidden" name="_method" value="PUT" th:if="${isEditing}">
+        <input type="hidden" name="id" th:if="${isEditing && notice != null}" th:value="${notice.id}">
+        <div class="form-group">
+            <label for="title">제목</label>
+            <input type="text" id="title" name="title" th:value="${notice != null ? notice.title : ''}"
+                   placeholder="제목을 입력하세요" required>
+        </div>
+        <div class="form-group">
+            <label for="customs_notice">공지 기관</label>
+            <input type="text" id="customs_notice" th:value="${customsName}" readonly>
+            <input type="hidden" name="customsId" th:value="${customsId}">
+        </div>
+        <div id="noticeContent" class="form-group">
+            <label for="content">내용</label>
+            <textarea id="content" name="content" th:text="${notice != null ? notice.content : ''}"
+                      placeholder="내용을 작성해주세요"></textarea>
+        </div>
+        <div class="button-group">
+            <a href="/customs/notices" class="cancel-btn">작성 취소</a>
+            <button type="submit" class="submit-btn" th:text="${isEditing ? '수정하기' : '등록하기'}">등록하기</button>
+        </div>
+    </form>
+</div>
+<div th:replace="~{fragments/footer :: footer}">footer content</div>
+<script th:src="@{/js/notice/noticeForm.js}"></script>
+</body>
+</html>

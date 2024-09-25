@@ -1,0 +1,264 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+
+body {
+    font-family: "IBM Plex Sans KR", sans-serif;
+    background-color: #fff;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+h1 {
+    text-align: center;
+    font-weight: 700;
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e0e0e0;  /* 구분선 추가 */
+}
+
+p {
+    font-family: "IBM Plex Sans KR", sans-serif;
+}
+
+.main-card {
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.notice-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.notice-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    min-height: 80px;
+}
+
+.notice-content {
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+.notice-icon {
+    margin-right: 20px;
+}
+
+.notice-icon img {
+    width: 2.5em;
+    height: 2.5em;
+}
+
+.notice-text h3 {
+    margin: 0 0 5px 0;
+    font-size: 16px;
+    font-weight: 700;
+    color: #333;
+}
+
+.notice-text p {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: #666;
+}
+
+.notice-actions {
+    display: flex;
+    gap: 5px;
+}
+
+.btn {
+    font-family: "IBM Plex Sans KR", sans-serif;
+    padding: 5px 15px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-primary {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.btn-secondary {
+    background-color: #000;
+    color: white;
+}
+
+.bottom-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    position: relative;
+}
+
+.pagination-wrapper {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.pagination {
+    display: flex;
+    align-items: center;
+}
+
+.prev-btn, .next-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #333;
+    cursor: pointer;
+    padding: 0 10px;
+}
+
+.prev-btn:disabled, .next-btn:disabled {
+    color: #ccc;
+    cursor: not-allowed;
+}
+
+.page-indicators {
+    display: flex;
+    gap: 5px;
+    margin: 0 10px;
+}
+
+.page-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #ddd;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.page-dot.active {
+    background-color: #333;
+}
+
+.btn-write {
+    font-family: "IBM Plex Sans KR", sans-serif;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn-write:hover {
+    background-color: #45a049;
+}
+
+.notice-item {
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.notice-item:hover {
+    background-color: #f0f0f0;
+}
+
+.notice-actions .btn {
+    z-index: 1;
+    position: relative;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    width: 400px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.modal-icon img {
+    width: 4em;
+    height: 4em;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+.modal-content h2 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.modal-content p {
+    font-size: 14px;
+    font-weight: 600;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.modal-footer {
+    margin-left: 25%;
+    margin-right: 25%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn {
+    font-size: 16px;
+    padding: 10px 35px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-confirm {
+    background-color: #000;
+    color: white;
+}
+
+.btn-cancel {
+    background-color: white;
+    border: 1px solid #000;
+    color: #000;
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
