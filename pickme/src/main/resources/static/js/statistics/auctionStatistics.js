@@ -1,4 +1,3 @@
-
 $(document).ready(function() {
     $.ajax({
         url: '/api/statistics/auctionStatistics',
@@ -13,6 +12,12 @@ $(document).ready(function() {
                 let monthlyBids = data.monthlyBids;
 
                 createTotalAuctionsChart(totalAuctions, totalCompetitionRate);
+                createMonthlyAuctionsChart(monthlyBids);
+                createCategoryCompetitionRate(categoryCompetition);
+
+                console.log('categoryCompetition:', totalAuctions);
+                console.log('categoryCompetition:', totalCompetitionRate);
+                console.log('monthlyBids:', monthlyBids);
             } else {
                 console.error('Failed to fetch data');
             }
@@ -28,7 +33,6 @@ function createTotalAuctionsChart(totalAuctions, totalCompetitionRate){
 
         chart: {
             type: 'column',
-//            styledMode: true
         },
 
         title: {
@@ -37,9 +41,7 @@ function createTotalAuctionsChart(totalAuctions, totalCompetitionRate){
         },
 
         subtitle: {
-            text: 'Source: ' +
-                '<a href="https://www.worlddata.info/average-bodyheight.php"' +
-                'target="_blank">WorldData</a>',
+            text: 'PICK-ME',
             align: 'left'
         },
 
@@ -71,18 +73,156 @@ function createTotalAuctionsChart(totalAuctions, totalCompetitionRate){
             name: '총 경매수',
             data: [totalAuctions, 0],
             yAxis: 0
-    //        tooltip: {
-    //            valueSuffix: ' 건'
-    //        }
         }, {
             name: '전체 경쟁률',
             data: [0, totalCompetitionRate],
             yAxis: 1
         }]
+    });
+}
 
+function createCategoryCompetitionRate(categoryCompetition) {
+    Highcharts.chart('categoryCompetitionChart', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: '카테고리별 경쟁률'
+        },
+        subtitle: {
+            text: 'PICK-ME'
+        },
+        xAxis: {
+            type: 'category',
+            labels: {
+                autoRotation: [-45, -90],
+                style: {
+                    fontSize: '13px',
+                    fontFamily: 'IBM Plex Sans KR'
+                }
+            }
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: '경쟁률'
+            }
+        },
+        legend: {
+            enabled: false
+        },
+        tooltip: {
+            pointFormat: '경쟁률'
+        },
+        series: [{
+            name: '경쟁률',
+            colors: [
+                '#9b20d9', '#691af3', '#4551d5', '#1f88b7', '#00f194'
+            ],
+            colorByPoint: true,
+            groupPadding: 0,
+            data: [
+                ['의류', 7.33],
+                ['생활용품', 3.18],
+                ['디지털', 7.79],
+                ['가구', 4.23],
+                ['소모품', 5.23]
+            ],
+            dataLabels: {
+                enabled: true,
+                rotation: -90,
+                color: '#FFFFFF',
+                inside: true,
+                verticalAlign: 'top',
+                format: '{point.y:.1f}',
+                y: 10,
+                style: {
+                    fontSize: '13px',
+                    fontFamily: 'IBM Plex Sans KR'
+                }
+            }
+        }]
     });
 }
 
 function createMonthlyAuctionsChart(monthlyBids){
+    Highcharts.chart('monthlyAuctionsChart', {
+        chart: {
+            zooming: {
+                type: 'xy'
+            }
+        },
+        title: {
+            text: '월별 경매 수/경쟁률',
+            align: 'left'
+        },
+        credits: {
+            text: 'PICK-ME'
+        },
+        xAxis: [{
+            categories: [
+                '1월', '2월', '3월', '4월', '5월', '6월',
+                '7월', '8월', '9월', '10월', '11월', '12월'
+            ],
+            crosshair: true
+        }],
+        yAxis: [{
+            labels: {
+                format: '{value}건',
+                style: {
+                    color: Highcharts.getOptions().colors[1]
+                }
+            },
+            title: {
+                text: '월별 경매 수',
+                style: {
+                    color: Highcharts.getOptions().colors[1]
+                }
+            }
+        }, {
+            title: {
+                text: '월별 경쟁률',
+                style: {
+                    color: Highcharts.getOptions().colors[0]
+                }
+            },
+            labels: {
+                format: '{value}',
+                style: {
+                    color: Highcharts.getOptions().colors[0]
+                }
+            },
+            opposite: true
+        }],
+        tooltip: {
+            shared: true
+        },
+        legend: {
+            align: 'left',
+            verticalAlign: 'top',
+            backgroundColor:
+                Highcharts.defaultOptions.legend.backgroundColor ||
+                'rgba(255,255,255,0.25)'
+        },
+        series: [{
+            name: '월별 경매수',
+            type: 'column',
+            yAxis: 1,
+            data: [
+                8, 15, 12, 23, 9, 18, 17, 6, 21,
+                24, 17, 16
+            ],
+            tooltip: {
+                valueSuffix: ' 건'
+            }
 
+        }, {
+            name: '월별 경쟁률',
+            type: 'spline',
+            data: [
+                3.3, 9.5, 14.2, 5.2, 7.0, 12.1, 13.5, 13.6, 8.2,
+                2.8, 12.0, 15.5
+            ],
+        }]
+    });
 }
