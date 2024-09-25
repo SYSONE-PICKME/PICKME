@@ -57,6 +57,11 @@ body {
     white-space: pre-wrap;
 }
 
+.notice-body {
+    margin-bottom: 5%;
+}
+
+
 .campaign-content img {
     max-width: 100%;
     height: auto;
@@ -86,7 +91,7 @@ body {
 
 .content-btn {
     position: absolute;
-    left: 72%;
+    left: 76%;
     font-family: "IBM Plex Sans KR", sans-serif;
     margin-right: 20px;
     padding: 8px 16px;

@@ -22,14 +22,16 @@ body {
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
-    position: sticky;
-    top: 20px;
+    position: fixed;
+    top: 235px;
+    left: calc(70% + 40px);
+    /*margin-top: 8%;*/
     align-self: flex-start;
     max-height: calc(100vh - 40px);
     overflow-y: auto;
 }
 
-.notice-categories h2 {
+.notice-categoriesh2 {
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 15px;
@@ -78,6 +80,7 @@ table td:nth-child(2), table td:nth-child(3) {
 }
 
 .load-more {
+    margin-left: 2.5%;
     text-align: left;
     margin-top: 20px;
 }
