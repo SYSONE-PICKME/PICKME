@@ -190,4 +190,34 @@
 
         where m.status = 1
     </select>
+
+    <select id = "findBidList" parameterType="string" resultType="project.pickme.item.dto.FindItemDto$MyBid">
+        select
+        i.item_id as id,
+        i.name,
+        i.price,
+        i.start_time as startTime,
+        i.end_time as endTime,
+        i.status,
+        img.url as imgUrl
+
+        from
+        Item i
+
+        -- Join Image img
+        join Image img
+        on i.item_id = img.item_id
+        and img.seq = 0
+
+        -- Subquery for Bid table with latest bid time
+        join (
+            select item_id, max(bid_time) as latest_bid_time
+            from Bid
+            where user_id = #{userId}
+            group by item_id
+        ) b
+        on i.item_id = b.item_id
+
+        order by b.latest_bid_time desc
+    </select>
 </mapper>

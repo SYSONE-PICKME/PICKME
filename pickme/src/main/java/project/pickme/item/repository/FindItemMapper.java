@@ -23,4 +23,6 @@ public interface FindItemMapper {
 	List<FindItemDto.GetAll> findAll(@Param("userId") String userId, @Param("category") String category);
 
 	List<FindItemDto.WishList> findWishList(String userId);
+
+	List<FindItemDto.MyBid> findBidList(String userId);
 }

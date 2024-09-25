@@ -58,4 +58,12 @@ public class FindItemController {
 
 		return "item/wishList";
 	}
+
+	@GetMapping("/bid-list")
+	public String getBidList(@CurrentUser User user, Model model) {
+		List<FindItemDto.MyBid> bidList = itemService.findBidList(user.getId());
+		model.addAttribute("bidList", bidList);
+
+		return "item/bidList";
+	}
 }

@@ -47,4 +47,8 @@ public class FindItemService {
 	public List<FindItemDto.WishList> findWishList(String userId) {
 		return itemMapper.findWishList(userId);
 	}
+
+	public List<FindItemDto.MyBid> findBidList(String userId) {
+		return itemMapper.findBidList(userId);
+	}
 }

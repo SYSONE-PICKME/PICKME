@@ -88,4 +88,16 @@ public class FindItemDto {
 		private String customsName;
 		private boolean isLiked;
 	}
+
+	@Getter
+	@NoArgsConstructor
+	public static class MyBid {
+		private Long id;
+		private String name;
+		private long price;
+		private LocalDateTime startTime;
+		private LocalDateTime endTime;
+		private String status;
+		private String imgUrl;
+	}
 }
