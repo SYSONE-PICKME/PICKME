@@ -32,6 +32,9 @@
                     <!-- 비동기로 데이터를 불러오고 표시할 위치 -->
                 </div>
             </div>
+            <div id="pagination" class="pagination">
+                <!-- 페이지네이션 -->
+            </div>
         </div>
     </div>
 </main>
@@ -41,7 +44,7 @@
 
 <!-- Handlebars 템플릿 -->
 <script id="payment-template" type="text/x-handlebars-template">
-    {{#each successfulBidList}}
+    {{#each payments}}
     <div class="product-card">
         <img src="{{imgUrl}}" alt="product image" class="product-image">
         <div class="product-info">

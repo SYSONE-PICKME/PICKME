@@ -9,4 +9,10 @@
     <delete id="deleteAll">
         delete from Payment
     </delete>
+
+    <select id="countTotalPayment" parameterType="String">
+        select count(*)
+        from Payment
+        where user_id = #{id}
+    </select>
 </mapper>
