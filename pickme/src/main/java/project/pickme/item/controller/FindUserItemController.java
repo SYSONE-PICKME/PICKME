@@ -19,7 +19,7 @@ import project.pickme.user.domain.User;
 @Controller
 @RequestMapping("/user/item")
 @RequiredArgsConstructor
-public class FindItemController {
+public class FindUserItemController {
 	private final FindItemService itemService;
 
 	@GetMapping("/{id}")
@@ -57,5 +57,17 @@ public class FindItemController {
 		model.addAttribute("user", user);
 
 		return "item/wishList";
+	}
+
+	@GetMapping("/bid-list")
+	public String getBidList(
+		@CurrentUser User user,
+		@RequestParam(name = "category", required = false, defaultValue = "all") String category,
+		Model model
+	) {
+		List<FindItemDto.MyBid> bidList = itemService.findBidList(user.getId(), category);
+		model.addAttribute("bidList", bidList);
+
+		return "item/bidList";
 	}
 }

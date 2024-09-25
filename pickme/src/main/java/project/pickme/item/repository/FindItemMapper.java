@@ -29,4 +29,6 @@ public interface FindItemMapper {
 	OriginalItemDto findByItemId(long itemId);
 
 	List<FindItemDto.WishList> findWishList(String userId);
+
+	List<FindItemDto.MyBid> findBidList(@Param("userId") String userId, @Param("category") String category);
 }
