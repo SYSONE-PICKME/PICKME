@@ -135,7 +135,7 @@ body {
     cursor: pointer;
     position: relative;
     background-color: white;
-    border-radius: 10px;
+    border-bottom-right-radius: 25px;
     overflow: hidden;
     transition: transform 0.3s;
     box-shadow: 0 0 15px rgba(0,0,0,0.2);
