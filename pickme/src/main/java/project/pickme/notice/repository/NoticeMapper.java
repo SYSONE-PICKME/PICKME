@@ -23,4 +23,10 @@ public interface NoticeMapper {
 	void delete(Long id);
 
 	List<String> select4Campaigns();
+
+	List<Notice> selectRecentAll();
+
+	List<Notice> selectRecentNotices();
+
+	List<Notice> selectRecentCampaigns();
 }
