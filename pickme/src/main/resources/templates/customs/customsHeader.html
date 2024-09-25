@@ -37,7 +37,9 @@
                 </ul>
             </nav>
         </div>
-        <button class="logout-btn" th:onclick="|location.href='@{/customs/logout}'|">로그아웃</button>
+        <form th:action="@{/customs/logout}" method="post">
+            <button type="submit" class="logout-btn">로그아웃</button>
+        </form>
     </div>
 </header>
 </body>

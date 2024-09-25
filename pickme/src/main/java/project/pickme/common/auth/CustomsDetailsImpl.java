@@ -50,4 +50,17 @@ public class CustomsDetailsImpl implements UserDetails {
 	public String getUsername() {
 		return customs.getId();
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof CustomsDetailsImpl) {
+			return this.customs.getId().equals(((CustomsDetailsImpl) obj).customs.getId());
+		}
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		return this.customs.getId().hashCode();
+	}
 }
