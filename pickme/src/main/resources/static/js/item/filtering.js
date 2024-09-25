@@ -1,4 +1,4 @@
-function filterItems() {
+function filterItems(titleText) {
     var toggle = document.getElementById("toggle").checked;
     var items = document.querySelectorAll('.product-card');
     const title = document.getElementById("title");
@@ -6,7 +6,7 @@ function filterItems() {
     if (toggle) {
             title.innerText = '진행중인 경매';
         } else {
-            title.innerText = '모든 경매 물품';
+            title.innerText = titleText;
         }
 
     items.forEach(function(item) {

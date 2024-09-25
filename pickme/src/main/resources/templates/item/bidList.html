@@ -9,7 +9,7 @@
     <!-- css -->
     <link rel="stylesheet" th:href="@{/css/common/header.css}">
     <link rel="stylesheet" th:href="@{/css/common/footer.css}">
-    <link rel="stylesheet" th:href="@{/css/item/bidList.css}">
+    <link rel="stylesheet" th:href="@{/css/item/list.css}">
 
     <!-- font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,7 +24,8 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <!-- js -->
-    <script th:src="@{/js/item/bidList.js}"></script>
+    <script th:src="@{/js/item/filtering.js}"></script>
+    <script th:src="@{/js/item/like.js}"></script>
     <script th:src="@{/js/item/request.js}"></script>
 </head>
 <body>
@@ -33,11 +34,22 @@
 
 <!-- 메인 -->
 <main>
+    <nav class="category">
+        <ul>
+            <li><a th:href="@{/user/item/bid-list}"><img th:src="@{/images/all.png}">#전체</a></li>
+            <li><a th:href="@{/user/item/bid-list(category='의류')}"><img th:src="@{/images/clothes.png}">#의류</a></li>
+            <li><a th:href="@{/user/item/bid-list(category='생활용품')}"><img th:src="@{/images/tableware.png}">#생활용품</a></li>
+            <li><a th:href="@{/user/item/bid-list(category='디지털')}"><img th:src="@{/images/fridge.png}">#디지털</a></li>
+            <li><a th:href="@{/user/item/bid-list(category='가구')}"><img th:src="@{/images/furniture.png}">#가구</a></li>
+            <li><a th:href="@{/user/item/bid-list(category='기타')}"><img th:src="@{/images/battery.png}">#소모품</a></li>
+        </ul>
+    </nav>
+
     <div class="auction-list">
         <div class="header-section">
             <h2 id="title">내 입찰 목록</h2>
             <div class="toggle-switch">
-                <input type="checkbox" id="toggle" onchange="filterItems()">
+                <input type="checkbox" id="toggle" onchange="filterItems('내 입찰 목록')">
                 <label for="toggle"></label>
             </div>
         </div>
@@ -47,6 +59,10 @@
                 <span class="status-label"
                       th:classappend="${item.status == 'OPEN' ? 'status-open' : (item.status == 'NOT_OPEN' ? 'status-not-open' : 'status-closed')}"
                       th:text="${item.status == 'OPEN' ? '진행중' : (item.status == 'NOT_OPEN' ? '진행 예정' : '마감')}">진행중</span>
+                <button id="likeButton" class="heart" type="button" th:data-liked="${item.isLiked}"
+                        th:data-item-id="${item.id}" th:data-action-url="@{/user/item/{id}/like(id=${item.id})}">
+                    <i class="far fa-heart"></i>
+                </button>
                 <img th:src="@{${item.imgUrl}}" alt="product image" class="product-image">
                 <div class="product-info">
                     <h3 class="item-name" th:data-item-id="${item.id}" th:text="${item.name}"></h3>
