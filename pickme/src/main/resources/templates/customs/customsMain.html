@@ -8,6 +8,8 @@
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" th:href="@{/css/customs/customsMain.css}">
   <link rel="stylesheet" th:href="@{/css/customs/customsHeader.css}">
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
 <div th:replace="~{customs/customsHeader :: header}">header content</div>
@@ -16,18 +18,11 @@
   <h1 class="section-title">공지 및 공고</h1>
   <div class="notice-card">
     <div class="notice-buttons">
-      <button class="active">전체</button>
-      <button>공지</button>
-      <button>캠페인</button>
+      <button id="all-btn" class="active" onclick="loadRecentAll()">전체</button>
+      <button id="notice-btn" onclick="loadNotices('NOTICE')">공지</button>
+      <button id="campaign-btn" onclick="loadNotices('CAMPAIGN')">캠페인</button>
     </div>
-    <div class="notice-list">
-      <div th:each="notice, iterStat : ${notices}" th:if="${iterStat.index < 6}" class="notice-item">
-        <div class="notice-content">
-          <strong th:text="${notice.title}">공지사항</strong>
-          <span th:text="${#temporals.format(notice.createTime, 'yyyy-MM-dd')}"></span>
-        </div>
-        <a th:href="@{/customs/notice/noticeContent/{id}(id=${notice.id}}" class="notice-link">→</a>
-      </div>
+    <div class="notice-list" id="notice-list">
     </div>
   </div>
 
@@ -39,7 +34,7 @@
         <span>자세히 보기 ></span>
       </div>
     </a>
-    <a href="/admin/auction" class="footer-button">
+    <a href="/customs/campaigns" class="footer-button">
       <img th:src="@{/images/campaign.png}" alt="캠페인 관리">
       <div class="footer-button-text">
         <strong>캠페인 관리</strong>
@@ -62,5 +57,6 @@
     </a>
   </div>
 </div>
+<script th:src="@{/js/customs/customsMain.js}"></script>
 </body>
 </html>
