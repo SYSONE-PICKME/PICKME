@@ -1,38 +1,29 @@
 package project.pickme.item.service;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import project.pickme.bid.dto.reqeust.SelectedBidDto;
-import project.pickme.bid.repository.BidMapper;
-import project.pickme.bid.service.MailService;
+import project.pickme.item.repository.ItemMapper;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class ItemSchedulingService {
 	private static final String EVERY_HOUR = "0 0 * * * *";
-	private final BidMapper bidMapper;
-	private final MailService mailService;
+
+	private final ItemMapper itemMapper;
 
 	@Scheduled(cron = EVERY_HOUR)
-	public void updateStatus() throws MessagingException {
+	public void updateStatus() {
 		LocalDateTime now = LocalDateTime.now()
 			.withSecond(0)
 			.withNano(0);
 
-		List<SelectedBidDto> selectedBidDtos = bidMapper.findAllSelectedBid();
-
-		for (SelectedBidDto selectedBidDto : selectedBidDtos) {	//낙찰된 사용자에게 메일 전송
-			mailService.sendSuccessfulBidMail(selectedBidDto);
-		}
-
-		log.info("Starting item scheduled status update at {}", now);
+		log.info("Starting scheduled status update at {}", now);
+		itemMapper.updateStatus(now);
 	}
 }
