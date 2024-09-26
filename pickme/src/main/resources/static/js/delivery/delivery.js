@@ -99,8 +99,6 @@ function registerDelivery(buttonElement) {
     // Show the modal
     document.getElementById('deliveryModal').style.display = 'block';
 
-    console.log(itemId, userId);
-    // Initialize carrier dropdown
     fetchCarriers();
 }
 
