@@ -72,7 +72,7 @@
         c.id, c.name, c.tel, m.like_id, m.status
     </select>
 
-    <select id = "findAll" parameterType="string" resultType="project.pickme.item.dto.FindItemDto$GetAll">
+    <select id = "findAll" resultType="project.pickme.item.dto.FindItemDto$GetAll">
         select
         i.item_id as id,
         i.name,
@@ -86,34 +86,54 @@
         case
         when m.like_id is not null and m.status = 1 then 1
         else 0
-        end as isLiked
+        end as liked
 
         from
         Item i
-
-        -- Join Image img
-        join Image img
-        on i.item_id = img.item_id
-        and img.seq = 0
 
         -- Join Mine table
         left join Mine m
         on i.item_id = m.item_id
         and m.user_id = #{userId}
 
-        <if test="category != 'all'">
+        -- Join Image img
+        join Image img
+        on i.item_id = img.item_id
+        and img.seq = 0
+
+        <if test="cursor.category != ''">
             -- Join Category table
             join Category c
             on i.code = c.code
-            and c.name = #{category}
+            and c.name = #{cursor.category}
         </if>
 
+        <where>
+            <if test="cursor.endTime != null and cursor.status != '' and cursor.itemId != null">
+                (i.status = #{cursor.status} and i.end_time = #{cursor.endTime} and i.item_id > #{cursor.itemId})
+                or
+
+                (i.status = #{cursor.status} and i.end_time > #{cursor.endTime})
+                or
+
+                (case
+                    when #{cursor.status} = 'OPEN' then i.status = 'NOT_OPEN'
+                    when #{cursor.status} = 'NOT_OPEN' then i.status = 'CLOSED'
+                end)
+            </if>
+        </where>
+
         order by
-        case
-        when i.status in ('NOT_OPEN', 'OPEN') then 0
-        else 1
+            case
+            when i.status = 'OPEN' then 0
+            when i.status = 'NOT_OPEN' then 1
+            else 2  -- 'CLOSED'
         end,
         i.end_time asc
+        i.end_time,
+        i.item_id
+
+        limit #{size}
     </select>
 
     <select id = "findTop20" parameterType="string" resultType="project.pickme.item.dto.FindItemDto$GetAll">

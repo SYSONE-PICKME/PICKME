@@ -27,8 +27,9 @@
     </div>
     <ul class="menu">
         <li th:onclick="|location.href='@{/user/myPage}'|"><img src="/images/myInfo.png"> 개인정보 수정</li>
-        <li th:onclick="|location.href='@{/user/item/wish-list-form}'|"><img src="/images/like.png"> 관심 상품</li>
         <li th:onclick="|location.href='@{/user/successful-bid-list}'|"><img src="/images/payment.png" alt="결제 목록"> 내 결제 목록</li>
+        <li th:onclick="|location.href='@{/user/item/wish-list}'|"><img src="/images/like.png"> 관심 상품</li>
+        <li th:onclick="|location.href='@{/user/successful-bid-listForm}'|"><img src="/images/payment.png" alt="결제 목록"> 내 결제 목록</li>
         <li th:onclick="|location.href='@{/user/point/historyForm}'|"><img src="/images/point.png" alt="포인트 내역"> 포인트 내역</li>
     </ul>
 </div>

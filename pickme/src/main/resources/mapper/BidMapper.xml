@@ -69,7 +69,7 @@
     </select>
 
     <!--내 낙찰 정보 조회-->
-    <select id="findMySuccessfulBid">
+    <select id="findMySuccessfulBid" resultType="Map">
         select i.item_id        as itemId,
                i.name           as name,
                img.url          as imgUrl,
@@ -87,6 +87,7 @@
                             where seq = 0) img on i.item_id = img.item_id
         where b.is_success = 1
           and b.user_id = #{id}
+        limit #{pageable.pageSize} offset #{pageable.offset}
     </select>
 
 </mapper>

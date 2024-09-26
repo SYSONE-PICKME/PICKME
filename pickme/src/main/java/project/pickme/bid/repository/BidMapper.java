@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.data.domain.Pageable;
 
 import project.pickme.bid.domain.Bid;
 
@@ -28,5 +30,5 @@ public interface BidMapper {
 
 	void updateBidSuccess(Long bidId);
 
-	List<MySuccessfulBidDto> findMySuccessfulBid(String id);
+	List<MySuccessfulBidDto> findMySuccessfulBid(@Param("id") String id, @Param("pageable") Pageable pageable);
 }
