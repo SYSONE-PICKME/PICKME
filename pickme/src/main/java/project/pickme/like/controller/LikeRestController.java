@@ -20,9 +20,9 @@ public class LikeRestController {
 	/**
 	 * 사용자의 특정 아이템에 대한 좋아요 상태를 토글하거나, 좋아요가 없을 경우 추가하는 메서드입니다.
 	 *
-	 * @param user 현재 인증된 사용자 정보입니다.
-	 * @param id 좋아요를 토글할 아이템의 고유 식별자(ID)입니다.
-	 * @return 성공적인 요청 수행을 나타내는 빈 {@link BaseResponse} 객체를 반환합니다.
+	 * @param user 현재 인증된 사용자 정보
+	 * @param id 좋아요를 토글할 아이템의 고유 식별자(ID)
+	 * @return 성공적인 요청 수행을 나타내는 빈 {@link BaseResponse} 객체를 반환
 	 */
 	@PostMapping("/{id}/like")
 	public BaseResponse<Void> switchLike(@CurrentUser User user, @PathVariable("id") Long id) {
