@@ -110,7 +110,7 @@
                            on b.user_id = u.id
     </select>
 
-    <select id="findAllSelectedMyBid" resultType="project.pickme.bid.dto.response.SelectedMyBidDto">
+    <select id="findUnPaidBid" resultType="project.pickme.bid.dto.response.UnPaidBidDto">
         select i.url         as itemImage,
                item.name     as itemName,
                item.end_time as selectedTime,

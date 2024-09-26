@@ -14,7 +14,7 @@ import project.pickme.bid.dto.MySuccessfulBidDto;
 import project.pickme.bid.dto.reqeust.SelectedBidDto;
 import project.pickme.bid.dto.response.BidDto;
 import project.pickme.bid.dto.response.PriceDto;
-import project.pickme.bid.dto.response.SelectedMyBidDto;
+import project.pickme.bid.dto.response.UnPaidBidDto;
 
 @Mapper
 public interface BidMapper {
@@ -36,5 +36,5 @@ public interface BidMapper {
 
 	List<SelectedBidDto> findAllSuccessBid();
 
-	List<SelectedMyBidDto> findAllSelectedMyBid(String id);
+	List<UnPaidBidDto> findUnPaidBid(String id);
 }

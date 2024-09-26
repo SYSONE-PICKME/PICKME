@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import project.pickme.bid.dto.reqeust.AddBidDto;
 
-import project.pickme.bid.dto.response.SelectedMyBidDto;
+import project.pickme.bid.dto.response.UnPaidBidDto;
 import project.pickme.bid.repository.BidMapper;
 import project.pickme.common.exception.BusinessException;
 import project.pickme.item.domain.Item;
@@ -69,7 +69,7 @@ public class BidService {
 		return new PageImpl<>(mySuccessfulBids, pageable, totalCount);
 	}
 
-	public List<SelectedMyBidDto> findMySelectedBid(String id) {
-		return bidMapper.findAllSelectedMyBid(id);
+	public List<UnPaidBidDto> findMyUnpaidBid(String id) {
+		return bidMapper.findUnPaidBid(id);
 	}
 }

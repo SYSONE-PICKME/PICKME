@@ -5,9 +5,9 @@ import java.time.LocalDateTime;
 import lombok.Getter;
 
 @Getter
-public class SelectedMyBidDto {
+public class UnPaidBidDto {
 	private String itemName;
 	private String itemImage;
-	private String selectedPrice;
+	private String price;
 	private LocalDateTime selectedTime;
 }

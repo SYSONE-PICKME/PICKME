@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import lombok.RequiredArgsConstructor;
 import project.pickme.bid.dto.MySuccessfulBidDto;
 import project.pickme.bid.dto.response.BidDetailsDto;
-import project.pickme.bid.dto.response.SelectedMyBidDto;
+import project.pickme.bid.dto.response.UnPaidBidDto;
 import project.pickme.bid.service.BidService;
 import project.pickme.common.annotation.CurrentUser;
 import project.pickme.common.response.BaseResponse;
@@ -47,10 +47,10 @@ public class BidRestController {
 		return BaseResponse.ok(mySuccessfulBids);
 	}
 
-	@GetMapping("/selected-bid")
-	public BaseResponse<?> selectedBidList(@CurrentUser User user){
-		List<SelectedMyBidDto> selectedMyBidDtos = bidService.findMySelectedBid(user.getId());
+	@GetMapping("/unpaid")
+	public BaseResponse<?> unpaidBidList(@CurrentUser User user){
+		List<UnPaidBidDto> unPaidBidDtos = bidService.findMyUnpaidBid(user.getId());
 
-		return BaseResponse.ok(selectedMyBidDtos);
+		return BaseResponse.ok(unPaidBidDtos);
 	}
 }
