@@ -1,7 +1,5 @@
 package project.pickme.bid.controller;
 
-import java.util.List;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -47,9 +45,15 @@ public class BidRestController {
 		return BaseResponse.ok(mySuccessfulBids);
 	}
 
+	/**
+	 * 낙찰 후 미결제한 목록 조회하는 메서드입니다.
+	 *
+	 * @param user 로그인 된 사용자
+	 * @return 미결제 목록
+	 */
 	@GetMapping("/unpaid")
-	public BaseResponse<?> unpaidBidList(@CurrentUser User user){
-		List<UnPaidBidDto> unPaidBidDtos = bidService.findMyUnpaidBid(user.getId());
+	public BaseResponse<?> unpaidBidList(@CurrentUser User user, @PageableDefault(size = DEFAULT_PAGE_SIZE) Pageable pageable){
+		Page<UnPaidBidDto> unPaidBidDtos = bidService.findMyUnpaidBid(user.getId(), pageable);
 
 		return BaseResponse.ok(unPaidBidDtos);
 	}

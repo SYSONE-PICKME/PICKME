@@ -36,5 +36,7 @@ public interface BidMapper {
 
 	List<SelectedBidDto> findAllSuccessBid();
 
-	List<UnPaidBidDto> findUnPaidBid(String id);
+	List<UnPaidBidDto> findUnPaidBid(@Param("id") String id, @Param("pageable") Pageable pageable);
+
+	long countTotalUnpaidBid(String id);
 }

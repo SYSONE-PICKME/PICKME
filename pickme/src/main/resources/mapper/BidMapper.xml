@@ -110,7 +110,7 @@
                            on b.user_id = u.id
     </select>
 
-    <select id="findUnPaidBid" resultType="project.pickme.bid.dto.response.UnPaidBidDto">
+    <select id="findUnPaidBid" resultType="Map">
         select i.url         as itemImage,
                item.name     as itemName,
                item.end_time as selectedTime,
@@ -130,5 +130,15 @@
                                                             where user_id = #{id})) as item
                       on i.item_id = item.item_id
                           and i.seq = 0
+        limit #{pageable.pageSize} offset #{pageable.offset}
+    </select>
+
+    <select id="countTotalUnpaidBid" parameterType="String">
+        select count(*)
+        from Bid
+        where bid_id not in (select bid_id
+                             from Payment)
+          and user_id = #{id}
+          and is_success = 1;
     </select>
 </mapper>

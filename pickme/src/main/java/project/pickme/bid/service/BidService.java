@@ -69,7 +69,10 @@ public class BidService {
 		return new PageImpl<>(mySuccessfulBids, pageable, totalCount);
 	}
 
-	public List<UnPaidBidDto> findMyUnpaidBid(String id) {
-		return bidMapper.findUnPaidBid(id);
+	public Page<UnPaidBidDto> findMyUnpaidBid(String id, Pageable pageable) {
+		List<UnPaidBidDto> unPaidBid = bidMapper.findUnPaidBid(id, pageable);
+		long totalCount = bidMapper.countTotalUnpaidBid(id);
+
+		return new PageImpl<>(unPaidBid, pageable, totalCount);
 	}
 }
