@@ -129,7 +129,6 @@
             when i.status = 'NOT_OPEN' then 1
             else 2  -- 'CLOSED'
         end,
-        i.end_time asc
         i.end_time,
         i.item_id
 
