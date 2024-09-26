@@ -9,4 +9,6 @@ public interface PaymentMapper {
 	void save(SavePaymentDto savePaymentDto);
 
 	void deleteAll();
+
+	long countTotalPayment(String id);
 }
