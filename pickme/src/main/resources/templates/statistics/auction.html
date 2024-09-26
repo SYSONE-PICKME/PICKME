@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PICKME</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/statistics/auction.css}">
+    <link rel="stylesheet" th:href="@{/css/common/header.css}">
+    <link rel="stylesheet" th:href="@{/css/common/footer.css}">
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+</head>
+<body>
+<div th:replace="~{fragments/header :: header}">header content</div>
+<div class="container">
+    <div class="notice-content" th:object="${notice}">
+        <div class="dashboard-container">
+            <h1 class=".statistics-title">경매 관련 통계</h1>
+
+            <div class="chart-row">
+                <div class="chart-small">
+                    <h2 class="section-title">총 경매수/전체 경쟁률</h2>
+                    <div class="chart-container">
+                        <div id="totalAuctionsChart"></div>
+                    </div>
+                </div>
+                <div class="chart-middle">
+                    <h2 class="section-title">카테고리별 경쟁률</h2>
+                    <div class="chart-container">
+                        <div id="categoryCompetitionRateChart"></div>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="section-title">월별 경매 수/경쟁률</h2>
+            <div class="chart-container chart-large">
+                <div class="coming-soon-overlay">
+                    <p>Coming soon...</p>
+                </div>
+                <div id="monthlyAuctionsChart"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/js/statistics/auction.js}"></script>
+</body>
+</html>
