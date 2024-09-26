@@ -21,7 +21,7 @@ public class CustomsMainRestController {
 	private final CustomsMainService customsMainService;
 
 	/**
-	 * 최근 공지사항과 캠페인을 함께 조회합니다.
+	 * 최근 공지사항과 캠페인을 함께 조회
 	 * 최신 기준 6개의 공지사항과 캠페인 반환
 	 *
 	 * @return "notices"와 "campaigns" 키를 가진 Map이며
