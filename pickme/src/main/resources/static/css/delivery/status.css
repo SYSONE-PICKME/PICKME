@@ -12,12 +12,12 @@
 }
 
 #trackingTable th {
-    background-color: #f4f4f4;
+    background-color: #cbf1cb;
     color: #333;
 }
 
 #trackingTable tr:nth-child(even) {
-    background-color: #f9f9f9;
+    background-color: #F6FFF8;
 }
 
 #trackingTable tr:nth-child(odd) {
@@ -125,12 +125,12 @@ h1 {
 }
 
 .step-container.active .step {
-    background-color: #4caf50; /* 활성화 상태의 색상 */
+    background-color: #2EC44F; /* 활성화 상태의 색상 */
     color: white;
 }
 
 .step-container.active .step-line {
-    background-color: #4caf50; /* 활성화된 선 색상 */
+    background-color: #2EC44F; /* 활성화된 선 색상 */
 }
 
 .step-container.inactive .step {

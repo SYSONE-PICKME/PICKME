@@ -1,7 +1,6 @@
 function setMinAuctionStartTime() {
-    const now = new Date();
-    const isoNow = now.toISOString().slice(0, 16);
-    document.getElementById('auctionStartTime').setAttribute('min', isoNow);
+    const auctionStartTimeInput = document.getElementById('auctionStartTime');
+    document.getElementById('auctionStartTime').setAttribute('min', auctionStartTimeInput);
 }
 
 function setMinAuctionEndTime() {
@@ -53,3 +52,31 @@ function submitUpdate() {
         }
     });
 }
+
+// Start Time Picker Initialization
+const startTimePicker = flatpickr("#auctionStartTime", {
+    enableTime: true,
+    noCalendar: false,
+    dateFormat: "Y-m-d H:i",
+    time_24hr: true,
+    minuteIncrement: 60,
+    minDate: "today" // 오늘 이후의 시간만 선택 가능
+});
+
+// End Time Picker Initialization
+const endTimePicker = flatpickr("#auctionEndTime", {
+    enableTime: true,
+    noCalendar: false,
+    dateFormat: "Y-m-d H:i",
+    time_24hr: true,
+    minuteIncrement: 60,
+    minDate: null // 초기에는 제한 없음
+});
+
+// Update endTimePicker minDate when startTimePicker changes
+startTimePicker.config.onChange.push(function (selectedDates) {
+    if (selectedDates.length > 0) {
+        const startTime = selectedDates[0];
+        endTimePicker.set('minDate', new Date(startTime.getTime() + 60 * 60 * 1000)); // 시작 시간 이후 1시간부터 선택 가능
+    }
+});

@@ -12,9 +12,11 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap"
+          rel="stylesheet">
     <link rel="stylesheet" href="/css/item/item.css">
     <link rel="stylesheet" href="/css/bid/success.css">
+    <link rel="stylesheet" href="/css/delivery/delivery.css">
 </head>
 <body>
 <!-- 헤더 -->
@@ -48,7 +50,6 @@
                                    th:data-item-id="${item.itemId}"
                                    th:data-user-id="${item.userId}"
                                    onclick="viewDeliveryStatus(this)">
-                            <p th:if="${item.invoiceNumber}">송장번호: <span th:text="${item.invoiceNumber}"></span></p>
                         </div>
                     </div>
                 </div>
@@ -56,20 +57,30 @@
         </div>
     </div>
 </main>
+<!-- Modal -->
+<div id="deliveryModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <div class="page-title">송장 등록</div>
+        <form id="deliveryForm">
+            <input type="hidden" name="itemId" id="itemIdInput">
+            <input type="hidden" name="userId" id="userIdInput">
+
+            <label for="carrierDropdown">택배사 선택</label>
+            <select id="carrierDropdown" name="code">
+                <option value="" class="loading">Loading...</option>
+            </select>
+
+            <label for="invoiceNumber" id="invoiceLabel">송장번호</label>
+            <input type="text" name="invoiceNumber" id="invoiceNumber">
+
+            <button type="button" id="submitButton" class="bid-button">등록하기</button>
+        </form>
+    </div>
+</div>
 <!-- 푸터 -->
 <div th:replace="~{fragments/footer :: footer}">footer content</div>
-<script>
-    function registerDelivery(buttonElement) {
-        const itemId = encodeURIComponent(buttonElement.getAttribute('data-item-id'));
-        const userId = encodeURIComponent(buttonElement.getAttribute('data-user-id'));
-        window.location.href = `/customs/delivery/register?itemId=${itemId}&userId=${userId}`;
-    }
-
-    function viewDeliveryStatus(buttonElement) {
-        const itemId = encodeURIComponent(buttonElement.getAttribute('data-item-id'));
-        const userId = encodeURIComponent(buttonElement.getAttribute('data-user-id'));
-        window.location.href = `/customs/delivery/status?itemId=${itemId}&userId=${userId}`;
-    }
-</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="/js/delivery/delivery.js"></script>
 </body>
 </html>

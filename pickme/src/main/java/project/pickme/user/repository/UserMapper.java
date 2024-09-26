@@ -31,4 +31,6 @@ public interface UserMapper {
 	List<PointHistoryDto> findPointHistory(@Param("userId") String userId, @Param("pageable") Pageable pageable);
 
 	long countTotalPointHistory(String userId);
+
+	void updateAddress(String userId,String address);
 }

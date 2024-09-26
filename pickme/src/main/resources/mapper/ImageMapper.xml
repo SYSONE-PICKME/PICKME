@@ -2,9 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="project.pickme.image.repository.ImageMapper">
 
-    <insert id="insertImage">
+    <insert id="insertImages">
         insert into Image(item_id, name, url, seq)
-        values (#{itemId}, #{name}, #{url}, #{seq})
+        values
+        <foreach collection="images" item="image" separator=",">
+        (#{image.itemId}, #{image.name}, #{image.url}, #{image.seq})
+        </foreach>
     </insert>
 
     <delete id="deleteAll">
