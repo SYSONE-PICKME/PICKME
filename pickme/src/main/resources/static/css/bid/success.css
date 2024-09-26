@@ -4,6 +4,10 @@ body {
     margin: 0;
 }
 
+.auction-container {
+    height: 800px;
+}
+
 .product-grid {
     display: flex;
     flex-direction: column;
