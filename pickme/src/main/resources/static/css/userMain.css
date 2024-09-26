@@ -58,8 +58,8 @@ body {
     align-items: center;
     height: 400px; /* 고정 높이 설정 */
     overflow: hidden;
-    box-shadow: 0 -5px 5px rgba(0,0,0,0.3),
-                0 5px 5px rgba(0,0,0,0.3);
+    box-shadow: 0 -5px 5px rgba(0,0,0,0.1),
+                0 5px 5px rgba(0,0,0,0.1);
     border-bottom-right-radius: 30px;
     border-top-left-radius: 30px;
 }
