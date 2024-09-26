@@ -1,6 +1,6 @@
 $(document).ready(function() {
     $.ajax({
-        url: '/user/statistics/toAuction',
+        url: '/user/api/statistics/auction',
         method: 'GET',
         dataType: 'json',
         success: function(response) {
