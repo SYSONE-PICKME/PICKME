@@ -53,7 +53,7 @@
                     <p id="item-name">{{itemName}}</p>
                 </div>
             </div>
-            <p class="unpaid-bid-info">낙찰 시간: <span>{{selectedTime}}</span></p>
+            <p class="unpaid-bid-info">낙찰 시간: <span>{{selectedTime.replace('T', ' ')}}</span></p>
             <div id="price-container">
                 <span>결제 금액: <span class="paid-price">{{formatPrice price}}</span> 원</span>
             </div>
