@@ -1,12 +1,12 @@
 package project.pickme.payment.repository;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
-import project.pickme.payment.dto.SavePaymentDto;
 
 @Mapper
 public interface PaymentMapper {
-	void save(SavePaymentDto savePaymentDto);
+	void save(@Param("bidId") Long bidId, @Param("id") String id);
 
 	void deleteAll();
 

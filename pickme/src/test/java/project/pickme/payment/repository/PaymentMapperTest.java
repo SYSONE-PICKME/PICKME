@@ -17,7 +17,7 @@ import project.pickme.bid.dto.response.BidDto;
 import project.pickme.bid.repository.BidMapper;
 import project.pickme.item.dto.ItemDto;
 import project.pickme.item.repository.ItemMapper;
-import project.pickme.payment.dto.SavePaymentDto;
+import project.pickme.payment.dto.PaymentDto;
 import project.pickme.user.domain.Customs;
 import project.pickme.user.domain.User;
 import project.pickme.user.repository.CustomsMapper;
@@ -62,10 +62,10 @@ class PaymentMapperTest {
 		BidDto bidDto = BidDto.create(11000l, "testUser", itemId);
 		bidMapper.save(bidDto);
 
-		SavePaymentDto savePaymentDto = SavePaymentDto.createOf("testUser", bidDto.getBidId());
+		PaymentDto paymentDto = PaymentDto.createOf(bidDto.getBidId());
 
 		// when //then
-		paymentMapper.save(savePaymentDto);
+		paymentMapper.save(paymentDto, "testUser");
 	}
 
 	private static User createUser(String id) {
