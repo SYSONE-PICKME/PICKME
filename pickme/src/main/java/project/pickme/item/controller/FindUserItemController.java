@@ -43,7 +43,7 @@ public class FindUserItemController {
 		return "bid/bidPage";
 	}
 
-	@GetMapping("/wish-list-form")
+	@GetMapping("/wish-list")
 	public String getWishListForm(@CurrentUser User user, Model model) {
 		model.addAttribute("user", user);
 

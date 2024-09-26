@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import project.pickme.common.annotation.CurrentUser;
 import project.pickme.common.response.BaseResponse;
 import project.pickme.item.dto.FindItemDto;
+import project.pickme.item.dto.ItemRequest;
 import project.pickme.item.service.FindItemService;
 import project.pickme.user.domain.User;
 

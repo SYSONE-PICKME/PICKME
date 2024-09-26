@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function loadWishList(page, size) {
     $.ajax({
-        url: '/user/item/wish-list',  // JSON 데이터를 가져올 URL
+        url: '/user/api/item/wish-list',  // JSON 데이터를 가져올 URL
         method: 'GET',
         data: {page: page, size: size},
         success: function (response) {
