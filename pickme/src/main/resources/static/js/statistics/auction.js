@@ -30,6 +30,9 @@ function createTotalAuctionsChart(totalAuctions, totalCompetitionRate){
 
         chart: {
             type: 'column',
+            style: {
+                        fontFamily: 'IBM Plex Sans KR'  // 전역 폰트 설정
+                    }
         },
 
         title: {
@@ -99,7 +102,10 @@ function createCategoryCompetitionRateChart(categoryCompetitionRate) {
 
     Highcharts.chart('categoryCompetitionRateChart', {
         chart: {
-            type: 'column'
+            type: 'column',
+            style: {
+                        fontFamily: 'IBM Plex Sans KR'  // 전역 폰트 설정
+                    }
         },
         title: {
             text: '카테고리별 경쟁률'
@@ -159,7 +165,10 @@ function createMonthlyAuctionsChart(monthlyBids){
         chart: {
             zooming: {
                 type: 'xy'
-            }
+            },
+            style: {
+                        fontFamily: 'IBM Plex Sans KR'  // 전역 폰트 설정
+                    }
         },
         title: {
             text: '월별 경매 수/경쟁률',

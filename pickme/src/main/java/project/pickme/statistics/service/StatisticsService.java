@@ -26,4 +26,14 @@ public class StatisticsService {
 
 		return data;
 	}
+
+	public Map<String, Object> getItemStatistics() {
+		Map<String, Object> data = new HashMap<>();
+
+		data.put("topCompetitiveAuctions", statisticsMapper.getTopCompetitiveAuctions());
+		data.put("categoryFrequency", statisticsMapper.getCategoryRegistrationFrequency());
+		data.put("categoryFailureRate", statisticsMapper.getCategoryFailureRate());
+
+		return data;
+	}
 }

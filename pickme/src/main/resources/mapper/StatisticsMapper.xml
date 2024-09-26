@@ -65,7 +65,60 @@
         group by
             i.code
         order by
-            category_code;
+            category_code
+    </select>
+
+    <select id="getTopCompetitiveAuctions" resultType="project.pickme.statistics.dto.CompetitiveAuctionDto">
+        select
+            b.item_id,
+            i.name AS itemName,
+            count(distinct b.user_id) as participantCount
+        from
+            Bid b
+        join
+            Item i
+        on
+            b.item_id = i.item_id
+        group by
+            b.item_id, i.name
+        order by
+            participantCount desc
+        limit 10
+    </select>
+
+    <select id="getCategoryRegistrationFrequency" resultType="project.pickme.statistics.dto.CategoryFrequencyDto">
+        select
+            i.code,
+            c.name as categoryName,
+            count(i.item_id) * 100.0 / (select count(*) from Item) as categoryPercentage
+        from
+            Item i
+        join
+            Category c
+        on
+            i.code = c.code
+        group by
+            i.code, c.name
+        order by
+            categoryPercentage desc
+    </select>
+
+    <select id="getCategoryFailureRate" resultType="project.pickme.statistics.dto.CategoryFailureRateDto">
+        select
+            i.code as categoryCode,
+            c.name as categoryName,
+            count(case when b.is_success = 0 then 1 end) as failedAuctions,
+            (count(case when b.is_success = 0 then 1 end) * 100.0 / count(b.bid_id)) as failRate
+        from
+            Item i
+        left join
+            Bid b on i.item_id = b.item_id
+        left join
+            Category c on i.code = c.code
+        group by
+            i.code, c.name
+        order by
+            failRate desc
     </select>
 
 </mapper>
