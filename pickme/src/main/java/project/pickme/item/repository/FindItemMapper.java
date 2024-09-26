@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.data.domain.Pageable;
 
 import project.pickme.item.domain.Item;
 import project.pickme.item.dto.FindItemDto;
@@ -33,7 +34,9 @@ public interface FindItemMapper {
 
 	OriginalItemDto findByItemId(long itemId);
 
-	List<FindItemDto.WishList> findWishList(String userId);
+	List<FindItemDto.WishList> findWishList(@Param("userId") String userId, @Param("pageable") Pageable pageable);
 
 	List<FindItemDto.MyBid> findBidList(@Param("userId") String userId, @Param("category") String category);
+
+	long countTotalMyWish(String userId);
 }

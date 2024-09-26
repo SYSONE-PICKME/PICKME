@@ -44,9 +44,7 @@ public class FindUserItemController {
 	}
 
 	@GetMapping("/wish-list")
-	public String getWishList(@CurrentUser User user, Model model) {
-		List<FindItemDto.WishList> wishList = itemService.findWishList(user.getId());
-		model.addAttribute("wishList", wishList);
+	public String getWishListForm(@CurrentUser User user, Model model) {
 		model.addAttribute("user", user);
 
 		return "item/wishList";

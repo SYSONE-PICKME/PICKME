@@ -3,6 +3,9 @@ package project.pickme.item.service;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -47,8 +50,11 @@ public class FindItemService {
 		return onBidItemDto;
 	}
 
-	public List<FindItemDto.WishList> findWishList(String userId) {
-		return itemMapper.findWishList(userId);
+	public Page<FindItemDto.WishList> findWishList(String userId, Pageable pageable) {
+		List<FindItemDto.WishList> wishList = itemMapper.findWishList(userId, pageable);
+		long totalCount = itemMapper.countTotalMyWish(userId);
+
+		return new PageImpl<>(wishList, pageable, totalCount);
 	}
 
 	public List<FindItemDto.MyBid> findBidList(String userId, String category) {

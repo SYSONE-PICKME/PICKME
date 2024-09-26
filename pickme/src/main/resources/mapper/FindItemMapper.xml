@@ -129,6 +129,7 @@
             when i.status = 'NOT_OPEN' then 1
             else 2  -- 'CLOSED'
         end,
+        i.end_time asc
         i.end_time,
         i.item_id
 
@@ -193,7 +194,7 @@
                      when 'NOT_OPEN' then 1
                      when 'OPEN' then 2
                      when 'CLOSED' then 3
-                     end;
+                     end
     </select>
 
     <select id="findByItemId">
@@ -206,10 +207,10 @@
                status     as status,
                customs_id as customsId
         from Item
-        where item_id = #{id};
+        where item_id = #{id}
     </select>
 
-    <select id="findWishList" parameterType="string" resultType="project.pickme.item.dto.FindItemDto$WishList">
+    <select id="findWishList" parameterType="Map" resultType="project.pickme.item.dto.FindItemDto$WishList">
         select
         i.item_id as id,
         i.name,
@@ -245,6 +246,7 @@
         and m.user_id = #{userId}
 
         where m.status = 1
+        limit #{pageable.pageSize} offset #{pageable.offset}
     </select>
 
     <select id = "findBidList" parameterType="map" resultType="project.pickme.item.dto.FindItemDto$MyBid">
@@ -293,5 +295,11 @@
         </if>
 
         order by b.latest_bid_time desc
+    </select>
+
+    <select id="countTotalMyWish" parameterType="String">
+        select count(*)
+        from Mine
+        where user_id = #{userId} and status = 1
     </select>
 </mapper>
