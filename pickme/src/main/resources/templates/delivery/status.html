@@ -16,6 +16,11 @@
     <link rel="stylesheet" href="/css/item/item.css">
     <link rel="stylesheet" href="/css/bid/success.css">
     <link rel="stylesheet" href="/css/delivery/status.css">
+    <style>
+        .product-card{
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
 <body>
 <div th:replace="~{customs/customsHeader :: header}">header content</div>
@@ -87,6 +92,7 @@
                 </div>
 
                 <!-- 배송 추적 테이블 -->
+                <h3>배송 현황</h3>
                 <table id="trackingTable"></table>
 
             </div>

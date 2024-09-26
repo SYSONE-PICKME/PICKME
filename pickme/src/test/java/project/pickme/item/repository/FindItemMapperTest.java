@@ -5,6 +5,9 @@ import static org.assertj.core.api.Assertions.*;
 import static project.pickme.item.constant.Status.*;
 import static project.pickme.user.constant.Type.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -38,10 +41,10 @@ class FindItemMapperTest {
 		ItemDto itemDto = new ItemDto("테스트", 1, USER,10000l, now(), now(), CLOSED, "incheon");
 		itemMapper.insert(itemDto);
 		itemId = itemDto.getItemId();
-
-		imageMapper.insertImage(new ImageDto(itemId, "이미지1", "url1", 0));
-		imageMapper.insertImage(new ImageDto(itemId, "이미지2", "url2", 1));
-	}
+		List<ImageDto> images=new ArrayList<>();
+		images.add(new ImageDto(itemId, "이미지1", "url1", 0));
+		images.add(new ImageDto(itemId, "이미지2", "url2", 1));
+		}
 
 	@AfterEach
 	void tearDown() {

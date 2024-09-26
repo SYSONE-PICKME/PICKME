@@ -23,6 +23,7 @@ public class ItemRestController {
 	public BaseResponse<?> updateItem(@PathVariable("id") long id,
 		@RequestBody UpdateItemFormDto form, @CurrentUser Customs customs) {
 		itemService.updateItemByItemId(customs, form, id);
+
 		return BaseResponse.ok("경매가 성공적으로 수정되었습니다.");
 	}
 }
