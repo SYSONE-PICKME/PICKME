@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="project.pickme.statistics.repository.StatisticsMapper">
+    <resultMap id="CategoryCompetitionResultMap" type="project.pickme.statistics.dto.CategoryCompetitionDto">
+        <result property="categoryCode" column="category_code"/>
+        <result property="totalBids" column="total_bids"/>
+        <result property="totalUsers" column="total_users"/>
+        <result property="competitionRate" column="competition_rate"/>
+    </resultMap>
+
+    <select id="getTotalAuctions" resultType="int">
+        select count(distinct item_id) from Bid
+    </select>
+
+    <select id="getMonthlyBids" resultType="project.pickme.statistics.dto.MonthlyBidStatisticsDto">
+        select
+            date_format(i.start_time, '%Y-%m') as bid_month,
+            count(b.bid_id) as total_bids,
+            count(distinct b.user_id) as total_users,
+            (count(b.bid_id) / count(distinct b.user_id)) as competition_rate
+        from
+            Bid b
+        left join
+            Item i
+        on
+            b.item_id = i.item_id
+        group by
+            date_format(i.start_time, '%Y-%m')
+        order by
+            bid_month asc
+    </select>
+
+    <select id="getTotalCompetitionRate" resultType="double">
+        select
+            round((select count(item_id) from Bid) / (select count(distinct user_id) from Bid), 2) as competition_rate
+    </select>
+
+    <select id="getMonthlyCompetitionRate" resultType="project.pickme.statistics.dto.MonthlyBidStatisticsDto">
+        select
+            date_format(b.bid_time, '%Y-%m') as bid_month,
+            count(b.bid_id) as total_bids,
+            count(distinct b.user_id) as total_users,
+            (count(b.bid_id) / count(distinct b.user_id)) as competition_rate
+        from
+            Bid b
+        group by
+            date_format(b.bid_time, '%Y-%m')
+        order by
+            bid_month asc
+    </select>
+
+    <select id="getCategoryCompetitionRate" resultMap="CategoryCompetitionResultMap">
+        select
+            i.code as category_code,
+            count(b.bid_id) as total_bids,
+            count(distinct b.user_id) as total_users,
+            round((count(b.bid_id) / count(distinct b.user_id)),2) as competition_rate
+        from
+            Item i
+        left join
+            Bid b
+        on
+            i.item_id = b.item_id
+        group by
+            i.code
+        order by
+            category_code;
+    </select>
+
+</mapper>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="project.pickme.payment.repository.PaymentMapper">
-    <insert id="save" parameterType="project.pickme.payment.dto.SavePaymentDto">
+    <insert id="save" parameterType="project.pickme.payment.dto.PaymentDto">
         insert into Payment(user_id, bid_id, payment_time)
-        values (#{userId}, #{bidId}, #{paymentTime})
+        values (#{id}, #{bidId}, now())
     </insert>
 
     <delete id="deleteAll">
