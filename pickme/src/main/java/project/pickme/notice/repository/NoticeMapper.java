@@ -26,4 +26,9 @@ public interface NoticeMapper {
 
 	List<String> select4Campaigns();
 
+	List<Notice> selectRecentAll();
+
+	List<Notice> selectRecentNotices();
+
+	List<Notice> selectRecentCampaigns();
 }

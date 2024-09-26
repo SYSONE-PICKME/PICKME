@@ -24,4 +24,11 @@ public class BidController {
 
 		return "bid/mySuccessfulBidList";
 	}
+
+	@GetMapping("/unpaid-bidForm")
+	public String unpaidBidListForm(@CurrentUser User user, Model model){
+		model.addAttribute("user", user);
+
+		return "bid/unpaidBidList";
+	}
 }

@@ -11,8 +11,10 @@ import project.pickme.bid.domain.Bid;
 
 import project.pickme.bid.dto.MySuccessfulBidDto;
 
+import project.pickme.bid.dto.reqeust.SelectedBidDto;
 import project.pickme.bid.dto.response.BidDto;
 import project.pickme.bid.dto.response.PriceDto;
+import project.pickme.bid.dto.response.UnPaidBidDto;
 
 @Mapper
 public interface BidMapper {
@@ -31,4 +33,12 @@ public interface BidMapper {
 	void updateBidSuccess(Long bidId);
 
 	List<MySuccessfulBidDto> findMySuccessfulBid(@Param("id") String id, @Param("pageable") Pageable pageable);
+
+	List<SelectedBidDto> findAllSelectedBid();
+
+	List<UnPaidBidDto> findUnPaidBid(@Param("id") String id, @Param("pageable") Pageable pageable);
+
+	long countTotalUnpaidBid(String id);
+
+	void updateAllBidSuccess(List<Long> bidIds);
 }

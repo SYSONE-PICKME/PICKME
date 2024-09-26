@@ -89,4 +89,11 @@
                  where user_id = #{userId}
              ) as history
     </select>
+
+    <update id="updateAddress">
+        update User
+        set addr= #{address}
+        where id = #{userId}
+    </update>
+
 </mapper>

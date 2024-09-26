@@ -1,0 +1,109 @@
+body {
+    margin: 0px;
+    padding: 0px;
+}
+
+.content {
+    flex-grow: 1;
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    max-height: 950px;
+}
+
+.unpaid-container {
+    height: 800px;
+}
+
+.page-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.unpaid-bid {
+    display: flex;
+    align-items: flex-start;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin: 15px 0;
+    padding: 15px;
+    position: relative;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    height: 110px;
+    cursor: pointer;
+}
+
+.item-image {
+    flex: 0 0 120px;
+    margin-right: 20px;
+}
+
+.item-image img {
+    width: 110px;
+    height: 110px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+#title {
+    font-size: 1.4rem;
+    font-weight: 500;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding-left: 30px;
+}
+
+#item-name {
+    font-weight: 500;
+}
+
+.unpaid-list-details {
+    margin-top: 10px;
+    flex: 1;
+    height: 110px;
+    position: relative;
+}
+
+.unpaid-list-details p {
+    margin: 0;
+    margin-bottom: 5px;
+    font-size: 16px;
+    color: #333;
+}
+
+.unpaid-list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 24px;
+    margin-bottom: 5px;
+}
+
+.unpaid-list-header p {
+    margin: 0;
+    font-size: 16px;
+    color: #333;
+}
+
+.unpaid-bid-info {
+    color: #777;
+    font-size: 14px;
+}
+
+.paid-price {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #2EC44F;
+    margin-left: 5px;
+}
+
+#price-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}

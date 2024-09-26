@@ -103,6 +103,11 @@ document.querySelectorAll('#dropdownContent input[type="checkbox"]').forEach(fun
     });
 });
 
+// 페이지 로드 시 선택된 법규 표시
+document.addEventListener('DOMContentLoaded', function() {
+    updateSelectedOptions();
+});
+
 function updateSelectedOptions() {
     const selected = Array.from(document.querySelectorAll('#dropdownContent input[type="checkbox"]:checked'))
         .map(function(checkbox) {
