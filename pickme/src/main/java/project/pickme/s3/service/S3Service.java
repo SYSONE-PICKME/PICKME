@@ -4,6 +4,8 @@ import static project.pickme.item.exception.ItemErrorCode.*;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -58,14 +60,12 @@ public class S3Service {
 
 	public void uploadImages(ItemDto itemDto, MultipartFile[] files) {
 		int sequence = 0;
+		List<ImageDto> images = new ArrayList<>();
 		for (MultipartFile file : files) {
-			long itemId = itemDto.getItemId();
-			String name = file.getOriginalFilename();
-			String url = uploadImage(file);
-			int seq = sequence;
-			imageMapper.insertImage(new ImageDto(itemId, name, url, seq));
+			images.add(new ImageDto(itemDto.getItemId(), file.getOriginalFilename(), uploadImage(file), sequence));
 			sequence++;
 		}
+		imageMapper.insertImages(images);
 	}
 
 	public void deleteFile(String fileUrl) {

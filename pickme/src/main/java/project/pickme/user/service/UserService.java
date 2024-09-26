@@ -17,6 +17,7 @@ import project.pickme.user.constant.Role;
 import project.pickme.user.constant.Type;
 import project.pickme.user.domain.User;
 import project.pickme.user.dto.user.PointHistoryDto;
+import project.pickme.user.dto.user.UpdateAddressDto;
 import project.pickme.user.dto.user.UpdatePasswordDto;
 import project.pickme.user.dto.SignUpDto;
 import project.pickme.user.dto.user.UpdateInfoDto;
@@ -75,5 +76,11 @@ public class UserService {
 			.phoneNum(signUpDto.getPhoneNum())
 			.businessNum(signUpDto.getBusinessNum())
 			.build();
+	}
+
+	@Transactional
+	public void updateAddress(UpdateAddressDto updateAddressDto) {
+		userMapper.updateAddress(updateAddressDto.getUserId(),updateAddressDto.getAddress());
+
 	}
 }

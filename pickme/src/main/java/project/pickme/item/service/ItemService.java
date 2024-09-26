@@ -46,13 +46,11 @@ public class ItemService {
 			Status.NOT_OPEN, customs.getId());
 
 		itemMapper.insert(itemDto);
-		System.out.println("----");
 		List<ItemLawDto> laws = new ArrayList<>();
 		for (long lawId : itemFormDto.getLawId()) {
 			laws.add(new ItemLawDto(lawId,itemDto.getItemId())); // ItemLawDto 리스트 생성
 		}
 		itemLawMapper.bulkInsert(laws);
-		System.out.println("==");
 
 		s3Service.uploadImages(itemDto, itemFormDto.getFiles());
 	}

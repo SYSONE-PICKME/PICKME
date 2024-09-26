@@ -14,8 +14,8 @@
     <link rel="stylesheet" th:href="@{/css/customs/customsSidebar.css}">
     <link rel="stylesheet" th:href="@{/css/customs/customsHeader.css}">
     <link rel="stylesheet" th:href="@{/css/common/footer.css}">
-    <link rel="stylesheet" th:href="@{/css/item/list.css}">
     <link rel="stylesheet" href="/css/item/item.css">
+    <link rel="stylesheet" th:href="@{/css/item/list.css}">
     <link rel="stylesheet" href="/css/bid/success.css">
 </head>
 <body>
@@ -40,8 +40,8 @@
 
                 <div class="form-row">
                     <div class="form-col">
-                        <label for="title">상품명</label>
-                        <input type="text" id="title" name="name" required>
+                        <label for="item-name">상품명</label>
+                        <input type="text" id="item-name" name="name" required>
                     </div>
 
                     <div class="form-col">
@@ -57,7 +57,7 @@
                     </div>
                     <div class="form-col">
                         <label for="endTime">경매 마감 시간</label>
-                        <input type="text" id="endTime" class="flatpickr-input" name="endTime" required>
+                        <input type="text" id="endTime" class="flatpickr-input" name="endTime" required disabled>
                     </div>
                 </div>
 
@@ -89,13 +89,13 @@
                         </div>
                         <div class="dropdown-content" id="dropdownContent">
                             <div th:each="law : ${laws}" style="display: flex; align-items: center;">
-                                <input type="checkbox" th:id="'law-' + ${law.id}" th:value="${law.id}" th:name="lawId[]">
+                                <input type="checkbox" th:id="'law-' + ${law.id}" th:value="${law.id}"
+                                       th:name="lawId[]">
                                 <label th:for="'law-' + ${law.id}" th:text="${law.title}"></label>
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <button class="bid-button" type="submit">경매 등록하기</button>
             </form>
         </div>
@@ -105,22 +105,6 @@
 <div th:replace="~{fragments/footer :: footer}">footer content</div>
 <script src="/js/item/item.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-<script>
-    flatpickr("#startTime", {
-        enableTime: true,
-        noCalendar: false,
-        dateFormat: "Y-m-d H:i",
-        time_24hr: true,
-        minuteIncrement: 60 // 분 단위를 60으로 설정해 분을 보이지 않게 함
-    });
-
-    flatpickr("#endTime", {
-        enableTime: true,
-        noCalendar: false,
-        dateFormat: "Y-m-d H:i",
-        time_24hr: true,
-        minuteIncrement: 60 // 분 단위를 60으로 설정해 분을 보이지 않게 함
-    });
-</script>
+<script src="/js/item/createItem.js"></script>
 </body>
 </html>

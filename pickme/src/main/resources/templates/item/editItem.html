@@ -44,27 +44,29 @@
                 </div>
 
                 <input type="hidden" id="itemId" th:value="${id}"/>
-                <div class="form-group">
-                    <label for="title">상품명</label>
-                    <input type="text" id="title" name="name" th:value="${selectedItem.name}" required disabled>
-                </div>
+                <div class="form-row">
+                    <div class="form-col">
+                        <label for="item-name">상품명</label>
+                        <input type="text" id="item-name" th:value="${selectedItem.name}" name="name" required disabled>
+                    </div>
 
-                <div class="form-group">
-                    <label for="startPrice">시작가</label>
-                    <input type="number" id="startPrice" name="price" th:value="${selectedItem.price}" required
-                           disabled>
+                    <div class="form-col">
+                        <label for="startPrice">시작가</label>
+                        <input type="number" id="startPrice" th:value="${selectedItem.price}" name="price" required
+                               disabled>
+                    </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-col">
                         <label for="auctionStartTime">경매 시작 시간</label>
-                        <input type="datetime-local" id="auctionStartTime" name="startTime"
+                        <input type="text" class="flatpickr-input" id="auctionStartTime" name="startTime"
                                th:value="${selectedItem.startTime}" required>
                     </div>
                     <div class="form-col">
                         <label for="auctionEndTime">경매 마감 시간</label>
-                        <input type="datetime-local" id="auctionEndTime" name="endTime"
-                               th:value="${selectedItem.endTime}" required disabled>
+                        <input type="text" class="flatpickr-input" id="auctionEndTime" name="endTime"
+                               th:value="${selectedItem.endTime}" required>
                     </div>
                 </div>
 
@@ -81,7 +83,7 @@
                     <label>관련 법규</label>
                     <div class="custom-select" id="lawsDropdown">
                         <div class="select-box" onclick="toggleDropdown()">
-                            <span id="selectedOptions">선택된 법규 없음</span>
+                            <span id="selectedOptions"></span>
                             <i class="fas fa-chevron-down"></i> <!-- 화살표 아이콘 -->
                         </div>
                         <div class="dropdown-content" id="dropdownContent">
@@ -109,25 +111,8 @@
 </main>
 
 <div th:replace="~{fragments/footer :: footer}">footer content</div>
-<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-<script>
-    flatpickr("#startTime", {
-        enableTime: true,
-        noCalendar: false,
-        dateFormat: "Y-m-d H:i",
-        time_24hr: true,
-        minuteIncrement: 60 // 분 단위를 60으로 설정해 분을 보이지 않게 함
-    });
-
-    flatpickr("#endTime", {
-        enableTime: true,
-        noCalendar: false,
-        dateFormat: "Y-m-d H:i",
-        time_24hr: true,
-        minuteIncrement: 60 // 분 단위를 60으로 설정해 분을 보이지 않게 함
-    });
-</script>
-<script src="/js/item/edit.js"></script>
 <script src="/js/item/item.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="/js/item/edit.js"></script>
 </body>
 </html>
