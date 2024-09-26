@@ -27,7 +27,7 @@ public class ItemSchedulingService {
 			.withSecond(0)
 			.withNano(0);
 
-		List<SelectedBidDto> selectedBidDtos = bidMapper.findAllSuccessBid();
+		List<SelectedBidDto> selectedBidDtos = bidMapper.findAllSelectedBid();
 
 		for (SelectedBidDto selectedBidDto : selectedBidDtos) {	//낙찰된 사용자에게 메일 전송
 			mailService.sendSuccessfulBidMail(selectedBidDto);

@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SelectedBidDto {
+	private Long bidId;
 	private long price;
 	private String email;
 	private String itemName;

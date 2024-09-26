@@ -34,9 +34,11 @@ public interface BidMapper {
 
 	List<MySuccessfulBidDto> findMySuccessfulBid(@Param("id") String id, @Param("pageable") Pageable pageable);
 
-	List<SelectedBidDto> findAllSuccessBid();
+	List<SelectedBidDto> findAllSelectedBid();
 
 	List<UnPaidBidDto> findUnPaidBid(@Param("id") String id, @Param("pageable") Pageable pageable);
 
 	long countTotalUnpaidBid(String id);
+
+	void updateAllBidSuccess(List<Long> bidIds);
 }
