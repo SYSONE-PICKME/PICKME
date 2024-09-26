@@ -129,7 +129,6 @@
             when i.status = 'NOT_OPEN' then 1
             else 2  -- 'CLOSED'
         end,
-        i.end_time asc
         i.end_time,
         i.item_id
 
@@ -227,7 +226,7 @@
         case
         when m.like_id is not null and m.status = 1 then 1
         else 0
-        end as isLiked
+        end as liked
 
         from Item i
 
@@ -246,6 +245,14 @@
         and m.user_id = #{userId}
 
         where m.status = 1
+
+        order by
+            case
+                when i.status = 'OPEN' then 0
+                when i.status = 'NOT_OPEN' then 1
+                else 2  -- 'CLOSED'
+            end
+
         limit #{pageable.pageSize} offset #{pageable.offset}
     </select>
 

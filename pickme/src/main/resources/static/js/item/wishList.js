@@ -44,18 +44,26 @@ function updateCountdown() {
         const countdownTextElement = $(this).next('.countdown-text');
 
         if (timeDifference > 0) {
+            const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
             const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
 
+            if (days > 0) {
+                countdownTextElement.hide();
+                countdownElement.html(`
+                    <span style="color: #333;">
+                          <span style="color: red;">${days}일 후</span> 마감
+                    </span>
+                `);
+
+                return;
+            }
+
             // 시간 형식을 'HH:mm:ss'로 변환하고 빨간색 스타일 적용
             countdownElement.html(`${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}</span>`);
-
-            // '이후 마감' 텍스트를 검정색으로 설정
-            countdownTextElement.show();
+            countdownTextElement.html('이후 마감');
         } else {
-            // 마감 시, 타이머 요소에 '마감되었습니다' 문구 설정하고 '이후 마감' 텍스트 숨기기
-            countdownTextElement.hide();
             countdownElement.html('<span style="color: #333;">마감되었습니다</span>');
         }
     });
