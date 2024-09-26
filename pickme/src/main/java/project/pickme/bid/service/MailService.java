@@ -21,26 +21,26 @@ public class MailService {
 	private final JavaMailSender javaMailSender;
 	private final SpringTemplateEngine templateEngine;
 
-	public void sendSuccessfulBidMail(SelectedBidDto selectedBidDto, String toMail, long price) throws MessagingException {
-		MimeMessage mailForm = createBidMailForm(selectedBidDto, toMail, price);
+	public void sendSuccessfulBidMail(SelectedBidDto selectedBidDto) throws MessagingException {
+		MimeMessage mailForm = createBidMailForm(selectedBidDto);
 		javaMailSender.send(mailForm);
 	}
 
-	private MimeMessage createBidMailForm(SelectedBidDto selectedBidDto, String toMail, long price) throws MessagingException {
+	private MimeMessage createBidMailForm(SelectedBidDto selectedBidDto) throws MessagingException {
 		MimeMessage message = javaMailSender.createMimeMessage();
-		message.addRecipients(MimeMessage.RecipientType.TO, toMail);
+		message.addRecipients(MimeMessage.RecipientType.TO, selectedBidDto.getEmail());
 		message.setSubject("공매 낙찰 안내");
 		message.setFrom(fromMail);
-		message.setText(buildBidEmailContent(selectedBidDto, price),"utf-8", "html");
+		message.setText(buildBidEmailContent(selectedBidDto),"utf-8", "html");
 
 		return message;
 	}
 
-	private String buildBidEmailContent(SelectedBidDto selectedBidDto, long price){
+	private String buildBidEmailContent(SelectedBidDto selectedBidDto){
 		Context context = new Context();
 		context.setVariable("itemName", selectedBidDto.getItemName());
 		context.setVariable("itemImage", selectedBidDto.getItemImage());
-		context.setVariable("price", price);
+		context.setVariable("price", selectedBidDto.getPrice());
 
 		return templateEngine.process("/user/bidMail", context);
 	}

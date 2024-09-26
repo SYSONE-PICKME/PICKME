@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PICKME</title>
+
+    <!-- CSS 파일 -->
+    <link rel="stylesheet" th:href="@{/css/common/header.css}">
+    <link rel="stylesheet" th:href="@{/css/common/footer.css}">
+    <link rel="stylesheet" th:href="@{/css/common/myPageSidebar.css}">
+    <link rel="stylesheet" href="/css/common/pagination.css">
+    <link rel="stylesheet" href="/css/bid/unpaidBid.css">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+<div th:replace="~{fragments/header :: header}">header content</div>
+
+<main>
+    <div class="container">
+        <div th:replace="~{fragments/myPageSidebar :: sidebar}">sidebar content</div>
+
+        <div class="content">
+            <div class="page-title">미결제 목록</div>
+
+            <div id="unpaidBidList-container" class="unpaid-container">
+                <!-- 관심 상품 목록을 렌더링 -->
+            </div>
+
+            <div id="pagination" class="pagination">
+                <!-- 페이지네이션 -->
+            </div>
+        </div>
+    </div>
+</main>
+<div th:replace="~{fragments/footer :: footer}">footer content</div>
+
+<!-- Handlebars 템플릿 -->
+<script id="unpaidBidList-template" type="text/x-handlebars-template">
+    {{#each unPaidList}}
+    <div class="unpaid-bid" data-item-id="{{id}}">
+        <div class="item-image">
+            <img src="{{itemImage}}" alt="상품 이미지"/>
+        </div>
+        <div class="unpaid-list-details">
+            <div class="unpaid-list-header">
+                <div>
+                    <p id="item-name">{{itemName}}</p>
+                </div>
+            </div>
+            <p class="unpaid-bid-info">낙찰 시간: <span>{{selectedTime}}</span></p>
+            <div id="price-container">
+                <span>결제 금액: <span class="paid-price">{{price}}</span> 원</span>
+            </div>
+        </div>
+    </div>
+    {{/each}}
+</script>
+
+<!-- JS 파일들 -->
+<script src="/js/user/myPage.js"></script>
+<script src="/js/bid/unpaidBid.js"></script>
+<script src="/js/common/pagination.js"></script>
+</body>
+</html>

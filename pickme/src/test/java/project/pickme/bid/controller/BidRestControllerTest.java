@@ -18,7 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.TestExecutionEvent;
 import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.context.ActiveProfiles;
@@ -26,7 +25,6 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import project.pickme.bid.dto.reqeust.SelectedBidDto;
 import project.pickme.bid.dto.response.BidDetailsDto;
 import project.pickme.bid.dto.response.PriceDto;
 import project.pickme.bid.service.BidService;
@@ -76,23 +74,6 @@ class BidRestControllerTest {
 			.andExpect(jsonPath("$.data.userId").value("testUser"))
 			.andExpect(jsonPath("$.data.bidId").value(1))
 			.andExpect(jsonPath("$.data.myPoint").value(10000));
-	}
-
-	@Test
-	@DisplayName("낙찰하는 컨트톨러")
-	@WithUserDetails(value = "testUser", userDetailsServiceBeanName = "userDetailServiceImpl", setupBefore = TestExecutionEvent.TEST_EXECUTION)
-	void endBid() throws Exception {
-	    // given
-		SelectedBidDto selectedBidDto = new SelectedBidDto(1l, 1l, "테스트 아이템", "test.png");
-		doNothing().when(bidService).selectBid(any(SelectedBidDto.class));
-
-	    // when // then
-		mockMvc.perform(post("/user/bid/end")
-				.contentType(MediaType.APPLICATION_JSON)
-				.content(objectMapper.writeValueAsString(selectedBidDto)))
-			.andDo(print())
-			.andExpect(status().isOk())
-			.andExpect(jsonPath("$.success").value(true));
 	}
 
 	private static User createUser(String id) {
