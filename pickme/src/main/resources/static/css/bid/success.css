@@ -4,6 +4,10 @@ body {
     margin: 0;
 }
 
+.auction-container {
+    height: 800px;
+}
+
 .product-grid {
     display: flex;
     flex-direction: column;
@@ -67,6 +71,13 @@ body {
     color: white;
     padding: 5px;
     font-weight: 600;
+}
+
+.payment-price {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #28a745;
+    margin-left: 5px;
 }
 
 @media (max-width: 768px) {

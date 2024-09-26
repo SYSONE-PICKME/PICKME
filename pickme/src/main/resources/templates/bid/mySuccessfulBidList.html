@@ -28,11 +28,15 @@
         <input type="hidden" id="userId" th:value="${userId}">
         <div class="content">
             <div class="page-title">내 결제 목록</div>
-            <div class="auction-list">
-                <div id="product-grid" class="product-grid">
-                    <!-- 비동기로 데이터를 불러오고 표시할 위치 -->
+            <div class="auction-container">
+                <div class="auction-list">
+                    <div id="product-grid" class="product-grid">
+                        <!-- 비동기로 데이터를 불러오고 표시할 위치 -->
+
+                    </div>
                 </div>
             </div>
+
             <div id="pagination" class="pagination">
                 <!-- 페이지네이션 -->
             </div>
@@ -52,7 +56,7 @@
             <h3>{{name}}</h3>
             <p>공매번호: <span>{{itemId}}</span></p>
             <p><span>{{customsName}}</span></p>
-            <p>결제금액: <span>{{price}}</span>원</p>
+            <p>결제금액: <span class="payment-price">{{formatPrice price}}</span>원</p>
 
             <!-- 배송현황 버튼: 송장번호가 등록된 경우 표시 -->
             {{#if invoiceNumber}}

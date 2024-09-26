@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="project.pickme.item.repository.ItemMapper">
-
     <insert id="insert" parameterType="ItemDto" useGeneratedKeys="true" keyProperty="itemId">
         insert into Item (name, code, target, price, start_time, end_time, status, customs_id)
         values (#{name}, #{code}, #{type}, #{price}, #{startTime}, #{endTime}, #{status}, #{customsId})
@@ -33,5 +32,4 @@
             start_time = #{startTime}
         where item_id = #{itemId}
     </update>
-
 </mapper>

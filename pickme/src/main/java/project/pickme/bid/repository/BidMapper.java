@@ -40,5 +40,5 @@ public interface BidMapper {
 
 	long countTotalUnpaidBid(String id);
 
-	void updateAllBidSuccess(List<Long> bidIds);
+	void updateAllBidSuccess(@Param("bidIds") List<Long> bidIds);
 }
