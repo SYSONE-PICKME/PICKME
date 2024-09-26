@@ -57,8 +57,8 @@
                 <div>
                     <p id="item-name">{{name}}</p>
                 </div>
-                <button class="heart" type="button" data-liked="{{isLiked}}" data-item-id="{{id}}" data-action-url="/user/item/{{id}}/like">
-                    <i class="{{#if isLiked}}fas{{else}}far{{/if}} fa-heart"></i>
+                <button class="heart {{#if liked}}active{{else}}{{/if}}" type="button" data-liked="{{liked}}" data-item-id="{{id}}" data-action-url="/user/item/{{id}}/like">
+                    <i class="{{#if liked}}fas{{else}}far{{/if}} fa-heart"></i>
                 </button>
             </div>
             <p class="wishlist-info">공매번호: <span>{{id}}</span></p>
@@ -78,8 +78,8 @@
 <!-- JS 파일들 -->
 <script src="/js/user/myPage.js"></script>
 <script src="/js/item/wishList.js"></script>
-<script src="/js/item/like.js"></script>
-<script src="/js/item/request.js"></script>
+<script src="/js/item/likeHandler.js"></script>
+<script src="/js/item/itemNavigation.js"></script>
 <script src="/js/common/pagination.js"></script>
 </body>
 </html>

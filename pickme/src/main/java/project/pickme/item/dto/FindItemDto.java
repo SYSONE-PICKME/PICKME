@@ -86,7 +86,7 @@ public class FindItemDto {
 		private LocalDateTime endTime;
 		private String imgUrl;
 		private String customsName;
-		private boolean isLiked;
+		private boolean liked;
 	}
 
 	@Getter
