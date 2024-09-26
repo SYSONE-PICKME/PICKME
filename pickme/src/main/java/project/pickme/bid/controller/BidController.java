@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import lombok.RequiredArgsConstructor;
 import project.pickme.common.annotation.CurrentUser;
 import project.pickme.user.domain.User;
+import project.pickme.user.service.UserService;
 
 @Controller
 @RequestMapping("/user")
@@ -16,9 +17,17 @@ public class BidController {
 
 	@GetMapping("/successful-bid-listForm")
 	public String successfulBidListForm(@CurrentUser User user, Model model) {
-		model.addAttribute("user", user);
+		User userInfo = userService.getById(user.getId());
+		model.addAttribute("user", userInfo);
 		model.addAttribute("userId", user.getId());
 
 		return "bid/mySuccessfulBidList";
+	}
+
+	@GetMapping("/unpaid-bidForm")
+	public String unpaidBidListForm(@CurrentUser User user, Model model){
+		model.addAttribute("user", user);
+
+		return "bid/unpaidBidList";
 	}
 }

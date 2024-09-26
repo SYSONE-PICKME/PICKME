@@ -1,4 +1,6 @@
 mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl # MyBatis에서 사용하는 로그 구현체 설정
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: project.pickme
 
@@ -46,3 +48,6 @@ logging:
     org:
       springframework:
         security: DEBUG
+      apache:
+        ibatis: DEBUG
+        mybatis: DEBUG
