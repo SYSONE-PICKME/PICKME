@@ -20,7 +20,7 @@
         <div class="points">
             <span class="points-label">보유 포인트</span>
             <div class="points-info">
-                <span class="points-amount" id="points-amount" th:text="*{point}"></span>
+                <span class="points-amount" id="points-amount" th:text="|${user.point}|"></span>
                 <button class="recharge-button" th:onclick="|location.href='@{/user/charge}'|">충전</button>
             </div>
         </div>
