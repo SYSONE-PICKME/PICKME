@@ -2,6 +2,10 @@ Handlebars.registerHelper('formatPrice', function(price) {
     return price.toLocaleString();  // 숫자에 콤마 추가
 });
 
+Handlebars.registerHelper('formatTime', function(time) {
+    return time.replace('T', ' ');  // 'T'를 공백으로 대체하여 시간 포맷 변경
+});
+
 document.addEventListener("DOMContentLoaded", function () {
     loadUnpaidBidList(0, 6);
 });
