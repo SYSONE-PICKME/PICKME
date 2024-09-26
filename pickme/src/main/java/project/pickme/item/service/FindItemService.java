@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 import project.pickme.item.dto.ItemRequest;
+import project.pickme.item.dto.ItemRequest.BidCursor;
 import project.pickme.item.dto.LawDto;
 import project.pickme.item.dto.OneBidItemDto;
 import project.pickme.item.dto.FindItemDto;
@@ -22,7 +23,7 @@ import project.pickme.user.domain.User;
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class FindItemService {
-	private final int DEFAULT_PAGE_SIZE = 16;
+	private static final int DEFAULT_PAGE_SIZE = 16;
 
 	private final FindItemMapper itemMapper;
 	private final LawMapper lawMapper;
@@ -57,7 +58,7 @@ public class FindItemService {
 		return new PageImpl<>(wishList, pageable, totalCount);
 	}
 
-	public List<FindItemDto.MyBid> findBidList(String userId, String category) {
-		return itemMapper.findBidList(userId, category);
+	public List<FindItemDto.MyBid> findBidList(String userId, BidCursor cursor) {
+		return itemMapper.findBidList(userId, cursor, DEFAULT_PAGE_SIZE);
 	}
 }

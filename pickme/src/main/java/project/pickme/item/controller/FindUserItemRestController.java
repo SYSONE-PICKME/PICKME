@@ -38,4 +38,12 @@ public class FindUserItemRestController {
 
 		return BaseResponse.ok(wishList);
 	}
+
+	@GetMapping("/bid-list")
+	public BaseResponse<List<FindItemDto.MyBid>> getBidList(@CurrentUser User user, @ModelAttribute ItemRequest.BidCursor cursor) {
+		System.out.println("Request~~");
+		List<FindItemDto.MyBid> bidList = itemService.findBidList(user.getId(), cursor);
+
+		return BaseResponse.ok(bidList);
+	}
 }
