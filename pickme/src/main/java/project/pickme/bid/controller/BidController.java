@@ -23,4 +23,11 @@ public class BidController {
 
 		return "bid/mySuccessfulBidList";
 	}
+
+	@GetMapping("/selected-bid")
+	public String selectedBidListForm(@CurrentUser User user, Model model){
+		model.addAttribute("user", user);
+
+		return "bid/selectedBidList";
+	}
 }

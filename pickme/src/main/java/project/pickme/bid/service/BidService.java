@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import project.pickme.bid.dto.reqeust.AddBidDto;
 
+import project.pickme.bid.dto.response.SelectedMyBidDto;
 import project.pickme.bid.repository.BidMapper;
 import project.pickme.common.exception.BusinessException;
 import project.pickme.item.domain.Item;
@@ -38,7 +39,6 @@ public class BidService {
 	private final UserMapper userMapper;
 	private final BidMapper bidMapper;
 	private final PaymentMapper paymentMapper;
-	private final MailService mailService;
 
 	@Transactional
 	public UpdatePriceBidDto addBid(AddBidDto addBidDto) {    //입찰하는 메서드
@@ -46,8 +46,7 @@ public class BidService {
 			.orElseThrow(() -> new BusinessException(NOT_FOUND_ITEM));
 
 		if (item.isOpen()) {
-			User user = userMapper.findUserById(addBidDto.getUserId())
-				.orElseThrow(() -> new BusinessException(NOT_FOUND_USER));
+			User user = userMapper.findUserById(addBidDto.getUserId()).orElseThrow(() -> new BusinessException(NOT_FOUND_USER));
 			BidDto bidDto = BidDto.create(addBidDto.getPrice(), user.getId(), item.getId());
 			bidMapper.save(bidDto);
 
@@ -68,5 +67,9 @@ public class BidService {
 		long totalCount = paymentMapper.countTotalPayment(user.getId());
 
 		return new PageImpl<>(mySuccessfulBids, pageable, totalCount);
+	}
+
+	public List<SelectedMyBidDto> findMySelectedBid(String id) {
+		return bidMapper.findAllSelectedMyBid(id);
 	}
 }

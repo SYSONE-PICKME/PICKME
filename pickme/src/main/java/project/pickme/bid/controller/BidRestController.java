@@ -1,5 +1,7 @@
 package project.pickme.bid.controller;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import lombok.RequiredArgsConstructor;
 import project.pickme.bid.dto.MySuccessfulBidDto;
 import project.pickme.bid.dto.response.BidDetailsDto;
+import project.pickme.bid.dto.response.SelectedMyBidDto;
 import project.pickme.bid.service.BidService;
 import project.pickme.common.annotation.CurrentUser;
 import project.pickme.common.response.BaseResponse;
@@ -42,5 +45,12 @@ public class BidRestController {
 		Page<MySuccessfulBidDto> mySuccessfulBids = bidService.findMySuccessfulBid(user, pageable);
 
 		return BaseResponse.ok(mySuccessfulBids);
+	}
+
+	@GetMapping("/selected-bid")
+	public BaseResponse<?> selectedBidList(@CurrentUser User user){
+		List<SelectedMyBidDto> selectedMyBidDtos = bidService.findMySelectedBid(user.getId());
+
+		return BaseResponse.ok(selectedMyBidDtos);
 	}
 }

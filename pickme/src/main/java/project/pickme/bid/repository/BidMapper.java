@@ -14,6 +14,7 @@ import project.pickme.bid.dto.MySuccessfulBidDto;
 import project.pickme.bid.dto.reqeust.SelectedBidDto;
 import project.pickme.bid.dto.response.BidDto;
 import project.pickme.bid.dto.response.PriceDto;
+import project.pickme.bid.dto.response.SelectedMyBidDto;
 
 @Mapper
 public interface BidMapper {
@@ -34,4 +35,6 @@ public interface BidMapper {
 	List<MySuccessfulBidDto> findMySuccessfulBid(@Param("id") String id, @Param("pageable") Pageable pageable);
 
 	List<SelectedBidDto> findAllSuccessBid();
+
+	List<SelectedMyBidDto> findAllSelectedMyBid(String id);
 }
