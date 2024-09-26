@@ -5,8 +5,7 @@ let isLoading = false;
 let noMoreData = false;
 
 // 페이지네이션을 위한 커서 정보
-let cursor = {
-};
+let cursor = {};
 
 // AJAX 요청으로 데이터를 가져오고 HTML에 표시하는 함수
 function loadItems() {
@@ -25,7 +24,6 @@ function loadItems() {
             // 데이터가 있는 경우 화면에 추가
             if (items.length > 0) {
                 items.forEach(item => {
-                console.log(item.isLiked);
                 const formattedStartTime = dayjs(item.startTime).format('YYYY-MM-DD HH:mm');
                 const formattedEndTime = dayjs(item.endTime).format('YYYY-MM-DD HH:mm');
 
