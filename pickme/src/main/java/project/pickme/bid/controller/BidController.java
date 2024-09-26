@@ -27,7 +27,8 @@ public class BidController {
 
 	@GetMapping("/unpaid-bidForm")
 	public String unpaidBidListForm(@CurrentUser User user, Model model){
-		model.addAttribute("user", user);
+		User userInfo = userService.getById(user.getId());
+		model.addAttribute("user", userInfo);
 
 		return "bid/unpaidBidList";
 	}
