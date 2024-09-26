@@ -45,14 +45,16 @@ public class UserController {
 
 	@GetMapping("/myPage")
 	public String myPage(@CurrentUser User user, Model model) {
-		model.addAttribute("user", user);
+		User userInfo = userService.getById(user.getId());
+		model.addAttribute("user", userInfo);
 
 		return "user/userInfoEditForm";
 	}
 
 	@GetMapping("/point/historyForm")
 	public String showPointHistory(@CurrentUser User user, Model model) {
-		model.addAttribute("user", user);
+		User userInfo = userService.getById(user.getId());
+		model.addAttribute("user", userInfo);
 
 		return "user/pointHistory";
 	}

@@ -10,7 +10,6 @@ import lombok.RequiredArgsConstructor;
 import project.pickme.common.annotation.CurrentUser;
 import project.pickme.item.dto.FindItemDto;
 import project.pickme.item.service.FindItemService;
-import project.pickme.notice.dto.CampaignDto;
 import project.pickme.notice.service.CampaignService;
 import project.pickme.user.domain.Customs;
 
@@ -31,5 +30,7 @@ public class MainController {
 	}
 
 	@GetMapping("/customs/main")
-	public String showMain() {return "/customs/customsMain";}
+	public String showMain(@CurrentUser Customs customs, Model model) {
+		return "customs/customsMain";
+	}
 }

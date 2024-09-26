@@ -21,6 +21,7 @@ import project.pickme.user.dto.user.UpdateAddressDto;
 import project.pickme.user.dto.user.UpdatePasswordDto;
 import project.pickme.user.dto.SignUpDto;
 import project.pickme.user.dto.user.UpdateInfoDto;
+import project.pickme.user.dto.user.UpdatePasswordDto;
 import project.pickme.user.repository.UserMapper;
 
 @Service
@@ -62,6 +63,11 @@ public class UserService {
 		long totalCount = userMapper.countTotalPointHistory(user.getId());
 
 		return new PageImpl<>(pointHistories, pageable, totalCount);
+	}
+
+	public User getById(String id) {
+		return userMapper.findUserById(id)
+			.orElseThrow(() -> new BusinessException(NOT_FOUND_USER));
 	}
 
 	private User createUser(SignUpDto signUpDto) {

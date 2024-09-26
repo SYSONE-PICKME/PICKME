@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function loadUnpaidBidList(page, size) {
     $.ajax({
-        url: '/user/bid/unpaid',  // JSON 데이터를 가져올 URL
+        url: '/user/bid/unpaid',
         method: 'GET',
         data: { page: page, size: size },
         success: function (response) {
@@ -22,9 +22,43 @@ function loadUnpaidBidList(page, size) {
             $('#unpaidBidList-container').html(html);
 
             updatePagination(response.data, 'loadUnpaidBidList', size);
+
+            $(".payment-button").on("click", function() {
+                let bidId = $(this).data("bid-id");
+                let price = $(this).data("price-id");
+
+                // 결제 로직 호출
+                handlePayment(bidId, price);
+            });
         },
         error: function (xhr, status, error) {
-            console.error('관심 상품 목록을 불러오는 중 오류가 발생했습니다:', error);
+            console.error('오류 발생', error);
+        }
+    });
+}
+
+// 결제 로직 처리 함수
+function handlePayment(bidId, price) {
+    let paymentDto = {
+        bidId: bidId,
+        price: price
+    };
+
+    $.ajax({
+        url: '/user/payment',
+        method: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(paymentDto),
+        success: function(response) {
+            if (response.success) {
+                alert('결제가 성공적으로 처리되었습니다.');
+            } else {
+                alert('포인트가 부족합니다. \n포인트 충전 후 결제 해주세요 ');
+            }
+        },
+        error: function(error) {
+            alert('결제 요청 중 오류가 발생했습니다.');
+            console.error("Error during payment:", error);
         }
     });
 }

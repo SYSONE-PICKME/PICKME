@@ -24,7 +24,7 @@ import project.pickme.charge.dto.ChargeDto;
 import project.pickme.charge.repository.ChargeMapper;
 import project.pickme.item.dto.ItemDto;
 import project.pickme.item.repository.ItemMapper;
-import project.pickme.payment.dto.SavePaymentDto;
+import project.pickme.payment.dto.PaymentDto;
 import project.pickme.payment.repository.PaymentMapper;
 import project.pickme.user.constant.Role;
 import project.pickme.user.domain.Customs;
@@ -155,7 +155,7 @@ class UserMapperTest {
 		bidMapper.save(bidDto);
 		bidMapper.updateBidSuccess(bidDto.getBidId());
 
-		paymentMapper.save(SavePaymentDto.createOf(user.getId(), bidDto.getBidId()));	//포인트 차감
+		paymentMapper.save(bidDto.getBidId(), user.getId());	//포인트 차감
 
 	    // when
 		Pageable pageable = PageRequest.of(0, 6);
