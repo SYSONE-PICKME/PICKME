@@ -184,3 +184,52 @@ function updateProgressBar(statusCode) {
 
     }
 }
+
+function updateAddress(buttonElement) {
+    document.getElementById('updateAddressModal').style.display = 'block';
+}
+
+// 모달 닫기 이벤트
+$('.close').on('click', function () {
+    $('#updateAddressModal').hide();
+});
+
+// 모달 외부 클릭 시 닫기
+$(window).on('click', function (event) {
+    if ($(event.target).is('#updateAddressModal')) {
+        $('#updateAddressModal').hide();
+    }
+});
+
+$('#updateAddressButton').on('click', function () {
+
+    document.getElementById('updateAddressModal').style.display = 'block';
+
+    const address = $('#modifiedAddress').val();
+    const userId = $('#userId').val();
+    const itemId = $('#itemId').val();
+
+
+    $.ajax({
+        type: 'PATCH',
+        url: '/user/address',
+        data: JSON.stringify({
+            address: address,
+            userId: userId
+        }),
+        contentType: 'application/json; charset=utf-8',
+        success: function (response) {
+            console.log({
+                userId: userId,
+                address: address
+            });
+            alert('배송지가 성공적으로 수정되었습니다.');
+
+            window.location.href = '/user/delivery/status?itemId=' + itemId + '&userId=' + userId;
+        },
+        error: function (error) {
+            alert('배송지 수정에 실패했습니다.');
+            console.log(error);
+        }
+    });
+});
