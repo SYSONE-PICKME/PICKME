@@ -4,14 +4,12 @@ body {
     margin: 0;
 }
 
-/* 레이아웃 스타일 */
 .product-grid {
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
-/* 컴포넌트 스타일 */
 .product-card {
     margin-bottom: auto;
     padding: 0 20px;
@@ -48,7 +46,6 @@ body {
     z-index: 2;
 }
 
-/* 상태에 따라 스타일 추가 */
 .product-card.closed2 {
     background-color: rgba(128, 128, 128, 0.5) !important;
     opacity: 0.5 !important;
@@ -72,7 +69,6 @@ body {
     font-weight: 600;
 }
 
-/* 미디어 쿼리 */
 @media (max-width: 768px) {
     .product-grid {
         grid-template-columns: repeat(2, 1fr);
