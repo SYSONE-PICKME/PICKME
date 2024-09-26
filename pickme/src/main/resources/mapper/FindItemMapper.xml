@@ -86,7 +86,7 @@
         case
         when m.like_id is not null and m.status = 1 then 1
         else 0
-        end as liked
+        end as isLiked
 
         from
         Item i
@@ -101,7 +101,7 @@
         on i.item_id = img.item_id
         and img.seq = 0
 
-        <if test="cursor.category != ''">
+        <if test="cursor.category != null">
             -- Join Category table
             join Category c
             on i.code = c.code
@@ -109,7 +109,7 @@
         </if>
 
         <where>
-            <if test="cursor.endTime != null and cursor.status != '' and cursor.itemId != null">
+            <if test="cursor.endTime != null and cursor.status != null and cursor.itemId != null">
                 (i.status = #{cursor.status} and i.end_time = #{cursor.endTime} and i.item_id > #{cursor.itemId})
                 or
 
@@ -226,7 +226,7 @@
         case
         when m.like_id is not null and m.status = 1 then 1
         else 0
-        end as liked
+        end as isLiked
 
         from Item i
 
@@ -270,7 +270,10 @@
         case
             when m.like_id is not null and m.status = 1 then 1
             else 0
-        end as isLiked
+        end as isLiked,
+
+        -- Bid table
+        b.latest_bid_time as latestBidTime
 
         from
         Item i
@@ -294,14 +297,27 @@
         ) b
         on i.item_id = b.item_id
 
-        <if test="category != 'all'">
+        <if test="cursor.category != null">
             -- Join Category table
             join Category c
             on i.code = c.code
-            and c.name = #{category}
+            and c.name = #{cursor.category}
         </if>
 
-        order by b.latest_bid_time desc
+        <where>
+            <if test="cursor != null and cursor.bidTime != null and cursor.itemId != null">
+                (b.latest_bid_time &lt; #{cursor.bidTime})
+                or
+                (b.latest_bid_time = #{cursor.bidTime}
+                and i.item_id &lt; #{cursor.itemId})
+            </if>
+        </where>
+
+        order by
+        latestBidTime desc,
+        id desc
+
+        limit #{size}
     </select>
 
     <select id="countTotalMyWish" parameterType="String">

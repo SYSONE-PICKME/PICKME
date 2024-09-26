@@ -69,7 +69,7 @@
         </div>
 
         <div class="auction-details">
-            <h2><span th:text="${item.name}"></span></h2>
+            <h2 id="item-name"><span th:text="${item.name}"></span></h2>
             <button id="likeButton" class="heart" th:classappend="${item.isLiked} ? 'active' : ''" type="button" th:data-liked="${item.isLiked}" th:data-item-id="${item.id}" th:data-action-url="@{/user/item/{id}/like(id=${item.id})}">
                 <i th:class="${item.isLiked} ? 'fas' + ' fa-heart': 'far' + ' fa-heart'"></i>
             </button>
