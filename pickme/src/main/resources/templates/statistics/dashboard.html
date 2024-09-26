@@ -6,17 +6,20 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
-     <link rel="stylesheet" th:href="@{/css/statistics/statisticsDashboard.css}">
+    <link rel="stylesheet" th:href="@{/css/common/header.css}">
+    <link rel="stylesheet" th:href="@{/css/common/footer.css}">
+     <link rel="stylesheet" th:href="@{/css/statistics/dashboard.css}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
 
 </head>
 <body>
+<div th:replace="~{fragments/header :: header}">header content</div>
 <h1 class="dashboard-title">주요통계 대시보드</h1>
 <div class="dashboard">
-    <a href="/경매통계" class="card">
+    <a href="/user/statistics/auction" class="card">
         <div class="card-image-container">
-            <img src="planning.jpg" alt="경매 관련 통계" class="card-image">
+            <img th:src="@{/images/express-delivery.png}" alt="경매 관련 통계" class="card-image">
             <div class="card-overlay">
                 <div class="card-overlay-content">
                     <ul>
@@ -40,9 +43,9 @@
             </div>
         </div>
     </a>
-    <a href="/물품통계" class="card">
+    <a href="/user/statistics/item" class="card">
         <div class="card-image-container">
-            <img src="planning.jpg" alt="물품 관련 통계" class="card-image">
+            <img th:src="@{/images/express-delivery.png}" alt="물품 관련 통계" class="card-image">
             <div class="card-overlay">
                 <div class="card-overlay-content">
                     <ul>
@@ -68,7 +71,7 @@
     </a>
     <a href="/재정통계" class="card">
         <div class="card-image-container">
-            <img src="planning.jpg" alt="재정 관련 통계" class="card-image">
+            <img th:src="@{/images/express-delivery.png}" alt="재정 관련 통계" class="card-image">
             <div class="card-overlay">
                 <div class="card-overlay-content">
                     <ul>
@@ -94,7 +97,7 @@
     </a>
     <a href="/지역통계" class="card">
         <div class="card-image-container">
-            <img src="planning.jpg" alt="지역별 통계" class="card-image">
+            <img th:src="@{/images/express-delivery.png}" alt="지역별 통계" class="card-image">
             <div class="card-overlay">
                 <div class="card-overlay-content">
                     <ul>
@@ -118,7 +121,7 @@
     </a>
     <a href="/시간통계" class="card">
         <div class="card-image-container">
-            <img src="planning.jpg" alt="시간 관련 통계" class="card-image">
+            <img th:src="@{/images/express-delivery.png}" alt="시간 관련 통계" class="card-image">
             <div class="card-overlay">
                 <div class="card-overlay-content">
                     <ul>
@@ -143,7 +146,7 @@
     </a>
     <a href="/법규통계" class="card">
         <div class="card-image-container">
-            <img src="planning.jpg" alt="법규 관련 통계" class="card-image">
+            <img th:src="@{/images/express-delivery.png}" alt="법규 관련 통계" class="card-image">
             <div class="card-overlay">
                 <div class="card-overlay-content">
                     <ul>
@@ -166,5 +169,6 @@
         </div>
     </a>
 </div>
+<div th:replace="~{fragments/footer :: footer}">footer content</div>
 </body>
 </html>

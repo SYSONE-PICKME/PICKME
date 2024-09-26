@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PICKME</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/statistics/item.css}">
+    <link rel="stylesheet" th:href="@{/css/common/header.css}">
+    <link rel="stylesheet" th:href="@{/css/common/footer.css}">
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+</head>
+<body>
+<div th:replace="~{fragments/header :: header}">header content</div>
+<div class="container">
+    <h1 class="item-title">물품 관련 통계</h1>
+    <div class="chart-container">
+        <div class="chart-wrapper">
+            <div class="chart-title">경쟁이 치열했던 경매 Top 10</div>
+            <div class="chart" id="competitiveAuctionsChart">
+                <div id="competitiveAuctionsChartContent"></div>
+            </div>
+        </div>
+        <div class="chart-wrapper">
+            <div class="chart-title">자주 등록되는 카테고리</div>
+            <div class="chart">
+                <div id="popularCategoriesChartContent"></div>
+            </div>
+        </div>
+        <div class="chart-wrapper">
+            <div class="chart-title">최고 낙찰가 경매 Top 10</div>
+            <div class="chart">
+                <div id="highestBidsChartContent"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div th:replace="~{fragments/footer :: footer}">footer content</div>
+<script th:src="@{/js/statistics/item.js}"></script>
+</body>
+</html>
