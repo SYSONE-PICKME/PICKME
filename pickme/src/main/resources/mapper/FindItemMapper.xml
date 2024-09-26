@@ -245,6 +245,14 @@
         and m.user_id = #{userId}
 
         where m.status = 1
+
+        order by
+            case
+                when i.status = 'OPEN' then 0
+                when i.status = 'NOT_OPEN' then 1
+                else 2  -- 'CLOSED'
+            end
+
         limit #{pageable.pageSize} offset #{pageable.offset}
     </select>
 
