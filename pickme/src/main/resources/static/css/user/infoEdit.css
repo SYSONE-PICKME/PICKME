@@ -52,7 +52,7 @@ input {
     width: 95%;
 }
 
-form {
+.info-form, .password-form{
     display: grid;
     grid-template-columns: 1fr 2fr;
     gap: 15px;

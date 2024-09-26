@@ -6,8 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PICKME</title>
 
-    <!-- css -->
-    <link rel="stylesheet" th:href="@{/css/common/index.css}">
+    <!-- cass -->
     <link rel="stylesheet" th:href="@{/css/common/header.css}">
     <link rel="stylesheet" th:href="@{/css/common/footer.css}">
     <link rel="stylesheet" th:href="@{/css/item/detail.css}">
@@ -85,8 +84,8 @@
                     <p id="item-id" th:text="${item.id}" th:data-item-id="${item.id}"></p>
                     <p th:text="${item.customsName}"></p>
                     <p th:text="${item.target}"></p>
-                    <p th:text="${item.startTime}"></p>
-                    <p th:text="${item.endTime}"></p>
+                    <p th:text="${#temporals.format(item.startTime, 'yyyy-MM-dd HH:mm')}"></p>
+                    <p th:text="${#temporals.format(item.endTime, 'yyyy-MM-dd HH:mm')}"></p>
                 </div>
 
             </div>

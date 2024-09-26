@@ -27,12 +27,6 @@
     </div>
     <div class="nav-content">
         <div class="navigation-buttons">
-            <div class="nav-arrows">
-                <a th:href="@{/customs/notices/{id}(id=${previousNoticeId})}" class="nav-content-btn" title="이전글"><i
-                        class="fas fa-chevron-left"></i></a>
-                <a th:href="@{/customs/notices/{id}(id=${nextNoticeId})}" class="nav-content-btn" title="다음글"><i
-                        class="fas fa-chevron-right"></i></a>
-            </div>
             <div class="action-buttons">
                 <a th:href="@{/customs/notices/edit/{id}(id=${notice.id})}" class="content-btn"
                    th:if="${notice.customsId==customsId}">수 정</a>
