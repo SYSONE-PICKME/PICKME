@@ -1,0 +1,17 @@
+.product-card{
+    margin-bottom: 0px;
+}
+
+.product-grid {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#trackingTable{
+    margin-top: 0px;
+}
+h3{
+    margin-top: 10px;
+    margin-bottom: 0px;
+}

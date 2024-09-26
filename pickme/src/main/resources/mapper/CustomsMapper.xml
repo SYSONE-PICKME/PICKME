@@ -64,6 +64,6 @@
                             from Item
                             where customs_id = #{id}
                             and status = 'CLOSED')
-        and b.is_success = 1;
+        and b.is_success = 1
     </select>
 </mapper>

@@ -6,6 +6,9 @@ import static project.pickme.user.exception.UserErrorCode.*;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -77,7 +80,10 @@ public class BidService {
 		return BidDetailsDto.createOf(allPrices, user.getPoint());
 	}
 
-	public List<MySuccessfulBidDto> findMySuccessfulBid(User user) {
-		return bidMapper.findMySuccessfulBid(user.getId());
+	public Page<MySuccessfulBidDto> findMySuccessfulBid(User user, Pageable pageable) {
+		List<MySuccessfulBidDto> mySuccessfulBids = bidMapper.findMySuccessfulBid(user.getId(), pageable);
+		long totalCount = paymentMapper.countTotalPayment(user.getId());
+
+		return new PageImpl<>(mySuccessfulBids, pageable, totalCount);
 	}
 }

@@ -31,7 +31,7 @@
         /*]]>*/
     </script>
     <script th:src="@{/js/item/image.js}"></script>
-    <script th:src="@{/js/item/like.js}"></script>
+    <script th:src="@{/js/item/likeHandler.js}"></script>
     <script th:src="@{/js/item/countdown.js}"></script>
     <script th:src="@{/js/item/unit.js}"></script>
     <script th:src="@{/js/item/law.js}"></script>
@@ -69,9 +69,9 @@
         </div>
 
         <div class="auction-details">
-            <h2><span th:text="${item.name}"></span></h2>
-            <button id="likeButton" class="heart" type="button" th:data-liked="${item.isLiked}" th:data-item-id="${item.id}" th:data-action-url="@{/user/item/{id}/like(id=${item.id})}">
-                <i class="far fa-heart"></i>
+            <h2 id="item-name"><span th:text="${item.name}"></span></h2>
+            <button id="likeButton" class="heart" th:classappend="${item.isLiked} ? 'active' : ''" type="button" th:data-liked="${item.isLiked}" th:data-item-id="${item.id}" th:data-action-url="@{/user/item/{id}/like(id=${item.id})}">
+                <i th:class="${item.isLiked} ? 'fas' + ' fa-heart': 'far' + ' fa-heart'"></i>
             </button>
             <div class="action-sub-details">
                 <div id="title">

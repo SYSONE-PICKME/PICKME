@@ -74,7 +74,7 @@ public class FindItemDto {
 		private LocalDateTime endTime;
 		private String status;
 		private String imgUrl;
-		private boolean isLiked;
+		private Boolean isLiked;
 	}
 
 	@Getter
@@ -86,7 +86,7 @@ public class FindItemDto {
 		private LocalDateTime endTime;
 		private String imgUrl;
 		private String customsName;
-		private boolean isLiked;
+		private Boolean isLiked;
 	}
 
 	@Getter
@@ -99,6 +99,7 @@ public class FindItemDto {
 		private LocalDateTime endTime;
 		private String status;
 		private String imgUrl;
-		private boolean isLiked;
+		private Boolean isLiked;
+		private LocalDateTime latestBidTime;
 	}
 }

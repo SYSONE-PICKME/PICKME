@@ -29,12 +29,12 @@
     <nav class="main-nav">
         <a th:href="@{/user/main}" class="logo">PICK-ME</a>
         <ul class="nav-links">
-            <li><a href="/notice_link">공지사항</a></li>
+            <li><a th:href="@{/user/notices}">공지사항</a></li>
             <li><a th:href="@{/user/item/list}">공매물품조회</a></li>
             <li><a th:href="@{/user/item/bid-list}">입찰 목록</a></li>
             <li><a th:href="@{/user/charge}">포인트등록</a></li>
             <li><a th:href="@{/user/myPage}">마이페이지</a></li>
-            <li><a href="/statistics">통계</a></li>
+            <li><a th:href="@{/user/statistics}">통계</a></li>
         </ul>
         <div class="auth-buttons">
             <th:block sec:authorize="isAnonymous()">
