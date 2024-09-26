@@ -144,7 +144,7 @@
         where bid_id not in (select bid_id
                              from Payment)
         and user_id = #{id}
-        and is_success = 1;
+        and is_success = 1
     </select>
 
     <update id="updateAllBidSuccess" parameterType="java.util.List">
