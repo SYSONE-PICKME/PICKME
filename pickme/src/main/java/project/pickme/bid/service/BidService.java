@@ -12,12 +12,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
-import project.pickme.bid.domain.Bid;
 import project.pickme.bid.dto.reqeust.AddBidDto;
 
-import project.pickme.bid.dto.reqeust.SelectedBidDto;
 import project.pickme.bid.repository.BidMapper;
 import project.pickme.common.exception.BusinessException;
 import project.pickme.item.domain.Item;
@@ -29,7 +26,6 @@ import project.pickme.bid.dto.response.PriceDto;
 import project.pickme.bid.dto.response.UpdatePriceBidDto;
 import project.pickme.item.repository.FindItemMapper;
 
-import project.pickme.payment.dto.SavePaymentDto;
 import project.pickme.payment.repository.PaymentMapper;
 import project.pickme.user.domain.User;
 import project.pickme.user.repository.UserMapper;
@@ -59,19 +55,6 @@ public class BidService {
 		}
 
 		throw new BusinessException(BID_NOT_PROGRESS);
-	}
-
-	@Transactional
-	public void selectBid(SelectedBidDto selectedBidDto) throws MessagingException {
-		Bid bid = bidMapper.findBidById(selectedBidDto.getBidId())
-			.orElseThrow(() -> new BusinessException(NOT_FOUND_BID));
-
-		bidMapper.updateBidSuccess(selectedBidDto.getBidId());
-		userMapper.minusPoint(bid.getUserId(), bid.getPrice());
-		paymentMapper.save(SavePaymentDto.createOf(bid.getUserId(), selectedBidDto.getBidId()));
-
-		//낙찰자에게 메일 전송
-		mailService.sendSuccessfulBidMail(selectedBidDto, bid.getUserEmail(), bid.getPrice());
 	}
 
 	public BidDetailsDto showBidDetails(Long itemId, User user) {

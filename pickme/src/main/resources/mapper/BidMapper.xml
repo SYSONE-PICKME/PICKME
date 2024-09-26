@@ -90,4 +90,23 @@
         limit #{pageable.pageSize} offset #{pageable.offset}
     </select>
 
+    <select id="findAllSuccessBid" resultType="project.pickme.bid.dto.reqeust.SelectedBidDto">
+        with bidRank as (select b.*,
+                                row_number() over (partition by b.item_id order by b.price desc) as rn
+                         from Bid b
+                         where item_id in (select item_id
+                                           from Item
+                                           where status = 'CLOSED'
+                                             and end_time between now - interval 5 minute and now + interval 5 minute))
+        select b.price,
+               b.name,
+               i.url,
+               u.email
+        from Image i
+                 join bidRank b
+                      on i.item_id = b.item_id
+                          and i.seq = 0 and rn = 1
+                 left join User u
+                           on b.user_id = u.id
+    </select>
 </mapper>
