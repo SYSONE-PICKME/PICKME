@@ -173,3 +173,23 @@ body {
     font-size: calc(7px + 0.5vw);
     color: #666;
 }
+
+.notice-buttons button {
+    display: block;
+    width: 100%;
+    padding: 15px 20px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 30px;
+    background-color: #f1f1f1;
+    color: #333;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.notice-buttons button.active {
+    background-color: #4CAF50;
+    color: white;
+}

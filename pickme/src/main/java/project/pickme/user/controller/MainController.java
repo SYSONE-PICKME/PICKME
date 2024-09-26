@@ -31,7 +31,5 @@ public class MainController {
 	}
 
 	@GetMapping("/customs/main")
-	public String showMain(@CurrentUser Customs customs, Model model) {
-		return "/customs/customsMain";
-	}
+	public String showMain() {return "/customs/customsMain";}
 }
