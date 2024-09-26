@@ -17,7 +17,7 @@ import project.pickme.bid.repository.BidMapper;
 @Service
 @RequiredArgsConstructor
 public class BidSchedulingService {
-	private static final String EVERY_HOUR = "10 0 * * * *";
+	private static final String EVERY_HOUR = "10 21 * * * *";
 
 	private final BidMapper bidMapper;
 	private final MailService mailService;
@@ -30,6 +30,8 @@ public class BidSchedulingService {
 
 		List<Long> bidIds = new ArrayList<>();
 		List<SelectedBidDto> allSelectedBid = bidMapper.findAllSelectedBid();
+		System.out.println(allSelectedBid.toString());
+
 		for (SelectedBidDto selectedBidDto : allSelectedBid) {
 			bidIds.add(selectedBidDto.getBidId());
 			mailService.sendSuccessfulBidMail(selectedBidDto);

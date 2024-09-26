@@ -13,4 +13,15 @@ public class SelectedBidDto {
 	private String email;
 	private String itemName;
 	private String itemImage;
+
+	@Override
+	public String toString() {
+		return "SelectedBidDto{" +
+			"bidId=" + bidId +
+			", price=" + price +
+			", email='" + email + '\'' +
+			", itemName='" + itemName + '\'' +
+			", itemImage='" + itemImage + '\'' +
+			'}';
+	}
 }

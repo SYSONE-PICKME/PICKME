@@ -92,12 +92,12 @@
 
     <select id="findAllSelectedBid" resultType="project.pickme.bid.dto.reqeust.SelectedBidDto">
         with bidRank as (select b.*,
+                                i.name,
                                 row_number() over (partition by b.item_id order by b.price desc) as rn
-                         from Bid b
-                         where item_id in (select item_id
-                                           from Item
-                                           where status = 'CLOSED'
-                                             and end_time between now - interval 5 minute and now + interval 5 minute))
+                         from Bid b join Item i
+                                         on b.item_id = i.item_id
+                                             and i.status = 'CLOSED'
+                                             and i.end_time between now() - interval 5 minute and now() + interval 5 minute)
         select b.price,
                b.name   as itemName,
                i.url    as itemImage,
@@ -145,12 +145,13 @@
           and is_success = 1;
     </select>
 
-    <update id="updateAllBidSuccess" parameterType="list">
+    <update id="updateAllBidSuccess" parameterType="java.util.List">
         update Bid
         set is_success = 1
         where bid_id in
-        <foreach item="id" collection="list" open="(" separator="," close=")">
+        <foreach item="id" collection="bidIds" open="(" separator="," close=")">
             #{id}
         </foreach>
     </update>
+
 </mapper>
