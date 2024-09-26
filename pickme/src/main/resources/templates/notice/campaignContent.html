@@ -29,12 +29,6 @@
     </div>
     <div class="nav-content">
         <div class="navigation-buttons">
-            <div class="nav-arrows">
-                <a th:href="@{/customs/campaigns/{id}(id=${previousCampaignId})}" class="nav-content-btn" title="이전글"><i
-                        class="fas fa-chevron-left"></i></a>
-                <a th:href="@{/customs/campaigns/{id}(id=${nextCampaignId})}" class="nav-content-btn" title="다음글"><i
-                        class="fas fa-chevron-right"></i></a>
-            </div>
             <div class="action-buttons">
                 <a th:href="@{/customs/campaigns/edit/{id}(id=${campaign.id})}" class="content-btn"
                    th:if="${campaign.customsId==customsId}">수 정</a>
