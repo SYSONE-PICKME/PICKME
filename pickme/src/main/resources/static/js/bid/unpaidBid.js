@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function loadUnpaidBidList(page, size) {
     $.ajax({
-        url: '/user/bid/unpaid',  // JSON 데이터를 가져올 URL
+        url: '/user/bid/unpaid',
         method: 'GET',
         data: { page: page, size: size },
         success: function (response) {
@@ -24,8 +24,8 @@ function loadUnpaidBidList(page, size) {
             updatePagination(response.data, 'loadUnpaidBidList', size);
 
             $(".payment-button").on("click", function() {
-                let bidId = $(this).data("bid-id");  // data-bid-id에서 값을 가져옴
-                let price = $(this).data("price-id");  // data-price-id에서 값을 가져옴
+                let bidId = $(this).data("bid-id");
+                let price = $(this).data("price-id");
 
                 // 결제 로직 호출
                 handlePayment(bidId, price);
@@ -44,20 +44,16 @@ function handlePayment(bidId, price) {
         price: price
     };
 
-    console.log(paymentDto, "============================");
-
-    // AJAX를 이용한 POST 요청
     $.ajax({
         url: '/user/payment',
         method: 'POST',
         contentType: 'application/json',
-        data: JSON.stringify(paymentDto),  // PaymentDto를 JSON 형식으로 변환하여 전송
+        data: JSON.stringify(paymentDto),
         success: function(response) {
             if (response.success) {
                 alert('결제가 성공적으로 처리되었습니다.');
-                // 추가 로직: 결제 후 페이지 이동 또는 상태 업데이트
             } else {
-                alert('결제 처리에 실패했습니다: ' + response.message);
+                alert('포인트가 부족합니다. \n포인트 충전 후 결제 해주세요 ');
             }
         },
         error: function(error) {

@@ -21,7 +21,6 @@ public class PaymentRestController {
 	@PostMapping("/payment")
 	public BaseResponse<?> payment(@RequestBody PaymentDto paymentDto, @CurrentUser User user) {
 		paymentService.payment(user, paymentDto);
-		System.out.println(paymentDto.toString() + "========================================");
 		return BaseResponse.ok();
 	}
 }
