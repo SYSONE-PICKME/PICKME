@@ -93,10 +93,11 @@
         with bidRank as (select b.*,
                                 i.name,
                                 row_number() over (partition by b.item_id order by b.price desc) as rn
-                         from Bid b join Item i
-                                         on b.item_id = i.item_id
-                                             and i.status = 'CLOSED'
-                                             and i.end_time between now() - interval 5 minute and now() + interval 5 minute)
+                         from Bid b
+                                  join Item i
+                                      on b.item_id = i.item_id
+                                      and i.status = 'CLOSED'
+                                      and i.end_time between now() - interval 5 minute and now() + interval 5 minute)
         select b.price,
                b.name   as itemName,
                i.url    as itemImage,
@@ -105,9 +106,9 @@
         from Image i
                  join bidRank b
                       on i.item_id = b.item_id
-                          and i.seq = 0 and rn = 1
+                      and i.seq = 0 and rn = 1
                  left join User u
-                           on b.user_id = u.id
+                      on b.user_id = u.id
     </select>
 
     <select id="findUnPaidBid" resultType="Map">
@@ -125,13 +126,13 @@
                        from Item i
                                 join Bid b
                                      on i.item_id = b.item_id
-                                         and b.user_id = #{id}
-                                         and b.is_success = 1
-                                         and bid_id not in (select bid_id
+                                     and b.user_id = #{id}
+                                     and b.is_success = 1
+                                     and bid_id not in (select bid_id
                                                             from Payment
                                                             where user_id = #{id})) as item
                       on i.item_id = item.item_id
-                          and i.seq = 0
+                      and i.seq = 0
         limit #{pageable.pageSize} offset #{pageable.offset}
     </select>
 
@@ -140,8 +141,8 @@
         from Bid
         where bid_id not in (select bid_id
                              from Payment)
-          and user_id = #{id}
-          and is_success = 1;
+        and user_id = #{id}
+        and is_success = 1;
     </select>
 
     <update id="updateAllBidSuccess" parameterType="java.util.List">

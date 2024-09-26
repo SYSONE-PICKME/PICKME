@@ -28,9 +28,10 @@ public class BidSchedulingService {
 			.withSecond(0)
 			.withNano(0);
 
+		log.info("Starting bid scheduled status update at {}", now);
+
 		List<Long> bidIds = new ArrayList<>();
 		List<SelectedBidDto> allSelectedBid = bidMapper.findAllSelectedBid();
-		System.out.println(allSelectedBid.toString());
 
 		for (SelectedBidDto selectedBidDto : allSelectedBid) {
 			bidIds.add(selectedBidDto.getBidId());
@@ -38,7 +39,5 @@ public class BidSchedulingService {
 		}
 
 		bidMapper.updateAllBidSuccess(bidIds);
-
-		log.info("Starting bid scheduled status update at {}", now);
 	}
 }
