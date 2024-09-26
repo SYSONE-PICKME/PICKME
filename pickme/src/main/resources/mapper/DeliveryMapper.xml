@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="project.pickme.delivery.repository.DeliveryMapper">
-
     <!--낙찰된 공매품 송장등록 및 배송현황 확인 페이지 /delivery-->
     <select id="findCustomsSuccessfulItems">
         select i.item_id        as itemId,
@@ -54,5 +53,4 @@
         insert into Delivery(user_id, item_id, invoice_number, code, status, courier)
         values (#{userId}, #{itemId}, #{invoiceNumber}, #{code}, #{status}, #{courier})
     </insert>
-
 </mapper>
