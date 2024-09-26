@@ -15,6 +15,8 @@ import project.pickme.user.service.UserService;
 @RequiredArgsConstructor
 public class BidController {
 
+	private final UserService userService;
+
 	@GetMapping("/successful-bid-listForm")
 	public String successfulBidListForm(@CurrentUser User user, Model model) {
 		User userInfo = userService.getById(user.getId());
