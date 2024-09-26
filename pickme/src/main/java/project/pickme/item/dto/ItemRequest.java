@@ -19,4 +19,14 @@ public class ItemRequest {
 		private LocalDateTime endTime;
 		private String category;
 	}
+
+	@Getter @Setter
+	@NoArgsConstructor
+	public static class BidCursor {
+		private Long itemId;
+
+		@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+		private LocalDateTime bidTime;
+		private String category;
+	}
 }
