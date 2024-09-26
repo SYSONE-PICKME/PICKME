@@ -86,7 +86,7 @@
         case
         when m.like_id is not null and m.status = 1 then 1
         else 0
-        end as liked
+        end as isLiked
 
         from
         Item i
@@ -101,7 +101,7 @@
         on i.item_id = img.item_id
         and img.seq = 0
 
-        <if test="cursor.category != ''">
+        <if test="cursor.category != null">
             -- Join Category table
             join Category c
             on i.code = c.code
@@ -109,7 +109,7 @@
         </if>
 
         <where>
-            <if test="cursor.endTime != null and cursor.status != '' and cursor.itemId != null">
+            <if test="cursor.endTime != null and cursor.status != null and cursor.itemId != null">
                 (i.status = #{cursor.status} and i.end_time = #{cursor.endTime} and i.item_id > #{cursor.itemId})
                 or
 

@@ -5,12 +5,7 @@ let isLoading = false;
 let noMoreData = false;
 
 // 페이지네이션을 위한 커서 정보
-let cursor = {
-    itemId: null,
-    status: null,
-    endTime: null,
-    category: null
-};
+let cursor = {};
 
 // AJAX 요청으로 데이터를 가져오고 HTML에 표시하는 함수
 function loadItems() {
@@ -37,8 +32,8 @@ function loadItems() {
                             <span class="status-label ${item.status == 'OPEN' ? 'status-open' : (item.status == 'NOT_OPEN' ? 'status-not-open' : 'status-closed')}">
                                 ${item.status == 'OPEN' ? '진행중' : (item.status == 'NOT_OPEN' ? '진행 예정' : '마감')}
                             </span>
-                            <button class="heart ${item.liked ? 'active' : ''}" type="button" data-liked="${item.liked}" data-item-id="${item.id}" data-action-url="/user/item/${item.id}/like">
-                                <i class="${item.liked ? 'fas' : 'far'} fa-heart"></i>
+                            <button class="heart ${item.isLiked ? 'active' : ''}" type="button" data-liked="${item.isLiked}" data-item-id="${item.id}" data-action-url="/user/item/${item.id}/like">
+                                <i class="${item.isLiked ? 'fas' : 'far'} fa-heart"></i>
                             </button>
                             <img src="${item.imgUrl}" alt="product image" class="product-image">
                             <div class="product-info">
