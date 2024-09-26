@@ -26,6 +26,6 @@ public class UserDeliveryController {
 		model.addAttribute("itemUser", deliveryService.getDeliveryInfo(userId));
 		model.addAttribute("itemId", itemId);
 
-		return "/delivery/userStatus";
+		return "delivery/userStatus";
 	}
 }
