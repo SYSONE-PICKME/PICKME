@@ -23,8 +23,6 @@ import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import project.pickme.bid.dto.response.BidDetailsDto;
 import project.pickme.bid.dto.response.PriceDto;
 import project.pickme.bid.service.BidService;
@@ -37,7 +35,6 @@ import project.pickme.user.repository.UserMapper;
 @ActiveProfiles("test")
 class BidRestControllerTest {
 	@Autowired private MockMvc mockMvc;
-	@Autowired private ObjectMapper objectMapper;
 	@Autowired private UserMapper userMapper;
 
 	@MockBean private BidService bidService;

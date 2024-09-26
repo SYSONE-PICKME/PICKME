@@ -62,22 +62,8 @@ h2 {
     justify-content: space-between;
     align-items: center;
     padding-top: 20px;
-    margin-left: 10%;
-    margin-right: 10%;
-}
-
-.nav-arrows {
-    display: flex;
-    gap: 10px;
-}
-
-.nav-content-btn {
-    font-size: 18px;
-    color: #333;
-    text-decoration: none;
-    border: 1px solid #ddd;
-    padding: 5px 10px;
-    border-radius: 4px;
+    margin-left: 70%;
+    margin-right: 5%;
 }
 
 .action-buttons {

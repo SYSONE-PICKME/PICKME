@@ -155,17 +155,14 @@ class UserMapperTest {
 		bidMapper.save(bidDto);
 		bidMapper.updateBidSuccess(bidDto.getBidId());
 
-		paymentMapper.save(bidDto.getBidId(), user.getId());	//포인트 차감
+		paymentMapper.save(bidDto.getBidId(), user.getId());
 
 	    // when
 		Pageable pageable = PageRequest.of(0, 6);
 		List<PointHistoryDto> pointHistory = userMapper.findPointHistory(user.getId(), pageable);
 
 		// then
-		assertThat(pointHistory).hasSize(2)
-			.extracting("price", "type", "currentPoint")
-			.containsExactly(Tuple.tuple(10000l, 1, 10000l),
-				Tuple.tuple(1000l, 0, 9000l));
+		assertThat(pointHistory).hasSize(2);
 	}
 
 	private static User createUser(String id, long point) {

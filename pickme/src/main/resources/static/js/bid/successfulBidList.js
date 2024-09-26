@@ -1,3 +1,7 @@
+Handlebars.registerHelper('formatPrice', function(price) {
+    return price.toLocaleString();  // 숫자에 콤마 추가
+});
+
 document.addEventListener("DOMContentLoaded", () => {
     loadPaymentList()
 });
