@@ -33,7 +33,7 @@
 
     <select id="getTotalCompetitionRate" resultType="double">
         select
-            round((select count(item_id) from Bid) / (select count(distinct user_id) from Bid), 2) as competition_rate;
+            round((select count(item_id) from Bid) / (select count(distinct user_id) from Bid), 2) as competition_rate
     </select>
 
     <select id="getMonthlyCompetitionRate" resultType="project.pickme.statistics.dto.MonthlyBidStatisticsDto">
