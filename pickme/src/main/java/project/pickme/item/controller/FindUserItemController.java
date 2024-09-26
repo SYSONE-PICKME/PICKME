@@ -10,16 +10,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import lombok.RequiredArgsConstructor;
-import project.pickme.item.dto.OneBidItemDto;
 import project.pickme.common.annotation.CurrentUser;
-import project.pickme.item.service.FindItemService;
 import project.pickme.item.dto.FindItemDto;
+import project.pickme.item.dto.OneBidItemDto;
+import project.pickme.item.service.FindItemService;
 import project.pickme.user.domain.User;
 
 @Controller
 @RequestMapping("/user/item")
 @RequiredArgsConstructor
-public class FindItemController {
+public class FindUserItemController {
 	private final FindItemService itemService;
 
 	@GetMapping("/{id}")
@@ -31,14 +31,7 @@ public class FindItemController {
 	}
 
 	@GetMapping("/list")
-	public String getAllItems(
-		@CurrentUser User user,
-		@RequestParam(name = "category", required = false, defaultValue = "all") String category,
-		Model model
-	) {
-		List<FindItemDto.GetAll> items = itemService.findAll(user.getId(), category);
-		model.addAttribute("items", items);
-
+	public String getAllItemsForm() {
 		return "item/list";
 	}
 
@@ -51,11 +44,21 @@ public class FindItemController {
 	}
 
 	@GetMapping("/wish-list")
-	public String getWishList(@CurrentUser User user, Model model) {
-		List<FindItemDto.WishList> wishList = itemService.findWishList(user.getId());
-		model.addAttribute("wishList", wishList);
+	public String getWishListForm(@CurrentUser User user, Model model) {
 		model.addAttribute("user", user);
 
 		return "item/wishList";
+	}
+
+	@GetMapping("/bid-list")
+	public String getBidList(
+		@CurrentUser User user,
+		@RequestParam(name = "category", required = false, defaultValue = "all") String category,
+		Model model
+	) {
+		List<FindItemDto.MyBid> bidList = itemService.findBidList(user.getId(), category);
+		model.addAttribute("bidList", bidList);
+
+		return "item/bidList";
 	}
 }

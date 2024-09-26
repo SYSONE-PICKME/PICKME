@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>공지사항</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/notice/userNoticeContent.css}">
+    <link rel="stylesheet" th:href="@{/css/common/header.css}">
+    <link rel="stylesheet" th:href="@{/css/common/footer.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+</head>
+<body>
+<div th:replace="~{fragments/header :: header}">header content</div>
+<div class="container">
+    <h1 class="page-title">공지사항</h1>
+
+    <div class="test-title" th:object="${notice}">
+        <h2 class="content-title" th:text="*{title}"></h2>
+        <p class="date" th:text="${#temporals.format(notice.createTime, 'yyyy.MM.dd')}"></p>
+        <div class="notice-body"
+             th:utext="${#strings.replace(#strings.escapeXml(notice.content), '&#10;', '&lt;br&gt;')}">
+        </div>
+    </div>
+    <div class="nav-content">
+        <div class="navigation-buttons">
+            <div class="action-buttons">
+                <a href="/user/notices" class="content-btn">목록보기</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="~{fragments/footer :: footer}">footer content</div>
+</body>
+</html>

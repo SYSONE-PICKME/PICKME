@@ -1,0 +1,134 @@
+body {
+    font-family: "IBM Plex Sans KR", sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+.dashboard-title {
+    text-align: center;
+    color: #333;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 20px;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none;
+    color: inherit;
+}
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+.card-image-container {
+    position: relative;
+    overflow: hidden;
+}
+.card-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+.card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(76, 175, 80, 0.9);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    padding: 20px;
+    color: white;
+}
+.card-image-container:hover .card-overlay {
+    opacity: 1;
+}
+.card-image-container:hover .card-image {
+    transform: scale(1.1);
+}
+.card-content {
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.card-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+}
+.tags {
+    display: flex;
+    gap: 5px;
+}
+.tag {
+    background-color: #e0e0e0;
+    padding: 3px 8px;
+    border-radius: 15px;
+    font-size: 12px;
+    color: #666;
+}
+.card-overlay-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+}
+.card-overlay-content ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+}
+.card-overlay-content li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 10px;
+    color: white;
+    font-size: 14px;
+}
+.card-overlay-content li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: white;
+}
+.overlay-icon-container {
+    width: 40px;
+    height: 40px;
+    background-color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;
+    flex-shrink: 0;
+}
+.overlay-icon {
+    color: #4CAF50;
+    font-size: 20px;
+}
+
+.card-image-container:hover .card-overlay {
+    opacity: 1;
+}

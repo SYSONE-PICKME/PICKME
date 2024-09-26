@@ -16,10 +16,9 @@ import project.pickme.user.domain.User;
 public class BidController {
 	private final BidService bidService;
 
-	@GetMapping("/successful-bid-list")
-	public String successfulBidList(@CurrentUser User user, Model model) {
+	@GetMapping("/successful-bid-listForm")
+	public String successfulBidListForm(@CurrentUser User user, Model model) {
 		model.addAttribute("user", user);
-		model.addAttribute("successfulBidList", bidService.findMySuccessfulBid(user));
 		model.addAttribute("userId", user.getId());
 
 		return "bid/mySuccessfulBidList";

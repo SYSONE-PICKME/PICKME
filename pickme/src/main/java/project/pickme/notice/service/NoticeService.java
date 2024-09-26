@@ -54,4 +54,11 @@ public class NoticeService {
 	private Customs getCustomsById(String customsId) {
 		return customsMapper.findByCustomsId(customsId).orElseThrow(() -> new BusinessException(NOT_FOUND_CUSTOMS));
 	}
+
+	public List<NoticeDto> getUserNotices(int page, int size){
+		int offset = page * size;
+		return noticeMapper.selectUserNotices(offset, size).stream()
+			.map(NoticeConverter::fromEntity)
+			.toList();
+	}
 }

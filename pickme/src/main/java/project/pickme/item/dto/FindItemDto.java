@@ -74,7 +74,7 @@ public class FindItemDto {
 		private LocalDateTime endTime;
 		private String status;
 		private String imgUrl;
-		private boolean isLiked;
+		private boolean liked;
 	}
 
 	@Getter
@@ -86,6 +86,19 @@ public class FindItemDto {
 		private LocalDateTime endTime;
 		private String imgUrl;
 		private String customsName;
+		private boolean liked;
+	}
+
+	@Getter
+	@NoArgsConstructor
+	public static class MyBid {
+		private Long id;
+		private String name;
+		private long price;
+		private LocalDateTime startTime;
+		private LocalDateTime endTime;
+		private String status;
+		private String imgUrl;
 		private boolean isLiked;
 	}
 }

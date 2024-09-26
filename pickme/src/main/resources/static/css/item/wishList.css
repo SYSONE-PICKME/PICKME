@@ -1,3 +1,28 @@
+body {
+    margin: 0px;
+    padding: 0px;
+}
+
+.content {
+    flex-grow: 1;
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    max-height: 950px;
+}
+
+.wishlist-container {
+    height: 800px;
+}
+
+.page-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
 .wishlist-item {
     display: flex;
     align-items: flex-start; /* 아이템을 수직 정렬 */

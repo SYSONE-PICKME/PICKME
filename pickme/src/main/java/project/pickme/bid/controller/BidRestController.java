@@ -1,5 +1,10 @@
 package project.pickme.bid.controller;
 
+import java.util.List;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -9,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
+import project.pickme.bid.dto.MySuccessfulBidDto;
 import project.pickme.bid.dto.reqeust.SelectedBidDto;
 import project.pickme.bid.dto.response.BidDetailsDto;
 import project.pickme.bid.service.BidService;
@@ -20,7 +26,7 @@ import project.pickme.user.domain.User;
 @RequiredArgsConstructor
 @RequestMapping("/user/bid")
 public class BidRestController {
-
+	private static final int DEFAULT_PAGE_SIZE = 5;
 	private final BidService bidService;
 
 	/**
@@ -49,5 +55,12 @@ public class BidRestController {
 		bidService.selectBid(selectedBidDto);
 
 		return BaseResponse.ok();
+	}
+
+	@GetMapping("/successful-list")
+	public BaseResponse<?> successfulBidList(@CurrentUser User user, @PageableDefault(size = DEFAULT_PAGE_SIZE) Pageable pageable) {
+		Page<MySuccessfulBidDto> mySuccessfulBids = bidService.findMySuccessfulBid(user, pageable);
+
+		return BaseResponse.ok(mySuccessfulBids);
 	}
 }
