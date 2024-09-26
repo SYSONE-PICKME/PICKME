@@ -14,7 +14,6 @@ import project.pickme.user.service.UserService;
 @RequestMapping("/user")
 @RequiredArgsConstructor
 public class BidController {
-	private final UserService userService;
 
 	@GetMapping("/successful-bid-listForm")
 	public String successfulBidListForm(@CurrentUser User user, Model model) {

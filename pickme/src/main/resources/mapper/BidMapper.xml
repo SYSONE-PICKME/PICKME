@@ -85,9 +85,11 @@
                  left join (select item_id, url
                             from Image
                             where seq = 0) img on i.item_id = img.item_id
+                 left join Payment p on b.bid_id = p.bid_id
         where b.is_success = 1
-          and b.user_id = #{id}
-        limit #{pageable.pageSize} offset #{pageable.offset}
+          and p.payment_time is not null
+          and b.user_id = #{id} limit #{pageable.pageSize}
+        offset #{pageable.offset}
     </select>
 
     <select id="findAllSelectedBid" resultType="project.pickme.bid.dto.reqeust.SelectedBidDto">
