@@ -17,7 +17,7 @@ import project.pickme.bid.repository.BidMapper;
 @Service
 @RequiredArgsConstructor
 public class BidSchedulingService {
-	private static final String EVERY_HOUR = "10 21 * * * *";
+	private static final String EVERY_HOUR = "10 0 * * * *";
 
 	private final BidMapper bidMapper;
 	private final MailService mailService;
