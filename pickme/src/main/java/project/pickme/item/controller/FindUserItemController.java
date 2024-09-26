@@ -51,14 +51,7 @@ public class FindUserItemController {
 	}
 
 	@GetMapping("/bid-list")
-	public String getBidList(
-		@CurrentUser User user,
-		@RequestParam(name = "category", required = false, defaultValue = "all") String category,
-		Model model
-	) {
-		List<FindItemDto.MyBid> bidList = itemService.findBidList(user.getId(), category);
-		model.addAttribute("bidList", bidList);
-
+	public String getBidListForm(@CurrentUser User user, Model model) {
 		return "item/bidList";
 	}
 }
