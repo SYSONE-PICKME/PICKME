@@ -15,11 +15,11 @@ function loadItems() {
     $('#loader').show(); // 로딩 스피너 표시
 
     $.ajax({
-        url: '/user/api/item/list',
+        url: '/user/api/item/bid-list',
         type: 'GET',
-        data: cursor, // cursor 객체를 쿼리 파라미터로 보냄
+        data: cursor,
         success: function(response) {
-            const items = response.data; // API가 반환한 items 데이터
+            const items = response.data;
 
             // 데이터가 있는 경우 화면에 추가
             if (items.length > 0) {
@@ -49,8 +49,7 @@ function loadItems() {
                 // 커서 정보 업데이트: 마지막 아이템의 정보를 커서로 설정
                 const lastItem = items[items.length - 1];
                 cursor.itemId = lastItem.id;
-                cursor.status = lastItem.status;
-                cursor.endTime = lastItem.endTime; // ISO 8601 형식으로 변환
+                cursor.bidTime = lastItem.latestBidTime;
 
                 setTimeout(() => {
                     $('#loader').hide(); // 로딩 스피너 숨김
