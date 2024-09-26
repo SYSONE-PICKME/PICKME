@@ -83,7 +83,8 @@
                     <div class="product-info">
                         <h3>배송지 정보</h3>
                         <input type="button" id="updateItem" value="배송지 수정"
-                               th:data-user-id="${itemUser.userId}"/>
+                               th:data-user-id="${itemUser.userId}"
+                               onclick="updateAddress(this)"/>
                         <p>주소: <span th:text="${itemUser.address}"></span></p>
                         <p>받는사람: <span th:text="${itemUser.userName}"></span></p>
                     </div>
@@ -99,6 +100,27 @@
         </div>
     </div>
 </main>
+
+<!-- Modal -->
+<div id="updateAddressModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <div class="page-title">배송지 수정</div>
+        <form id="deliveryForm">
+            <input type="hidden" name="userId" id="userId" th:value="${itemUser.userId}">
+            <input type="hidden" name="itemId" id="itemId" th:value="${itemId}">
+            <div class="m-content">
+                <p>구매자: <span th:text="${itemUser.userName}"></span></p>
+
+                <label for="Address" id="Address">주소: </label>
+                <input type="text" name="modifiedAddress" id="modifiedAddress" th:value="${itemUser.address}">
+            </div>
+            <button type="button" id="updateAddressButton" class="bid-button">수정하기</button>
+        </form>
+    </div>
+</div>
+<!--Modal-->
+
 <div th:replace="~{fragments/footer :: footer}">footer content</div>
 <script th:src="@{/js/delivery/status.js}"></script>
 </body>
