@@ -37,31 +37,6 @@ function fetchBidDetails() {
     })
 }
 
-// function endBid() {
-//     const itemName = document.querySelector('.item-name').textContent;
-//     const itemImage = document.querySelector('.item-image').src;
-//
-//     const selectedBidDto = {
-//         itemId: itemId,
-//         bidId: selectedBid,
-//         itemName: itemName,
-//         itemImage: itemImage
-//     };
-//
-//     $.ajax({
-//         url: "/user/bid/end",
-//         type: 'POST',
-//         contentType: 'application/json',
-//         data: JSON.stringify(selectedBidDto),
-//         success: function (response) {
-//             console.log("공매 종료 요청 성공: ", response);
-//         },
-//         error: function (error) {
-//             console.error("공매 종료 요청 실패: ", error);
-//         }
-//     })
-// }
-
 document.addEventListener("DOMContentLoaded", function () {
     modal = new Modal("modal", "modal-message", "modal-confirm");
 
@@ -175,7 +150,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     window.addEventListener('bidEnded', (event) => {
         sendEndToServer(socket);
-        // endBid();
     });
 
     document.querySelector('.bid-btn').addEventListener('click', function () {
