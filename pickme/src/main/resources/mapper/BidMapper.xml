@@ -115,12 +115,14 @@
         select i.url         as itemImage,
                item.name     as itemName,
                item.end_time as selectedTime,
-               item.price
+               item.price,
+               item.bid_id   as bidId
         from Image i
                  join (select i.item_id,
                               i.name,
                               i.end_time,
-                              b.price
+                              b.price,
+                              b.bid_id
                        from Item i
                                 join Bid b
                                      on i.item_id = b.item_id
