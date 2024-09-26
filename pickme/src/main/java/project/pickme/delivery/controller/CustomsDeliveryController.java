@@ -22,7 +22,7 @@ public class CustomsDeliveryController {
 	public String showDeliveryAdminPage(Model model, @CurrentUser Customs customs) {
 		model.addAttribute("items", deliveryService.getCustomsSuccessfulItems(customs));
 
-		return "/delivery/delivery";
+		return "delivery/delivery";
 	}
 
 	@GetMapping("/status")
@@ -31,6 +31,6 @@ public class CustomsDeliveryController {
 		model.addAttribute("item", deliveryService.getDeliveryItemInfo(itemId));
 		model.addAttribute("user", deliveryService.getDeliveryInfo(userId));
 
-		return "/delivery/status";
+		return "delivery/status";
 	}
 }
