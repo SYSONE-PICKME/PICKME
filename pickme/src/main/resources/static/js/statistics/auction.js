@@ -79,6 +79,24 @@ function createTotalAuctionsChart(totalAuctions, totalCompetitionRate){
 }
 
 function createCategoryCompetitionRateChart(categoryCompetitionRate) {
+    const categoryMap = {
+            1: '의류',
+            2: '생활용품',
+            3: '디지털',
+            4: '가구',
+            10: '기타'
+    };
+
+    const chartData = Object.entries(categoryMap).map(([code, name]) => {       // todo: 현재 데이터가 많지 않아 값이 없는 null인 경우도 가정하여 코딩, 수정 예정
+        const data = categoryCompetitionRate[code];
+        console.log(`Category: ${name}, Data: ${JSON.stringify(data)}`);
+
+        const competitionRate = data && data.competitionRate !== null && data.competitionRate !== undefined
+            ? parseFloat(data.competitionRate)
+            : 0;
+        return [name, competitionRate];
+    });
+
     Highcharts.chart('categoryCompetitionRateChart', {
         chart: {
             type: 'column'
@@ -118,13 +136,7 @@ function createCategoryCompetitionRateChart(categoryCompetitionRate) {
             ],
             colorByPoint: true,
             groupPadding: 0,
-            data: [
-                ['의류', 7.33],
-                ['생활용품', 3.18],
-                ['디지털', 7.79],
-                ['가구', 4.23],
-                ['소모품', 5.23]
-            ],
+            data: chartData,
             dataLabels: {
                 enabled: true,
                 rotation: -90,

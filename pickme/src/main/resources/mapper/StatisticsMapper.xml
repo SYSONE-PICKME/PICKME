@@ -2,6 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="project.pickme.statistics.repository.StatisticsMapper">
+    <resultMap id="CategoryCompetitionResultMap" type="project.pickme.statistics.dto.CategoryCompetitionDto">
+        <result property="categoryCode" column="category_code"/>
+        <result property="totalBids" column="total_bids"/>
+        <result property="totalUsers" column="total_users"/>
+        <result property="competitionRate" column="competition_rate"/>
+    </resultMap>
 
     <select id="getTotalAuctions" resultType="int">
         select count(distinct item_id) from Bid
@@ -44,12 +50,12 @@
             bid_month asc
     </select>
 
-    <select id="getCategoryCompetitionRate" resultType="project.pickme.statistics.dto.CategoryCompetitionDto">
+    <select id="getCategoryCompetitionRate" resultMap="CategoryCompetitionResultMap">
         select
             i.code as category_code,
             count(b.bid_id) as total_bids,
             count(distinct b.user_id) as total_users,
-            round((count(b.bid_id) / count(distinct b.user_id)), 2) as competition_rate
+            round((count(b.bid_id) / count(distinct b.user_id)),2) as competition_rate
         from
             Item i
         left join
@@ -59,8 +65,7 @@
         group by
             i.code
         order by
-            competition_rate desc
+            category_code;
     </select>
-
 
 </mapper>
