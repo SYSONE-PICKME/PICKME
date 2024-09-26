@@ -22,5 +22,8 @@ public interface NoticeMapper {
 
 	void delete(Long id);
 
+	List<Notice> selectUserNotices(@Param("offset") int offset, @Param("size") int size);
+
 	List<String> select4Campaigns();
+
 }

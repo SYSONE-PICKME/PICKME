@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>통계 메인</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/notice/userNoticeList.css}">
+    <link rel="stylesheet" th:href="@{/css/common/header.css}">
+    <link rel="stylesheet" th:href="@{/css/common/footer.css}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+
+</head>
+<body>
+<div th:replace="~{fragments/header :: header}">header content</div>
+<div class="main-container">
+    <div class="container">
+        <h1>공지사항</h1>
+        <hr>
+
+        <table id="noticeTable">
+            <tbody>
+
+            </tbody>
+        </table>
+
+        <div class="load-more">
+            <a href="#" id="loadMore">공지 10개 더보기 → </a>
+        </div>
+    </div>
+
+    <div class="notice-categories">
+        <h2>문의</h2>
+        <ul>
+            <li>세관별 문의전화 번호</li>
+            <li>문의 안내</li>
+        </ul>
+    </div>
+</div>
+<div th:replace="~{fragments/footer :: footer}">footer content</div>
+<script th:src="@{/js/notice/userNoticeList.js}"></script>
+</body>
+</html>
