@@ -34,7 +34,7 @@ body {
 
 .thumbnail {
     width: 24%;
-    height: 125px;
+    height: 120px;
     cursor: pointer;
     transition: border 0.3s;
 }
@@ -103,8 +103,8 @@ body {
     font-weight: 400;
     color: #49454F;
     text-align: left;
-    width: 90%;
-    height: 65%;
+    width: 85%;
+    height: 60%;
     margin-left: auto;
     margin-right: auto;
     padding-top: 25px;
@@ -200,7 +200,7 @@ body {
 }
 
 #unit-button {
-    padding-top: 15px;
+    padding-top: 30px;
     background-color: #FFFFFF;
     border: 2px solid #2EC44F;
     margin-right: 2%;
@@ -214,7 +214,7 @@ body {
 }
 
 #law-button {
-    padding-top: 15px;
+    padding-top: 30px;
     background-color: #5AA76B;
     border: 2px solid #5AA76B;
 }
@@ -238,7 +238,7 @@ body {
 }
 
 #dept-container {
-    height: 50%;
+    height: 65px;
     padding-top: 10px;
     padding-left: 35px;
     padding-bottom: 10px;
@@ -265,7 +265,7 @@ body {
 }
 
 #contact-container {
-    height: 50%;
+    height: 45px;
     padding: 20px 35px;
     display: flex;
     align-items: center;
