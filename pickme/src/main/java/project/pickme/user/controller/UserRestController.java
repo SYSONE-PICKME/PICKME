@@ -4,6 +4,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,6 +16,7 @@ import project.pickme.common.annotation.CurrentUser;
 import project.pickme.common.response.BaseResponse;
 import project.pickme.user.domain.User;
 import project.pickme.user.dto.user.PointHistoryDto;
+import project.pickme.user.dto.user.UpdateAddressDto;
 import project.pickme.user.dto.user.UpdatePasswordDto;
 import project.pickme.user.dto.user.UpdateInfoDto;
 import project.pickme.user.service.UserService;
@@ -79,4 +81,12 @@ public class UserRestController {
 		Page<PointHistoryDto> pointHistories = userService.showHistory(user, pageable);
 		return BaseResponse.ok(pointHistories);
 	}
+
+	@PatchMapping("/address")
+	public BaseResponse<?> updateAddress(@RequestBody UpdateAddressDto updateAddressDto){
+		userService.updateAddress(updateAddressDto);
+
+		return BaseResponse.ok();
+	}
+
 }

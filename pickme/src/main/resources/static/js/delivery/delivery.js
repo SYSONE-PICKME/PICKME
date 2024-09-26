@@ -10,7 +10,6 @@ function getCredentials() {
     }).then(response => {
         return response.authHeader;
     }).fail((jqXHR, textStatus, errorThrown) => {
-        console.error('Credentials 가져오기 오류:', textStatus, errorThrown);
         throw new Error('Credentials 가져오기 오류');
     });
 }
@@ -23,25 +22,25 @@ function fetchCarriers() {
         return $.ajax({
             url: "https://apis.tracker.delivery/graphql",
             method: "POST",
-            contentType: "application/json", // 수정된 부분
+            contentType: "application/json",
             headers: {
                 "Authorization": authHeader
             },
             data: JSON.stringify({
                 query: `query CarrierList($after: String) {
-                                carriers(first: 50, after: $after) {
-                                    pageInfo {
-                                        hasNextPage
-                                        endCursor
-                                    }
-                                    edges {
-                                        node {
-                                            id
-                                            name
+                                        carriers(first: 50, after: $after) {
+                                            pageInfo {
+                                                hasNextPage
+                                                endCursor
+                                            }
+                                            edges {
+                                                node {
+                                                    id
+                                                    name
+                                                }
+                                            }
                                         }
-                                    }
-                                }
-                            }`,
+                                    }`,
                 variables: {
                     after: after
                 }
@@ -61,7 +60,6 @@ function fetchCarriers() {
                 if (hasNextPage) {
                     fetchCarriers();
                 }
-
             },
             error: function (xhr) {
                 console.error('데이터 가져오기 오류:', xhr);
@@ -88,14 +86,41 @@ function populateDropdown(carriers) {
             .text(carrier.name);
         dropdown.append(option);
     });
-
-    console.log('Dropdown populated:', dropdown);
 }
 
-// 페이지 로드 시 데이터 로드
-$(document).ready(function () {
+function registerDelivery(buttonElement) {
+    const itemId = buttonElement.getAttribute('data-item-id');
+    const userId = buttonElement.getAttribute('data-user-id');
+
+    // Set the itemId and userId in the modal form
+    document.getElementById('itemIdInput').value = itemId;
+    document.getElementById('userIdInput').value = userId;
+
+    // Show the modal
+    document.getElementById('deliveryModal').style.display = 'block';
+
+    console.log(itemId, userId);
+    // Initialize carrier dropdown
     fetchCarriers();
-});
+}
+
+function viewDeliveryStatus(buttonElement) {
+    const itemId = encodeURIComponent(buttonElement.getAttribute('data-item-id'));
+    const userId = encodeURIComponent(buttonElement.getAttribute('data-user-id'));
+    window.location.href = `/customs/delivery/status?itemId=${itemId}&userId=${userId}`;
+}
+
+// Close the modal when clicking on <span> (x)
+document.querySelector('.close').onclick = function () {
+    document.getElementById('deliveryModal').style.display = 'none';
+}
+
+// Close the modal when clicking outside of it
+window.onclick = function (event) {
+    if (event.target == document.getElementById('deliveryModal')) {
+        document.getElementById('deliveryModal').style.display = 'none';
+    }
+}
 
 $('#submitButton').on('click', function () {
     const itemId = $('#itemIdInput').val();
@@ -109,15 +134,6 @@ $('#submitButton').on('click', function () {
         alert("모든 필드를 입력하세요.");
         return;
     }
-
-    console.log({
-        itemId: itemId,
-        userId: userId,
-        code: code,
-        invoiceNumber: invoiceNumber,
-        courier: courier
-    });
-
     $.ajax({
         type: 'POST',
         url: '/customs/delivery',
