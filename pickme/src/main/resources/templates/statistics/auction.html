@@ -19,32 +19,30 @@
 <body>
 <div th:replace="~{fragments/header :: header}">header content</div>
 <div class="container">
-    <div class="notice-content" th:object="${notice}">
-        <div class="dashboard-container">
-            <h1 class=".statistics-title">경매 관련 통계</h1>
+    <div class="dashboard-container">
+        <h1 class=".statistics-title">경매 관련 통계</h1>
 
-            <div class="chart-row">
-                <div class="chart-small">
-                    <h2 class="section-title">총 경매수/전체 경쟁률</h2>
-                    <div class="chart-container">
-                        <div id="totalAuctionsChart"></div>
-                    </div>
-                </div>
-                <div class="chart-middle">
-                    <h2 class="section-title">카테고리별 경쟁률</h2>
-                    <div class="chart-container">
-                        <div id="categoryCompetitionRateChart"></div>
-                    </div>
+        <div class="chart-row">
+            <div class="chart-small">
+                <h2 class="section-title">총 경매수/전체 경쟁률</h2>
+                <div class="chart-container">
+                    <div id="totalAuctionsChart"></div>
                 </div>
             </div>
-
-            <h2 class="section-title">월별 경매 수/경쟁률</h2>
-            <div class="chart-container chart-large">
-                <div class="coming-soon-overlay">
-                    <p>Coming soon...</p>
+            <div class="chart-middle">
+                <h2 class="section-title">카테고리별 경쟁률</h2>
+                <div class="chart-container">
+                    <div id="categoryCompetitionRateChart"></div>
                 </div>
-                <div id="monthlyAuctionsChart"></div>
             </div>
+        </div>
+
+        <h2 class="section-title">월별 경매 수/경쟁률</h2>
+        <div class="chart-container chart-large">
+            <div class="coming-soon-overlay">
+                <p>Coming soon...</p>
+            </div>
+            <div id="monthlyAuctionsChart"></div>
         </div>
     </div>
 </div>

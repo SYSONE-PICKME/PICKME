@@ -105,20 +105,100 @@
 
     <select id="getCategoryFailureRate" resultType="project.pickme.statistics.dto.CategoryFailureRateDto">
         select
-            i.code as categoryCode,
-            c.name as categoryName,
-            count(case when b.is_success = 0 then 1 end) as failedAuctions,
-            (count(case when b.is_success = 0 then 1 end) * 100.0 / count(b.bid_id)) as failRate
+            c.name as category_name,
+            sum(b.price) as total_revenue
         from
-            Item i
+        Item i
         left join
-            Bid b on i.item_id = b.item_id
-        left join
-            Category c on i.code = c.code
+        Bid b on i.item_id = b.item_id and b.is_success = 1
+        join
+        Category c on i.code = c.code
         group by
-            i.code, c.name
+        c.name
         order by
-            failRate desc
+        c.name
     </select>
+
+    <select id="getCategoryRevenue" resultType="project.pickme.statistics.dto.CategoryRevenueDto">
+        select
+        c.name as categoryName,
+        coalesce(sum(b.price), 0) as totalRevenue
+        from
+        Category c
+        left join
+        Item i on c.code = i.code
+        left join
+        Bid b on i.item_id = b.item_id and b.is_success = 1
+        group by
+        c.name
+        order by
+        c.name
+    </select>
+
+    <select id="getCategoryBidPriceRange" resultType="project.pickme.statistics.dto.CategoryBidPriceRangeDto">
+        select
+        c.name as categoryName,
+        coalesce(min(b.price), 0) as minBidPrice,
+        coalesce(max(b.price), 0) as maxBidPrice
+        from
+        Item i
+        left join
+        Bid b on i.item_id = b.item_id and b.is_success = 1
+        join
+        Category c on i.code = c.code
+        group by
+        c.name
+        order by
+        c.name
+    </select>
+
+    <select id="getCategoryRevenueHistory" resultType="project.pickme.statistics.dto.CategoryRevenueHistoryDto">
+        select
+        c.name as category_name,
+        date_format(i.end_time, '%Y-%m') as month,
+        SUM(b.price) as monthly_revenue
+        from
+        Item i
+        left join
+        Bid b on i.item_id = b.item_id and b.is_success = 1
+        join
+        Category c on i.code = c.code
+        group by
+        c.name, date_format(i.end_time, '%Y-%m')
+        order by
+        c.name, month
+    </select>
+
+    <select id="getCustomsItemCount" resultType="project.pickme.statistics.dto.CustomsItemCountDto">
+        select c.id as customsId, c.name as customsName, count(i.item_id) as itemCount
+        from Customs c
+        left join Item i on c.id = i.customs_id
+        group by c.id, c.name
+        order by itemCount desc
+    </select>
+
+    <select id="getHourlyBidActivity" resultType="project.pickme.statistics.dto.HourlyBidActivityDto">
+        with recursive hours as (
+        select 1 as hour_of_day
+        union all
+        select hour_of_day + 1
+        from hours
+        where hour_of_day &lt; 24
+        )
+        select
+        h.hour_of_day as hourOfDay,
+        coalesce(count(b.bid_id), 0) as bidCount
+        from
+        hours h
+        left join
+        Bid b
+        on
+        hour(b.bid_time) + 1 = h.hour_of_day
+        group by
+        h.hour_of_day
+        order by
+        h.hour_of_day;
+    </select>
+
 
 </mapper>

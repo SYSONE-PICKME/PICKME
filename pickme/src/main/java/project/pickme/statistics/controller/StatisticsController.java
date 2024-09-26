@@ -23,4 +23,12 @@ public class StatisticsController {
 	public String showItemPage() {
 		return "statistics/item";
 	}
+
+	@GetMapping("/finances")
+	public String showFinancesPage() {
+		return "statistics/finances";
+	}
+
+	@GetMapping("/etc")
+	public String showEtcPage() { return "statistics/etc"; }
 }

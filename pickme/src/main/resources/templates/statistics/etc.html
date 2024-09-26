@@ -8,13 +8,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap"
           rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/css/statistics/finances.css}">
+    <link rel="stylesheet" th:href="@{/css/statistics/etc.css}">
     <link rel="stylesheet" th:href="@{/css/common/header.css}">
     <link rel="stylesheet" th:href="@{/css/common/footer.css}">
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
-    <script src="https://code.highcharts.com/highcharts-more.js"></script>
+    <script src="https://code.highcharts.com/modules/heatmap.js"></script>
+    <script src="https://code.highcharts.com/modules/treemap.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
@@ -22,32 +23,36 @@
 <body>
 <div th:replace="~{fragments/header :: header}">header content</div>
 <div class="container">
-    <h1 class="item-title">물품 관련 통계</h1>
-    <div class="chart-container">
-        <div class="chart-wrapper">
-            <div class="chart-title">총 경매/카테고리별 수익</div>
-            <div class="chart" id="categoryRevenueChart">
-                <div id="categoryRevenueChartContent"></div>
+    <div class="notice-content" th:object="${notice}">
+        <div class="dashboard-container">
+            <h1 class=".statistics-title">기타 통계</h1>
+
+            <div class="chart-row">
+                <div class="chart-small">
+                    <h2 class="section-title">세관별 물품 등록 개수</h2>
+                    <div class="chart-container">
+                        <div id="customsItemCount"></div>
+                    </div>
+                </div>
+                <div class="chart-middle">
+                    <h2 class="section-title">시간대별 입찰 활성도</h2>
+                    <div class="chart-container">
+                        <div id="hourlyBidActivity"></div>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="chart-wrapper">
-            <div class="chart-title">카테고리별 최저-최고 낙찰 금액</div>
-            <div class="chart">
-                <div id="categoryBidPriceRangeChartContent"></div>
-            </div>
-        </div>
-        <div class="chart-wrapper">
-            <div class="chart-title">카테고리별 수익 추이</div>
-            <div class="chart">
+
+            <h2 class="section-title">Coming soon</h2>
+            <div class="chart-container chart-large">
                 <div class="coming-soon-overlay">
                     <p>Coming soon...</p>
                 </div>
-                <div id="categoryRevenueHistoryChartContent"></div>
+                <div id="monthlyAuctionsChart"></div>
             </div>
         </div>
     </div>
 </div>
 <div th:replace="~{fragments/footer :: footer}">footer content</div>
-<script th:src="@{/js/statistics/finances.js}"></script>
+<script th:src="@{/js/statistics/etc.js}"></script>
 </body>
 </html>

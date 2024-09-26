@@ -27,4 +27,17 @@ public class StatisticsRestController {
 		Map<String, Object> statisticsData = statisticsService.getItemStatistics();
 		return BaseResponse.ok(statisticsData);
 	}
+
+	@GetMapping("/finances")
+	public BaseResponse<Map<String, Object>> getFinancesStatistics() {
+		Map<String, Object> statisticsData = statisticsService.getFinancesStatistics();
+		return BaseResponse.ok(statisticsData);
+	}
+
+	@GetMapping("/etc")
+	public BaseResponse<Map<String, Object>> getEtcStatistics() {
+		Map<String, Object> statisticsData = statisticsService.getEtcStatistics();
+		return BaseResponse.ok(statisticsData);
+	}
+
 }
