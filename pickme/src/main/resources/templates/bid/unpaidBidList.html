@@ -55,7 +55,7 @@
             </div>
             <p class="unpaid-bid-info">낙찰 시간: <span>{{selectedTime}}</span></p>
             <div id="price-container">
-                <span>결제 금액: <span class="paid-price">{{price}}</span> 원</span>
+                <span>결제 금액: <span class="paid-price">{{formatPrice price}}</span> 원</span>
             </div>
 
             <button class="payment-button" data-bid-id="{{bidId}}" data-price-id="{{price}}">결제하기</button>
