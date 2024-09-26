@@ -28,9 +28,9 @@
 
     <script th:src="@{/js/item/list.js}"></script>
     <script th:src="@{/js/item/filtering.js}"></script>
-    <script th:src="@{/js/item/infiniteScroll.js}"></script>
-    <script th:src="@{/js/item/itemNavigation.js}"></script>
     <script th:src="@{/js/item/likeHandler.js}"></script>
+    <script th:src="@{/js/item/itemNavigation.js}"></script>
+    <script th:src="@{/js/item/BidInfiniteScroll.js}"></script>
 </head>
 <body>
 <!-- 헤더 -->
@@ -51,13 +51,12 @@
 
     <div class="auction-list">
         <div class="header-section">
-            <h2 id="title">모든 경매 물품</h2>
+            <h2 id="title">내 입찰 목록</h2>
             <div class="toggle-switch">
-                <input type="checkbox" id="toggle" onchange="filterItems('모든 경매 물품')">
+                <input type="checkbox" id="toggle" onchange="filterItems('내 입찰 목록')">
                 <label for="toggle"></label>
             </div>
         </div>
-
         <div class="product-grid"></div>
         <div id="loader">
             <div class="spinner"></div>

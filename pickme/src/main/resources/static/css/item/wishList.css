@@ -1,3 +1,28 @@
+body {
+    margin: 0px;
+    padding: 0px;
+}
+
+.content {
+    flex-grow: 1;
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    max-height: 950px;
+}
+
+.wishlist-container {
+    height: 800px;
+}
+
+.page-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
 .wishlist-item {
     display: flex;
     align-items: flex-start; /* 아이템을 수직 정렬 */
@@ -35,6 +60,10 @@
 
 #item-name {
     font-weight: 500;
+    white-space: nowrap;       /* 텍스트를 한 줄로 표시 */
+    overflow: hidden;          /* 넘치는 텍스트 숨김 */
+    text-overflow: ellipsis;   /* 넘치는 텍스트에 '...' 추가 */
+    max-width: 450px;          /* 최대 너비 설정 */
 }
 
 /* 상세 정보 컨테이너 */

@@ -70,4 +70,8 @@ public class CampaignService {
 		}
 		return s3Service.uploadImage(campaignDto.getImageFile());
 	}
+
+	public List<String> get4Campaigns() {
+		return noticeMapper.select4Campaigns();
+	}
 }

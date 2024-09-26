@@ -1,70 +1,85 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PICKME</title>
 
-    <!-- css -->
+    <!-- CSS 파일 -->
     <link rel="stylesheet" th:href="@{/css/common/header.css}">
     <link rel="stylesheet" th:href="@{/css/common/footer.css}">
     <link rel="stylesheet" th:href="@{/css/common/myPageSidebar.css}">
     <link rel="stylesheet" href="/css/user/infoEdit.css">
+    <link rel="stylesheet" href="/css/common/pagination.css">
     <link rel="stylesheet" th:href="@{/css/item/wishList.css}">
-
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
-    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    <!-- icon -->
+    <!-- jQuery -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <!-- handlebars -->
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+
+    <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
 <div th:replace="~{fragments/header :: header}">header content</div>
 
 <main>
-    <div class="container" th:object="${user}">
+    <div class="container">
         <div th:replace="~{fragments/myPageSidebar :: sidebar}">sidebar content</div>
 
         <div class="content">
-            <h2 id="title">관심 상품</h2>
-            <hr>
-            <div th:each="item, iterStat : ${wishList}">
-                <div class="wishlist-item" th:data-item-id="${item.id}">
-                    <div class="wishlist-image">
-                        <img th:src="${item.imgUrl}" alt="상품 이미지"/>
-                    </div>
-                    <div class="wishlist-details">
-                        <div class="wishlist-header">
-                            <div>
-                                <p id="item-name" th:text="${item.name}"></p>
-                            </div>
-                            <button id="likeButton" class="heart" type="button" th:data-liked="${item.isLiked}" th:data-item-id="${item.id}" th:data-action-url="@{/user/item/{id}/like(id=${item.id})}">
-                                <i class="far fa-heart"></i>
-                            </button>
-                        </div>
-                        <p class="wishlist-info">공매번호: <span th:text="${item.id}"></span></p>
-                        <p th:text="${item.customsName}"></p>
-                        <div id="price-container">
-                            <span>시작가: <span class="wishlist-price" th:text="${#numbers.formatDecimal(item.price, 0, 'COMMA', 0, 'POINT')}"></span> 원</span>
-                            <div class="countdown-container">
-                                <span class="wishlist-info countdown" th:id="'countdown_' + ${iterStat.index}" th:data-end-time="${item.endTime}"></span>
-                                <span class="countdown-text">이후 마감</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="page-title">관심 상품</div>
+
+            <div id="wishlist-container" class="wishlist-container">
+                <!-- 관심 상품 목록을 렌더링 -->
+            </div>
+
+            <div id="pagination" class="pagination">
+                <!-- 페이지네이션 -->
             </div>
         </div>
     </div>
 </main>
 
 <div th:replace="~{fragments/footer :: footer}">footer content</div>
-</body>
+
+<!-- Handlebars 템플릿 -->
+<script id="wishlist-template" type="text/x-handlebars-template">
+    {{#each wishList}}
+    <div class="wishlist-item" data-item-id="{{id}}">
+        <div class="wishlist-image">
+            <img src="{{imgUrl}}" alt="상품 이미지"/>
+        </div>
+        <div class="wishlist-details">
+            <div class="wishlist-header">
+                <div>
+                    <p id="item-name">{{name}}</p>
+                </div>
+                <button class="heart {{#if isLiked}}active{{else}}{{/if}}" type="button" data-liked="{{isLiked}}" data-item-id="{{id}}" data-action-url="/user/item/{{id}}/like">
+                    <i class="{{#if isLiked}}fas{{else}}far{{/if}} fa-heart"></i>
+                </button>
+            </div>
+            <p class="wishlist-info">공매번호: <span>{{id}}</span></p>
+            <p>{{customsName}}</p>
+            <div id="price-container">
+                <span>시작가: <span class="wishlist-price">{{formatPrice price}}</span> 원</span>
+                <div class="countdown-container">
+                    <span class="wishlist-info countdown" data-end-time="{{endTime}}"></span>
+                    <span class="countdown-text"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{/each}}
+</script>
+
+<!-- JS 파일들 -->
 <script src="/js/user/myPage.js"></script>
-<script src="/js/user/infoEdit.js"></script>
 <script src="/js/item/wishList.js"></script>
-<script src="/js/item/like.js"></script>
-<script src="/js/item/request.js"></script>
+<script src="/js/item/likeHandler.js"></script>
+<script src="/js/item/itemNavigation.js"></script>
+<script src="/js/common/pagination.js"></script>
+</body>
 </html>

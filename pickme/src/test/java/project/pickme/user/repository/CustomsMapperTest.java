@@ -41,8 +41,6 @@ class CustomsMapperTest {
 
 	@BeforeEach
 	void setUp(){
-		customsMapper.save(Customs.createCustoms("incheon", "1234", "incheon", "02-123-1234"));
-
 		User user = createUser("testUser");
 		userMapper.save(user);
 	}
@@ -72,12 +70,18 @@ class CustomsMapperTest {
 
 	    // then
 		List<Customs> findAll = customsMapper.findAll();
-		assertThat(findAll).hasSize(4);
+		assertThat(findAll).hasSize(3)
+			.extracting("id", "name", "tel")
+			.containsExactlyInAnyOrder(Tuple.tuple("gunsan", "군산세관", "064-730-8710"),
+				Tuple.tuple("kimpo", "김포공항세관", "064-730-8710"),
+				Tuple.tuple("changwon", "창원세관", "064-730-8710"));
 	}
 
 	@Test
 	@DisplayName("수입이 난 아이템과 누적 수입 총 수입을 확인할 수 있다.")
 	void findIncomeItemById() {
+		customsMapper.save(Customs.createCustoms("incheon", "1234", "incheon", "02-123-1234"));
+
 	    // given
 		String customsId = customsMapper.findByCustomsId("incheon").get().getId();
 		createIncome();

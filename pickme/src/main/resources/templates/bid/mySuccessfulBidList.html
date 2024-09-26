@@ -9,18 +9,22 @@
     <link rel="stylesheet" th:href="@{/css/common/footer.css}">
     <link rel="stylesheet" th:href="@{/css/common/myPageSidebar.css}">
     <link rel="stylesheet" th:href="@{/css/item/list.css}">
+    <link rel="stylesheet" href="/css/bid/success.css">
+    <link rel="stylesheet" href="/css/common/pagination.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap"
-          rel="stylesheet">
-    <link rel="stylesheet" href="/css/bid/success.css">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
 </head>
 <body>
 <div th:replace="~{fragments/header :: header}">header content</div>
 <main>
     <div class="container">
         <div th:replace="~{fragments/myPageSidebar :: sidebar}">sidebar content</div>
+        <input type="hidden" id="userId" th:value="${userId}">
         <div class="content">
             <div class="page-title">내 결제 목록</div>
             <div class="auction-list">
@@ -43,18 +47,47 @@
                     </div>
                 </div>
             </div>
+            <div id="pagination" class="pagination">
+                <!-- 페이지네이션 -->
+            </div>
         </div>
     </div>
 </main>
 
 <div th:replace="~{fragments/footer :: footer}">footer content</div>
 <script src="/js/user/myPage.js"></script>
+
+<!-- Handlebars 템플릿 -->
+<script id="payment-template" type="text/x-handlebars-template">
+    {{#each payments}}
+    <div class="product-card">
+        <img src="{{imgUrl}}" alt="product image" class="product-image">
+        <div class="product-info">
+            <h3>{{name}}</h3>
+            <p>공매번호: <span>{{itemId}}</span></p>
+            <p><span>{{customsName}}</span></p>
+            <p>결제금액: <span>{{price}}</span>원</p>
+
+            <!-- 배송현황 버튼: 송장번호가 등록된 경우 표시 -->
+            {{#if invoiceNumber}}
+            <input type="button" id="deliveryStatus" value="배송현황"
+                   data-item-id="{{itemId}}"
+                   onclick="viewDeliveryStatus(this)">
+            <p>송장번호: <span>{{invoiceNumber}}</span></p>
+            {{/if}}
+        </div>
+    </div>
+    {{/each}}
+</script>
+
 <script>
     function viewDeliveryStatus(buttonElement) {
         const itemId = encodeURIComponent(buttonElement.getAttribute('data-item-id'));
-        const userId = encodeURIComponent(buttonElement.getAttribute('data-user-id'));
+        const userId = document.getElementById('userId').value;
         window.location.href = `/user/delivery/status?itemId=${itemId}&userId=${userId}`;
     }
 </script>
+<script src="/js/bid/successfulBidList.js"></script>
+<script src="/js/common/pagination.js"></script>
 </body>
 </html>

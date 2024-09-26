@@ -15,6 +15,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
+import org.springframework.security.web.session.HttpSessionEventPublisher;
 
 import lombok.RequiredArgsConstructor;
 import project.pickme.common.auth.CustomAuthenticationSuccessHandler;
@@ -39,6 +40,11 @@ public class WebSecurityConfig {
 			.requestMatchers(
 				PathRequest.toStaticResources().atCommonLocations()
 			);
+	}
+
+	@Bean
+	public HttpSessionEventPublisher httpSessionEventPublisher() {
+		return new HttpSessionEventPublisher();
 	}
 
 	@Bean
@@ -95,7 +101,7 @@ public class WebSecurityConfig {
 				sessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
 					.sessionFixation(SessionManagementConfigurer.SessionFixationConfigurer::changeSessionId)
 					.maximumSessions(1)
-					.maxSessionsPreventsLogin(true)
+					.maxSessionsPreventsLogin(false)
 					.expiredUrl(loginPage));
 
 		return http.build();
