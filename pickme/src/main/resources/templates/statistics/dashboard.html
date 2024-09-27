@@ -23,10 +23,9 @@
             <div class="card-overlay">
                 <div class="card-overlay-content">
                     <ul>
-                        <li>경매 참가자 수 추이</li>
-                        <li>물품별 경쟁률 분석</li>
-                        <li>낙찰률 변동 추이</li>
-                        <li>경매 성사율 통계</li>
+                        <li>총 경매 수/전체 경쟁률</li>
+                        <li>카테고리별 경쟁률</li>
+                        <li>월별 경매 수/경쟁률</li>
                     </ul>
                 </div>
                 <div class="overlay-icon-container">
@@ -39,7 +38,7 @@
             <div class="tags">
                 <span class="tag">#경매</span>
                 <span class="tag">#경쟁률</span>
-                <span class="tag">#낙찰률</span>
+                <span class="tag">#경매 수</span>
             </div>
         </div>
     </a>
@@ -49,10 +48,9 @@
             <div class="card-overlay">
                 <div class="card-overlay-content">
                     <ul>
-                        <li>물품 카테고리별 경매 비율</li>
-                        <li>자주 적발되는 물품 유형</li>
-                        <li>시작가 대비 낙찰가 평균</li>
-                        <li>미낙찰 물품 비율</li>
+                        <li>경쟁이 치열했던 경매</li>
+                        <li>자주 등록되는 카테고리</li>
+                        <li>카테고리별 유찰률</li>
                     </ul>
                 </div>
                 <div class="overlay-icon-container">
@@ -64,8 +62,8 @@
             <h2 class="card-title">물품 관련 통계</h2>
             <div class="tags">
                 <span class="tag">#카테고리</span>
-                <span class="tag">#낙찰가</span>
-                <span class="tag">#물품유형</span>
+                <span class="tag">#경쟁</span>
+                <span class="tag">#빈도</span>
             </div>
         </div>
     </a>
@@ -76,9 +74,8 @@
                 <div class="card-overlay-content">
                     <ul>
                         <li>총 경매 수익</li>
-                        <li>월별/연도별 수익 추이</li>
-                        <li>카테고리별 수익 비율</li>
-                        <li>평균 낙찰가 추이</li>
+                        <li>카테고리별 최저-최고 낙찰 금액</li>
+                        <li>카테고리별 수익 추이</li>
                     </ul>
                 </div>
                 <div class="overlay-icon-container">
@@ -91,7 +88,7 @@
             <div class="tags">
                 <span class="tag">#경매수익</span>
                 <span class="tag">#수익추이</span>
-                <span class="tag">#낙찰가추이</span>
+                <span class="tag">#최저최고</span>
             </div>
         </div>
     </a>
@@ -101,9 +98,8 @@
             <div class="card-overlay">
                 <div class="card-overlay-content">
                     <ul>
-                        <li>적발 지역별 물품 분포</li>
-                        <li>지역별 낙찰자 분포</li>
-                        <li>지역별 평균 낙찰가 비교</li>
+                        <li>세관별 물품 등록 개수</li>
+                        <li>시간대별 입찰 활성도</li>
                     </ul>
                 </div>
                 <div class="overlay-icon-container">
@@ -112,15 +108,14 @@
             </div>
         </div>
         <div class="card-content">
-            <h2 class="card-title">지역별 통계</h2>
+            <h2 class="card-title">기타 통계</h2>
             <div class="tags">
-                <span class="tag">#물품분포</span>
-                <span class="tag">#낙찰자분포</span>
+                <span class="tag">#세관별분포</span>
+                <span class="tag">#입찰활성도</span>
             </div>
         </div>
     </a>
 </div>
 <div th:replace="~{fragments/footer :: footer}">footer content</div>
-<script th:src="@{/js/common/header.js}"></script>
 </body>
 </html>
