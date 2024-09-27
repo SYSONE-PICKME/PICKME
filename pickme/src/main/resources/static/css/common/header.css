@@ -132,10 +132,6 @@ body {
     80%, 94% {margin-top: -250px;}
     96%, 100% {margin-top: -300px;}
 }
-/*
-.nav-links li {
-    transition: all 0.3s ease;
-}*/
 
 .nav-links li a {
     color: #333;
