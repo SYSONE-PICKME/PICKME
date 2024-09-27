@@ -71,7 +71,7 @@
     <select id="getTopCompetitiveAuctions" resultType="project.pickme.statistics.dto.CompetitiveAuctionDto">
         select
             b.item_id,
-            i.name AS itemName,
+            i.name as itemName,
             count(distinct b.user_id) as participantCount
         from
             Bid b
