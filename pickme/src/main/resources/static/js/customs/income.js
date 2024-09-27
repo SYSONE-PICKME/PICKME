@@ -32,7 +32,7 @@ function updateIncomeContent(incomeDtos) {
     incomeDtos.forEach(incomeDto => {
         const context = {
             itemImage: incomeDto.itemImage,
-            income: formatCurrency(incomeDto.income),
+            income: formatCurrency(incomeDto.income ?? 0),
             totalIncome: formatCurrency(incomeDto.totalIncome),
             time: new Date(incomeDto.endTime).toLocaleString()
         };
@@ -41,7 +41,7 @@ function updateIncomeContent(incomeDtos) {
         container.innerHTML += html;
     });
 
-    const lastTotalIncome = incomeDtos[0].totalIncome;
+    const lastTotalIncome = incomeDtos[0]?.totalIncome ?? 0;
     document.getElementById('points-amount').innerText = formatCurrency(lastTotalIncome) + ' P';
 }
 

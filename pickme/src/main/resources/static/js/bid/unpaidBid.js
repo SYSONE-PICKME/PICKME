@@ -2,6 +2,10 @@ Handlebars.registerHelper('formatPrice', function(price) {
     return price.toLocaleString();  // 숫자에 콤마 추가
 });
 
+Handlebars.registerHelper('formatTime', function(time) {
+    return time.replace('T', ' ');  // 'T'를 공백으로 대체하여 시간 포맷 변경
+});
+
 document.addEventListener("DOMContentLoaded", function () {
     loadUnpaidBidList(0, 6);
 });
@@ -52,6 +56,7 @@ function handlePayment(bidId, price) {
         success: function(response) {
             if (response.success) {
                 alert('결제가 성공적으로 처리되었습니다.');
+                location.href = '/user/unpaid-bidForm'
             } else {
                 alert('포인트가 부족합니다. \n포인트 충전 후 결제 해주세요 ');
             }

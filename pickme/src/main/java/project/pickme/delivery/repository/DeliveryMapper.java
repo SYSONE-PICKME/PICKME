@@ -17,5 +17,4 @@ public interface DeliveryMapper {
 	DeliveryInfoDto getDeliveryInfo(String userId);
   
 	ItemInfoDto getDeliveryItemInfo(long itemId);
-
 }

@@ -35,22 +35,25 @@ class FindItemMapperTest {
 	private Long itemId;
 
 	@BeforeEach
-	void initData(){
+	void initData() {
 		customsMapper.save(Customs.createCustoms("incheon", "1234", "incheon", "02-123-1234"));
 
-		ItemDto itemDto = new ItemDto("테스트", 1, USER,10000l, now(), now(), CLOSED, "incheon");
+		ItemDto itemDto = new ItemDto("테스트", 1, USER, 10000l, now(), now(), CLOSED, "incheon");
 		itemMapper.insert(itemDto);
 		itemId = itemDto.getItemId();
-		List<ImageDto> images=new ArrayList<>();
+		List<ImageDto> images = new ArrayList<>();
 		images.add(new ImageDto(itemId, "이미지1", "url1", 0));
 		images.add(new ImageDto(itemId, "이미지2", "url2", 1));
-		}
+
+		imageMapper.insertImages(images);
+	}
 
 	@AfterEach
 	void tearDown() {
 		imageMapper.deleteAll();
 		itemMapper.deleteAll();
 		customsMapper.deleteAll();
+		imageMapper.deleteAll();
 	}
 
 	@Test

@@ -25,6 +25,7 @@ import project.pickme.image.dto.ImageDto;
 import project.pickme.image.repository.ImageMapper;
 import project.pickme.item.dto.ItemDto;
 import project.pickme.item.repository.ItemMapper;
+import project.pickme.payment.repository.PaymentMapper;
 import project.pickme.user.constant.Role;
 import project.pickme.user.domain.Customs;
 import project.pickme.user.domain.User;
@@ -38,6 +39,8 @@ class CustomsMapperTest {
 	@Autowired private ItemMapper itemMapper;
 	@Autowired private CustomsMapper customsMapper;
 	@Autowired private ImageMapper imageMapper;
+	@Autowired
+	private PaymentMapper paymentMapper;
 
 	@BeforeEach
 	void setUp(){
@@ -47,6 +50,7 @@ class CustomsMapperTest {
 
 	@AfterEach
 	void tearDown() {
+		paymentMapper.deleteAll();
 		bidMapper.deleteAll();
 		imageMapper.deleteAll();
 		itemMapper.deleteAll();
@@ -124,6 +128,9 @@ class CustomsMapperTest {
 
 		bidMapper.updateBidSuccess(bid3.getBidId());
 		bidMapper.updateBidSuccess(bid4.getBidId());
+
+		paymentMapper.save(bid3.getBidId(), "testUser");
+		paymentMapper.save(bid4.getBidId(), "testUser");
 	}
 
 	private static User createUser(String id) {

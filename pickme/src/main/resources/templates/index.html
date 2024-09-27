@@ -50,16 +50,9 @@
         </div>
 
         <div class="navigation">
-            <button id="nav-btn-left" ><img th:src="@{/images/express-delivery.png}" alt="배송" src="">배송현황</button>
+            <button id="nav-btn-left" th:onclick="|location.href='@{/user/successful-bid-listForm}'|"><img th:src="@{/images/express-delivery.png}" alt="배송" src="">배송현황</button>
             <button class="nav-btn-cen" th:onclick="|location.href='@{/user/item/list}'|"><img th:src="@{/images/search.png}" alt="공매물품조회" src="">공매물품조회</button>
-            <button class="nav-btn-cen" th:if="${userId != null}"
-                    th:onclick="|location.href='@{/user/item/' + ${userId}}'|">
-                <img th:src="@{/images/auction.png}" alt="입찰목록" src="">입찰목록
-            </button>
-            <button class="nav-btn-cen" th:if="${userId == null}"
-                    th:onclick="|location.href='@{/user/loginForm}'|">
-                <img th:src="@{/images/auction.png}" alt="입찰목록" src="">입찰목록
-            </button>
+            <button class="nav-btn-cen" th:onclick="|location.href='@{/user/item/bid-list}'|"><img th:src="@{/images/auction.png}" alt="입찰목록" src="">입찰목록</button>
             <button class="nav-btn-cen" th:onclick="|location.href='@{/user/charge}'|"><img th:src="@{/images/credit-card.png}" alt="포인트등록" src="">포인트등록</button>
             <button class="nav-btn-cen" th:onclick="|location.href='@{/user/myPage}'|"><img th:src="@{/images/web-profile.png}" alt="마이페이지" src="">마이페이지</button>
             <button id="nav-btn-right"><img th:src="@{/images/analytics.png}" alt="통계" src="">통계</button>
@@ -98,5 +91,6 @@
 <div th:replace="~{fragments/footer :: footer}">footer content</div>
 <script th:src="@{/js/userMain.js}"></script>
 <script th:src="@{/js/item/request.js}"></script>
+<script th:src="@{/js/item/itemNavigation.js}"></script>
 </body>
 </html>

@@ -50,7 +50,10 @@
                                            on i.item_id = b.item_id
                                                and i.status = 'CLOSED'
                                                and i.customs_id = #{id}
-                                               and b.is_success = 1) as item
+                                               and b.is_success = 1
+                            where b.bid_id in (select bid_id
+                                               from Payment)
+                             ) as item
                             on m.item_id = item.item_id
                                 and m.seq = 0) as income
         order by end_time desc

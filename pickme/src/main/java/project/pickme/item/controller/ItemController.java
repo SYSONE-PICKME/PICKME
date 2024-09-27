@@ -32,7 +32,7 @@ public class ItemController {
 		model.addAttribute("types", Type.values());
 		model.addAttribute("categories", Category.values());
 
-		return "/item/createItem"; // 같은 뷰 리턴
+		return "item/createItem"; // 같은 뷰 리턴
 	}
 
 	@PostMapping
@@ -46,7 +46,7 @@ public class ItemController {
 	public String getItems(@CurrentUser Customs customs, Model model) {
 		model.addAttribute("items", itemService.findItemsByCustomsId(customs.getId()));
 
-		return "/item/customsItems";
+		return "item/customsItems";
 	}
 
 	@GetMapping("/edit/{id}")
@@ -60,6 +60,6 @@ public class ItemController {
 		model.addAttribute("laws", itemService.findAllLaws());
 		model.addAttribute("types", Type.values());
 		model.addAttribute("categories", Category.values());
-		return "/item/editItem";
+		return "item/editItem";
 	}
 }

@@ -28,15 +28,18 @@ public class BidSchedulingService {
 			.withSecond(0)
 			.withNano(0);
 
+		log.info("Starting bid scheduled status update at {}", now);
+
 		List<Long> bidIds = new ArrayList<>();
 		List<SelectedBidDto> allSelectedBid = bidMapper.findAllSelectedBid();
+
 		for (SelectedBidDto selectedBidDto : allSelectedBid) {
 			bidIds.add(selectedBidDto.getBidId());
 			mailService.sendSuccessfulBidMail(selectedBidDto);
 		}
 
-		bidMapper.updateAllBidSuccess(bidIds);
-
-		log.info("Starting bid scheduled status update at {}", now);
+		if(!bidIds.isEmpty()){
+			bidMapper.updateAllBidSuccess(bidIds);
+		}
 	}
 }

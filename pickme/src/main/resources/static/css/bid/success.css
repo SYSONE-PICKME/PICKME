@@ -4,6 +4,10 @@ body {
     margin: 0;
 }
 
+.auction-container {
+    height: 800px;
+}
+
 .product-grid {
     display: flex;
     flex-direction: column;
@@ -22,8 +26,8 @@ body {
 }
 
 .product-image {
-    width: 150px;
-    height: 150px;
+    width: 130px;
+    height: 130px;
     object-fit: cover;
     border-radius: 10px;
     margin-right: 20px;
@@ -44,6 +48,10 @@ body {
     position: relative;
     flex: 1;
     z-index: 2;
+}
+
+.product-info h3 {
+    margin-top: 0px;
 }
 
 .product-card.closed2 {
@@ -67,6 +75,13 @@ body {
     color: white;
     padding: 5px;
     font-weight: 600;
+}
+
+.payment-price {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #28a745;
+    margin-left: 5px;
 }
 
 @media (max-width: 768px) {

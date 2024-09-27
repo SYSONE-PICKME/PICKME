@@ -23,7 +23,6 @@
                  left join Item i on b.item_id = i.item_id
     </select>
 
-
     <insert id="save" parameterType="project.pickme.bid.dto.response.BidDto" useGeneratedKeys="true" keyProperty="bidId">
         insert into Bid(item_id, user_id, price, bid_time, is_success)
         values (#{itemId}, #{userId}, #{price}, #{bidTime}, #{isSuccess})
@@ -85,19 +84,22 @@
                  left join (select item_id, url
                             from Image
                             where seq = 0) img on i.item_id = img.item_id
+                 left join Payment p on b.bid_id = p.bid_id
         where b.is_success = 1
-          and b.user_id = #{id}
-        limit #{pageable.pageSize} offset #{pageable.offset}
+          and p.payment_time is not null
+          and b.user_id = #{id} limit #{pageable.pageSize}
+        offset #{pageable.offset}
     </select>
 
     <select id="findAllSelectedBid" resultType="project.pickme.bid.dto.reqeust.SelectedBidDto">
         with bidRank as (select b.*,
+                                i.name,
                                 row_number() over (partition by b.item_id order by b.price desc) as rn
                          from Bid b
-                         where item_id in (select item_id
-                                           from Item
-                                           where status = 'CLOSED'
-                                             and end_time between now - interval 5 minute and now + interval 5 minute))
+                                  join Item i
+                                      on b.item_id = i.item_id
+                                      and i.status = 'CLOSED'
+                                      and i.end_time between now() - interval 5 minute and now() + interval 5 minute)
         select b.price,
                b.name   as itemName,
                i.url    as itemImage,
@@ -106,9 +108,9 @@
         from Image i
                  join bidRank b
                       on i.item_id = b.item_id
-                          and i.seq = 0 and rn = 1
+                      and i.seq = 0 and rn = 1
                  left join User u
-                           on b.user_id = u.id
+                      on b.user_id = u.id
     </select>
 
     <select id="findUnPaidBid" resultType="Map">
@@ -126,13 +128,13 @@
                        from Item i
                                 join Bid b
                                      on i.item_id = b.item_id
-                                         and b.user_id = #{id}
-                                         and b.is_success = 1
-                                         and bid_id not in (select bid_id
+                                     and b.user_id = #{id}
+                                     and b.is_success = 1
+                                     and bid_id not in (select bid_id
                                                             from Payment
                                                             where user_id = #{id})) as item
                       on i.item_id = item.item_id
-                          and i.seq = 0
+                      and i.seq = 0
         limit #{pageable.pageSize} offset #{pageable.offset}
     </select>
 
@@ -141,15 +143,15 @@
         from Bid
         where bid_id not in (select bid_id
                              from Payment)
-          and user_id = #{id}
-          and is_success = 1;
+        and user_id = #{id}
+        and is_success = 1
     </select>
 
-    <update id="updateAllBidSuccess" parameterType="list">
+    <update id="updateAllBidSuccess" parameterType="java.util.List">
         update Bid
         set is_success = 1
         where bid_id in
-        <foreach item="id" collection="list" open="(" separator="," close=")">
+        <foreach item="id" collection="bidIds" open="(" separator="," close=")">
             #{id}
         </foreach>
     </update>

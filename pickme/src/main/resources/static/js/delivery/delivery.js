@@ -8,10 +8,8 @@ function getCredentials() {
         method: "GET",
         dataType: "json",
     }).then(response => {
-        console.log(response.authHeader)
         return response.authHeader;
     }).fail((jqXHR, textStatus, errorThrown) => {
-        console.error('Credentials 가져오기 오류:', textStatus, errorThrown);
         throw new Error('Credentials 가져오기 오류');
     });
 }
@@ -88,8 +86,6 @@ function populateDropdown(carriers) {
             .text(carrier.name);
         dropdown.append(option);
     });
-
-    console.log('Dropdown populated:', dropdown);
 }
 
 function registerDelivery(buttonElement) {
@@ -103,8 +99,6 @@ function registerDelivery(buttonElement) {
     // Show the modal
     document.getElementById('deliveryModal').style.display = 'block';
 
-    console.log(itemId,userId);
-    // Initialize carrier dropdown
     fetchCarriers();
 }
 
@@ -115,12 +109,12 @@ function viewDeliveryStatus(buttonElement) {
 }
 
 // Close the modal when clicking on <span> (x)
-document.querySelector('.close').onclick = function() {
+document.querySelector('.close').onclick = function () {
     document.getElementById('deliveryModal').style.display = 'none';
 }
 
 // Close the modal when clicking outside of it
-window.onclick = function(event) {
+window.onclick = function (event) {
     if (event.target == document.getElementById('deliveryModal')) {
         document.getElementById('deliveryModal').style.display = 'none';
     }
@@ -138,15 +132,6 @@ $('#submitButton').on('click', function () {
         alert("모든 필드를 입력하세요.");
         return;
     }
-
-    console.log({
-        itemId: itemId,
-        userId: userId,
-        code: code,
-        invoiceNumber: invoiceNumber,
-        courier: courier
-    });
-
     $.ajax({
         type: 'POST',
         url: '/customs/delivery',
