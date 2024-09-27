@@ -38,12 +38,12 @@ function createCategoryRevenueChart(data) {
     Highcharts.chart('categoryRevenueChartContent', {
         chart: {
             type: 'column',
-            height: 900, // 원하는 높이를 픽셀 단위로 지정 (예: 600px)
-            animation: false, // 애니메이션 비활성화로 렌더링 속도 향상
+            height: 900,
+            animation: false,
             width: null
         },
         title: {
-            text: '총 경매수익/카테고리별 경매 수익',
+            text: '',
             align: 'left'
         },
         subtitle: {
@@ -95,7 +95,7 @@ function createCategoryBidPriceRangeChart(data) {
         },
 
         title: {
-            text: '카테고리별 최저-최고 낙찰가'
+            text: ''
         },
 
         subtitle: {
@@ -150,13 +150,12 @@ function createCategoryRevenueHistoryChart(data) {
         },
 
         title: {
-            text: 'Most common desktop screen readers',
+            text: '',
             align: 'left'
         },
 
         subtitle: {
-            text: 'Source: WebAIM. Click on points to visit official screen ' +
-                'reader website',
+            text: '',
             align: 'left'
         },
 
@@ -270,6 +269,4 @@ function createCategoryRevenueHistoryChart(data) {
             }]
         }
     });
-
 }
-

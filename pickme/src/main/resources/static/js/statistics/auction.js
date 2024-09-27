@@ -36,7 +36,7 @@ function createTotalAuctionsChart(totalAuctions, totalCompetitionRate){
         },
 
         title: {
-            text: '총 경매수/전체 경쟁률',
+            text: '',
             align: 'left'
         },
 
@@ -104,11 +104,11 @@ function createCategoryCompetitionRateChart(categoryCompetitionRate) {
         chart: {
             type: 'column',
             style: {
-                        fontFamily: 'IBM Plex Sans KR'  // 전역 폰트 설정
+                        fontFamily: 'IBM Plex Sans KR'
                     }
         },
         title: {
-            text: '카테고리별 경쟁률'
+            text: ''
         },
         subtitle: {
             text: 'PICK-ME'
@@ -167,11 +167,11 @@ function createMonthlyAuctionsChart(monthlyBids){
                 type: 'xy'
             },
             style: {
-                        fontFamily: 'IBM Plex Sans KR'  // 전역 폰트 설정
+                        fontFamily: 'IBM Plex Sans KR'
                     }
         },
         title: {
-            text: '월별 경매 수/경쟁률',
+            text: '',
             align: 'left'
         },
         credits: {
