@@ -1,5 +1,7 @@
 package project.pickme.item.service;
 
+import static project.pickme.bid.service.BidSchedulingService.*;
+
 import java.time.LocalDateTime;
 
 import org.springframework.scheduling.annotation.Scheduled;
@@ -13,7 +15,7 @@ import project.pickme.item.repository.ItemMapper;
 @Service
 @RequiredArgsConstructor
 public class ItemSchedulingService {
-	private static final String EVERY_HOUR = "0 0 * * * *";
+	private static final String EVERY_HOUR = "0 */10 * * * *";
 
 	private final ItemMapper itemMapper;
 
