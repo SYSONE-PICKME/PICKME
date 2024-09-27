@@ -164,3 +164,20 @@ body {
         margin-bottom: 20px;
     }
 }
+
+/* 기본 링크 스타일 */
+.sidebar .menu li {
+    color: #333; /* 기본 텍스트 색상 */
+    text-decoration: none;
+}
+
+/* 활성화된 메뉴 항목 스타일 */
+.sidebar .menu li.active {
+    color: #4CAF50; /* 활성화된 항목의 텍스트 색상을 초록색으로 */
+    font-weight: bold; /* 글자를 굵게 만듭니다 */
+}
+
+/* 호버 효과 */
+.sidebar .menu li:hover {
+    background-color: #f0f0f0; /* 배경색 변경 */
+}
