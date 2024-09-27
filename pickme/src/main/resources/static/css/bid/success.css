@@ -26,8 +26,8 @@ body {
 }
 
 .product-image {
-    width: 150px;
-    height: 150px;
+    width: 130px;
+    height: 130px;
     object-fit: cover;
     border-radius: 10px;
     margin-right: 20px;
@@ -48,6 +48,10 @@ body {
     position: relative;
     flex: 1;
     z-index: 2;
+}
+
+.product-info h3 {
+    margin-top: 0px;
 }
 
 .product-card.closed2 {
