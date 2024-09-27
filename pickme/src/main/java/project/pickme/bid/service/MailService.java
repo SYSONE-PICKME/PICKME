@@ -42,6 +42,6 @@ public class MailService {
 		context.setVariable("itemImage", selectedBidDto.getItemImage());
 		context.setVariable("price", selectedBidDto.getPrice());
 
-		return templateEngine.process("/user/bidMail", context);
+		return templateEngine.process("user/bidMail", context);
 	}
 }
