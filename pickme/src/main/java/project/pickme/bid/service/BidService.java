@@ -57,9 +57,10 @@ public class BidService {
 	}
 
 	public BidDetailsDto showBidDetails(Long itemId, User user) {
+		User findUser = userMapper.findUserById(user.getId()).orElseThrow(() -> new BusinessException(NOT_FOUND_USER));
 		List<PriceDto> allPrices = bidMapper.findAllPriceByItemId(itemId);
 
-		return BidDetailsDto.createOf(allPrices, user.getPoint());
+		return BidDetailsDto.createOf(allPrices, findUser.getPoint());
 	}
 
 	public Page<MySuccessfulBidDto> findMySuccessfulBid(User user, Pageable pageable) {
