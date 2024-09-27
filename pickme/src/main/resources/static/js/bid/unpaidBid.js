@@ -56,6 +56,7 @@ function handlePayment(bidId, price) {
         success: function(response) {
             if (response.success) {
                 alert('결제가 성공적으로 처리되었습니다.');
+                location.href = '/user/unpaid-bidForm'
             } else {
                 alert('포인트가 부족합니다. \n포인트 충전 후 결제 해주세요 ');
             }

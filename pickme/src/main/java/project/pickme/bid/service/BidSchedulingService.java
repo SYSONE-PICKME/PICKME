@@ -38,6 +38,8 @@ public class BidSchedulingService {
 			mailService.sendSuccessfulBidMail(selectedBidDto);
 		}
 
-		bidMapper.updateAllBidSuccess(bidIds);
+		if(!bidIds.isEmpty()){
+			bidMapper.updateAllBidSuccess(bidIds);
+		}
 	}
 }
