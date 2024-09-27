@@ -185,8 +185,8 @@
 
     <select id="getCustomsItemCount" resultType="project.pickme.statistics.dto.CustomsItemCountDto">
         select
-            c.id as customsId
-            c.name as customsName
+            c.id as customsId,
+            c.name as customsName,
             count(i.item_id) as itemCount
         from
             Customs c
