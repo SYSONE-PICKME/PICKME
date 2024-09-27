@@ -113,10 +113,10 @@ document.addEventListener('DOMContentLoaded', function() {
     forword.addEventListener('click', nextSlide);
     back.addEventListener('click', prevSlide);
 
-    let interval = setInterval(nextSlide, 3000);
+    let interval = setInterval(nextSlide, 4000);
 
     slider.addEventListener('mouseenter', () => clearInterval(interval));
-    slider.addEventListener('mouseleave', () => interval = setInterval(nextSlide, 3000));
+    slider.addEventListener('mouseleave', () => interval = setInterval(nextSlide, 4000));
 
     updateDots();
 });

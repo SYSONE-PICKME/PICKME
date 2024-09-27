@@ -99,7 +99,7 @@ body {
     font-weight: 700;
     display: flex;
     align-items: center;
-    height: 35px; /* 안맞으면 이거 수정. 최종 전 삭제 */
+    height: 35px;
     overflow: hidden;
 }
 
@@ -131,4 +131,14 @@ body {
     64%, 78% {margin-top: -200px;}
     80%, 94% {margin-top: -250px;}
     96%, 100% {margin-top: -300px;}
+}
+
+.nav-links li a {
+    color: #333;
+    text-decoration: none;
+}
+
+.nav-links li.active,
+.nav-links li.active a {
+    color: #2EC44F;
 }

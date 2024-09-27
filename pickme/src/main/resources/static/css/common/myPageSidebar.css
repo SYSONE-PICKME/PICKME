@@ -164,3 +164,17 @@ body {
         margin-bottom: 20px;
     }
 }
+
+.sidebar .menu li {
+    color: #333;
+    text-decoration: none;
+}
+
+.sidebar .menu li.active {
+    color: #4CAF50; /
+    font-weight: bold;
+}
+
+.sidebar .menu li:hover {
+    background-color: #f0f0f0;
+}

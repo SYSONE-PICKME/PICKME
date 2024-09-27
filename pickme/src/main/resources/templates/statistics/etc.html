@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PICKME</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/statistics/etc.css}">
+    <link rel="stylesheet" th:href="@{/css/common/header.css}">
+    <link rel="stylesheet" th:href="@{/css/common/footer.css}">
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/heatmap.js"></script>
+    <script src="https://code.highcharts.com/modules/treemap.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+</head>
+<body>
+<div th:replace="~{fragments/header :: header}">header content</div>
+<div class="container">
+    <div class="notice-content" th:object="${notice}">
+        <div class="dashboard-container">
+            <h1 class="statistics-title">기타 통계</h1>
+            <div class="chart-row">
+                <div class="chart-small">
+                    <h2 class="section-title">세관별 물품 등록 개수</h2>
+                    <div class="chart-container">
+                        <div id="customsItemCount"></div>
+                    </div>
+                </div>
+                <div class="chart-middle">
+                    <h2 class="section-title">시간대별 입찰 활성도</h2>
+                    <div class="chart-container">
+                        <div id="hourlyBidActivity"></div>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="section-title">Coming soon</h2>
+            <div class="chart-container chart-large">
+                <div class="coming-soon-overlay">
+                    <p>Coming soon...</p>
+                </div>
+                <div id="etcChart"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="~{fragments/footer :: footer}">footer content</div>
+<script th:src="@{/js/statistics/etc.js}"></script>
+<script th:src="@{/js/common/header.js}"></script>
+</body>
+</html>

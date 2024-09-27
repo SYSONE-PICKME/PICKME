@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PICKME</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/statistics/finances.css}">
+    <link rel="stylesheet" th:href="@{/css/common/header.css}">
+    <link rel="stylesheet" th:href="@{/css/common/footer.css}">
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/highcharts-more.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+</head>
+<body>
+<div th:replace="~{fragments/header :: header}">header content</div>
+<div class="container">
+    <h1 class="item-title">재정 관련 통계</h1>
+    <div class="chart-container">
+        <div class="chart-wrapper">
+            <h2 class="chart-title">총 경매/카테고리별 수익</h2>
+            <div class="chart" id="categoryRevenueChart">
+                <div id="categoryRevenueChartContent"></div>
+            </div>
+        </div>
+        <div class="chart-wrapper">
+            <h2 class="chart-title">카테고리별 최저-최고 낙찰 금액</h2>
+            <div class="chart">
+                <div id="categoryBidPriceRangeChartContent"></div>
+            </div>
+        </div>
+        <div class="chart-wrapper">
+            <h2 class="chart-title">카테고리별 수익 추이</h2>
+            <div class="chart">
+                <div class="coming-soon-overlay">
+                    <p>Coming soon...</p>
+                </div>
+                <div id="categoryRevenueHistoryChartContent"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="~{fragments/footer :: footer}">footer content</div>
+<script th:src="@{/js/statistics/finances.js}"></script>
+<script th:src="@{/js/common/header.js}"></script>
+</body>
+</html>
