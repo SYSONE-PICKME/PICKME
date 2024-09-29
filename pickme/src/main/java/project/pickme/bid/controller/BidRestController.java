@@ -39,6 +39,13 @@ public class BidRestController {
 		return BaseResponse.ok(bidDetailsDto);
 	}
 
+	/**
+	 * 사용자의 결제 목록을 페이지로 반환합니다.
+	 *
+	 * @param user 현재 로그인된 사용자 (@CurrentUser로 주입됨)
+	 * @param pageable 페이지네이션 정보 (@PageableDefault로 주입됨)
+	 * @return 사용자의 결제 목록을 담은 BaseResponse
+	 */
 	@GetMapping("/successful-list")
 	public BaseResponse<?> successfulBidList(@CurrentUser User user, @PageableDefault(size = DEFAULT_PAGE_SIZE) Pageable pageable) {
 		Page<MySuccessfulBidDto> mySuccessfulBids = bidService.findMySuccessfulBid(user, pageable);
