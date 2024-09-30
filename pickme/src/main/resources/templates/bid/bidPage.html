@@ -35,11 +35,11 @@
                     </tr>
                     <tr>
                         <td>공매시작일시</td>
-                        <td th:text="*{startTime}"></td>
+                        <td th:text="${#temporals.format(oneBidItemDto.startTime, 'yyyy-MM-dd HH:mm')}" class="end-time"></td>
                     </tr>
                     <tr>
                         <td>공매마감일시</td>
-                        <td th:text="*{endTime}" class="end-time"></td>
+                        <td th:text="${#temporals.format(oneBidItemDto.endTime, 'yyyy-MM-dd HH:mm')}" class="end-time"></td>
                     </tr>
                 </table>
                 <div class="starting-price">
