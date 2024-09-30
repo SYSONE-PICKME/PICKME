@@ -26,8 +26,10 @@
     <div class="container">
         <div th:replace="~{fragments/myPageSidebar :: sidebar}">sidebar content</div>
         <input type="hidden" id="userId" th:value="${userId}">
+
         <div class="content">
             <div class="page-title">내 결제 목록</div>
+
             <div class="auction-container">
                 <div class="auction-list">
                     <div id="product-grid" class="product-grid">
