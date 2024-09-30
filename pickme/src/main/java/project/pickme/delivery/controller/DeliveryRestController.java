@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
+import project.pickme.common.response.BaseResponse;
 import project.pickme.delivery.dto.DeliveryFormDto;
 import project.pickme.delivery.service.DeliveryService;
 
@@ -37,8 +38,8 @@ public class DeliveryRestController {
 	 * @return 송장이 성공적으로 등록되었음을 알리는 메시지를 담은 ResponseEntity
 	 */
 	@PostMapping("/customs/delivery")
-	public ResponseEntity<String> saveInvoiceNumber(@RequestBody DeliveryFormDto deliveryFormDto) {
+	public BaseResponse<String> saveInvoiceNumber(@RequestBody DeliveryFormDto deliveryFormDto) {
 		deliveryService.saveDelivery(deliveryFormDto);
-		return ResponseEntity.ok("송장이 성공적으로 등록되었습니다."); // 성공 메시지 반환
+		return BaseResponse.ok("송장이 성공적으로 등록되었습니다."); // 성공 메시지 반환
 	}
 }
