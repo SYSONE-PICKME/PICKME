@@ -3,13 +3,14 @@
 }
 
 .product-grid {
-    display: inline-flex;
+    display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
 #trackingTable {
     margin-top: 0px;
+    width: auto;
 }
 
 h3 {

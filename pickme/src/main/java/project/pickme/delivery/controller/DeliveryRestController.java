@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
+import project.pickme.common.response.BaseResponse;
 import project.pickme.delivery.dto.DeliveryFormDto;
 import project.pickme.delivery.service.DeliveryService;
 
@@ -18,6 +19,11 @@ import project.pickme.delivery.service.DeliveryService;
 public class DeliveryRestController {
 	private final DeliveryService deliveryService;
 
+	/**
+	 * 인증 헤더를 반환합니다.
+	 *
+	 * @return 인증 헤더를 담은 Map을 반환하는 ResponseEntity
+	 */
 	@GetMapping("/tracking/getAuthHeader")
 	public ResponseEntity<Map<String, String>> getAuthHeader() {
 		Map<String, String> response = new HashMap<>();
@@ -25,9 +31,15 @@ public class DeliveryRestController {
 		return ResponseEntity.ok(response);
 	}
 
+	/**
+	 * 송장 번호를 저장합니다.
+	 *
+	 * @param deliveryFormDto 송장 정보가 담긴 DTO
+	 * @return 송장이 성공적으로 등록되었음을 알리는 메시지를 담은 ResponseEntity
+	 */
 	@PostMapping("/customs/delivery")
-	public ResponseEntity<String> saveInvoiceNumber(@RequestBody DeliveryFormDto deliveryFormDto) {
+	public BaseResponse<String> saveInvoiceNumber(@RequestBody DeliveryFormDto deliveryFormDto) {
 		deliveryService.saveDelivery(deliveryFormDto);
-		return ResponseEntity.ok("송장이 성공적으로 등록되었습니다."); // 성공 메시지 반환
+		return BaseResponse.ok("송장이 성공적으로 등록되었습니다."); // 성공 메시지 반환
 	}
 }
